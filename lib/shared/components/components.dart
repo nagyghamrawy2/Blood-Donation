@@ -260,7 +260,61 @@ class Container_with_button extends StatelessWidget {
   }
 }
 
-
+class Button_with_icon extends StatelessWidget {
+  Button_with_icon({
+    required this.num_width,
+    required this.num_height,
+    required this.img_left_padding,
+    required this.img_bottom_padding,
+    required this.label_name,
+    required this.color,
+    required this.icon_name,
+    required this.img_width,
+    required this.img_height,
+  });
+  late double num_width;
+  late double num_height;
+  late double img_left_padding;
+  late double img_bottom_padding;
+  late String icon_name;
+  late double img_width;
+  late double img_height;
+  late String label_name;
+  late Color color;
+  late Function function;
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {Function;},
+      child: Container(
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        width: MediaQuery.of(context).size.width * num_width,
+        height: num_height,
+        child: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                  left: img_left_padding, bottom: img_bottom_padding),
+              child: Image.asset(
+                icon_name,
+                width: img_width,
+                height: img_height,
+              ),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(label_name,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 
 
