@@ -22,33 +22,44 @@ class HomeLayout extends StatelessWidget {
         shape: const CircularNotchedRectangle(),
         notchMargin: 10,
         child: Container(
-          height: 60,
+          height: 62.5,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Row(
                 children: [
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       MaterialButton(
                         onPressed: (){},
                         child: Column(
                           children: [
-                            Icon(Icons.home),
-                            Text('Home'),
+                            const Image(
+                              image: AssetImage('assets/images/home.png'),
+                              height: 31,
+                              width: 32,
+                            ),
+                            const Text('Home'),
                           ],
                         ),
                       ),
                     ],
                   ),
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       MaterialButton(
                         onPressed: (){},
                         child: Column(
                           children: [
-                            Icon(Icons.home),
-                            Text('Home'),
+                            const Image(
+                              image: AssetImage('assets/images/requests.png'),
+                              height: 31,
+                              width: 32,
+                            ),
+                            Text('Requests'),
                           ],
                         ),
                       ),
@@ -59,26 +70,36 @@ class HomeLayout extends StatelessWidget {
               Row(
                 children: [
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       MaterialButton(
                         onPressed: (){},
                         child: Column(
                           children: [
-                            Icon(Icons.home),
-                            Text('Home'),
+                            const Image(
+                              image: AssetImage('assets/images/education.png'),
+                              height: 31,
+                              width: 32,
+                            ),
+                            Text('Education'),
                           ],
                         ),
                       ),
                     ],
                   ),
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       MaterialButton(
                         onPressed: (){},
                         child: Column(
                           children: [
-                            Icon(Icons.home),
-                            Text('Home'),
+                            const Image(
+                              image: AssetImage('assets/images/profile.png'),
+                              height: 31,
+                              width: 32,
+                            ),
+                            Text('Profile'),
                           ],
                         ),
                       ),
