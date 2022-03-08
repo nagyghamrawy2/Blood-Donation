@@ -32,7 +32,6 @@ class Buttons_without_icon extends StatelessWidget {
   }
 }
 
-
 class Textformfield_with_border_with_icon extends StatelessWidget {
   Textformfield_with_border_with_icon({required this.controller_Name,required this.num_width ,required this.num_hieght ,required this.keyboardtype ,required this.obsecure ,required this.text_hint ,required this.text_label ,required this.num_border ,required this.img_right_padding ,required this.img_bottom_padding ,required this.icon_name ,required this.img_width ,required this.img_height});
   late double num_width;
@@ -90,7 +89,6 @@ class Textformfield_with_border_with_icon extends StatelessWidget {
     );
   }
 }
-
 
 class Textformfield_with_icon extends StatelessWidget {
   Textformfield_with_icon({required this.controller_Name,required this.text_name , required this.num_width ,required this.num_height ,required this.keyboardtype ,required this.obsecure ,required this.text_hint ,required this.img_right_padding ,required this.img_bottom_padding ,required this.icon_name ,required this.img_width ,required this.img_height});

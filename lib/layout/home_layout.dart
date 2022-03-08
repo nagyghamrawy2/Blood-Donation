@@ -2,29 +2,93 @@ import 'package:blood_bank/modules/home/home.dart';
 import 'package:flutter/material.dart';
 
 class HomeLayout extends StatelessWidget {
-  HomeLayout({Key? key}) : super(key: key);
-
-  final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = HomeScreen();
+  const HomeLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
       ),
-      body: PageStorage(
-        bucket: bucket,
-        child: currentScreen,
+      body: Container(
+        child: Text('Home'),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () {},
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-      shape: CircularNotchedRectangle(),
-      notchMargin: 10,
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 10,
+        child: Container(
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      MaterialButton(
+                        onPressed: (){},
+                        child: Column(
+                          children: [
+                            Icon(Icons.home),
+                            Text('Home'),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      MaterialButton(
+                        onPressed: (){},
+                        child: Column(
+                          children: [
+                            Icon(Icons.home),
+                            Text('Home'),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      MaterialButton(
+                        onPressed: (){},
+                        child: Column(
+                          children: [
+                            Icon(Icons.home),
+                            Text('Home'),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      MaterialButton(
+                        onPressed: (){},
+                        child: Column(
+                          children: [
+                            Icon(Icons.home),
+                            Text('Home'),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
