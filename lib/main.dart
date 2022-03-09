@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Color.fromRGBO(237, 57, 74, 1),
         ),
       ),
+      debugShowCheckedModeBanner: false,
       home: ChangePasswordScreen(),
     );
   }
