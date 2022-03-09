@@ -32,8 +32,8 @@ class Buttons_without_icon extends StatelessWidget {
   }
 }
 
-class Textformfield_with_border_with_icon extends StatelessWidget {
-  Textformfield_with_border_with_icon({required this.controller_Name,required this.num_width ,required this.num_hieght ,required this.keyboardtype ,required this.obsecure ,required this.text_hint ,required this.text_label ,required this.num_border ,});
+class Textformfield_with_border extends StatelessWidget {
+  Textformfield_with_border({required this.controller_Name,required this.num_width ,required this.num_hieght ,required this.keyboardtype ,required this.obsecure ,required this.text_hint ,required this.text_label ,required this.num_border ,});
   late double num_width;
   late double num_hieght;
   late TextInputType keyboardtype;

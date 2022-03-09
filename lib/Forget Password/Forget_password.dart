@@ -53,7 +53,7 @@ class ForgetPassword extends StatelessWidget {
               ),
             ),
             SizedBox(height: 60,),
-            Textformfield_with_border_with_icon(
+            Textformfield_with_border(
               controller_Name: emailcontroller,
               num_width: 0.9,
               num_hieght: 70,

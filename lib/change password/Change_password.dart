@@ -92,7 +92,7 @@ class ChangePasswordScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 50,),
-            Textformfield_with_border_with_icon(
+            Textformfield_with_border(
                 controller_Name: passwordcontroller,
                 num_width: 0.9,
                 num_hieght: 70,
@@ -108,7 +108,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 // img_height: 20
             ),
             SizedBox(height: 30,),
-            Textformfield_with_border_with_icon(
+            Textformfield_with_border(
                 controller_Name: passwordcontroller,
                 num_width: 0.9,
                 num_hieght: 70,
@@ -124,7 +124,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 // img_height: 20
             ),
             SizedBox(height: 30,),
-            Textformfield_with_border_with_icon(
+            Textformfield_with_border(
                 controller_Name: passwordcontroller,
                 num_width: 0.9,
                 num_hieght: 70,
