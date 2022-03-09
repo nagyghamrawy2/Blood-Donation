@@ -90,7 +90,7 @@ class Textformfield_with_border_with_icon extends StatelessWidget {
 }
 
 class Textformfield_with_icon extends StatelessWidget {
-  Textformfield_with_icon({required this.controller_Name,required this.text_name , required this.num_width ,required this.num_height ,required this.keyboardtype ,required this.obsecure ,required this.text_hint ,});
+  Textformfield_with_icon({required this.controller_Name,required this.text_name , required this.num_width ,required this.num_height ,required this.keyboardtype ,required this.obsecure ,required this.text_hint ,required this.img_right_padding ,required this.img_bottom_padding ,required this.icon_name ,required this.img_width ,required this.img_height});
   late String text_name;
   late double num_width;
   late double num_height;
@@ -393,7 +393,62 @@ class Requst_textformfield extends StatelessWidget {
     );
   }
 }
+class Textformfield_with_border_with_icon2 extends StatelessWidget {
+  Textformfield_with_border_with_icon2({required this.controller_Name,required this.num_width ,required this.num_hieght ,required this.keyboardtype ,required this.obsecure ,required this.text_hint ,required this.text_label ,required this.num_border ,required this.img_right_padding ,required this.img_bottom_padding ,required this.icon_name ,required this.img_width ,required this.img_height});
+  late double num_width;
+  late double num_hieght;
+  late TextInputType keyboardtype;
+  late bool obsecure;
+  late String text_hint;
+  late String text_label;
+  late double num_border;
+  late double img_right_padding;
+  late double img_bottom_padding;
+  late String icon_name;
+  late double img_width;
+  late double img_height;
+  TextEditingController controller_Name;
 
+  @override
+  Widget build(BuildContext context) {
+    return  Container(
+      width: MediaQuery.of(context).size.width * num_width,
+      height: num_hieght,
+      child: TextFormField(
+        controller:controller_Name ,
+        keyboardType: keyboardtype,
+        obscureText: obsecure,
+        decoration: InputDecoration(
+          hintText: text_hint,
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          hintStyle: TextStyle(fontSize: 16),
+          labelText: text_label,
+          labelStyle: TextStyle(fontSize: 22 , fontWeight: FontWeight.bold ,color: Colors.black),
+          border: OutlineInputBorder(
+              borderSide:  BorderSide(color: Colors.black26, width: 3.0),
+              borderRadius: BorderRadius.circular(num_border)
+          ),
+          focusedBorder:OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.black26, width: 3.0),
+            borderRadius: BorderRadius.circular(num_border),
+          ),
+          suffixIcon: Padding(
+            padding:  EdgeInsets.only(right: img_right_padding ,bottom: img_bottom_padding),
+            child: Image.asset(icon_name
+              ,width: img_width,
+              height: img_height,
+            ),
+          ),
+
+
+        ),
+        onChanged: (value) {
+          // do something
+        },
+      ),
+    );
+  }
+}
 
 
 
