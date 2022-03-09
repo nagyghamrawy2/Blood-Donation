@@ -259,7 +259,141 @@ class Container_with_button extends StatelessWidget {
   }
 }
 
+class Button_with_icon extends StatelessWidget {
+  Button_with_icon({
+    required this.num_width,
+    required this.num_height,
+    required this.img_left_padding,
+    required this.img_bottom_padding,
+    required this.label_name,
+    required this.color,
+    required this.icon_name,
+    required this.img_width,
+    required this.img_height,
+  });
+  late double num_width;
+  late double num_height;
+  late double img_left_padding;
+  late double img_bottom_padding;
+  late String icon_name;
+  late double img_width;
+  late double img_height;
+  late String label_name;
+  late Color color;
+  late Function function;
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {Function;},
+      child: Container(
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        width: MediaQuery.of(context).size.width * num_width,
+        height: num_height,
+        child: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                  left: img_left_padding, bottom: img_bottom_padding),
+              child: Image.asset(
+                icon_name,
+                width: img_width,
+                height: img_height,
+              ),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(label_name,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
+class Requst_textformfield extends StatelessWidget {
+  Requst_textformfield(
+      {required this.controller_Name,
+        required this.text_name,
+        required this.num_width,
+        required this.num_height,
+        required this.keyboardtype,
+        required this.obsecure,
+        required this.text_hint,
+        required this.img_right_padding,
+        required this.img_bottom_padding,
+        required this.icon_name,
+        required this.img_width,
+        required this.img_height});
+
+  late String text_name;
+  late double num_width;
+  late double num_height;
+  late TextInputType keyboardtype;
+  late bool obsecure;
+  late String text_hint;
+  late double img_right_padding;
+  late double img_bottom_padding;
+  late String icon_name;
+  late double img_width;
+  late double img_height;
+  TextEditingController controller_Name;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.topLeft,
+          child: Container(
+            child: Text(
+              text_name,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Align(
+          alignment: Alignment.topLeft,
+          child: Container(
+            width: MediaQuery.of(context).size.width * num_width,
+            height: num_height,
+            child: Material(
+              elevation: 10.0,
+              shadowColor: Colors.white,
+              child: TextField(
+                controller: controller_Name,
+                keyboardType: keyboardtype,
+                obscureText: obsecure,
+                decoration: InputDecoration(
+                  hintText: text_hint,
+                  contentPadding: EdgeInsets.all(15),
+                  hintStyle: TextStyle(fontSize: 16),
+                  border: InputBorder.none,
+                  suffixIcon: Padding(
+                    padding: EdgeInsets.only(
+                        right: img_right_padding, bottom: img_bottom_padding),
+                    child: Image.asset(
+                      icon_name,
+                      width: img_width,
+                      height: img_height,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
 
 
 
