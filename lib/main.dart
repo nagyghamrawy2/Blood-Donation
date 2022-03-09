@@ -1,8 +1,12 @@
 import 'package:blood_bank/layout/home_layout.dart';
+import 'package:blood_bank/shared/bloc_observer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'change password/Change_password.dart';
+import 'shared/styles/colors.dart';
 
 void main() {
+  Bloc.observer = SimpleBlocObserver();
   runApp(const MyApp());
 }
 
@@ -13,14 +17,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        //237, 57, 74,
         primarySwatch: Colors.blue,
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: Color.fromRGBO(237, 57, 74, 1),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: mainColor,
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: mainColor,
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
+          showUnselectedLabels: true,
+          type: BottomNavigationBarType.fixed,
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: ChangePasswordScreen(),
+      home: const HomeLayout(),
     );
   }
 }
