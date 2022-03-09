@@ -33,7 +33,7 @@ class Buttons_without_icon extends StatelessWidget {
 }
 
 class Textformfield_with_border_with_icon extends StatelessWidget {
-  Textformfield_with_border_with_icon({required this.controller_Name,required this.num_width ,required this.num_hieght ,required this.keyboardtype ,required this.obsecure ,required this.text_hint ,required this.text_label ,required this.num_border ,required this.img_right_padding ,required this.img_bottom_padding ,required this.icon_name ,required this.img_width ,required this.img_height});
+  Textformfield_with_border_with_icon({required this.controller_Name,required this.num_width ,required this.num_hieght ,required this.keyboardtype ,required this.obsecure ,required this.text_hint ,required this.text_label ,required this.num_border ,});
   late double num_width;
   late double num_hieght;
   late TextInputType keyboardtype;
@@ -71,13 +71,13 @@ class Textformfield_with_border_with_icon extends StatelessWidget {
             borderSide: const BorderSide(color: Colors.black26, width: 3.0),
             borderRadius: BorderRadius.circular(num_border),
           ),
-          suffixIcon: Padding(
-            padding:  EdgeInsets.only(right: img_right_padding ,bottom: img_bottom_padding),
-            child: Image.asset(icon_name
-              ,width: img_width,
-              height: img_height,
-            ),
-          ),
+          // suffixIcon: Padding(
+          //   padding:  EdgeInsets.only(right: img_right_padding ,bottom: img_bottom_padding),
+          //   child: Image.asset(icon_name
+          //     ,width: img_width,
+          //     height: img_height,
+          //   ),
+          // ),
 
 
         ),

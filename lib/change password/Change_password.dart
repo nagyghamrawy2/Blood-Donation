@@ -30,7 +30,7 @@ class ChangePasswordScreen extends StatelessWidget {
                       ),
                     ],
                     color:Color.fromRGBO(237, 57, 74, 1),
-                  borderRadius: BorderRadius.only(topRight:Radius.circular(25.0),bottomLeft:Radius.circular(25.0), )
+                    borderRadius: BorderRadius.only(topRight:Radius.circular(25.0),bottomLeft:Radius.circular(25.0), )
                 ),
 
                 child: Column(
@@ -101,11 +101,12 @@ class ChangePasswordScreen extends StatelessWidget {
                 text_hint: 'Enter old  password',
                 text_label: 'Old Password',
                 num_border: 10,
-                img_right_padding: 5,
-                img_bottom_padding: 3,
-                icon_name:'assets/images/profile.png',
-                img_width: 50,
-                img_height: 20),
+                // img_right_padding: 5,
+                // img_bottom_padding: 3,
+                // icon_name:'assets/images/profile.png',
+                // img_width: 50,
+                // img_height: 20
+            ),
             SizedBox(height: 30,),
             Textformfield_with_border_with_icon(
                 controller_Name: passwordcontroller,
@@ -116,11 +117,12 @@ class ChangePasswordScreen extends StatelessWidget {
                 text_hint: 'Enter New password',
                 text_label: 'New Password',
                 num_border: 10,
-                img_right_padding: 5,
-                img_bottom_padding: 3,
-                icon_name:'assets/images/profile.png',
-                img_width: 50,
-                img_height: 20),
+                // img_right_padding: 5,
+                // img_bottom_padding: 3,
+                // icon_name:'assets/images/profile.png',
+                // img_width: 50,
+                // img_height: 20
+            ),
             SizedBox(height: 30,),
             Textformfield_with_border_with_icon(
                 controller_Name: passwordcontroller,
@@ -131,11 +133,12 @@ class ChangePasswordScreen extends StatelessWidget {
                 text_hint: 'Confirm password',
                 text_label: 'Confirm New Password',
                 num_border: 10,
-                img_right_padding: 5,
-                img_bottom_padding: 3,
-                icon_name:'assets/images/profile.png',
-                img_width: 50,
-                img_height: 20),
+                // img_right_padding: 5,
+                // img_bottom_padding: 3,
+                // icon_name:'assets/images/profile.png',
+                // img_width: 50,
+                // img_height: 20
+            ),
             SizedBox(height: 30,),
             Buttons_without_icon(
                 num_width: 0.9,
