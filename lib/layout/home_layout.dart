@@ -11,18 +11,17 @@ class HomeLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context)=> AppCubit(),
+      create: (context) => AppCubit(),
       child: BlocConsumer<AppCubit,AppStates>(
         listener: (context,state){},
         builder: (context,state)
         {
+          AppCubit cubit = AppCubit.get(context);
           return Scaffold(
             appBar: AppBar(
-              title: Text('Home'),
+              title: Text(cubit.titles[cubit.currentIndex]),
             ),
-            body: Container(
-              child: Text('Home'),
-            ),
+            body: cubit.screens[cubit.currentIndex],
             floatingActionButton: FloatingActionButton(
               child: const Icon(Icons.add),
               onPressed: () {},
@@ -35,9 +34,9 @@ class HomeLayout extends StatelessWidget {
               child: BottomNavigationBar(
                 currentIndex: AppCubit.get(context).currentIndex,
                 onTap: (int index){
-                  print(index);
+                  cubit.changeIndex(index);
                 },
-                items: [
+                items: const [
                 BottomNavigationBarItem(
                     icon: Image(
                         image: AssetImage('assets/images/home.png'),
@@ -71,96 +70,6 @@ class HomeLayout extends StatelessWidget {
                   label: 'Profile',
                 ),
               ]),
-              // child: Container(
-              //
-              //   height: 62.5,
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     crossAxisAlignment: CrossAxisAlignment.end,
-              //     children: [
-              //       Row(
-              //         children: [
-              //           Column(
-              //             mainAxisAlignment: MainAxisAlignment.center,
-              //             children: [
-              //               MaterialButton(
-              //                 onPressed: (){},
-              //                 child: Column(
-              //                   children: [
-              //                     const Image(
-              //                       image: AssetImage('assets/images/home.png'),
-              //                       height: 31,
-              //                       width: 32,
-              //                     ),
-              //                     const Text('Home'),
-              //                   ],
-              //                 ),
-              //               ),
-              //             ],
-              //           ),
-              //           Column(
-              //             mainAxisAlignment: MainAxisAlignment.center,
-              //             children: [
-              //               MaterialButton(
-              //                 onPressed: (){},
-              //                 child: Column(
-              //                   children: [
-              //                     const Image(
-              //                       image: AssetImage('assets/images/requests.png'),
-              //                       height: 31,
-              //                       width: 32,
-              //                     ),
-              //                     Text('Requests'),
-              //                   ],
-              //                 ),
-              //               ),
-              //             ],
-              //           ),
-              //         ],
-              //       ),
-              //       Row(
-              //         children: [
-              //           Column(
-              //             mainAxisAlignment: MainAxisAlignment.center,
-              //             children: [
-              //               MaterialButton(
-              //                 onPressed: (){},
-              //                 child: Column(
-              //                   children: [
-              //                     const Image(
-              //                       image: AssetImage('assets/images/education.png'),
-              //                       height: 31,
-              //                       width: 32,
-              //                     ),
-              //                     Text('Education'),
-              //                   ],
-              //                 ),
-              //               ),
-              //             ],
-              //           ),
-              //           Column(
-              //             mainAxisAlignment: MainAxisAlignment.center,
-              //             children: [
-              //               MaterialButton(
-              //                 onPressed: (){},
-              //                 child: Column(
-              //                   children: [
-              //                     const Image(
-              //                       image: AssetImage('assets/images/profile.png'),
-              //                       height: 31,
-              //                       width: 32,
-              //                     ),
-              //                     Text('Profile'),
-              //                   ],
-              //                 ),
-              //               ),
-              //             ],
-              //           ),
-              //         ],
-              //       ),
-              //     ],
-              //   ),
-              // ),
             ),
           );
         },

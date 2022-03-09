@@ -8,7 +8,9 @@ class Buttons_without_icon extends StatelessWidget {
       required this.button_color,
       required this.num_border,
       required this.num_fontsize,
-      required this.text_fontwwieght});
+      required this.text_fontwwieght
+      });
+
   late double num_width;
   late double num_hieght;
   late String text_button_name;
@@ -51,6 +53,7 @@ class Textformfield_with_border_with_icon extends StatelessWidget {
       required this.icon_name,
       required this.img_width,
       required this.img_height});
+
   late double num_width;
   late double num_hieght;
   late TextInputType keyboardtype;
@@ -120,6 +123,7 @@ class Textformfield_with_icon extends StatelessWidget {
       required this.icon_name,
       required this.img_width,
       required this.img_height});
+
   late String text_name;
   late double num_width;
   late double num_height;
@@ -132,6 +136,7 @@ class Textformfield_with_icon extends StatelessWidget {
   late double img_width;
   late double img_height;
   TextEditingController controller_Name;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -198,6 +203,7 @@ class Textformfield2_with_border_with_icon extends StatelessWidget {
       required this.icon_name,
       required this.img_width,
       required this.img_height});
+
   late String text_name;
   late double num_width;
   late double num_height;
@@ -210,6 +216,7 @@ class Textformfield2_with_border_with_icon extends StatelessWidget {
   late double img_width;
   late double img_height;
   TextEditingController controller_Name;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -275,6 +282,7 @@ class Container_with_button extends StatelessWidget {
       required this.img_width,
       required this.img_height,
       required this.label_name});
+
   late double num_width;
   late double num_height;
   late double img_left_padding;
@@ -283,6 +291,7 @@ class Container_with_button extends StatelessWidget {
   late double img_width;
   late double img_height;
   late String label_name;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -326,6 +335,7 @@ class Button_with_icon extends StatelessWidget {
     required this.img_width,
     required this.img_height,
   });
+
   late double num_width;
   late double num_height;
   late double img_left_padding;
@@ -336,6 +346,7 @@ class Button_with_icon extends StatelessWidget {
   late String label_name;
   late Color color;
   late Function function;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(

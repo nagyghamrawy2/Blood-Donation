@@ -29,4 +29,8 @@ class AppCubit extends Cubit<AppStates>
     'Education',
     'Profile',
   ];
+  void changeIndex(int index){
+    currentIndex = index;
+    emit(AppChangeBotNavBarState());
+  }
 }
