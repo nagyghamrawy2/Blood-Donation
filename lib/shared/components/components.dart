@@ -50,7 +50,7 @@ class Textformfield_with_border_with_icon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   Container(
+    return  Container(
       width: MediaQuery.of(context).size.width * num_width,
       height: num_hieght,
       child: TextFormField(
@@ -76,7 +76,6 @@ class Textformfield_with_border_with_icon extends StatelessWidget {
             child: Image.asset(icon_name
               ,width: img_width,
               height: img_height,
-
             ),
           ),
 
