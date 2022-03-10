@@ -67,6 +67,7 @@ class VerificationScreen extends StatelessWidget {
                   decoration: InputDecoration(
                       border: InputBorder.none
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
               SizedBox(width: 15,),
@@ -82,6 +83,8 @@ class VerificationScreen extends StatelessWidget {
                   decoration: InputDecoration(
                       border: InputBorder.none
                   ),
+                  textAlign: TextAlign.center,
+
                 ),
               ),
               SizedBox(width: 15,),
@@ -97,6 +100,8 @@ class VerificationScreen extends StatelessWidget {
                   decoration: InputDecoration(
                       border: InputBorder.none
                   ),
+                  textAlign: TextAlign.center,
+
                 ),
               ),
               SizedBox(width: 15,),
@@ -112,6 +117,8 @@ class VerificationScreen extends StatelessWidget {
                   decoration: InputDecoration(
                       border: InputBorder.none
                   ),
+                  textAlign: TextAlign.center,
+
                 ),
               ),
             ],
