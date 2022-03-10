@@ -1,6 +1,7 @@
 import 'package:blood_bank/layout/home_layout.dart';
 import 'package:flutter/material.dart';
 import 'Forget Password/Forget_password.dart';
+import 'Login_Screen/Login_Screen.dart';
 import 'change password/Change_password.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: ForgetPassword(),
+      home: LoginScreen(),
     );
   }
 }
