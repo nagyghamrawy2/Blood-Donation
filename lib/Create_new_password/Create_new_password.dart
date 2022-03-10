@@ -128,7 +128,6 @@ class CreateNewPasswordScreen extends StatelessWidget {
               // img_width: 50,
               // img_height: 20
             ),
-
             SizedBox(
               height: 30,
             ),
