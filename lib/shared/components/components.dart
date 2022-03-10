@@ -9,6 +9,7 @@ class Buttons_without_icon extends StatelessWidget {
       required this.num_border,
       required this.num_fontsize,
       required this.text_fontwwieght});
+
   late double num_width;
   late double num_hieght;
   late String text_button_name;
@@ -45,6 +46,7 @@ class Textformfield_with_border extends StatelessWidget {
     required this.text_label,
     required this.num_border,
   });
+
   late TextInputType keyboardtype;
   late bool obsecure;
   late String text_hint;
@@ -110,6 +112,7 @@ class Textformfield_with_icon extends StatelessWidget {
       required this.icon_name,
       required this.img_width,
       required this.img_height});
+
   late String text_name;
   late double num_width;
   late double num_height;
@@ -122,6 +125,7 @@ class Textformfield_with_icon extends StatelessWidget {
   late double img_width;
   late double img_height;
   TextEditingController controller_Name;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -188,6 +192,7 @@ class Textformfield2_with_border_with_icon extends StatelessWidget {
       required this.icon_name,
       required this.img_width,
       required this.img_height});
+
   late String text_name;
   late double num_width;
   late double num_height;
@@ -200,6 +205,7 @@ class Textformfield2_with_border_with_icon extends StatelessWidget {
   late double img_width;
   late double img_height;
   TextEditingController controller_Name;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -257,47 +263,88 @@ class Textformfield2_with_border_with_icon extends StatelessWidget {
 
 class Container_with_button extends StatelessWidget {
   Container_with_button(
-      {required this.num_width,
-      required this.num_height,
-      required this.img_left_padding,
-      required this.img_bottom_padding,
-      required this.icon_name,
-      required this.img_width,
-      required this.img_height,
-      required this.label_name});
+      {
+        required this.num_width,
+        required this.img_left_padding,
+        required this.icon_name,
+        required this.img_width,
+        required this.img_height,
+        required this.label_name,
+        this.have_switch = false,
+        this.cubitValueSwitch = false,
+        this.function,
+      });
   late double num_width;
-  late double num_height;
   late double img_left_padding;
-  late double img_bottom_padding;
   late String icon_name;
   late double img_width;
   late double img_height;
   late String label_name;
+  final bool have_switch;
+  final bool cubitValueSwitch;
+  final Function(bool)? function;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {},
-      child: Container(
-        width: MediaQuery.of(context).size.width * num_width,
-        height: num_height,
-        color: Colors.black26,
-        child: Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                  left: img_left_padding, bottom: img_bottom_padding),
-              child: Image.asset(
-                icon_name,
-                width: img_width,
-                height: img_height,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Container(
+          width: MediaQuery.of(context).size.width * num_width,
+          height: 43,
+          color: Colors.black26,
+          child: have_switch ? Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  left: img_left_padding,
+                ),
+                child: Image.asset(
+                  icon_name,
+                  width: img_width,
+                  height: img_height,
+                ),
               ),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Text(label_name,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          ],
+              SizedBox(
+                width: 5,
+              ),
+              Expanded(
+                child: Text(label_name,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              ),
+              Switch.adaptive(
+                activeColor: Colors.green,
+                inactiveTrackColor: Colors.red,
+                value: cubitValueSwitch,
+                onChanged: (value){
+                  function!(value);
+                  print(value);
+                },
+              ),
+            ],
+          ) : Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  left: img_left_padding,
+                ),
+                child: Image.asset(
+                  icon_name,
+                  width: img_width,
+                  height: img_height,
+                ),
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Expanded(
+                child: Text(label_name,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              ),
+
+            ],
+          )
         ),
       ),
     );
@@ -316,6 +363,7 @@ class Button_with_icon extends StatelessWidget {
     required this.img_width,
     required this.img_height,
   });
+
   late double num_width;
   late double num_height;
   late double img_left_padding;
@@ -326,6 +374,7 @@ class Button_with_icon extends StatelessWidget {
   late String label_name;
   late Color color;
   late Function function;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -455,6 +504,7 @@ class Textformfield_with_border_with_icon2 extends StatelessWidget {
       required this.icon_name,
       required this.img_width,
       required this.img_height});
+
   late TextInputType keyboardtype;
   late bool obsecure;
   late String text_hint;

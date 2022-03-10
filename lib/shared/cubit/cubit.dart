@@ -15,12 +15,18 @@ class AppCubit extends Cubit<AppStates>
   static AppCubit get(context) => BlocProvider.of(context);
 
   int currentIndex = 0;
+  bool valueSwitch = false;
+
+  void changeValueSwitch(bool value){
+    valueSwitch = value;
+    emit(AppChangeSwitchValueState());
+  }
 
   List<Widget> screens =[
     const HomeScreen(),
     const EducationScreen(),
     const PostRequestScreen(),
-    const ProfileScreen(),
+    //const ProfileScreen(),
   ];
 
   List<String> titles = [
