@@ -557,3 +557,26 @@ class Textformfield_with_border_with_icon2 extends StatelessWidget {
     );
   }
 }
+
+class InformationOfProfile extends StatelessWidget{
+
+  InformationOfProfile({
+    required this.label,
+    required this.leftLabel,
+});
+  late String label;
+  late String leftLabel;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 30,right: 30,top: 15.0,),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text('$label'),
+          Text('$leftLabel'),
+        ],
+      ),
+    );
+  }
+}
