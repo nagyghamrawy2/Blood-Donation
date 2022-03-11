@@ -364,8 +364,9 @@ class Button_with_icon extends StatelessWidget {
     required this.img_height,
     required this.fontsize,
     required this.label_color,
-    required this.label_fontwieght,
     required this.num_border,
+    required this.label_fontwieght,
+
   });
 
   late double num_width;
@@ -585,5 +586,70 @@ class InformationOfProfile extends StatelessWidget{
         ],
       ),
     );
+  }
+}
+
+class Signup_Textfeild extends StatelessWidget {
+  const Signup_Textfeild({
+    Key? key,
+    required this.htext,
+    required this.secure,
+    required this.width,
+    required this.height,
+    required this.text,
+    required this.margin,
+    required this.controller,
+    required this.keyboardtype,
+  }) : super(key: key);
+  final String htext;
+  final bool secure;
+  final double width;
+  final double height;
+  final String text;
+  final double margin;
+  final TextEditingController controller;
+  final TextInputType keyboardtype;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(color: Colors.white),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                margin: (EdgeInsets.only(right: margin)),
+                child: Text(
+                  text,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              TextField(
+                obscureText: secure,
+                controller: controller,
+                keyboardType: keyboardtype,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  hintText: htext,
+                  labelStyle: TextStyle(color: Colors.grey),
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }
