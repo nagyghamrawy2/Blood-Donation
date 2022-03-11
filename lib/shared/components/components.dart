@@ -8,7 +8,8 @@ class Buttons_without_icon extends StatelessWidget {
       required this.button_color,
       required this.num_border,
       required this.num_fontsize,
-      required this.text_fontwwieght});
+      required this.text_fontwwieght,
+      });
 
   late double num_width;
   late double num_hieght;
@@ -589,67 +590,60 @@ class InformationOfProfile extends StatelessWidget{
   }
 }
 
-class Signup_Textfeild extends StatelessWidget {
-  const Signup_Textfeild({
-    Key? key,
-    required this.htext,
-    required this.secure,
+class SignupTextField extends StatelessWidget {
+  SignupTextField({
+    required this.hintText,
+    this.secure = false,
     required this.width,
-    required this.height,
     required this.text,
-    required this.margin,
     required this.controller,
     required this.keyboardtype,
-  }) : super(key: key);
-  final String htext;
+  });
+  late String hintText;
   final bool secure;
-  final double width;
-  final double height;
-  final String text;
-  final double margin;
-  final TextEditingController controller;
-  final TextInputType keyboardtype;
+  late double width;
+  late String text;
+  late TextEditingController controller;
+  late TextInputType keyboardtype;
 
   @override
   Widget build(BuildContext context) {
     return Container(
         width: width,
-        height: height,
-        decoration: BoxDecoration(color: Colors.white),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                margin: (EdgeInsets.only(right: margin)),
-                child: Text(
-                  text,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+        height: 76,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              child: Text(
+                text,
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              SizedBox(
-                height: 5,
-              ),
-              TextField(
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Container(
+              height: 53,
+              child: TextFormField(
                 obscureText: secure,
                 controller: controller,
                 keyboardType: keyboardtype,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       width: 1,
                     ),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  hintText: htext,
-                  labelStyle: TextStyle(color: Colors.grey),
+                  hintText: hintText,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ));
   }
 }
