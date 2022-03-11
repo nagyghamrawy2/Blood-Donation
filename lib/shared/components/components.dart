@@ -362,6 +362,10 @@ class Button_with_icon extends StatelessWidget {
     required this.icon_name,
     required this.img_width,
     required this.img_height,
+    required this.fontsize,
+    required this.label_color,
+    required this.label_fontwieght,
+    required this.num_border,
   });
 
   late double num_width;
@@ -374,7 +378,10 @@ class Button_with_icon extends StatelessWidget {
   late String label_name;
   late Color color;
   late Function function;
-
+  late double fontsize;
+  late FontWeight label_fontwieght;
+  late Color label_color;
+  late double num_border;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -384,7 +391,7 @@ class Button_with_icon extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(num_border),
         ),
         width: MediaQuery.of(context).size.width * num_width,
         height: num_height,
@@ -403,7 +410,7 @@ class Button_with_icon extends StatelessWidget {
               width: 5,
             ),
             Text(label_name,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                style: TextStyle(fontSize: fontsize, fontWeight: label_fontwieght ,color: label_color)),
           ],
         ),
       ),
