@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import '../shared/components/components.dart';
+import '../../shared/components/components.dart';
 
-class CreateNewPasswordScreen extends StatelessWidget {
+class ChangePasswordScreen extends StatelessWidget {
   var passwordcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(237, 57, 74, 1),
-        title: Text('Create new password'),
+        title: Text('Change Password'),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
         ],
@@ -97,7 +97,23 @@ class CreateNewPasswordScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 90,
+              height: 50,
+            ),
+            Textformfield_with_border(
+              controller_Name: passwordcontroller,
+              keyboardtype: TextInputType.visiblePassword,
+              obsecure: true,
+              text_hint: 'Enter old  password',
+              text_label: 'Old Password',
+              num_border: 10,
+              // img_right_padding: 5,
+              // img_bottom_padding: 3,
+              // icon_name:'assets/images/profile.png',
+              // img_width: 50,
+              // img_height: 20
+            ),
+            SizedBox(
+              height: 30,
             ),
             Textformfield_with_border(
               controller_Name: passwordcontroller,
@@ -113,14 +129,14 @@ class CreateNewPasswordScreen extends StatelessWidget {
               // img_height: 20
             ),
             SizedBox(
-              height: 40,
+              height: 30,
             ),
             Textformfield_with_border(
               controller_Name: passwordcontroller,
               keyboardtype: TextInputType.visiblePassword,
               obsecure: true,
-              text_hint: 'Confirm new  password',
-              text_label: 'Confirm Password',
+              text_hint: 'Confirm password',
+              text_label: 'Confirm New Password',
               num_border: 10,
               // img_right_padding: 5,
               // img_bottom_padding: 3,

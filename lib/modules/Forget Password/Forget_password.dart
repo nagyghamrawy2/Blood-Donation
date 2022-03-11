@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../shared/components/components.dart';
+import '../../shared/components/components.dart';
+
 
 class ForgetPassword extends StatelessWidget {
   var emailcontroller = TextEditingController();
