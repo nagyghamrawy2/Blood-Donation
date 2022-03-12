@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../shared/components/components.dart';
 
 class CreateNewPasswordScreen extends StatelessWidget {

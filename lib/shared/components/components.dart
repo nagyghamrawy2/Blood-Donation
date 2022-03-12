@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class Buttons_without_icon extends StatelessWidget {
-  Buttons_without_icon(
-      {required this.num_width,
-      required this.num_hieght,
-      required this.text_button_name,
-      required this.button_color,
-      required this.num_border,
-      required this.num_fontsize,
-      required this.text_fontwwieght,
-      });
+  Buttons_without_icon({
+    required this.num_width,
+    required this.num_hieght,
+    required this.text_button_name,
+    required this.button_color,
+    required this.num_border,
+    required this.num_fontsize,
+    required this.text_fontwwieght,
+  });
 
   late double num_width;
   late double num_hieght;
@@ -263,18 +263,17 @@ class Textformfield2_with_border_with_icon extends StatelessWidget {
 }
 
 class Container_with_button extends StatelessWidget {
-  Container_with_button(
-      {
-        required this.num_width,
-        required this.img_left_padding,
-        required this.icon_name,
-        required this.img_width,
-        required this.img_height,
-        required this.label_name,
-        this.have_switch = false,
-        this.cubitValueSwitch = false,
-        this.function,
-      });
+  Container_with_button({
+    required this.num_width,
+    required this.img_left_padding,
+    required this.icon_name,
+    required this.img_width,
+    required this.img_height,
+    required this.label_name,
+    this.have_switch = false,
+    this.cubitValueSwitch = false,
+    this.function,
+  });
   late double num_width;
   late double img_left_padding;
   late String icon_name;
@@ -292,61 +291,63 @@ class Container_with_button extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: Container(
-          width: MediaQuery.of(context).size.width * num_width,
-          height: 43,
-          color: Colors.black26,
-          child: have_switch ? Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  left: img_left_padding,
-                ),
-                child: Image.asset(
-                  icon_name,
-                  width: img_width,
-                  height: img_height,
-                ),
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Expanded(
-                child: Text(label_name,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-              ),
-              Switch.adaptive(
-                activeColor: Colors.green,
-                inactiveTrackColor: Colors.red,
-                value: cubitValueSwitch,
-                onChanged: (value){
-                  function!(value);
-                  print(value);
-                },
-              ),
-            ],
-          ) : Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  left: img_left_padding,
-                ),
-                child: Image.asset(
-                  icon_name,
-                  width: img_width,
-                  height: img_height,
-                ),
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Expanded(
-                child: Text(label_name,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-              ),
-
-            ],
-          )
-        ),
+            width: MediaQuery.of(context).size.width * num_width,
+            height: 43,
+            color: Colors.black26,
+            child: have_switch
+                ? Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: img_left_padding,
+                        ),
+                        child: Image.asset(
+                          icon_name,
+                          width: img_width,
+                          height: img_height,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Expanded(
+                        child: Text(label_name,
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold)),
+                      ),
+                      Switch.adaptive(
+                        activeColor: Colors.green,
+                        inactiveTrackColor: Colors.red,
+                        value: cubitValueSwitch,
+                        onChanged: (value) {
+                          function!(value);
+                          print(value);
+                        },
+                      ),
+                    ],
+                  )
+                : Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: img_left_padding,
+                        ),
+                        child: Image.asset(
+                          icon_name,
+                          width: img_width,
+                          height: img_height,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Expanded(
+                        child: Text(label_name,
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold)),
+                      ),
+                    ],
+                  )),
       ),
     );
   }
@@ -367,7 +368,6 @@ class Button_with_icon extends StatelessWidget {
     required this.label_color,
     required this.num_border,
     required this.label_fontwieght,
-
   });
 
   late double num_width;
@@ -412,7 +412,10 @@ class Button_with_icon extends StatelessWidget {
               width: 5,
             ),
             Text(label_name,
-                style: TextStyle(fontSize: fontsize, fontWeight: label_fontwieght ,color: label_color)),
+                style: TextStyle(
+                    fontSize: fontsize,
+                    fontWeight: label_fontwieght,
+                    color: label_color)),
           ],
         ),
       ),
@@ -567,18 +570,21 @@ class Textformfield_with_border_with_icon2 extends StatelessWidget {
   }
 }
 
-class InformationOfProfile extends StatelessWidget{
-
+class InformationOfProfile extends StatelessWidget {
   InformationOfProfile({
     required this.label,
     required this.leftLabel,
-});
+  });
   late String label;
   late String leftLabel;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30,right: 30,top: 15.0,),
+      padding: const EdgeInsets.only(
+        left: 30,
+        right: 30,
+        top: 15.0,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -1,9 +1,18 @@
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   var emailcontroller = TextEditingController();
+
   var passwordcontroller = TextEditingController();
+
+  bool value = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,12 +78,20 @@ class LoginScreen extends StatelessWidget {
                 img_height: 20),
             Row(
               children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 40.0),
-                    child: Text('Remember me',
-                        style: TextStyle(color: Colors.grey)),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15.0),
+                  child: Checkbox(
+                    value: this.value,
+                    onChanged: (value) {
+                      setState(() {
+                        this.value = value!;
+                      });
+                    },
                   ),
+                ),
+                Expanded(
+                  child:
+                      Text('Remember me', style: TextStyle(color: Colors.grey)),
                 ),
                 MaterialButton(
                   onPressed: () {},
@@ -107,8 +124,10 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
 class CustomClipPath extends CustomClipper<Path> {
   var radius = 10.0;
+
   @override
   Path getClip(Size size) {
     Path path = Path();
