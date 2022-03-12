@@ -1,5 +1,7 @@
 import 'package:blood_bank/shared/components/components.dart';
+import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
+import '../../shared/styles/colors.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -8,10 +10,10 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   var emailcontroller = TextEditingController();
-
   var passwordcontroller = TextEditingController();
 
   bool value = false;
+  void initState(){}
 
   @override
   Widget build(BuildContext context) {
@@ -81,8 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.only(left: 15.0),
                   child: Checkbox(
-                    //checkColor:Color.fromRGBO(237, 57, 74, 1),
-                    activeColor: Colors.redAccent,
+                    activeColor: mainColor,
                     value: this.value,
                     onChanged: (value) {
                       setState(() {
@@ -93,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Expanded(
                   child:
-                      Text('Remember me', style: TextStyle(color: Colors.grey)),
+                      Text('Remember me', style: TextStyle(color:mainColor,fontWeight: FontWeight.bold)),
                 ),
                 MaterialButton(
                   onPressed: () {},
@@ -103,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         alignment: Alignment.centerRight,
                         child: Text(
                           'Forget password ?',
-                          style: TextStyle(color: Colors.grey),
+                          style: TextStyle(color:mainColor,fontWeight: FontWeight.bold),
                         )),
                   ),
                 ),
