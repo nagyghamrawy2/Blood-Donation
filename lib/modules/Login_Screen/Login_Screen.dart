@@ -81,6 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.only(left: 15.0),
                   child: Checkbox(
+                    //checkColor:Color.fromRGBO(237, 57, 74, 1),
+                    activeColor: Colors.redAccent,
                     value: this.value,
                     onChanged: (value) {
                       setState(() {
