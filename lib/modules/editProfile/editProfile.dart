@@ -36,7 +36,6 @@ class EditProfile extends StatelessWidget {
                   children: [
                     SignupTextField(
                       hintText: 'Enter your name',
-                      width: double.infinity,
                       text: 'First Name',
                       controller: firstName,
                       keyboardtype: TextInputType.text,
@@ -44,7 +43,6 @@ class EditProfile extends StatelessWidget {
                     SizedBox(height: 10,),
                     SignupTextField(
                       hintText: 'Enter your name',
-                      width: double.infinity,
                       text: 'Last Name',
                       controller: lastName,
                       keyboardtype: TextInputType.text,
@@ -52,7 +50,6 @@ class EditProfile extends StatelessWidget {
                     SizedBox(height: 10,),
                     SignupTextField(
                       hintText: 'Enter your email',
-                      width: double.infinity,
                       text: 'Email',
                       controller: emailAddress,
                       keyboardtype: TextInputType.emailAddress,
@@ -60,7 +57,6 @@ class EditProfile extends StatelessWidget {
                     SizedBox(height: 10,),
                     SignupTextField(
                       hintText: 'Enter your phone number',
-                      width: double.infinity,
                       text: 'Phone',
                       controller: phone,
                       keyboardtype: TextInputType.phone,
@@ -68,7 +64,6 @@ class EditProfile extends StatelessWidget {
                     SizedBox(height: 10,),
                     SignupTextField(
                       hintText: 'Enter your location',
-                      width: double.infinity,
                       text: 'location',
                       controller: location,
                       keyboardtype: TextInputType.text,
@@ -76,7 +71,6 @@ class EditProfile extends StatelessWidget {
                     SizedBox(height: 10,),
                     SignupTextField(
                       hintText: 'Enter your birthdate',
-                      width: double.infinity,
                       text: 'Birth Date',
                       controller: birthDate,
                       keyboardtype: TextInputType.datetime,
@@ -84,7 +78,6 @@ class EditProfile extends StatelessWidget {
                     SizedBox(height: 10,),
                     SignupTextField(
                       hintText: 'Enter your Blood type',
-                      width: double.infinity,
                       text: 'Blood type',
                       controller: bloodType,
                       keyboardtype: TextInputType.text,
@@ -92,7 +85,6 @@ class EditProfile extends StatelessWidget {
                     SizedBox(height: 10,),
                     SignupTextField(
                       hintText: 'Enter your Weight',
-                      width: double.infinity,
                       text: 'Weight',
                       controller: weight,
                       keyboardtype: TextInputType.number,
@@ -100,7 +92,6 @@ class EditProfile extends StatelessWidget {
                     SizedBox(height: 10,),
                     SignupTextField(
                       hintText: 'Enter your Height',
-                      width: double.infinity,
                       text: 'Height',
                       controller: height,
                       keyboardtype: TextInputType.number,

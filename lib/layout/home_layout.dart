@@ -31,6 +31,7 @@ class HomeLayout extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               notchMargin: 10,
               child: BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
                 currentIndex: AppCubit.get(context).currentIndex,
                 onTap: (int index){
                   cubit.changeIndex(index);

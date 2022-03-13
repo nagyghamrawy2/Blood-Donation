@@ -274,6 +274,7 @@ class Container_with_button extends StatelessWidget {
     this.cubitValueSwitch = false,
     this.function,
   });
+
   late double num_width;
   late double img_left_padding;
   late String icon_name;
@@ -384,6 +385,7 @@ class Button_with_icon extends StatelessWidget {
   late FontWeight label_fontwieght;
   late Color label_color;
   late double num_border;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -575,8 +577,10 @@ class InformationOfProfile extends StatelessWidget {
     required this.label,
     required this.leftLabel,
   });
+
   late String label;
   late String leftLabel;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -598,44 +602,53 @@ class InformationOfProfile extends StatelessWidget {
 
 class SignupTextField extends StatelessWidget {
   SignupTextField({
-    required this.hintText,
+    this.hintText = '',
     this.secure = false,
-    required this.width,
+    this.heightTextField = 53,
+    this.heightContainer = 78,
+    this.maxLengthTextField,
     required this.text,
     required this.controller,
     required this.keyboardtype,
   });
-  late String hintText;
+
+  final String hintText;
   final bool secure;
-  late double width;
   late String text;
+  final double heightTextField;
+  final double heightContainer;
+  final int? maxLengthTextField;
   late TextEditingController controller;
   late TextInputType keyboardtype;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: width,
-        height: 76,
+        width: double.infinity,
+        height: heightContainer,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              child: Text(
-                text,
-                style: TextStyle(fontWeight: FontWeight.bold),
+            Text(
+              text,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
               ),
             ),
             SizedBox(
-              height: 5,
+              height: 4,
             ),
             Container(
-              height: 53,
+              height: heightTextField,
               child: TextFormField(
+                maxLines: 3,
+                maxLength: maxLengthTextField,
                 obscureText: secure,
                 controller: controller,
                 keyboardType: keyboardtype,
                 decoration: InputDecoration(
+
                   enabledBorder: OutlineInputBorder(
                     borderSide: const BorderSide(
                       width: 1,

@@ -1,7 +1,6 @@
+import 'package:blood_bank/shared/components/components.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-
-import '../shared/components/components.dart';
 
 class VerificationScreen extends StatelessWidget {
   @override

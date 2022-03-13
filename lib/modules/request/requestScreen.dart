@@ -1,8 +1,8 @@
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 
-class RequestScreen2 extends StatelessWidget {
-  const RequestScreen2({Key? key}) : super(key: key);
+class RequestScreen extends StatelessWidget {
+  const RequestScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +10,10 @@ class RequestScreen2 extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('All request'),
+          title: Text('Requests'),
           backgroundColor: mainColor,
           bottom: TabBar(
+            indicatorColor: mainColor,
             tabs: <Widget>[
               Tab(
                 child: Text('All requests'),
@@ -42,7 +43,7 @@ class RequestScreen2 extends StatelessWidget {
                         ),
                         backgroundColor: mainColor,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Expanded(
@@ -89,7 +90,8 @@ class RequestScreen2 extends StatelessWidget {
                               height: 28,
                               width: 85,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   SizedBox(
                                     width: 2,
@@ -110,7 +112,8 @@ class RequestScreen2 extends StatelessWidget {
                                 ],
                               ),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
                                 color: greenColor,
                               ),
                             ),
@@ -136,7 +139,7 @@ class RequestScreen2 extends StatelessWidget {
                     ],
                   ),
                 ),
-                separatorBuilder: (contex, index) => SizedBox(
+                separatorBuilder: (context, index) => const SizedBox(
                   height: 5,
                 ),
                 itemCount: 20,
@@ -198,55 +201,15 @@ class RequestScreen2 extends StatelessWidget {
                         ),
                       ),
                       Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              height: 28,
-                              width: 85,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(
-                                    width: 2,
-                                  ),
-                                  Text(
-                                    'Contact',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  CircleAvatar(
-                                    radius: 13,
-                                    child: Image.asset(
-                                      'assets/images/chat.png',
-                                    ),
-                                    backgroundColor: greenColor,
-                                  ),
-                                ],
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                                color: greenColor,
-                              ),
-                            ),
+                          IconButton(
+                            onPressed: (){},
+                            icon: Icon(Icons.edit),
                           ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              height: 28,
-                              width: 85,
-                              color: mainColor,
-                              child: Center(
-                                child: Text(
-                                  'I can donate',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
+                          IconButton(
+                            onPressed: (){},
+                            icon: Icon(Icons.delete_outline),
                           ),
                         ],
                       ),
@@ -256,7 +219,7 @@ class RequestScreen2 extends StatelessWidget {
                 separatorBuilder: (contex, index) => SizedBox(
                   height: 5,
                 ),
-                itemCount: 20,
+                itemCount: 2,
               ),
             ),
           ],
