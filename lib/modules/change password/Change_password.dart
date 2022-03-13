@@ -22,7 +22,7 @@ class ChangePasswordScreen extends StatelessWidget {
             Center(
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.18,
+                height: MediaQuery.of(context).size.height * 0.17,
                 decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
