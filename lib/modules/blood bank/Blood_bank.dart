@@ -26,7 +26,7 @@ class _Blood_bankState extends State<Blood_bank> {
               width: double.infinity,
               height: 301.55,
               child: Image.asset(
-                "assets/images/finddonor.jpg",
+                "assets/images/hospital.jpg",
               ),
             ),
             Padding(

@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: Find_donor(),
+      home: Blood_bank(),
     );
   }
 }
