@@ -36,7 +36,7 @@ class _Blood_bankState extends State<Blood_bank> {
                 height: 80,
                 child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                   CircleAvatar(
-                   backgroundImage: AssetImage("assets/images/pp.png"),
+                    backgroundImage: AssetImage("assets/images/pp.png"),
                     radius: 28.5,
                   ),
                   SizedBox(
@@ -59,12 +59,13 @@ class _Blood_bankState extends State<Blood_bank> {
                         ),
                         Text("helwan,cairo",
                             style:
-                            TextStyle(fontSize: 12, color: Colors.black26)),
+                                TextStyle(fontSize: 12, color: Colors.black26)),
                         SizedBox(
                           height: 3,
                         ),
                         Text("30 km",
-                            style: TextStyle(fontSize: 12, color: Colors.black26))
+                            style:
+                                TextStyle(fontSize: 12, color: Colors.black26))
                       ],
                     ),
                   ),
@@ -75,7 +76,10 @@ class _Blood_bankState extends State<Blood_bank> {
                         onTap: () {},
                         child: CircleAvatar(
                           radius: 13,
-                          child: SvgPicture.asset("assets/images/phone-call.svg",color: greenColor,),
+                          child: SvgPicture.asset(
+                            "assets/images/phone-call.svg",
+                            color: greenColor,
+                          ),
                           backgroundColor: Colors.transparent,
                         ),
                       ),
@@ -85,7 +89,11 @@ class _Blood_bankState extends State<Blood_bank> {
                           height: 28,
                           width: 85,
                           child: Center(
-                            child: Icon(Icons.location_on,color: mainColor,size: 30,),
+                            child: Icon(
+                              Icons.location_on,
+                              color: mainColor,
+                              size: 30,
+                            ),
                           ),
                         ),
                       ),
@@ -97,11 +105,6 @@ class _Blood_bankState extends State<Blood_bank> {
           ],
         ),
       ),
-
     );
   }
 }
-
-
-
-
