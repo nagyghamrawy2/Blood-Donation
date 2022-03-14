@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
 class Buttons_without_icon extends StatelessWidget {
   Buttons_without_icon({
     required this.num_width,
@@ -392,7 +391,7 @@ class Button_with_icon extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Function;
+        function;
       },
       child: Container(
         decoration: BoxDecoration(
@@ -428,19 +427,15 @@ class Button_with_icon extends StatelessWidget {
 }
 
 class Requst_textformfield extends StatelessWidget {
-  Requst_textformfield(
-      {required this.controller_Name,
-      required this.text_name,
-      required this.num_width,
-      required this.num_height,
-      required this.keyboardtype,
-      required this.obsecure,
-      required this.text_hint,
-      required this.img_right_padding,
-      required this.img_bottom_padding,
-      required this.icon_name,
-      required this.img_width,
-      required this.img_height});
+  Requst_textformfield({
+    required this.controller_Name,
+    required this.text_name,
+    required this.num_width,
+    required this.num_height,
+    required this.keyboardtype,
+    required this.obsecure,
+    required this.text_hint,
+  });
 
   late String text_name;
   late double num_width;
@@ -448,11 +443,6 @@ class Requst_textformfield extends StatelessWidget {
   late TextInputType keyboardtype;
   late bool obsecure;
   late String text_hint;
-  late double img_right_padding;
-  late double img_bottom_padding;
-  late String icon_name;
-  late double img_width;
-  late double img_height;
   TextEditingController controller_Name;
 
   @override
@@ -485,18 +475,8 @@ class Requst_textformfield extends StatelessWidget {
                 obscureText: obsecure,
                 decoration: InputDecoration(
                   hintText: text_hint,
-                  contentPadding: EdgeInsets.all(15),
-                  hintStyle: TextStyle(fontSize: 16),
+                  hintStyle: TextStyle(fontSize: 16, color: Color(0xFF808080)),
                   border: InputBorder.none,
-                  suffixIcon: Padding(
-                    padding: EdgeInsets.only(
-                        right: img_right_padding, bottom: img_bottom_padding),
-                    child: Image.asset(
-                      icon_name,
-                      width: img_width,
-                      height: img_height,
-                    ),
-                  ),
                 ),
               ),
             ),
@@ -667,6 +647,7 @@ class SignupTextField extends StatelessWidget {
         ));
   }
 }
+
 class SignupTextFieldcustom extends StatelessWidget {
   SignupTextFieldcustom({
     this.hintText = '',
@@ -735,6 +716,7 @@ class SignupTextFieldcustom extends StatelessWidget {
         ));
   }
 }
+
 class SignupTextFieldForDatepicker extends StatelessWidget {
   SignupTextFieldForDatepicker({
     this.hintText = '',
@@ -746,7 +728,6 @@ class SignupTextFieldForDatepicker extends StatelessWidget {
     required this.text,
     required this.controller,
     required this.keyboardtype,
-
   });
 
   final String hintText;
@@ -799,8 +780,7 @@ class SignupTextFieldForDatepicker extends StatelessWidget {
                     firstDate: DateTime.parse('2000-01-01'),
                     lastDate: DateTime.parse('2022-10-01'),
                   ).then((value) {
-                    controller.text =
-                        DateFormat.yMMMd().format(value!);
+                    controller.text = DateFormat.yMMMd().format(value!);
                   });
                 },
                 decoration: InputDecoration(
@@ -819,5 +799,148 @@ class SignupTextFieldForDatepicker extends StatelessWidget {
             ),
           ],
         ));
+  }
+}
+
+class Education extends StatelessWidget {
+  Education({required this.index});
+
+  late int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return index % 2 == 0
+        ? Card(
+            elevation: 10.0,
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: 125,
+              decoration: BoxDecoration(
+                color: Color(0xFFFFEEE6),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage("assets/images/test.png"),
+                      radius: 60,
+                    ),
+                    SizedBox(
+                      width: 17,
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "The Concept of Red Blood Cell",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                                color: Color(0xFF5D240C)),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            "Hellosadfas asdfasdfcs swadsdasdasdasadsadasdasdasdasdsadsadsadasdasdsad asdasdsaddasdasdasdasda",
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.normal,
+                                color: Color(0xFF787F8F)),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          InkWell(
+                            child: Text(
+                              "Learn more",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  color: Color(0xFFFF0000)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              // child: Material(
+              //   elevation: 10.0,
+              //   shadowColor: Colors.white,
+              // ),
+            ),
+          )
+        : Card(
+            elevation: 10.0,
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: 125,
+              decoration: BoxDecoration(
+                color: Color(0xFFF8F8F8),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage("assets/images/test.png"),
+                      radius: 60,
+                    ),
+                    SizedBox(
+                      width: 17,
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "The Concept of Red Blood Cell",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                                color: Color(0xFF5D240C)),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            "Hellosadfas asdfasdfcs swadsdasdasdasadsadasdasdasdasdsadsadsadasdasdsad asdasdsaddasdasdasdasda",
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.normal,
+                                color: Color(0xFF787F8F)),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          InkWell(
+                            child: Text(
+                              "Learn more",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  color: Color(0xFFFF0000)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              // child: Material(
+              //   elevation: 10.0,
+              //   shadowColor: Colors.white,
+              // ),
+            ),
+          );
   }
 }

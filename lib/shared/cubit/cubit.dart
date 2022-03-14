@@ -39,4 +39,5 @@ class AppCubit extends Cubit<AppStates>
     currentIndex = index;
     emit(AppChangeBotNavBarState());
   }
+
 }
