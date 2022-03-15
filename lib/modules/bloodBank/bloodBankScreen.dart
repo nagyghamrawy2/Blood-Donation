@@ -3,12 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../shared/styles/colors.dart';
 
-class Blood_bank extends StatefulWidget {
-  @override
-  State<Blood_bank> createState() => _Blood_bankState();
-}
 
-class _Blood_bankState extends State<Blood_bank> {
+class BloodBankScreen extends StatelessWidget {
+  const BloodBankScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,13 +57,13 @@ class _Blood_bankState extends State<Blood_bank> {
                         ),
                         Text("helwan,cairo",
                             style:
-                                TextStyle(fontSize: 12, color: Colors.black26)),
+                            TextStyle(fontSize: 12, color: Colors.black26)),
                         SizedBox(
                           height: 3,
                         ),
                         Text("30 km",
                             style:
-                                TextStyle(fontSize: 12, color: Colors.black26))
+                            TextStyle(fontSize: 12, color: Colors.black26))
                       ],
                     ),
                   ),
@@ -108,3 +106,4 @@ class _Blood_bankState extends State<Blood_bank> {
     );
   }
 }
+

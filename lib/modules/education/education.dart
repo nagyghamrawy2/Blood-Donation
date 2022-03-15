@@ -6,17 +6,13 @@ class EducationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFED394A),
         title: Text(
           "Education",
           style: TextStyle(
               fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-        leading: Icon(
-          Icons.arrow_back,
-          color: Colors.white,
         ),
         actions: [
           Icon(
@@ -26,31 +22,36 @@ class EducationScreen extends StatelessWidget {
           )
         ],
       ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 32,),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(
-                  "Articles",
-                style: TextStyle(fontSize: 20 ,fontWeight: FontWeight.bold),
-              ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 32,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              "Articles",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 19,),
-            Expanded(
-              child: ListView.separated(
-                  itemBuilder: (context , index){
-                    return Education(index: index);
-                  },
-                  separatorBuilder: (context ,index){
-                    return SizedBox(height: 19,);
-                  },
-                  itemCount: 20
-              ),
-            ),
-          ],
-        ),
+          ),
+          SizedBox(
+            height: 19,
+          ),
+          Expanded(
+            child: ListView.separated(
+                itemBuilder: (context, index) {
+                  return Education(index: index);
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox(
+                    height: 19,
+                  );
+                },
+                itemCount: 20),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -3,12 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../shared/styles/colors.dart';
 
-class Find_donor extends StatefulWidget {
-  @override
-  State<Find_donor> createState() => _Find_donorState();
-}
+class FindDonorScreen extends StatelessWidget {
+  const FindDonorScreen({Key? key}) : super(key: key);
 
-class _Find_donorState extends State<Find_donor> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +54,7 @@ class _Find_donorState extends State<Find_donor> {
                       ),
                       Text("helwan,cairo",
                           style:
-                              TextStyle(fontSize: 12, color: Colors.black26)),
+                          TextStyle(fontSize: 12, color: Colors.black26)),
                       Text("30 km",
                           style: TextStyle(fontSize: 12, color: Colors.black26))
                     ],
@@ -82,10 +79,10 @@ class _Find_donorState extends State<Find_donor> {
                           borderRadius: BorderRadius.circular(26)),
                       child: Center(
                           child: Text(
-                        "A+",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      )),
+                            "A+",
+                            style: TextStyle(
+                                color: Colors.white, fontWeight: FontWeight.bold),
+                          )),
                     )
                   ],
                 )
@@ -108,6 +105,7 @@ class _Find_donorState extends State<Find_donor> {
     );
   }
 }
+
 
 var bloodtype;
 
