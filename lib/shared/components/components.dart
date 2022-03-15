@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -26,7 +27,9 @@ class Buttons_without_icon extends StatelessWidget {
       width: MediaQuery.of(context).size.width * num_width,
       height: num_hieght,
       child: ElevatedButton(
-        child: Text(text_button_name),
+        child: Text(
+          text_button_name,
+        ),
         onPressed: () {},
         style: ElevatedButton.styleFrom(
             primary: button_color,
@@ -586,9 +589,6 @@ class SignupTextField extends StatelessWidget {
   SignupTextField({
     this.hintText = '',
     this.secure = false,
-    this.heightTextField = 53,
-    this.heightContainer = 78,
-    this.maxLengthTextField,
     required this.text,
     required this.controller,
     required this.keyboardtype,
@@ -597,9 +597,6 @@ class SignupTextField extends StatelessWidget {
   final String hintText;
   final bool secure;
   late String text;
-  final double heightTextField;
-  final double heightContainer;
-  final int? maxLengthTextField;
   late TextEditingController controller;
   late TextInputType keyboardtype;
 
@@ -607,7 +604,7 @@ class SignupTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        height: heightContainer,
+        height: MediaQuery.of(context).size.height * 0.11,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -621,11 +618,10 @@ class SignupTextField extends StatelessWidget {
             SizedBox(
               height: 4,
             ),
-            Container(
-              height: heightTextField,
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 1,
               child: TextFormField(
-                maxLines: 3,
-                maxLength: maxLengthTextField,
                 obscureText: secure,
                 controller: controller,
                 keyboardType: keyboardtype,
@@ -692,7 +688,6 @@ class SignupTextFieldcustom extends StatelessWidget {
             Container(
               height: heightTextField,
               child: TextFormField(
-                maxLines: 3,
                 maxLength: maxLengthTextField,
                 obscureText: secure,
                 controller: controller,

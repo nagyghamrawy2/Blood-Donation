@@ -35,9 +35,6 @@ class EditRequest extends StatelessWidget {
                 SizedBox(height: 10,),
                 SignupTextField(
                   text: 'Description',
-                  maxLengthTextField: 120,
-                  heightTextField: 90,
-                  heightContainer: 120,
                   controller: descriptionController,
                   keyboardtype: TextInputType.text,
                 ),

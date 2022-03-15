@@ -1,4 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+import '../../shared/styles/colors.dart';
 
 class chat extends StatefulWidget {
   @override
@@ -13,8 +16,11 @@ class _chatState extends State<chat> {
         backgroundColor: Color.fromRGBO(237, 57, 74, 1),
         title: Container(
             child: Row(
-          children: [
-            CircleAvatar(maxRadius: 25,child: Image.asset(""),),
+             children: [
+             CircleAvatar(
+              backgroundImage: AssetImage("assets/images/pp.png"),
+              radius: 25,
+            ),
             SizedBox(
               width: 10,
             ),
@@ -34,7 +40,59 @@ class _chatState extends State<chat> {
               )),
         ],
       ),
-      body: Container(),
+      body: SafeArea(
+          child: Column(
+        children: [
+          Expanded(
+              child: ListView.builder(
+            itemBuilder: (context, index) => Text("Kosom el chat"),
+            itemCount: 100,
+          )),
+          Container(
+            margin: EdgeInsets.all(15.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(48),
+                      color: greyColor,
+                    ),
+                    height: 55,
+                    child: TextField(
+                      decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(48),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(48),
+                          ),
+                          hintText: "Write a reply...",
+                          hintStyle: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(left: 18),
+                  decoration: BoxDecoration(shape: BoxShape.circle),
+                  child: InkWell(
+                    child: Icon(
+                      Icons.send,
+                      size: 40,
+                      color: mainColor,
+                    ),
+                    onLongPress: () {},
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      )),
     );
   }
 }

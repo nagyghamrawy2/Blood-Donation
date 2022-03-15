@@ -127,9 +127,11 @@ class RequestScreen extends StatelessWidget {
                               child: Center(
                                 child: Text(
                                   'I can donate',
+                                  textScaleFactor: 1,
                                   style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
@@ -204,11 +206,11 @@ class RequestScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           IconButton(
-                            onPressed: (){},
+                            onPressed: () {},
                             icon: Icon(Icons.edit),
                           ),
                           IconButton(
-                            onPressed: (){},
+                            onPressed: () {},
                             icon: Icon(Icons.delete_outline),
                           ),
                         ],
