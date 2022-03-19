@@ -4,6 +4,7 @@ import '../../shared/styles/colors.dart';
 
 class FindDonorScreen extends StatelessWidget {
   @override
+  var bloodtype;
   var scaffoldkey = GlobalKey<ScaffoldState>();
   bool isButtomSheetShown = false;
 
@@ -730,4 +731,3 @@ class FindDonorScreen extends StatelessWidget {
   }
 }
 
-var bloodtype;
