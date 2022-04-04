@@ -11,6 +11,7 @@ import 'package:blood_bank/modules/request/editRequest.dart';
 import 'package:blood_bank/modules/request/requestScreen.dart';
 import 'package:blood_bank/shared/Network/Remote/dio_helper.dart';
 import 'package:blood_bank/shared/bloc_observer.dart';
+import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,13 +28,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: Color.fromRGBO(237, 57, 74, 1),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: mainColor,
         ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: mainColor,
+          titleTextStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            fontFamily: 'OpenSans',
+          ),
+        ),
+        fontFamily: 'OpenSans',
       ),
       debugShowCheckedModeBanner: false,
-      home: FindDonorScreen(),
+      home: MyInformation(),
     );
   }
 }

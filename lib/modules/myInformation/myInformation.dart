@@ -3,13 +3,33 @@ import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 
 class MyInformation extends StatelessWidget {
-  const MyInformation({Key? key}) : super(key: key);
+  MyInformation({Key? key}) : super(key: key);
 
+  final List<String> label = [
+    'Email',
+    'Phone',
+    'Location',
+    'Birth date',
+    'Blood type',
+    'Weight',
+    'Height',
+  ];
+  final List<String> ApiInfo = [
+    'Atch71200@gmail.com',
+    '01101171298',
+    'helwan,cairo',
+    '7/12/1998',
+    'A+',
+    '94 kg',
+    '192 cm',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Information'),
+        title: const Text(
+          'My Information',
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -18,7 +38,7 @@ class MyInformation extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: 270,
+                  height: MediaQuery.of(context).size.height*0.35,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: mainColor,
@@ -27,7 +47,6 @@ class MyInformation extends StatelessWidget {
                         bottomRight: Radius.circular(20)),
                   ),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(
                         height: 10,
@@ -50,13 +69,14 @@ class MyInformation extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 40, right: 40, top: 230),
+                  padding: const EdgeInsets.only(left: 40, right: 40, top: 240),
                   child: Container(
-                    height: 350,
+                    height: MediaQuery.of(context).size.height*0.48,
                     width: double.infinity,
                     child: ListView.separated(
                       itemBuilder: (context, index) => InformationOfProfile(
-                          label: 'Email', leftLabel: 'atch71200@gmail.com'),
+                          label: label[index], leftLabel: ApiInfo[index],
+                      ),
                       separatorBuilder: (context, index) => Divider(
                         color: greyColor2,
                         thickness: 1,
@@ -76,9 +96,8 @@ class MyInformation extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 15
+              ,),
             Buttons_without_icon(
               num_width: 0.8,
               num_hieght: 50,
@@ -87,9 +106,6 @@ class MyInformation extends StatelessWidget {
               num_border: 12,
               num_fontsize: 20,
               text_fontwwieght: FontWeight.normal,
-            ),
-            SizedBox(
-              height: 10,
             ),
           ],
         ),

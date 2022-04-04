@@ -24,7 +24,10 @@ class Buttons_without_icon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * num_width,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * num_width,
       height: num_hieght,
       child: ElevatedButton(
         child: Text(
@@ -67,7 +70,10 @@ class Textformfield_with_border extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.9,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * 0.9,
       height: 66,
       child: TextFormField(
         controller: controller_Name,
@@ -104,19 +110,18 @@ class Textformfield_with_border extends StatelessWidget {
 }
 
 class Textformfield_with_icon extends StatelessWidget {
-  Textformfield_with_icon(
-      {required this.controller_Name,
-      required this.text_name,
-      required this.num_width,
-      required this.num_height,
-      required this.keyboardtype,
-      required this.obsecure,
-      required this.text_hint,
-      required this.img_right_padding,
-      required this.img_bottom_padding,
-      required this.icon_name,
-      required this.img_width,
-      required this.img_height});
+  Textformfield_with_icon({required this.controller_Name,
+    required this.text_name,
+    required this.num_width,
+    required this.num_height,
+    required this.keyboardtype,
+    required this.obsecure,
+    required this.text_hint,
+    required this.img_right_padding,
+    required this.img_bottom_padding,
+    required this.icon_name,
+    required this.img_width,
+    required this.img_height});
 
   late String text_name;
   late double num_width;
@@ -150,7 +155,10 @@ class Textformfield_with_icon extends StatelessWidget {
         Align(
           alignment: Alignment.topLeft,
           child: Container(
-            width: MediaQuery.of(context).size.width * num_width,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width * num_width,
             height: num_height,
             child: Material(
               elevation: 10.0,
@@ -184,19 +192,18 @@ class Textformfield_with_icon extends StatelessWidget {
 }
 
 class Textformfield2_with_border_with_icon extends StatelessWidget {
-  Textformfield2_with_border_with_icon(
-      {required this.controller_Name,
-      required this.text_name,
-      required this.num_width,
-      required this.num_height,
-      required this.keyboardtype,
-      required this.obsecure,
-      required this.text_hint,
-      required this.img_right_padding,
-      required this.img_bottom_padding,
-      required this.icon_name,
-      required this.img_width,
-      required this.img_height});
+  Textformfield2_with_border_with_icon({required this.controller_Name,
+    required this.text_name,
+    required this.num_width,
+    required this.num_height,
+    required this.keyboardtype,
+    required this.obsecure,
+    required this.text_hint,
+    required this.img_right_padding,
+    required this.img_bottom_padding,
+    required this.icon_name,
+    required this.img_width,
+    required this.img_height});
 
   late String text_name;
   late double num_width;
@@ -230,7 +237,10 @@ class Textformfield2_with_border_with_icon extends StatelessWidget {
         Align(
           alignment: Alignment.topLeft,
           child: Container(
-            width: MediaQuery.of(context).size.width * num_width,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width * num_width,
             height: num_height,
             child: TextField(
               controller: controller_Name,
@@ -245,7 +255,7 @@ class Textformfield2_with_border_with_icon extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)),
                 focusedBorder: OutlineInputBorder(
                   borderSide:
-                      const BorderSide(color: Colors.black26, width: 2.0),
+                  const BorderSide(color: Colors.black26, width: 2.0),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 suffixIcon: Padding(
@@ -287,72 +297,74 @@ class Container_with_button extends StatelessWidget {
   late String label_name;
   final bool have_switch;
   final bool cubitValueSwitch;
-  final Function(bool)? function;
+  final Function? function;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        function;
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: Container(
-            width: MediaQuery.of(context).size.width * num_width,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width * num_width,
             height: 43,
             color: Colors.black26,
             child: have_switch
                 ? Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: img_left_padding,
-                        ),
-                        child: Image.asset(
-                          icon_name,
-                          width: img_width,
-                          height: img_height,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Expanded(
-                        child: Text(label_name,
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold)),
-                      ),
-                      Switch.adaptive(
-                        activeColor: Colors.green,
-                        inactiveTrackColor: Colors.red,
-                        value: cubitValueSwitch,
-                        onChanged: (value) {
-                          function!(value);
-                          print(value);
-                        },
-                      ),
-                    ],
-                  )
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: img_left_padding,
+                  ),
+                  child: Image.asset(
+                    icon_name,
+                    width: img_width,
+                    height: img_height,
+                  ),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Expanded(
+                  child: Text(label_name,
+                      style: TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold)),
+                ),
+                Switch.adaptive(
+                  activeColor: Colors.green,
+                  inactiveTrackColor: Colors.red,
+                  value: cubitValueSwitch,
+                  onChanged: (value) {},
+                ),
+              ],
+            )
                 : Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: img_left_padding,
-                        ),
-                        child: Image.asset(
-                          icon_name,
-                          width: img_width,
-                          height: img_height,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Expanded(
-                        child: Text(label_name,
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold)),
-                      ),
-                    ],
-                  )),
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: img_left_padding,
+                  ),
+                  child: Image.asset(
+                    icon_name,
+                    width: img_width,
+                    height: img_height,
+                  ),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Expanded(
+                  child: Text(label_name,
+                      style: TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold)),
+                ),
+              ],
+            )),
       ),
     );
   }
@@ -401,7 +413,10 @@ class Button_with_icon extends StatelessWidget {
           color: color,
           borderRadius: BorderRadius.circular(num_border),
         ),
-        width: MediaQuery.of(context).size.width * num_width,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width * num_width,
         height: num_height,
         child: Row(
           children: [
@@ -467,12 +482,15 @@ class Requst_textformfield extends StatelessWidget {
         Align(
           alignment: Alignment.topLeft,
           child: Container(
-            width: MediaQuery.of(context).size.width * num_width,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width * num_width,
             height: num_height,
             child: Material(
               elevation: 10.0,
               shadowColor: Colors.white,
-              child: TextField(
+              child: TextFormField(
                 controller: controller_Name,
                 keyboardType: keyboardtype,
                 obscureText: obsecure,
@@ -491,18 +509,17 @@ class Requst_textformfield extends StatelessWidget {
 }
 
 class Textformfield_with_border_with_icon2 extends StatelessWidget {
-  Textformfield_with_border_with_icon2(
-      {required this.controller_Name,
-      required this.keyboardtype,
-      required this.obsecure,
-      required this.text_hint,
-      required this.text_label,
-      required this.num_border,
-      required this.img_right_padding,
-      required this.img_bottom_padding,
-      required this.icon_name,
-      required this.img_width,
-      required this.img_height});
+  Textformfield_with_border_with_icon2({required this.controller_Name,
+    required this.keyboardtype,
+    required this.obsecure,
+    required this.text_hint,
+    required this.text_label,
+    required this.num_border,
+    required this.img_right_padding,
+    required this.img_bottom_padding,
+    required this.icon_name,
+    required this.img_width,
+    required this.img_height});
 
   late TextInputType keyboardtype;
   late bool obsecure;
@@ -519,7 +536,10 @@ class Textformfield_with_border_with_icon2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.9,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * 0.9,
       height: 66,
       child: TextFormField(
         controller: controller_Name,
@@ -559,9 +579,10 @@ class Textformfield_with_border_with_icon2 extends StatelessWidget {
 
 class InformationOfProfile extends StatelessWidget {
   InformationOfProfile({
+    Key? key,
     required this.label,
     required this.leftLabel,
-  });
+  }) : super(key: key);
 
   late String label;
   late String leftLabel;
@@ -577,8 +598,14 @@ class InformationOfProfile extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('$label'),
-          Text('$leftLabel'),
+          Expanded(child: Text('$label',)),
+          Flexible(
+            fit: FlexFit.loose,
+            child: Text(
+              '$leftLabel',
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ],
       ),
     );
@@ -604,7 +631,10 @@ class SignupTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        height: MediaQuery.of(context).size.height * 0.11,
+        height: MediaQuery
+            .of(context)
+            .size
+            .height * 0.11,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -670,7 +700,10 @@ class SignupTextFieldcustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: MediaQuery.of(context).size.width * widthContainer,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width * widthContainer,
         height: heightContainer,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -738,7 +771,10 @@ class SignupTextFieldForDatepicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: MediaQuery.of(context).size.width * widthContainer,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width * widthContainer,
         height: heightContainer,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -806,136 +842,143 @@ class Education extends StatelessWidget {
   Widget build(BuildContext context) {
     return index % 2 == 0
         ? Card(
-            elevation: 10.0,
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.9,
-              height: 125,
-              decoration: BoxDecoration(
-                color: Color(0xFFFFEEE6),
+      elevation: 10.0,
+      child: Container(
+        width: MediaQuery
+            .of(context)
+            .size
+            .width * 0.9,
+        height: 125,
+        decoration: BoxDecoration(
+          color: Color(0xFFFFEEE6),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            children: [
+              CircleAvatar(
+                backgroundImage: AssetImage("assets/images/test.png"),
+                radius: 60,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
+              SizedBox(
+                width: 17,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage("assets/images/test.png"),
-                      radius: 60,
+                    Text(
+                      "The Concept of Red Blood Cell",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: Color(0xFF5D240C)),
                     ),
                     SizedBox(
-                      width: 17,
+                      height: 15,
                     ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "The Concept of Red Blood Cell",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                color: Color(0xFF5D240C)),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Text(
-                            "Hellosadfas asdfasdfcs swadsdasdasdasadsadasdasdasdasdsadsadsadasdasdsad asdasdsaddasdasdasdasda",
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.normal,
-                                color: Color(0xFF787F8F)),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          InkWell(
-                            child: Text(
-                              "Learn more",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.normal,
-                                  color: Color(0xFFFF0000)),
-                            ),
-                          ),
-                        ],
+                    Text(
+                      "Hellosadfas asdfasdfcs swadsdasdasdasadsadasdasdasdasdsadsadsadasdasdsad asdasdsaddasdasdasdasda",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal,
+                        color: Color(0xFF787F8F),
                       ),
-                    )
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    InkWell(
+                      child: Text(
+                        "Learn more",
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                            color: Color(0xFFFF0000)),
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              // child: Material(
-              //   elevation: 10.0,
-              //   shadowColor: Colors.white,
-              // ),
-            ),
-          )
+              )
+            ],
+          ),
+        ),
+        // child: Material(
+        //   elevation: 10.0,
+        //   shadowColor: Colors.white,
+        // ),
+      ),
+    )
         : Card(
-            elevation: 10.0,
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.9,
-              height: 125,
-              decoration: BoxDecoration(
-                color: Color(0xFFF8F8F8),
+      elevation: 10.0,
+      child: Container(
+        width: MediaQuery
+            .of(context)
+            .size
+            .width * 0.9,
+        height: 125,
+        decoration: BoxDecoration(
+          color: Color(0xFFF8F8F8),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            children: [
+              CircleAvatar(
+                backgroundImage: AssetImage("assets/images/test.png"),
+                radius: 60,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
+              SizedBox(
+                width: 17,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage("assets/images/test.png"),
-                      radius: 60,
+                    Text(
+                      "The Concept of Red Blood Cell",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: Color(0xFF5D240C)),
                     ),
                     SizedBox(
-                      width: 17,
+                      height: 15,
                     ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "The Concept of Red Blood Cell",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                color: Color(0xFF5D240C)),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Text(
-                            "Hellosadfas asdfasdfcs swadsdasdasdasadsadasdasdasdasdsadsadsadasdasdsad asdasdsaddasdasdasdasda",
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.normal,
-                                color: Color(0xFF787F8F)),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                          InkWell(
-                            child: Text(
-                              "Learn more",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.normal,
-                                  color: Color(0xFFFF0000)),
-                            ),
-                          ),
-                        ],
+                    Text(
+                      "Hellosadfas asdfasdfcs swadsdasdasdasadsadasdasdasdasdsadsadsadasdasdsad asdasdsaddasdasdasdasda",
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.normal,
+                          color: Color(0xFF787F8F)),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    InkWell(
+                      child: Text(
+                        "Learn more",
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                            color: Color(0xFFFF0000)),
                       ),
-                    )
+                    ),
                   ],
                 ),
-              ),
-              // child: Material(
-              //   elevation: 10.0,
-              //   shadowColor: Colors.white,
-              // ),
-            ),
-          );
+              )
+            ],
+          ),
+        ),
+        // child: Material(
+        //   elevation: 10.0,
+        //   shadowColor: Colors.white,
+        // ),
+      ),
+    );
   }
 }

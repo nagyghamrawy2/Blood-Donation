@@ -1,3 +1,5 @@
+import 'package:blood_bank/modules/change%20password/Change_password.dart';
+import 'package:blood_bank/modules/myInformation/myInformation.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
@@ -151,18 +153,11 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 29.0,),
-                    // Switch.adaptive(
-                    //   activeColor: Colors.green,
-                    //   inactiveTrackColor: Colors.red,
-                    //   value: cubit.valueSwitch,
-                    //   onChanged: (value){
-                    //     cubit.changeValueSwitch(value);
-                    //   },
-                    // ),
                     Container_with_button(
                       have_switch: true,
                       cubitValueSwitch: cubit.valueSwitch,
                       function: (value){
+                        print('dsdsad');
                         cubit.changeValueSwitch(value);
                       },
                       num_width: 382,
@@ -189,6 +184,12 @@ class ProfileScreen extends StatelessWidget {
                       img_width: 35,
                       img_height: 35,
                       label_name: 'My Information',
+                      function: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MyInformation()),
+                        );
+                      },
                     ),
                     SizedBox(height: 14.0,),
                     Container_with_button(
@@ -207,6 +208,12 @@ class ProfileScreen extends StatelessWidget {
                       img_width: 30,
                       img_height: 30,
                       label_name: 'Change password',
+                      function: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ChangePasswordScreen()),
+                        );
+                      },
                     ),
                     SizedBox(height: 14.0,),
                     Container_with_button(
