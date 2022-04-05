@@ -15,7 +15,6 @@ class AppCubit extends Cubit<AppStates>
 
   int currentIndex = 0;
   bool valueSwitch = false;
-
   void changeValueSwitch(bool value){
     valueSwitch = value;
     emit(AppChangeSwitchValueState());
@@ -38,5 +37,31 @@ class AppCubit extends Cubit<AppStates>
     currentIndex = index;
     emit(AppChangeBotNavBarState());
   }
+
+  List<String> blood_group_item = [
+    "A+",
+    "A-",
+    "B+",
+    "B-",
+    "O+",
+    "O-",
+    "AB+",
+    "AB-"
+  ];
+
+  int bloodGroup = -1;
+
+  void changeBloodValue(int value){
+    bloodGroup = value;
+    emit(BloodValueChangeState());
+  }
+
+
+  bool policyTerms = false;
+  void acceptPolicy (bool value){
+    policyTerms = value;
+    emit(PolicyTermsChangeState());
+  }
+
 
 }
