@@ -146,7 +146,7 @@ class HomeScreen extends StatelessWidget {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => EditProfile()),
+                                MaterialPageRoute(builder: (context) => EditProfileScreen()),
                               );
                             },
                             child: Card(

@@ -2,8 +2,8 @@ import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 
-class EditProfile extends StatelessWidget {
-  EditProfile({Key? key}) : super(key: key);
+class EditProfileScreen extends StatelessWidget {
+  EditProfileScreen({Key? key}) : super(key: key);
 
   var firstName = TextEditingController();
   var lastName = TextEditingController();

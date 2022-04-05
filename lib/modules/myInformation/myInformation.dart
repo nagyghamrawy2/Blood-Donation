@@ -53,7 +53,7 @@ class MyInformationScreen extends StatelessWidget {
                           radius: 90,
                           backgroundImage: AssetImage('assets/images/pp.png'),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
