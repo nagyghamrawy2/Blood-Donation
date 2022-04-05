@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:blood_bank/shared/cubit/cubit.dart';
+import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class Buttons_without_icon extends StatelessWidget {
@@ -24,12 +26,10 @@ class Buttons_without_icon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * num_width,
+      width: num_width,
       height: num_hieght,
       child: ElevatedButton(
-        child: Text(
-          text_button_name,
-        ),
+        child: Text(text_button_name),
         onPressed: () {},
         style: ElevatedButton.styleFrom(
             primary: button_color,
@@ -133,52 +133,55 @@ class Textformfield_with_icon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Align(
-          alignment: Alignment.topLeft,
-          child: Container(
-            child: Text(
-              text_name,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+    return Padding(
+      padding:  EdgeInsets.only(left: 5),
+      child: Column(
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              child: Text(
+                text_name,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
             ),
           ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: Container(
-            width: MediaQuery.of(context).size.width * num_width,
-            height: num_height,
-            child: Material(
-              elevation: 10.0,
-              shadowColor: Colors.white,
-              child: TextField(
-                controller: controller_Name,
-                keyboardType: keyboardtype,
-                obscureText: obsecure,
-                decoration: InputDecoration(
-                  hintText: text_hint,
-                  contentPadding: EdgeInsets.all(15),
-                  hintStyle: TextStyle(fontSize: 16),
-                  border: InputBorder.none,
-                  suffixIcon: Padding(
-                    padding: EdgeInsets.only(
-                        right: img_right_padding, bottom: img_bottom_padding),
-                    child: Image.asset(
-                      icon_name,
-                      width: img_width,
-                      height: img_height,
+          SizedBox(
+            height: 10,
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              width: MediaQuery.of(context).size.width * num_width,
+              height: MediaQuery.of(context).size.height * num_height,
+              child: Material(
+                elevation: 10.0,
+                shadowColor: Colors.white,
+                child: TextField(
+                  controller: controller_Name,
+                  keyboardType: keyboardtype,
+                  obscureText: obsecure,
+                  decoration: InputDecoration(
+                    hintText: text_hint,
+                    contentPadding: EdgeInsets.all(15),
+                    hintStyle: TextStyle(fontSize: 16),
+                    border: InputBorder.none,
+                    suffixIcon: Padding(
+                      padding: EdgeInsets.only(
+                          right: img_right_padding, bottom: img_bottom_padding),
+                      child: Image.asset(
+                        icon_name,
+                        width: img_width,
+                        height: img_height,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -408,7 +411,7 @@ class Button_with_icon extends StatelessWidget {
           color: color,
           borderRadius: BorderRadius.circular(num_border),
         ),
-        width: MediaQuery.of(context).size.width * num_width,
+        width: num_width,
         height: num_height,
         child: Row(
           children: [
@@ -424,7 +427,8 @@ class Button_with_icon extends StatelessWidget {
             SizedBox(
               width: 5,
             ),
-            Text(label_name,
+            Text(
+                label_name,
                 style: TextStyle(
                     fontSize: fontsize,
                     fontWeight: label_fontwieght,
@@ -475,7 +479,7 @@ class Requst_textformfield extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Container(
             width: MediaQuery.of(context).size.width * num_width,
-            height: num_height,
+            height:MediaQuery.of(context).size.height * num_height,
             child: Material(
               elevation: 10.0,
               shadowColor: Colors.white,
@@ -661,6 +665,7 @@ class SignupTextField extends StatelessWidget {
   }
 }
 
+
 class SignupTextFieldcustom extends StatelessWidget {
   SignupTextFieldcustom({
     this.hintText = '',
@@ -705,6 +710,7 @@ class SignupTextFieldcustom extends StatelessWidget {
             Container(
               height: heightTextField,
               child: TextFormField(
+                maxLines: 3,
                 maxLength: maxLengthTextField,
                 obscureText: secure,
                 controller: controller,
@@ -957,3 +963,6 @@ class Education extends StatelessWidget {
           );
   }
 }
+
+
+

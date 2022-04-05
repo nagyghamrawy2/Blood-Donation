@@ -1,5 +1,9 @@
 import 'package:blood_bank/shared/components/components.dart';
+import 'package:blood_bank/shared/cubit/cubit.dart';
+import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Add_Request extends StatefulWidget {
   @override
@@ -24,10 +28,6 @@ class _Add_RequestState extends State<Add_Request> {
           style: TextStyle(
               fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
         ),
-        leading: Icon(
-          Icons.arrow_back,
-          color: Colors.white,
-        ),
         actions: [
           Icon(
             Icons.notifications,
@@ -36,123 +36,175 @@ class _Add_RequestState extends State<Add_Request> {
           )
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.all(13),
-        child: ListView(
-          children: [
-            Requst_textformfield(
-                controller_Name: titleController,
-                text_name: "Title",
-                num_width: 0.9,
-                num_height: 69,
-                keyboardtype: TextInputType.name,
-                obsecure: false,
-                text_hint: "Enter your title "),
-            SizedBox(
-              height: 5,
-            ),
-            Requst_textformfield(
-                controller_Name: descriptionController,
-                text_name: "Description",
-                num_width: 0.9,
-                num_height: 99,
-                keyboardtype: TextInputType.name,
-                obsecure: false,
-                text_hint: "Enter your description "),
-            SizedBox(
-              height: 16,
-            ),
-            Column(
+      body: BlocProvider(
+        create: (context) => AppCubit(),
+        child: BlocConsumer<AppCubit, AppStates>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            AppCubit cubit = AppCubit.get(context);
+            return ListView(
+              padding: EdgeInsets.symmetric(horizontal: 30.w ,vertical: 10.h),
               children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "Choose blood group",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
+                Requst_textformfield(
+                    controller_Name: titleController,
+                    text_name: "Title",
+                    num_width: 0.9,
+                    num_height: 0.08,
+                    keyboardtype: TextInputType.name,
+                    obsecure: false,
+                    text_hint: "Enter your title "),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.009,
+                ),
+                Requst_textformfield(
+                    controller_Name: descriptionController,
+                    text_name: "Description",
+                    num_width: 0.9,
+                    num_height: 0.15,
+                    keyboardtype: TextInputType.name,
+                    obsecure: false,
+                    text_hint: "Enter your description "),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.019,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Choose blood group",
+                      style:
+                          TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.006,
+                    ),
+                    Card(
+                      elevation: 5.0,
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.167,
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        child: GridView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: cubit.blood_group_item.length,
+                          padding: EdgeInsets.fromLTRB(13, 10, 9, 5),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 4,
+                                  crossAxisSpacing: MediaQuery.of(context).size.width * 0.11,
+                                  childAspectRatio: 40 / 41,
+                                  mainAxisSpacing: 8
+                              ),
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: () {
+                                cubit.changeBloodValue(index);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(9.r),
+                                  border: Border.all(color: Colors.black),
+                                  color: cubit.bloodGroup == index
+                                      ? Colors.red
+                                      : Colors.white,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    cubit.blood_group_item[index],
+                                    style: TextStyle(
+                                        color: cubit.bloodGroup == index
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16.sp),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  height: 1,
+                  height: MediaQuery.of(context).size.height * 0.009,
                 ),
-                Container(
-                  height: 103,
-                  width: MediaQuery.of(context).size.width * 0.93,
-                  child: Material(
-                    elevation: 10.0,
-                    shadowColor: Colors.white,
-                  ),
+                Textformfield_with_icon(
+                    controller_Name: bagsController,
+                    text_name: "Blood Bags",
+                    num_width: 0.9,
+                    num_height: 0.065,
+                    keyboardtype: TextInputType.number,
+                    obsecure: false,
+                    text_hint: "Enter number of bags",
+                    img_right_padding: 15.w,
+                    img_bottom_padding: 5.h,
+                    icon_name: "assets/images/blood-bag.png",
+                    img_width: 10.w,
+                    img_height: 10.h),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height*0.0097,
                 ),
+                Textformfield_with_icon(
+                    controller_Name: bagsController,
+                    text_name: "Phone Number",
+                    num_width: 0.9,
+                    num_height: 0.065,
+                    keyboardtype: TextInputType.number,
+                    obsecure: false,
+                    text_hint: "Enter your phone",
+                    img_right_padding: 15.w,
+                    img_bottom_padding: 5.h,
+                    icon_name: "assets/images/blood-bag.png",
+                    img_width: 10.w,
+                    img_height: 10.h),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height*0.0097,
+                ),
+                Textformfield_with_icon(
+                    controller_Name: bagsController,
+                    text_name: "Location",
+                    num_width: 0.9,
+                    num_height: 0.065,
+                    keyboardtype: TextInputType.name,
+                    obsecure: false,
+                    text_hint: "Enter your location",
+                    img_right_padding: 20.w,
+                    img_bottom_padding: 5.h,
+                    icon_name: "assets/images/location.png",
+                    img_width: 10.w,
+                    img_height: 10.h),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height*0.0097,
+                ),
+                Textformfield_with_icon(
+                  controller_Name: bagsController,
+                  text_name: "Expired Date",
+                  num_width: 0.9,
+                  num_height: 0.065,
+                  keyboardtype: TextInputType.datetime,
+                  obsecure: false,
+                  text_hint: "Enter date",
+                  img_right_padding: 15.w,
+                  img_bottom_padding: 5.h,
+                  icon_name: "assets/images/blood-bag.png",
+                  img_width: 10.w,
+                  img_height: 10.h,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height*0.02,
+                ),
+                Buttons_without_icon(
+                    num_width: 3,
+                    num_hieght: MediaQuery.of(context).size.height * 0.07,
+                    text_button_name: "Post a request",
+                    button_color: Color(0xffED394A),
+                    num_border: 12.r,
+                    num_fontsize: 20.sp,
+                    text_fontwwieght: FontWeight.normal),
               ],
-            ),
-            SizedBox(
-              height: 11,
-            ),
-            Textformfield_with_icon(
-                controller_Name: bagsController,
-                text_name: "Blood Bags",
-                num_width: 0.9,
-                num_height: 50,
-                keyboardtype: TextInputType.number,
-                obsecure: false,
-                text_hint: "Enter number of bags",
-                img_right_padding: 15,
-                img_bottom_padding: 5,
-                icon_name: "assets/images/blood-bag.png",
-                img_width: 10,
-                img_height: 10),
-            SizedBox(height: 12,),
-            Textformfield_with_icon(
-                controller_Name: bagsController,
-                text_name: "Phone Number",
-                num_width: 0.9,
-                num_height: 50,
-                keyboardtype: TextInputType.number,
-                obsecure: false,
-                text_hint: "Enter your phone",
-                img_right_padding: 15,
-                img_bottom_padding: 5,
-                icon_name: "assets/images/blood-bag.png",
-                img_width: 10,
-                img_height: 10),
-            SizedBox(height: 12,),
-            Textformfield_with_icon(
-                controller_Name: bagsController,
-                text_name: "Location",
-                num_width: 0.9,
-                num_height: 50,
-                keyboardtype: TextInputType.name,
-                obsecure: false,
-                text_hint: "Enter your location",
-                img_right_padding: 20,
-                img_bottom_padding: 5,
-                icon_name: "assets/images/location.png",
-                img_width: 10,
-                img_height: 10),
-            SizedBox(height: 12,),
-            Textformfield_with_icon(
-                controller_Name: bagsController,
-                text_name: "Expired Date",
-                num_width: 0.9,
-                num_height: 50,
-                keyboardtype: TextInputType.datetime,
-                obsecure: false,
-                text_hint: "Enter date",
-                img_right_padding: 15,
-                img_bottom_padding: 5,
-                icon_name: "assets/images/blood-bag.png",
-                img_width: 10,
-                img_height: 10,
-            ),
-            SizedBox(height: 17,),
-            Buttons_without_icon(num_width: 0.8,
-                num_hieght: 53,
-                text_button_name: "Post a request",
-                button_color: Color(0xffED394A),
-                num_border: 12,
-                num_fontsize: 20,
-                text_fontwwieght: FontWeight.normal
-            ),
-          ],
+            );
+          },
         ),
       ),
     );

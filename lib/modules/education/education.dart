@@ -22,35 +22,38 @@ class EducationScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 32,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text(
-              "Articles",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      body: Padding(
+        padding:  EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 32,
             ),
-          ),
-          SizedBox(
-            height: 19,
-          ),
-          Expanded(
-            child: ListView.separated(
-                itemBuilder: (context, index) {
-                  return Education(index: index);
-                },
-                separatorBuilder: (context, index) {
-                  return SizedBox(
-                    height: 19,
-                  );
-                },
-                itemCount: 20),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                "Articles",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(
+              height: 19,
+            ),
+            Expanded(
+              child: ListView.separated(
+                  itemBuilder: (context, index) {
+                    return Education(index: index);
+                  },
+                  separatorBuilder: (context, index) {
+                    return SizedBox(
+                      height: 19,
+                    );
+                  },
+                  itemCount: 20),
+            ),
+          ],
+        ),
       ),
     );
   }
