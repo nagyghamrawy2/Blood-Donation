@@ -2,11 +2,12 @@ import 'package:blood_bank/modules/bloodBank/bloodBankScreen.dart';
 import 'package:blood_bank/modules/editProfile/editProfile.dart';
 import 'package:blood_bank/modules/education/education.dart';
 import 'package:blood_bank/modules/findDonor/findDonorScreen.dart';
-import 'package:blood_bank/modules/postRequest/postRequest.dart';
 import 'package:blood_bank/modules/request/requestScreen.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+
+import '../add_request/Add_Request.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -113,7 +114,7 @@ class HomeScreen extends StatelessWidget {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const PostRequestScreen()),
+                                MaterialPageRoute(builder: (context) => Add_Request()),
                               );
                             },
                             child: Card(

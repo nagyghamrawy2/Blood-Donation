@@ -2,19 +2,19 @@ import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 
-class MyInformation extends StatelessWidget {
-  MyInformation({Key? key}) : super(key: key);
+class MyInformationScreen extends StatelessWidget {
+  MyInformationScreen({Key? key}) : super(key: key);
 
   final List<String> label = [
     'Email',
-    'Phone',
+    'Phone number',
     'Location',
     'Birth date',
     'Blood type',
     'Weight',
     'Height',
   ];
-  final List<String> ApiInfo = [
+  final List<String> apiInfo = [
     'Atch71200@gmail.com',
     '01101171298',
     'helwan,cairo',
@@ -38,52 +38,53 @@ class MyInformation extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height*0.35,
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: mainColor,
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(20),
                         bottomRight: Radius.circular(20)),
                   ),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 10,
-                      ),
-                      CircleAvatar(
-                        radius: 90,
-                        backgroundImage: AssetImage('assets/images/pp.png'),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'Hesham Ahmed',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 40.0,top: 10),
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 90,
+                          backgroundImage: AssetImage('assets/images/pp.png'),
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Hesham Ahmed',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 40, right: 40, top: 240),
                   child: Container(
-                    height: MediaQuery.of(context).size.height*0.48,
                     width: double.infinity,
                     child: ListView.separated(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      shrinkWrap: true,
                       itemBuilder: (context, index) => InformationOfProfile(
-                          label: label[index], leftLabel: ApiInfo[index],
+                          label: label[index], leftLabel: apiInfo[index],
                       ),
-                      separatorBuilder: (context, index) => Divider(
+                      separatorBuilder: (context, index) => const Divider(
                         color: greyColor2,
                         thickness: 1,
                         indent: 30,
                         endIndent: 30,
                       ),
-                      itemCount: 7,
+                      itemCount: label.length,
                     ),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -96,8 +97,7 @@ class MyInformation extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 15
-              ,),
+            const SizedBox(height: 30,),
             Buttons_without_icon(
               num_width: 0.8,
               num_hieght: 50,

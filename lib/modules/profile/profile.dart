@@ -30,6 +30,7 @@ class ProfileScreen extends StatelessWidget {
                     SizedBox(height: 15.0,),
                     CircleAvatar(
                       radius: 70.0,
+                      backgroundImage: AssetImage('assets/images/pp.png'),
                     ),
                     SizedBox(height: 3.0,),
                     Text('Hesham ahmed'),
@@ -165,7 +166,7 @@ class ProfileScreen extends StatelessWidget {
                       icon_name: 'assets/images/profile.png',
                       img_width: 35,
                       img_height: 35,
-                      label_name: 'Availbe to donate',
+                      label_name: 'Availabe to donate',
                     ),
                     SizedBox(height: 14.0,),
                     Container_with_button(
@@ -187,7 +188,7 @@ class ProfileScreen extends StatelessWidget {
                       function: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MyInformation()),
+                          MaterialPageRoute(builder: (context) => MyInformationScreen()),
                         );
                       },
                     ),
@@ -217,7 +218,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 14.0,),
                     Container_with_button(
-                      num_width: 382,
+                      num_width: double.infinity,
                       img_left_padding: 13,
                       icon_name: 'assets/images/profile.png',
                       img_width: 35,

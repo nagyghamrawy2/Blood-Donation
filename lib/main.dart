@@ -37,12 +37,13 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
             fontSize: 20,
             fontFamily: 'OpenSans',
+            color: Colors.white,
           ),
         ),
         fontFamily: 'OpenSans',
       ),
       debugShowCheckedModeBanner: false,
-      home: MyInformation(),
+      home: ProfileScreen(),
     );
   }
 }
