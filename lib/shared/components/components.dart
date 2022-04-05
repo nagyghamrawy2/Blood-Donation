@@ -610,7 +610,6 @@ class SignupTextField extends StatelessWidget {
   SignupTextField({
     this.hintText = '',
     this.secure = false,
-     this.heightTextField = 53 ,
     required this.text,
     required this.controller,
     required this.keyboardtype,
@@ -619,49 +618,53 @@ class SignupTextField extends StatelessWidget {
   final String hintText;
   final bool secure;
   late String text;
-  late double heightTextField;
   late TextEditingController controller;
   late TextInputType keyboardtype;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          text,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 17,
-          ),
-        ),
-        SizedBox(
-          height: 4,
-        ),
-        Container(
-          height: heightTextField,
-          child: TextFormField(
-            obscureText: secure,
-            controller: controller,
-            keyboardType: keyboardtype,
-            decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.circular(10),
+    return Container(
+        width: double.infinity,
+        height: MediaQuery.of(context).size.height * 0.11,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              text,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
               ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              hintText: hintText,
             ),
-          ),
-        ),
-      ],
-    );
+            SizedBox(
+              height: 4,
+            ),
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 1,
+              child: TextFormField(
+                obscureText: secure,
+                controller: controller,
+                keyboardType: keyboardtype,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  hintText: hintText,
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 }
+
 
 class SignupTextFieldcustom extends StatelessWidget {
   SignupTextFieldcustom({
