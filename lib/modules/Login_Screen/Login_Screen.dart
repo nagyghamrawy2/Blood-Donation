@@ -114,7 +114,6 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 60,
             ),
             Buttons_without_icon(
-                num_width: 0.45,
                 num_hieght: 52,
                 text_button_name: 'Login',
                 button_color: Color.fromRGBO(237, 57, 74, 1),

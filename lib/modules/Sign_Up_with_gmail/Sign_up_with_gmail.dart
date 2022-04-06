@@ -39,7 +39,6 @@ class _Sign_Up_With_GmailState extends State<Sign_Up_With_Gmail> {
                 height: MediaQuery.of(context).size.height * 0.03,
               ),
               Buttons_without_icon(
-                  num_width: MediaQuery.of(context).size.width * 0.8,
                   num_hieght: MediaQuery.of(context).size.height * 0.068,
                   text_button_name: "Sign up with email",
                   button_color: Colors.grey,

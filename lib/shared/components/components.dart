@@ -1,21 +1,21 @@
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
+import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class Buttons_without_icon extends StatelessWidget {
   Buttons_without_icon({
-    required this.num_width,
     required this.num_hieght,
     required this.text_button_name,
     required this.button_color,
     required this.num_border,
     required this.num_fontsize,
     required this.text_fontwwieght,
+    // required this.function,
   });
 
-  late double num_width;
   late double num_hieght;
   late String text_button_name;
   late Color button_color;
@@ -23,10 +23,12 @@ class Buttons_without_icon extends StatelessWidget {
   late double num_fontsize;
   late FontWeight text_fontwwieght;
 
+  // late Function function;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: num_width,
+      width: double.infinity,
       height: num_hieght,
       child: ElevatedButton(
         child: Text(text_button_name),
@@ -76,12 +78,12 @@ class Textformfield_with_border extends StatelessWidget {
         decoration: InputDecoration(
           hintText: text_hint,
           floatingLabelBehavior: FloatingLabelBehavior.always,
-          hintStyle: TextStyle(fontSize: 16),
+          hintStyle: const TextStyle(fontSize: 16),
           labelText: text_label,
-          labelStyle: TextStyle(
+          labelStyle: const TextStyle(
               fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black),
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black26, width: 3.0),
+              borderSide: const BorderSide(color: Colors.black26, width: 3.0),
               borderRadius: BorderRadius.circular(num_border)),
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.black26, width: 3.0),
@@ -134,7 +136,7 @@ class Textformfield_with_icon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.only(left: 5),
+      padding: const EdgeInsets.only(left: 5),
       child: Column(
         children: [
           Align(
@@ -142,11 +144,12 @@ class Textformfield_with_icon extends StatelessWidget {
             child: Container(
               child: Text(
                 text_name,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Align(
@@ -163,8 +166,8 @@ class Textformfield_with_icon extends StatelessWidget {
                   obscureText: obsecure,
                   decoration: InputDecoration(
                     hintText: text_hint,
-                    contentPadding: EdgeInsets.all(15),
-                    hintStyle: TextStyle(fontSize: 16),
+                    contentPadding: const EdgeInsets.all(15),
+                    hintStyle: const TextStyle(fontSize: 16),
                     border: InputBorder.none,
                     suffixIcon: Padding(
                       padding: EdgeInsets.only(
@@ -223,11 +226,11 @@ class Textformfield2_with_border_with_icon extends StatelessWidget {
           child: Container(
             child: Text(
               text_name,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Align(
@@ -241,10 +244,11 @@ class Textformfield2_with_border_with_icon extends StatelessWidget {
               obscureText: obsecure,
               decoration: InputDecoration(
                 hintText: text_hint,
-                contentPadding: EdgeInsets.all(15),
-                hintStyle: TextStyle(fontSize: 16),
+                contentPadding: const EdgeInsets.all(15),
+                hintStyle: const TextStyle(fontSize: 16),
                 border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black12, width: 2.0),
+                    borderSide:
+                        const BorderSide(color: Colors.black12, width: 2.0),
                     borderRadius: BorderRadius.circular(10)),
                 focusedBorder: OutlineInputBorder(
                   borderSide:
@@ -271,7 +275,6 @@ class Textformfield2_with_border_with_icon extends StatelessWidget {
 
 class Container_with_button extends StatelessWidget {
   Container_with_button({
-    required this.num_width,
     required this.img_left_padding,
     required this.icon_name,
     required this.img_width,
@@ -279,29 +282,28 @@ class Container_with_button extends StatelessWidget {
     required this.label_name,
     this.have_switch = false,
     this.cubitValueSwitch = false,
-    this.function,
+    required this.function,
   });
 
-  late double num_width;
   late double img_left_padding;
   late String icon_name;
   late double img_width;
   late double img_height;
   late String label_name;
   final bool have_switch;
-  late final bool cubitValueSwitch;
-  final Function? function;
+  bool cubitValueSwitch;
+  late Function function;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        function;
+      onTap: (){
+        function();
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: Container(
-            width: MediaQuery.of(context).size.width * num_width,
+            width: double.infinity,
             height: 43,
             color: Colors.black26,
             child: have_switch
@@ -317,13 +319,13 @@ class Container_with_button extends StatelessWidget {
                           height: img_height,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Expanded(
                         child: Text(
                           label_name,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
@@ -336,8 +338,6 @@ class Container_with_button extends StatelessWidget {
                         onChanged: (value) {
                           cubitValueSwitch = value;
                         },
-
-
                       ),
                     ],
                   )
@@ -353,12 +353,12 @@ class Container_with_button extends StatelessWidget {
                           height: img_height,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Expanded(
                         child: Text(label_name,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold)),
                       ),
                     ],
@@ -424,11 +424,10 @@ class Button_with_icon extends StatelessWidget {
                 height: img_height,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
-            Text(
-                label_name,
+            Text(label_name,
                 style: TextStyle(
                     fontSize: fontsize,
                     fontWeight: label_fontwieght,
@@ -468,18 +467,18 @@ class Requst_textformfield extends StatelessWidget {
           child: Container(
             child: Text(
               text_name,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Align(
           alignment: Alignment.topLeft,
           child: Container(
             width: MediaQuery.of(context).size.width * num_width,
-            height:MediaQuery.of(context).size.height * num_height,
+            height: MediaQuery.of(context).size.height * num_height,
             child: Material(
               elevation: 10.0,
               shadowColor: Colors.white,
@@ -489,7 +488,8 @@ class Requst_textformfield extends StatelessWidget {
                 obscureText: obsecure,
                 decoration: InputDecoration(
                   hintText: text_hint,
-                  hintStyle: TextStyle(fontSize: 16, color: Color(0xFF808080)),
+                  hintStyle:
+                      const TextStyle(fontSize: 16, color: Color(0xFF808080)),
                   border: InputBorder.none,
                 ),
               ),
@@ -539,12 +539,12 @@ class Textformfield_with_border_with_icon2 extends StatelessWidget {
         decoration: InputDecoration(
           hintText: text_hint,
           floatingLabelBehavior: FloatingLabelBehavior.always,
-          hintStyle: TextStyle(fontSize: 16),
+          hintStyle: const TextStyle(fontSize: 16),
           labelText: text_label,
-          labelStyle: TextStyle(
+          labelStyle: const TextStyle(
               fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black),
           border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black26, width: 3.0),
+              borderSide: const BorderSide(color: Colors.black26, width: 3.0),
               borderRadius: BorderRadius.circular(num_border)),
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.black26, width: 3.0),
@@ -613,6 +613,7 @@ class SignupTextField extends StatelessWidget {
     required this.text,
     required this.controller,
     required this.keyboardtype,
+    required this.validatorText,
   });
 
   final String hintText;
@@ -620,12 +621,13 @@ class SignupTextField extends StatelessWidget {
   late String text;
   late TextEditingController controller;
   late TextInputType keyboardtype;
+  late String validatorText;
 
   @override
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        height: MediaQuery.of(context).size.height * 0.11,
+        height: 100,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -636,7 +638,7 @@ class SignupTextField extends StatelessWidget {
                 fontSize: 17,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Flexible(
@@ -646,17 +648,30 @@ class SignupTextField extends StatelessWidget {
                 obscureText: secure,
                 controller: controller,
                 keyboardType: keyboardtype,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '$validatorText';
+                  }
+                },
                 decoration: InputDecoration(
+                  focusColor: Colors.green,
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        color: greyColor,
+                      )),
                   enabledBorder: OutlineInputBorder(
                     borderSide: const BorderSide(
                       width: 1,
                     ),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                  errorBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.red, width: 1),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   hintText: hintText,
+                  focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),),
                 ),
               ),
             ),
@@ -664,7 +679,6 @@ class SignupTextField extends StatelessWidget {
         ));
   }
 }
-
 
 class SignupTextFieldcustom extends StatelessWidget {
   SignupTextFieldcustom({
@@ -699,12 +713,12 @@ class SignupTextFieldcustom extends StatelessWidget {
           children: [
             Text(
               text,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 17,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Container(
@@ -768,12 +782,12 @@ class SignupTextFieldForDatepicker extends StatelessWidget {
           children: [
             Text(
               text,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 17,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
             Container(
@@ -833,37 +847,37 @@ class Education extends StatelessWidget {
             child: Container(
               width: MediaQuery.of(context).size.width * 0.9,
               height: 125,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0xFFFFEEE6),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Row(
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       backgroundImage: AssetImage("assets/images/test.png"),
                       radius: 60,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 17,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             "The Concept of Red Blood Cell",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,
                                 color: Color(0xFF5D240C)),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
-                          Text(
+                          const Text(
                             "Hellosadfas asdfasdfcs swadsdasdasdasadsadasdasdasdasdsadsadsadasdasdsad asdasdsaddasdasdasdasda",
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.normal,
                               color: Color(0xFF787F8F),
@@ -871,10 +885,10 @@ class Education extends StatelessWidget {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
-                          InkWell(
+                          const InkWell(
                             child: Text(
                               "Learn more",
                               style: TextStyle(
@@ -900,35 +914,35 @@ class Education extends StatelessWidget {
             child: Container(
               width: MediaQuery.of(context).size.width * 0.9,
               height: 125,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0xFFF8F8F8),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Row(
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       backgroundImage: AssetImage("assets/images/test.png"),
                       radius: 60,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 17,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             "The Concept of Red Blood Cell",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 14,
                                 color: Color(0xFF5D240C)),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
-                          Text(
+                          const Text(
                             "Hellosadfas asdfasdfcs swadsdasdasdasadsadasdasdasdasdsadsadsadasdasdsad asdasdsaddasdasdasdasda",
                             style: TextStyle(
                                 fontSize: 12,
@@ -937,10 +951,10 @@ class Education extends StatelessWidget {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
-                          InkWell(
+                          const InkWell(
                             child: Text(
                               "Learn more",
                               style: TextStyle(
@@ -963,6 +977,3 @@ class Education extends StatelessWidget {
           );
   }
 }
-
-
-

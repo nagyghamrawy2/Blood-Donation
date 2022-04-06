@@ -192,13 +192,13 @@ class _Add_RequestState extends State<Add_Request> {
                   height: MediaQuery.of(context).size.height*0.02,
                 ),
                 Buttons_without_icon(
-                    num_width: 3,
                     num_hieght: MediaQuery.of(context).size.height * 0.07,
                     text_button_name: "Post a request",
                     button_color: Color(0xffED394A),
                     num_border: 12.r,
                     num_fontsize: 20.sp,
-                    text_fontwwieght: FontWeight.normal),
+                    text_fontwwieght: FontWeight.normal,
+                ),
               ],
             );
           },

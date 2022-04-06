@@ -11,8 +11,7 @@ class RequestScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Requests'),
-          backgroundColor: mainColor,
-          bottom: TabBar(
+          bottom: const TabBar(
             indicatorColor: mainColor,
             tabs: <Widget>[
               Tab(
@@ -84,56 +83,33 @@ class RequestScreen extends StatelessWidget {
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              height: 28,
-                              width: 85,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(
-                                    width: 2,
-                                  ),
-                                  Text(
-                                    'Contact',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  CircleAvatar(
-                                    radius: 13,
-                                    child: Image.asset(
-                                      'assets/images/chat.png',
-                                    ),
-                                    backgroundColor: greenColor,
-                                  ),
-                                ],
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                color: greenColor,
-                              ),
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(greenColor),
                             ),
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              height: 28,
-                              width: 85,
-                              color: mainColor,
-                              child: Center(
-                                child: Text(
-                                  'I can donate',
-                                  textScaleFactor: 1,
+                            onPressed: () {},
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Contact ',
                                   style: TextStyle(
-                                    color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                              ),
+                                Icon(Icons.chat,size: 20,),
+                              ],
+                            ),
+                          ),
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(mainColor),
+                            ),
+                            onPressed: () {},
+                            child: Text(
+                              'I can donate',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                         ],

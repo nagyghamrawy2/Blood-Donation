@@ -11,6 +11,7 @@ import 'package:blood_bank/modules/request/requestScreen.dart';
 import 'package:blood_bank/modules/sign_up/SignUpForm.dart';
 import 'package:blood_bank/shared/Network/Remote/dio_helper.dart';
 import 'package:blood_bank/shared/bloc_observer.dart';
+import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,8 +36,24 @@ class MyApp extends StatelessWidget {
       builder: () => MaterialApp(
         theme: ThemeData(
           primarySwatch: Colors.blue,
-          floatingActionButtonTheme: FloatingActionButtonThemeData(
-            backgroundColor: Color.fromRGBO(237, 57, 74, 1),
+          floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            backgroundColor: mainColor,
+            elevation: 2,
+          ),
+          fontFamily: 'OpenSans',
+          appBarTheme: const AppBarTheme(
+            backgroundColor: mainColor,
+            titleTextStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            unselectedItemColor: Colors.black,
+            selectedItemColor: mainColor,
+            selectedLabelStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+            )
           ),
         ),
         debugShowCheckedModeBanner: false,
@@ -48,7 +65,7 @@ class MyApp extends StatelessWidget {
             child: widget!,
           );
         },
-        home: Add_Request(),
+        home: EditRequestScreen(),
       ),
     );
   }

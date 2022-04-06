@@ -1,5 +1,7 @@
+import 'package:blood_bank/modules/add_request/Add_Request.dart';
 import 'package:blood_bank/modules/change%20password/Change_password.dart';
 import 'package:blood_bank/modules/myInformation/myInformation.dart';
+import 'package:blood_bank/modules/request/requestScreen.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
@@ -15,8 +17,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
-        backgroundColor: mainColor,
+        title: const Text('Profile'),
       ),
       body: BlocProvider(
         create: (context)=> AppCubit(),
@@ -27,14 +28,14 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 15.0,),
-                    CircleAvatar(
+                    const SizedBox(height: 15.0,),
+                    const CircleAvatar(
                       radius: 70.0,
                       backgroundImage: AssetImage('assets/images/pp.png'),
                     ),
-                    SizedBox(height: 3.0,),
-                    Text('Hesham ahmed'),
-                    SizedBox(height: 3.0,),
+                    const SizedBox(height: 3.0,),
+                    const Text('Hesham ahmed',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+                    const SizedBox(height: 3.0,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
@@ -47,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
                         Text('Cairo,Helwan'),
                       ],
                     ),
-                    SizedBox(height: 10.0,),
+                    const SizedBox(height: 10.0,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -59,17 +60,22 @@ class ProfileScreen extends StatelessWidget {
                             color: mainColor,
                           ),
                           child: MaterialButton(
-                            onPressed: (){},
+                            onPressed: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  Add_Request()),
+                              );
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
+                              children: const [
                                 Image(
                                   image: AssetImage('assets/images/blood-bag.png'),
                                   height: 30,
                                   width: 30,
                                 ),
                                 SizedBox(width: 10.0,),
-                                Text('Donate Blood'),
+                                Text('Donate Blood',style: TextStyle(color: Colors.white,),),
                               ],
                             ),
                           ),
@@ -85,24 +91,29 @@ class ProfileScreen extends StatelessWidget {
                             ),
                           ),
                           child: MaterialButton(
-                            onPressed: (){},
+                            onPressed: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  RequestScreen()),
+                              );
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
+                              children: const [
                                 Image(
                                   image: AssetImage('assets/images/requests.png'),
                                   height: 30,
                                   width: 30,
                                 ),
                                 SizedBox(width: 10.0,),
-                                Text('Donate Blood'),
+                                Text('Request'),
                               ],
                             ),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 25.0,),
+                    const SizedBox(height: 25.0,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -115,7 +126,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Text('A+'),
                               Text('Blood Type'),
                             ],
@@ -130,7 +141,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Text('04'),
                               Text('donations'),
                             ],
@@ -145,7 +156,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Text('03'),
                               Text('requests'),
                             ],
@@ -153,33 +164,31 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 29.0,),
+                    const SizedBox(height: 29.0,),
                     Container_with_button(
                       have_switch: true,
                       cubitValueSwitch: cubit.valueSwitch,
                       function: (value){
-                        print('dsdsad');
+                        print(value);
                         cubit.changeValueSwitch(value);
                       },
-                      num_width: 382,
                       img_left_padding: 13,
                       icon_name: 'assets/images/profile.png',
                       img_width: 35,
                       img_height: 35,
                       label_name: 'Availabe to donate',
                     ),
-                    SizedBox(height: 14.0,),
+                    const SizedBox(height: 14.0,),
                     Container_with_button(
-                      num_width: 382,
                       img_left_padding: 13,
                       icon_name: 'assets/images/invite.png',
                       img_width: 35,
                       img_height: 35,
                       label_name: 'Invite a friend',
+                      function: (){},
                     ),
-                    SizedBox(height: 14.0,),
+                    const SizedBox(height: 14.0,),
                     Container_with_button(
-                      num_width: 382,
                       img_left_padding: 13,
                       icon_name: 'assets/images/information.png',
                       img_width: 35,
@@ -190,20 +199,19 @@ class ProfileScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(builder: (context) => MyInformationScreen()),
                         );
-                      },
+                      }
                     ),
-                    SizedBox(height: 14.0,),
+                    const SizedBox(height: 14.0,),
                     Container_with_button(
-                      num_width: 382,
                       img_left_padding: 13,
                       icon_name: 'assets/images/chat.png',
                       img_width: 35,
                       img_height: 35,
                       label_name: 'Chats',
+                      function: (){},
                     ),
-                    SizedBox(height: 14.0,),
+                    const SizedBox(height: 14.0,),
                     Container_with_button(
-                      num_width: 382,
                       img_left_padding: 13,
                       icon_name: 'assets/images/lock_profile.png',
                       img_width: 30,
@@ -216,16 +224,16 @@ class ProfileScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    SizedBox(height: 14.0,),
+                    const SizedBox(height: 14.0,),
                     Container_with_button(
-                      num_width: double.infinity,
                       img_left_padding: 13,
                       icon_name: 'assets/images/profile.png',
                       img_width: 35,
                       img_height: 35,
                       label_name: 'Sign out',
+                      function: (){},
                     ),
-                    SizedBox(height: 14.0,),
+                    const SizedBox(height: 14.0,),
                   ],
                 ),
               );

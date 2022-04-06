@@ -1,3 +1,4 @@
+import 'package:blood_bank/modules/add_request/Add_Request.dart';
 import 'package:blood_bank/modules/home/home.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
@@ -20,7 +21,12 @@ class HomeLayout extends StatelessWidget {
             body: cubit.screens[cubit.currentIndex],
             floatingActionButton: FloatingActionButton(
               child: const Icon(Icons.add),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Add_Request()),
+                );
+              },
             ),
             floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: BottomAppBar(

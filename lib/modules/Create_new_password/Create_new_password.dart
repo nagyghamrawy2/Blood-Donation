@@ -122,7 +122,6 @@ class CreateNewPasswordScreen extends StatelessWidget {
               height: 30,
             ),
             Buttons_without_icon(
-                num_width: 0.9,
                 num_hieght: 52,
                 text_button_name: 'Change Password',
                 button_color: Color.fromRGBO(237, 57, 74, 1),

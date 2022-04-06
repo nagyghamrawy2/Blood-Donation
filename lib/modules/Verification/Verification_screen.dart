@@ -126,7 +126,6 @@ class VerificationScreen extends StatelessWidget {
               height: 40,
             ),
             Buttons_without_icon(
-                num_width: 0.9,
                 num_hieght: 52,
                 text_button_name: 'Verifiy',
                 button_color: Color.fromRGBO(237, 57, 74, 1),

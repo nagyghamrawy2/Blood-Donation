@@ -99,7 +99,6 @@ class MyInformationScreen extends StatelessWidget {
             ),
             const SizedBox(height: 30,),
             Buttons_without_icon(
-              num_width: 0.8,
               num_hieght: 50,
               text_button_name: 'Edit Profile',
               button_color: mainColor,
