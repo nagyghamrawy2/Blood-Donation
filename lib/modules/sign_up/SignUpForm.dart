@@ -21,6 +21,7 @@ class SignUpScreen extends StatelessWidget {
   var bloodType = TextEditingController();
   var height = TextEditingController();
   var weight = TextEditingController();
+  var city = TextEditingController();
   bool value = false;
 
   @override
@@ -81,6 +82,15 @@ class SignUpScreen extends StatelessWidget {
                               hintText: 'Enter your name',
                               text: 'Last Name',
                               controller: lastName,
+                              keyboardtype: TextInputType.text,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            SignupTextField(
+                              hintText: 'Enter your city',
+                              text: 'City',
+                              controller: city,
                               keyboardtype: TextInputType.text,
                             ),
                             SizedBox(

@@ -43,7 +43,7 @@ class _Add_RequestState extends State<Add_Request> {
           builder: (context, state) {
             AppCubit cubit = AppCubit.get(context);
             return ListView(
-              padding: EdgeInsets.symmetric(horizontal: 30.w ,vertical: 10.h),
+              padding: EdgeInsets.symmetric(horizontal: 30,vertical: 10),
               children: [
                 Requst_textformfield(
                     controller_Name: titleController,
@@ -72,28 +72,25 @@ class _Add_RequestState extends State<Add_Request> {
                   children: [
                     Text(
                       "Choose blood group",
-                      style:
-                          TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.006,
+                      height: 2,
                     ),
                     Card(
-                      elevation: 5.0,
+                      elevation: 10.0,
                       child: Container(
-                        height: MediaQuery.of(context).size.height * 0.167,
+                        height: 125,
                         width: MediaQuery.of(context).size.width * 0.9,
                         child: GridView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: cubit.blood_group_item.length,
-                          padding: EdgeInsets.fromLTRB(13, 10, 9, 5),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 4,
-                                  crossAxisSpacing: MediaQuery.of(context).size.width * 0.11,
-                                  childAspectRatio: 40 / 41,
-                                  mainAxisSpacing: 8
-                              ),
+                          padding: EdgeInsets.fromLTRB(13, 10, 9 , 5),
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4,
+                              crossAxisSpacing: 52,
+                              childAspectRatio: 35 / 41,
+                              mainAxisSpacing: 8),
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
@@ -101,11 +98,10 @@ class _Add_RequestState extends State<Add_Request> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(9.r),
+                                  borderRadius: BorderRadius.circular(9),
                                   border: Border.all(color: Colors.black),
-                                  color: cubit.bloodGroup == index
-                                      ? Colors.red
-                                      : Colors.white,
+                                  color:
+                                  cubit.bloodGroup == index ? Colors.red : Colors.white,
                                 ),
                                 child: Center(
                                   child: Text(
@@ -115,7 +111,8 @@ class _Add_RequestState extends State<Add_Request> {
                                             ? Colors.white
                                             : Colors.black,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16.sp),
+                                        fontSize: 16
+                                    ),
                                   ),
                                 ),
                               ),
