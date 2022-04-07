@@ -106,7 +106,7 @@ class SignUpScreen extends StatelessWidget {
                             SizedBox(
                               height: 10,
                             ),
-                            SignupTextField(
+                            PasswordTextField(
                               hintText: 'Enter your password',
                               text: 'Password',
                               controller: password,
@@ -115,7 +115,7 @@ class SignUpScreen extends StatelessWidget {
                             SizedBox(
                               height: 10,
                             ),
-                            SignupTextField(
+                            PasswordTextField(
                               hintText: 'Enter password again',
                               text: 'Confirm Password',
                               controller: confirmPassword,
@@ -142,12 +142,67 @@ class SignUpScreen extends StatelessWidget {
                             SizedBox(
                               height: 10,
                             ),
-                            SignupTextField(
-                              hintText: 'Enter your birthdate',
-                              text: 'Birth Date',
-                              controller: birthDate,
-                              keyboardtype: TextInputType.datetime, validatorText: 'Please enter your date of birth',
-                            ),
+                            Container(
+                                width: double.infinity,
+                                height: 100,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Birth Date",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 4,
+                                    ),
+                                    Flexible(
+                                      fit: FlexFit.tight,
+                                      flex: 1,
+                                      child: TextFormField(
+                                        controller: birthDate,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Date must not be empty';
+                                          }
+                                        },
+                                        decoration: InputDecoration(
+                                          focusColor: Colors.green,
+                                          focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                              borderSide: const BorderSide(
+                                                color: greyColor,
+                                              )),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                              width: 1,
+                                            ),
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: const BorderSide(color: Colors.red, width: 1),
+                                            borderRadius: BorderRadius.circular(20),
+                                          ),
+                                          hintText: "Date",
+                                          focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),),
+                                          suffixIcon: Icon(
+                                            Icons.calendar_today,
+                                          ),
+                                        ),
+                                        onTap: (){
+                                          showDatePicker(
+                                            context: context,
+                                            initialDate: DateTime.now(),
+                                            firstDate: DateTime(1900),
+                                            lastDate: DateTime.parse('2025-05-05'),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                )),
                             SizedBox(
                               height: 10,
                             ),
@@ -181,6 +236,7 @@ class SignUpScreen extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5.0),
                                   child: Checkbox(
+
                                     activeColor: mainColor,
                                     value: cubit.policyTerms,
                                     onChanged: (value) {
@@ -188,6 +244,7 @@ class SignUpScreen extends StatelessWidget {
                                     },
                                   ),
                                 ),
+
                                 Text(
                                     'I accept the policy and terms',
                                     style: TextStyle(

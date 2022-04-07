@@ -64,5 +64,10 @@ class AppCubit extends Cubit<AppStates>
     emit(PolicyTermsChangeState());
   }
 
+  bool obsecure = true;
+  void changePasswordStatus(){
+    obsecure = !obsecure;
+    emit(ChangePasswordState());
+  }
 
 }

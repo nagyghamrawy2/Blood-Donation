@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Buttons_without_icon extends StatelessWidget {
   Buttons_without_icon({
@@ -680,6 +681,96 @@ class SignupTextField extends StatelessWidget {
         ));
   }
 }
+
+class PasswordTextField extends StatelessWidget {
+  PasswordTextField({
+    this.hintText = '',
+    this.secure = false,
+    required this.text,
+    required this.controller,
+    required this.keyboardtype,
+    required this.validatorText,
+  });
+
+  final String hintText;
+  final bool secure;
+  late String text;
+  late TextEditingController controller;
+  late TextInputType keyboardtype;
+  late String validatorText;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+  create: (context) => AppCubit(),
+  child: BlocConsumer<AppCubit, AppStates>(
+  listener: (context, state) {},
+  builder: (context, state) {
+    AppCubit cubit = AppCubit.get(context);
+    return Container(
+        width: double.infinity,
+        height: 100,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              text,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
+              ),
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 1,
+              child: TextFormField(
+                obscureText: cubit.obsecure,
+                controller: controller,
+                keyboardType: keyboardtype,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '$validatorText';
+                  }
+                },
+                decoration: InputDecoration(
+                  focusColor: Colors.green,
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        color: greyColor,
+                      )),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.red, width: 1),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  hintText: hintText,
+                  focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      cubit.changePasswordStatus();
+                    },
+                    icon: Icon(Icons.remove_red_eye_outlined ,color: Colors.black,),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ));
+  },
+),
+);
+  }
+}
+
 
 class SignupTextFieldcustom extends StatelessWidget {
   SignupTextFieldcustom({
