@@ -5,12 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Add_Request extends StatefulWidget {
-  @override
-  State<Add_Request> createState() => _Add_RequestState();
-}
 
-class _Add_RequestState extends State<Add_Request> {
+class Add_Request extends StatelessWidget {
   TextEditingController titleController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();
   TextEditingController bagsController = new TextEditingController();
@@ -80,17 +76,18 @@ class _Add_RequestState extends State<Add_Request> {
                     Card(
                       elevation: 10.0,
                       child: Container(
-                        height: 125,
+                        height: MediaQuery.of(context).size.height*0.14,
                         width: MediaQuery.of(context).size.width * 0.9,
                         child: GridView.builder(
-                          physics: NeverScrollableScrollPhysics(),
+                           physics: NeverScrollableScrollPhysics(),
                           itemCount: cubit.blood_group_item.length,
                           padding: EdgeInsets.fromLTRB(13, 10, 9 , 5),
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 4,
-                              crossAxisSpacing: 52,
-                              childAspectRatio: 35 / 41,
-                              mainAxisSpacing: 8),
+                              crossAxisSpacing: MediaQuery.of(context).size.height*0.059,
+                              childAspectRatio:(MediaQuery.of(context).size.width /0.65) /(MediaQuery.of(context).size.height /1.2) ,
+                              mainAxisSpacing: 10
+                          ),
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
@@ -98,7 +95,7 @@ class _Add_RequestState extends State<Add_Request> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(9),
+                                  borderRadius: BorderRadius.circular(15.r),
                                   border: Border.all(color: Colors.black),
                                   color:
                                   cubit.bloodGroup == index ? Colors.red : Colors.white,
@@ -111,7 +108,7 @@ class _Add_RequestState extends State<Add_Request> {
                                             ? Colors.white
                                             : Colors.black,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16
+                                        fontSize: 27.sp
                                     ),
                                   ),
                                 ),

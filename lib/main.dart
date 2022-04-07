@@ -2,6 +2,8 @@ import 'package:blood_bank/layout/home_layout.dart';
 import 'package:blood_bank/modules/Sign_Up_with_gmail/Sign_up_with_gmail.dart';
 import 'package:blood_bank/modules/bloodBank/bloodBankScreen.dart';
 import 'package:blood_bank/modules/editProfile/editProfile.dart';
+import 'package:blood_bank/modules/education/education.dart';
+import 'package:blood_bank/modules/education_article/Education_Article.dart';
 import 'package:blood_bank/modules/findDonor/findDonorScreen.dart';
 import 'package:blood_bank/modules/home/home.dart';
 import 'package:blood_bank/modules/myInformation/myInformation.dart';
@@ -65,7 +67,7 @@ class MyApp extends StatelessWidget {
             child: widget!,
           );
         },
-        home: EditRequestScreen(),
+        home: SignUpScreen(),
       ),
     );
   }

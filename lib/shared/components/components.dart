@@ -4,6 +4,7 @@ import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Buttons_without_icon extends StatelessWidget {
   Buttons_without_icon({
@@ -858,35 +859,35 @@ class Education extends StatelessWidget {
                       backgroundImage: AssetImage("assets/images/test.png"),
                       radius: 60,
                     ),
-                    const SizedBox(
-                      width: 17,
+                     SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.05,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                           Text(
                             "The Concept of Red Blood Cell",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 14,
+                                fontSize: 19.sp,
                                 color: Color(0xFF5D240C)),
                           ),
-                          const SizedBox(
-                            height: 15,
+                           SizedBox(
+                            height: MediaQuery.of(context).size.height*0.02,
                           ),
-                          const Text(
+                           Text(
                             "Hellosadfas asdfasdfcs swadsdasdasdasadsadasdasdasdasdsadsadsadasdasdsad asdasdsaddasdasdasdasda",
-                            style: const TextStyle(
-                              fontSize: 12,
+                            style:  TextStyle(
+                              fontSize: 17.sp,
                               fontWeight: FontWeight.normal,
                               color: Color(0xFF787F8F),
                             ),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          const SizedBox(
-                            height: 15,
+                           SizedBox(
+                            height: MediaQuery.of(context).size.height*0.02,
                           ),
                           const InkWell(
                             child: Text(
@@ -925,34 +926,34 @@ class Education extends StatelessWidget {
                       backgroundImage: AssetImage("assets/images/test.png"),
                       radius: 60,
                     ),
-                    const SizedBox(
-                      width: 17,
+                     SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.05,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                           Text(
                             "The Concept of Red Blood Cell",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 14,
+                                fontSize: 19.sp,
                                 color: Color(0xFF5D240C)),
                           ),
-                          const SizedBox(
-                            height: 15,
+                           SizedBox(
+                            height: MediaQuery.of(context).size.height*0.02,
                           ),
-                          const Text(
+                           Text(
                             "Hellosadfas asdfasdfcs swadsdasdasdasadsadasdasdasdasdsadsadsadasdasdsad asdasdsaddasdasdasdasda",
                             style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 17.sp,
                                 fontWeight: FontWeight.normal,
                                 color: Color(0xFF787F8F)),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          const SizedBox(
-                            height: 15,
+                           SizedBox(
+                            height: MediaQuery.of(context).size.height*0.02,
                           ),
                           const InkWell(
                             child: Text(
