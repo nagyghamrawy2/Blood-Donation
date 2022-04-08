@@ -70,4 +70,11 @@ class AppCubit extends Cubit<AppStates>
     emit(ChangePasswordState());
   }
 
+  String dropDownValue = AppCubit().blood_group_item[0];
+
+  void ChangeDropDownValue(String? value){
+    dropDownValue = value!;
+    emit(ChangeDropDownValueState());
+  }
+
 }

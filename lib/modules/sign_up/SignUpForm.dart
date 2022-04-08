@@ -2,6 +2,7 @@ import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../shared/components/components.dart';
 import '../../shared/styles/colors.dart';
@@ -23,6 +24,14 @@ class SignUpScreen extends StatelessWidget {
   var weight = TextEditingController();
   var city = TextEditingController();
   bool value = false;
+  String dropdownvalue = 'Item 1';
+  var items = [
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+    'Item 5',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +92,8 @@ class SignUpScreen extends StatelessWidget {
                               hintText: 'Enter your last name',
                               text: 'Last Name',
                               controller: lastName,
-                              keyboardtype: TextInputType.text, validatorText: 'Please enter your last name',
+                              keyboardtype: TextInputType.text,
+                              validatorText: 'Please enter your last name',
                             ),
                             SizedBox(
                               height: 10,
@@ -92,7 +102,8 @@ class SignUpScreen extends StatelessWidget {
                               hintText: 'Enter your city',
                               text: 'City',
                               controller: city,
-                              keyboardtype: TextInputType.text, validatorText: 'Please enter your city',
+                              keyboardtype: TextInputType.text,
+                              validatorText: 'Please enter your city',
                             ),
                             SizedBox(
                               height: 10,
@@ -101,7 +112,8 @@ class SignUpScreen extends StatelessWidget {
                               hintText: 'Enter your email',
                               text: 'Email',
                               controller: emailAddress,
-                              keyboardtype: TextInputType.emailAddress, validatorText: 'Please enter your email',
+                              keyboardtype: TextInputType.emailAddress,
+                              validatorText: 'Please enter your email',
                             ),
                             SizedBox(
                               height: 10,
@@ -110,7 +122,8 @@ class SignUpScreen extends StatelessWidget {
                               hintText: 'Enter your password',
                               text: 'Password',
                               controller: password,
-                              keyboardtype: TextInputType.emailAddress, validatorText: 'Please enter your password',
+                              keyboardtype: TextInputType.emailAddress,
+                              validatorText: 'Please enter your password',
                             ),
                             SizedBox(
                               height: 10,
@@ -119,7 +132,8 @@ class SignUpScreen extends StatelessWidget {
                               hintText: 'Enter password again',
                               text: 'Confirm Password',
                               controller: confirmPassword,
-                              keyboardtype: TextInputType.visiblePassword, validatorText: 'Please enter your password again',
+                              keyboardtype: TextInputType.visiblePassword,
+                              validatorText: 'Please enter your password again',
                             ),
                             SizedBox(
                               height: 10,
@@ -128,7 +142,8 @@ class SignUpScreen extends StatelessWidget {
                               hintText: 'Enter your phone number',
                               text: 'Phone',
                               controller: phone,
-                              keyboardtype: TextInputType.phone, validatorText: 'Please enter your phone number',
+                              keyboardtype: TextInputType.phone,
+                              validatorText: 'Please enter your phone number',
                             ),
                             SizedBox(
                               height: 10,
@@ -137,7 +152,8 @@ class SignUpScreen extends StatelessWidget {
                               hintText: 'Enter your location',
                               text: 'location',
                               controller: location,
-                              keyboardtype: TextInputType.text, validatorText: 'Please enter your location',
+                              keyboardtype: TextInputType.text,
+                              validatorText: 'Please enter your location',
                             ),
                             SizedBox(
                               height: 10,
@@ -162,16 +178,21 @@ class SignUpScreen extends StatelessWidget {
                                       fit: FlexFit.tight,
                                       flex: 1,
                                       child: TextFormField(
+                                        readOnly: true,
+                                        keyboardType: TextInputType.datetime,
                                         controller: birthDate,
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
                                             return 'Date must not be empty';
+                                          } else {
+                                            birthDate.text = value;
                                           }
                                         },
                                         decoration: InputDecoration(
                                           focusColor: Colors.green,
                                           focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                               borderSide: const BorderSide(
                                                 color: greyColor,
                                               )),
@@ -179,25 +200,36 @@ class SignUpScreen extends StatelessWidget {
                                             borderSide: const BorderSide(
                                               width: 1,
                                             ),
-                                            borderRadius: BorderRadius.circular(10),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                           ),
                                           errorBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(color: Colors.red, width: 1),
-                                            borderRadius: BorderRadius.circular(20),
+                                            borderSide: const BorderSide(
+                                                color: Colors.red, width: 1),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
                                           ),
                                           hintText: "Date",
-                                          focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
                                           suffixIcon: Icon(
                                             Icons.calendar_today,
                                           ),
                                         ),
-                                        onTap: (){
+                                        onTap: () {
                                           showDatePicker(
                                             context: context,
                                             initialDate: DateTime.now(),
                                             firstDate: DateTime(1900),
-                                            lastDate: DateTime.parse('2025-05-05'),
-                                          );
+                                            lastDate:
+                                                DateTime.parse('2025-05-05'),
+                                          ).then((value) {
+                                            birthDate.text = DateFormat.yMMMd()
+                                                .format(value!);
+                                          });
                                         },
                                       ),
                                     ),
@@ -207,19 +239,59 @@ class SignUpScreen extends StatelessWidget {
                               height: 10,
                             ),
                             SignupTextField(
-                              hintText: 'Enter your Blood type',
-                              text: 'Blood type',
-                              controller: bloodType,
-                              keyboardtype: TextInputType.text, validatorText: 'Please enter your blood type ',
+                              hintText: 'Enter your Weight',
+                              text: 'Weight',
+                              controller: weight,
+                              keyboardtype: TextInputType.number,
+                              validatorText: 'Please enter your weight',
                             ),
                             SizedBox(
                               height: 10,
                             ),
-                            SignupTextField(
-                              hintText: 'Enter your Weight',
-                              text: 'Weight',
-                              controller: weight,
-                              keyboardtype: TextInputType.number, validatorText: 'Please enter your weight',
+                            DropdownButtonFormField(
+                              decoration: InputDecoration(
+                                focusColor: Colors.green,
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: Colors.grey,
+                                    )),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(color: Colors.red,
+                                      width: 1),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              // Initial Value
+                              value: dropdownvalue,
+
+                              // Down Arrow Icon
+                              icon: const Icon(Icons.keyboard_arrow_down),
+                              isExpanded: true,
+                              // Array list of items
+                              items: items.map((String items) {
+                                return DropdownMenuItem(
+                                  value: items,
+                                  child: Text(items),
+                                );
+                              }).toList(),
+                              // After selecting the desired option,it will
+                              // change button value to selected value
+                              onChanged: (String? newValue) {
+                                print(newValue);
+                                // setState(() {
+                                //   dropdownvalue = newValue!;
+                                // });
+                              },
                             ),
                             SizedBox(
                               height: 10,
@@ -236,7 +308,6 @@ class SignUpScreen extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5.0),
                                   child: Checkbox(
-
                                     activeColor: mainColor,
                                     value: cubit.policyTerms,
                                     onChanged: (value) {
@@ -244,9 +315,7 @@ class SignUpScreen extends StatelessWidget {
                                     },
                                   ),
                                 ),
-
-                                Text(
-                                    'I accept the policy and terms',
+                                Text('I accept the policy and terms',
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
