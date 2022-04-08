@@ -34,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
                       backgroundImage: AssetImage('assets/images/pp.png'),
                     ),
                     const SizedBox(height: 3.0,),
-                    const Text('Hesham ahmed',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+                    const Text('Hesham ahmed',style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
                     const SizedBox(height: 3.0,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -94,7 +94,7 @@ class ProfileScreen extends StatelessWidget {
                             onPressed: (){
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) =>  RequestScreen()),
+                                MaterialPageRoute(builder: (context) =>  const RequestScreen()),
                               );
                             },
                             child: Row(
@@ -166,12 +166,12 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 29.0,),
                     Container_with_button(
-                      have_switch: true,
-                      cubitValueSwitch: cubit.valueSwitch,
-                      function: (value){
-                        print(value);
+                      switchFun: (value){
                         cubit.changeValueSwitch(value);
                       },
+                      have_switch: true,
+                      cubitValueSwitch: cubit.valueSwitch,
+                      function: (){},
                       img_left_padding: 13,
                       icon_name: 'assets/images/profile.png',
                       img_width: 35,

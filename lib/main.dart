@@ -14,6 +14,7 @@ import 'package:blood_bank/modules/sign_up/SignUpForm.dart';
 import 'package:blood_bank/shared/Network/Remote/dio_helper.dart';
 import 'package:blood_bank/shared/bloc_observer.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
+import 'package:blood_bank/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
             titleTextStyle: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
+              color: Colors.white,
             ),
           ),
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -55,7 +57,13 @@ class MyApp extends StatelessWidget {
             selectedItemColor: mainColor,
             selectedLabelStyle: TextStyle(
               fontWeight: FontWeight.bold,
-            )
+            ),
+          ),
+          tabBarTheme: const TabBarTheme(
+            labelStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20
+            ),
           ),
         ),
         debugShowCheckedModeBanner: false,
@@ -67,9 +75,8 @@ class MyApp extends StatelessWidget {
             child: widget!,
           );
         },
-        home: SignUpScreen(),
+        home: BloodBankScreen(),
       ),
     );
   }
 }
-

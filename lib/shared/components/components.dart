@@ -15,7 +15,7 @@ class Buttons_without_icon extends StatelessWidget {
     required this.num_border,
     required this.num_fontsize,
     required this.text_fontwwieght,
-    // required this.function,
+    this.function,
   });
 
   late double num_hieght;
@@ -24,8 +24,7 @@ class Buttons_without_icon extends StatelessWidget {
   late double num_border;
   late double num_fontsize;
   late FontWeight text_fontwwieght;
-
-  // late Function function;
+  Function? function;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,9 @@ class Buttons_without_icon extends StatelessWidget {
       height: num_hieght,
       child: ElevatedButton(
         child: Text(text_button_name),
-        onPressed: () {},
+        onPressed: () {
+          function!();
+        },
         style: ElevatedButton.styleFrom(
             primary: button_color,
             shape: RoundedRectangleBorder(
@@ -285,6 +286,7 @@ class Container_with_button extends StatelessWidget {
     this.have_switch = false,
     this.cubitValueSwitch = false,
     required this.function,
+    this.switchFun,
   });
 
   late double img_left_padding;
@@ -294,12 +296,13 @@ class Container_with_button extends StatelessWidget {
   late String label_name;
   final bool have_switch;
   bool cubitValueSwitch;
+  Function(bool val)? switchFun;
   late Function function;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
+      onTap: () {
         function();
       },
       child: Padding(
@@ -338,7 +341,7 @@ class Container_with_button extends StatelessWidget {
                         inactiveTrackColor: Colors.red,
                         value: cubitValueSwitch,
                         onChanged: (value) {
-                          cubitValueSwitch = value;
+                          switchFun!(value);
                         },
                       ),
                     ],
@@ -359,12 +362,17 @@ class Container_with_button extends StatelessWidget {
                         width: 5,
                       ),
                       Expanded(
-                        child: Text(label_name,
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold)),
+                        child: Text(
+                          label_name,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ],
-                  )),
+                  ),
+        ),
       ),
     );
   }
@@ -673,7 +681,9 @@ class SignupTextField extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   hintText: hintText,
-                  focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
             ),
@@ -702,75 +712,80 @@ class PasswordTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-  create: (context) => AppCubit(),
-  child: BlocConsumer<AppCubit, AppStates>(
-  listener: (context, state) {},
-  builder: (context, state) {
-    AppCubit cubit = AppCubit.get(context);
-    return Container(
-        width: double.infinity,
-        height: 100,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              text,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 17,
-              ),
-            ),
-            const SizedBox(
-              height: 4,
-            ),
-            Flexible(
-              fit: FlexFit.tight,
-              flex: 1,
-              child: TextFormField(
-                obscureText: cubit.obsecure,
-                controller: controller,
-                keyboardType: keyboardtype,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return '$validatorText';
-                  }
-                },
-                decoration: InputDecoration(
-                  focusColor: Colors.green,
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(
-                        color: greyColor,
-                      )),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      width: 1,
+      create: (context) => AppCubit(),
+      child: BlocConsumer<AppCubit, AppStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          AppCubit cubit = AppCubit.get(context);
+          return Container(
+              width: double.infinity,
+              height: 100,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    text,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
                     ),
-                    borderRadius: BorderRadius.circular(10),
                   ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.red, width: 1),
-                    borderRadius: BorderRadius.circular(20),
+                  const SizedBox(
+                    height: 4,
                   ),
-                  hintText: hintText,
-                  focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      cubit.changePasswordStatus();
-                    },
-                    icon: Icon(Icons.remove_red_eye_outlined ,color: Colors.black,),
+                  Flexible(
+                    fit: FlexFit.tight,
+                    flex: 1,
+                    child: TextFormField(
+                      obscureText: cubit.obsecure,
+                      controller: controller,
+                      keyboardType: keyboardtype,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return '$validatorText';
+                        }
+                      },
+                      decoration: InputDecoration(
+                        focusColor: Colors.green,
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                              color: greyColor,
+                            )),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.red, width: 1),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        hintText: hintText,
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            cubit.changePasswordStatus();
+                          },
+                          icon: Icon(
+                            Icons.remove_red_eye_outlined,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
-          ],
-        ));
-  },
-),
-);
+                ],
+              ));
+        },
+      ),
+    );
   }
 }
-
 
 class SignupTextFieldcustom extends StatelessWidget {
   SignupTextFieldcustom({
@@ -950,26 +965,26 @@ class Education extends StatelessWidget {
                       backgroundImage: AssetImage("assets/images/test.png"),
                       radius: 60,
                     ),
-                     SizedBox(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width * 0.05,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Text(
+                          Text(
                             "The Concept of Red Blood Cell",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 19.sp,
                                 color: Color(0xFF5D240C)),
                           ),
-                           SizedBox(
-                            height: MediaQuery.of(context).size.height*0.02,
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02,
                           ),
-                           Text(
+                          Text(
                             "Hellosadfas asdfasdfcs swadsdasdasdasadsadasdasdasdasdsadsadsadasdasdsad asdasdsaddasdasdasdasda",
-                            style:  TextStyle(
+                            style: TextStyle(
                               fontSize: 17.sp,
                               fontWeight: FontWeight.normal,
                               color: Color(0xFF787F8F),
@@ -977,8 +992,8 @@ class Education extends StatelessWidget {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
-                           SizedBox(
-                            height: MediaQuery.of(context).size.height*0.02,
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02,
                           ),
                           const InkWell(
                             child: Text(
@@ -1017,24 +1032,24 @@ class Education extends StatelessWidget {
                       backgroundImage: AssetImage("assets/images/test.png"),
                       radius: 60,
                     ),
-                     SizedBox(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width * 0.05,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Text(
+                          Text(
                             "The Concept of Red Blood Cell",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 19.sp,
                                 color: Color(0xFF5D240C)),
                           ),
-                           SizedBox(
-                            height: MediaQuery.of(context).size.height*0.02,
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02,
                           ),
-                           Text(
+                          Text(
                             "Hellosadfas asdfasdfcs swadsdasdasdasadsadasdasdasdasdsadsadsadasdasdsad asdasdsaddasdasdasdasda",
                             style: TextStyle(
                                 fontSize: 17.sp,
@@ -1043,8 +1058,8 @@ class Education extends StatelessWidget {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
-                           SizedBox(
-                            height: MediaQuery.of(context).size.height*0.02,
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.02,
                           ),
                           const InkWell(
                             child: Text(

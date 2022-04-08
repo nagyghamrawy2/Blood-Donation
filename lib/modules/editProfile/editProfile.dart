@@ -1,9 +1,14 @@
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class EditProfileScreen extends StatelessWidget {
-  EditProfileScreen({Key? key}) : super(key: key);
+  EditProfileScreen({
+    this.listOfApi,
+});
+
+  final List? listOfApi ;
 
   var firstName = TextEditingController();
   var lastName = TextEditingController();
@@ -18,6 +23,8 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    emailAddress = TextEditingController(text: listOfApi![0]);
+    phone = TextEditingController(text: listOfApi![1]);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit profile'),
@@ -89,13 +96,70 @@ class EditProfileScreen extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      SignupTextField(
-                        hintText: 'Enter your birthdate',
-                        text: 'Birth Date',
-                        controller: birthDate,
-                        keyboardtype: TextInputType.datetime,
-                        validatorText: 'Birthdate must not be empty',
-                      ),
+                      Container(
+                      width: double.infinity,
+                      height: 100,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Birth Date',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          Flexible(
+                            fit: FlexFit.tight,
+                            flex: 1,
+                            child: TextFormField(
+                              readOnly: true,
+                              controller: birthDate,
+                              keyboardType: TextInputType.datetime,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Birthdate must not be empty';
+                                }
+                              },
+                              onTap: (){
+                                showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1900),
+                                  lastDate: DateTime.parse('2025-05-05'),
+                                ).then((value){
+                                  birthDate.text =
+                                      DateFormat.yMMMd().format(value!);
+                                });
+                              },
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                      color: greyColor,
+                                    )),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(color: Colors.red, width: 1),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                hintText: 'Enter your birthdate',
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
                       const SizedBox(
                         height: 10,
                       ),
@@ -130,32 +194,19 @@ class EditProfileScreen extends StatelessWidget {
                         height: 20,
                       ),
                       Buttons_without_icon(
+                        function: () {
+                          if(formKey.currentState!.validate()){
+                            print('done');
+                          }else{
+                            print('not done');
+                          }
+                        },
                         num_hieght: 52,
                         text_button_name: 'Save data',
                         button_color: mainColor,
                         num_border: 12,
                         num_fontsize: 20,
                         text_fontwwieght: FontWeight.normal,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: 52,
-                        child: ElevatedButton(
-                          child: Text('Save data'),
-                          onPressed: () {
-                            if(formKey.currentState!.validate()){
-                              print('done');
-                            }else{
-                              print('not done');
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                              primary: mainColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12)),
-                              textStyle: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.normal)),
-                        ),
                       ),
                       const SizedBox(
                         height: 20,

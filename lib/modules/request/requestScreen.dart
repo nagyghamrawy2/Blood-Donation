@@ -1,3 +1,4 @@
+import 'package:blood_bank/modules/request/editRequest.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -10,12 +11,12 @@ class RequestScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Requests'),
+          title: const Text('Requests'),
           bottom: const TabBar(
             indicatorColor: mainColor,
             tabs: <Widget>[
               Tab(
-                child: Text('All requests'),
+                child: Text('All requests',),
               ),
               Tab(
                 child: Text('My requests'),
@@ -34,11 +35,11 @@ class RequestScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      CircleAvatar(
+                      const CircleAvatar(
                         radius: 20,
-                        child: Text(
+                        child: const Text(
                           'A+',
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                         backgroundColor: mainColor,
                       ),
@@ -50,30 +51,30 @@ class RequestScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Hesham ahmed needs blood',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
-                            Text(
+                            const Text(
                               'no of bags    2',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: greyColor2,
                               ),
                             ),
-                            Text(
+                            const Text(
                               'Date      Dec,6,2022',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: greyColor2,
                               ),
                             ),
-                            Text(
+                            const Text(
                               'Location    Cairo,helwan',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: greyColor2,
                               ),
                             ),
@@ -90,13 +91,13 @@ class RequestScreen extends StatelessWidget {
                             onPressed: () {},
                             child: Row(
                               children: [
-                                Text(
+                                const Text(
                                   'Contact ',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                Icon(Icons.chat,size: 20,),
+                                const Icon(Icons.chat,size: 20,),
                               ],
                             ),
                           ),
@@ -105,7 +106,7 @@ class RequestScreen extends StatelessWidget {
                               backgroundColor: MaterialStateProperty.all<Color>(mainColor),
                             ),
                             onPressed: () {},
-                            child: Text(
+                            child: const Text(
                               'I can donate',
                               style: TextStyle(
                                   color: Colors.white,
@@ -132,15 +133,15 @@ class RequestScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      CircleAvatar(
+                      const CircleAvatar(
                         radius: 20,
-                        child: Text(
+                        child: const Text(
                           'A+',
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                         backgroundColor: mainColor,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Expanded(
@@ -148,30 +149,30 @@ class RequestScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Hesham ahmed needs blood',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 12,
                             ),
-                            Text(
+                            const Text(
                               'no of bags    2',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: greyColor2,
                               ),
                             ),
-                            Text(
+                            const Text(
                               'Date      Dec,6,2022',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: greyColor2,
                               ),
                             ),
-                            Text(
+                            const Text(
                               'Location    Cairo,helwan',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: greyColor2,
                               ),
                             ),
@@ -182,19 +183,24 @@ class RequestScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.edit),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => EditRequestScreen()),
+                              );
+                            },
+                            icon: const Icon(Icons.edit),
                           ),
                           IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.delete_outline),
+                            icon: const Icon(Icons.delete_outline),
                           ),
                         ],
                       ),
                     ],
                   ),
                 ),
-                separatorBuilder: (contex, index) => SizedBox(
+                separatorBuilder: (context, index) => const SizedBox(
                   height: 5,
                 ),
                 itemCount: 2,

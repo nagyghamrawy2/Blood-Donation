@@ -13,6 +13,15 @@ class EditRequestScreen extends StatelessWidget {
   var locationController = TextEditingController();
   var dateController = TextEditingController();
   var formKey = GlobalKey<FormState>();
+
+  List<String> bloodType = [
+    'A+',
+    'A-',
+    'B+',
+    'B-',
+    'O+',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,69 +33,127 @@ class EditRequestScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Form(
-            key: formKey,
-            child: Column(
-              children: [
-                SignupTextField(
-                  text: 'Title',
-                  controller: titleController,
-                  keyboardtype: TextInputType.text,
-                  validatorText: 'Title must not be empty',
+              key: formKey,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    SignupTextField(
+                      hintText: 'Enter Title',
+                      text: 'Title',
+                      controller: titleController,
+                      keyboardtype: TextInputType.text,
+                      validatorText: 'Title must not be empty',
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SignupTextField(
+                      hintText: 'Enter Description',
+                      text: 'Description',
+                      controller: descriptionController,
+                      keyboardtype: TextInputType.text,
+                      validatorText: 'Description must not be empty',
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    DropdownButtonFormField(
+                      items: bloodType
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem(
+                          child: Text(value),
+                          value: value,
+                        );
+                      }).toList(),
+                      onChanged: (val){
+                        print(val);
+                      },
+                    ),
+                    SignupTextField(
+                      hintText: 'Enter bloodType',
+                      text: 'BloodType',
+                      controller: bloodTypeController,
+                      keyboardtype: TextInputType.emailAddress,
+                      validatorText: 'BloodType must not be empty',
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SignupTextField(
+                      hintText: 'Enter BloodBags',
+                      text: 'BloodBags',
+                      controller: bloodBagsController,
+                      keyboardtype: TextInputType.number,
+                      validatorText: 'BloodBags must not be empty',
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SignupTextField(
+                      hintText: 'Enter Phone',
+                      text: 'Phone',
+                      controller: phoneController,
+                      keyboardtype: TextInputType.text,
+                      validatorText: 'Phone must not be empty',
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SignupTextField(
+                      hintText: 'Enter location',
+                      text: 'location',
+                      controller: locationController,
+                      keyboardtype: TextInputType.datetime,
+                      validatorText: 'location must not be empty',
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SignupTextField(
+                      hintText: 'Enter your Blood type',
+                      text: 'Date',
+                      controller: dateController,
+                      keyboardtype: TextInputType.text,
+                      validatorText: 'date must not be empty',
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    // Buttons_without_icon(
+                    //   num_hieght: 52,
+                    //   text_button_name: 'Save data',
+                    //   button_color: mainColor,
+                    //   num_border: 12,
+                    //   num_fontsize: 20,
+                    //   text_fontwwieght: FontWeight.normal,
+                    // ),
+                    Container(
+                      width: double.infinity,
+                      height: 52,
+                      child: ElevatedButton(
+                        child: Text('Save data'),
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            print('done');
+                          } else {
+                            print('not done');
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                            primary: mainColor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                            textStyle: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.normal)),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 10,),
-                SignupTextField(
-                  text: 'Description',
-                  controller: descriptionController,
-                  keyboardtype: TextInputType.text,
-                  validatorText: 'Description must not be empty',
-                ),
-                const SizedBox(height: 10,),
-                SignupTextField(
-                  text: 'Blood Type',
-                  controller: bloodTypeController,
-                  keyboardtype: TextInputType.text,
-                  validatorText: 'Blood type must not be empty',
-                ),
-                const SizedBox(height: 10,),
-                SignupTextField(
-                  text: 'Blood Bags',
-                  controller: bloodBagsController,
-                  keyboardtype: TextInputType.number,
-                  validatorText: 'Blood bags must not be empty',
-                ),
-                const SizedBox(height: 10,),
-                SignupTextField(
-                  text: 'Phone',
-                  controller: phoneController,
-                  keyboardtype: TextInputType.phone,
-                  validatorText: 'Phone must not be empty',
-                ),
-                const SizedBox(height: 10,),
-                SignupTextField(
-                  text: 'Location',
-                  controller: locationController,
-                  keyboardtype: TextInputType.text,
-                  validatorText: 'Location must not be empty',
-                ),
-                const SizedBox(height: 10,),
-                SignupTextField(
-                  text: 'Date',
-                  controller: dateController,
-                  keyboardtype: TextInputType.text,
-                  validatorText: 'Date must not be empty',
-                ),
-                const SizedBox(height: 15,),
-                Buttons_without_icon(
-                  num_hieght: 52,
-                  text_button_name: 'Save data',
-                  button_color: mainColor,
-                  num_border: 12,
-                  num_fontsize: 20,
-                  text_fontwwieght: FontWeight.normal,
-                ),
-              ],
-            ),
-          ),
+              )),
         ),
       ),
     );

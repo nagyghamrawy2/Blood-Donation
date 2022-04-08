@@ -1,3 +1,4 @@
+import 'package:blood_bank/modules/editProfile/editProfile.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
@@ -98,13 +99,22 @@ class MyInformationScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 30,),
-            Buttons_without_icon(
-              num_hieght: 50,
-              text_button_name: 'Edit Profile',
-              button_color: mainColor,
-              num_border: 12,
-              num_fontsize: 20,
-              text_fontwwieght: FontWeight.normal,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: Buttons_without_icon(
+                num_hieght: 50,
+                text_button_name: 'Edit Profile',
+                button_color: mainColor,
+                num_border: 12,
+                num_fontsize: 20,
+                text_fontwwieght: FontWeight.normal,
+                function: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>  EditProfileScreen(listOfApi: apiInfo,)),
+                  );
+                },
+              ),
             ),
           ],
         ),

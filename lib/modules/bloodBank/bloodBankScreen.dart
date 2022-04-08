@@ -25,366 +25,83 @@ class BloodBankScreen extends StatelessWidget {
                 "assets/images/hospital.jpg",
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Container(
-                width: double.infinity,
-                height: 80,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage("assets/images/pp.png"),
-                      radius: 29,
-                    ),
-                    SizedBox(
-                      width: 11,
-                    ),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Ain Shams University Hospital",
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          Text(
-                            'Helwan,Cairo',
-                            style: TextStyle(
-                              color: greyColor2,
-                            ),
-                          ),
-                          Text(
-                            '30 Km',
-                            style: TextStyle(
-                              color: greyColor2,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+            ListView.separated(
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                itemBuilder: (context, index) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Container(
+                    width: double.infinity,
+                    height: 80,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: SvgPicture.asset(
-                            "assets/images/phone-call.svg",
-                            color: greenColor,
+                        CircleAvatar(
+                          backgroundImage: AssetImage("assets/images/pp.png"),
+                          radius: 29,
+                        ),
+                        SizedBox(
+                          width: 11,
+                        ),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Ain Shams University Hospital",
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 12,
+                              ),
+                              Text(
+                                'Helwan,Cairo',
+                                style: TextStyle(
+                                  color: greyColor2,
+                                ),
+                              ),
+                              Text(
+                                '30 Km',
+                                style: TextStyle(
+                                  color: greyColor2,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Icon(
-                            Icons.location_on,
-                            color: mainColor,
-                            size: 30,
-                          ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            GestureDetector(
+                              onTap: () {},
+                              child: SvgPicture.asset(
+                                "assets/images/phone-call.svg",
+                                color: greenColor,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Icon(
+                                Icons.location_on,
+                                color: mainColor,
+                                size: 30,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+                separatorBuilder: (context,index)=> SizedBox(height: 5,),
+                itemCount: 8,
             ),
-            SizedBox(height: 5,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Container(
-                width: double.infinity,
-                height: 80,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage("assets/images/pp.png"),
-                      radius: 29,
-                    ),
-                    SizedBox(
-                      width: 11,
-                    ),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Ain Shams University Hospital",
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          Text(
-                            'Helwan,Cairo',
-                            style: TextStyle(
-                              color: greyColor2,
-                            ),
-                          ),
-                          Text(
-                            '30 Km',
-                            style: TextStyle(
-                              color: greyColor2,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: SvgPicture.asset(
-                            "assets/images/phone-call.svg",
-                            color: greenColor,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Icon(
-                            Icons.location_on,
-                            color: mainColor,
-                            size: 30,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 5,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Container(
-                width: double.infinity,
-                height: 80,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage("assets/images/pp.png"),
-                      radius: 29,
-                    ),
-                    SizedBox(
-                      width: 11,
-                    ),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Ain Shams University Hospital",
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          Text(
-                            'Helwan,Cairo',
-                            style: TextStyle(
-                              color: greyColor2,
-                            ),
-                          ),
-                          Text(
-                            '30 Km',
-                            style: TextStyle(
-                              color: greyColor2,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: SvgPicture.asset(
-                            "assets/images/phone-call.svg",
-                            color: greenColor,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Icon(
-                            Icons.location_on,
-                            color: mainColor,
-                            size: 30,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 5,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Container(
-                width: double.infinity,
-                height: 80,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage("assets/images/pp.png"),
-                      radius: 29,
-                    ),
-                    SizedBox(
-                      width: 11,
-                    ),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Ain Shams University Hospital",
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          Text(
-                            'Helwan,Cairo',
-                            style: TextStyle(
-                              color: greyColor2,
-                            ),
-                          ),
-                          Text(
-                            '30 Km',
-                            style: TextStyle(
-                              color: greyColor2,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: SvgPicture.asset(
-                            "assets/images/phone-call.svg",
-                            color: greenColor,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Icon(
-                            Icons.location_on,
-                            color: mainColor,
-                            size: 30,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 5,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Container(
-                width: double.infinity,
-                height: 80,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage("assets/images/pp.png"),
-                      radius: 29,
-                    ),
-                    SizedBox(
-                      width: 11,
-                    ),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Ain Shams University Hospital",
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          Text(
-                            'Helwan,Cairo',
-                            style: TextStyle(
-                              color: greyColor2,
-                            ),
-                          ),
-                          Text(
-                            '30 Km',
-                            style: TextStyle(
-                              color: greyColor2,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: SvgPicture.asset(
-                            "assets/images/phone-call.svg",
-                            color: greenColor,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Icon(
-                            Icons.location_on,
-                            color: mainColor,
-                            size: 30,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 5,),
           ],
         ),
       ),
