@@ -50,25 +50,24 @@ class Buttons_without_icon extends StatelessWidget {
 
 class Textformfield_with_border extends StatelessWidget {
   Textformfield_with_border({
-    required this.controller_Name,
-    required this.keyboardtype,
-    required this.obsecure,
-    required this.text_hint,
+    required this.controllerName,
+    required this.keyboardType,
+    this.obsecure = false,
+    this.isPasswordField = false,
+    required this.hintText,
     required this.text_label,
     required this.num_border,
+    this.suffixFunction,
   });
 
-  late TextInputType keyboardtype;
-  late bool obsecure;
-  late String text_hint;
+  late TextEditingController controllerName;
+  late TextInputType keyboardType;
+  final bool obsecure;
+  final bool isPasswordField;
+  late String hintText;
   late String text_label;
   late double num_border;
-  late double img_right_padding;
-  late double img_bottom_padding;
-  late String icon_name;
-  late double img_width;
-  late double img_height;
-  TextEditingController controller_Name;
+  Function? suffixFunction;
 
   @override
   Widget build(BuildContext context) {
@@ -76,16 +75,17 @@ class Textformfield_with_border extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.9,
       height: 66,
       child: TextFormField(
-        controller: controller_Name,
-        keyboardType: keyboardtype,
+        controller: controllerName,
+        keyboardType: keyboardType,
         obscureText: obsecure,
         decoration: InputDecoration(
-          hintText: text_hint,
+          hintText: hintText,
           floatingLabelBehavior: FloatingLabelBehavior.always,
           hintStyle: const TextStyle(fontSize: 16),
           labelText: text_label,
           labelStyle: const TextStyle(
-              fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black),
+              fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black,
+          ),
           border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.black26, width: 3.0),
               borderRadius: BorderRadius.circular(num_border)),
@@ -93,17 +93,19 @@ class Textformfield_with_border extends StatelessWidget {
             borderSide: const BorderSide(color: Colors.black26, width: 3.0),
             borderRadius: BorderRadius.circular(num_border),
           ),
-          // suffixIcon: Padding(
-          //   padding:  EdgeInsets.only(right: img_right_padding ,bottom: img_bottom_padding),
-          //   child: Image.asset(icon_name
-          //     ,width: img_width,
-          //     height: img_height,
-          //   ),
-          // ),
+          suffixIcon: isPasswordField == false
+              ? null
+              : IconButton(
+            onPressed: () {
+              suffixFunction!();
+            },
+            icon: Icon(
+              obsecure == true ? Icons.visibility : Icons.visibility_off,
+              color: Colors.black,
+            ),
+          ),
+
         ),
-        onChanged: (value) {
-          // do something
-        },
       ),
     );
   }

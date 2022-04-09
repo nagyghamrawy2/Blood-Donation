@@ -64,10 +64,10 @@ class ForgetPasswordScreen extends StatelessWidget {
               height: 60,
             ),
             Textformfield_with_border(
-              controller_Name: emailcontroller,
-              keyboardtype: TextInputType.emailAddress,
+              controllerName: emailcontroller,
+              keyboardType: TextInputType.emailAddress,
               obsecure: false,
-              text_hint: 'Enter your email',
+              hintText: 'Enter your email',
               text_label: 'Email address',
               num_border: 10,
             ),

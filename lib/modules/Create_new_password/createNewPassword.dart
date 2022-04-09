@@ -36,8 +36,8 @@ class CreateNewPasswordScreen extends StatelessWidget {
                     ],
                     color: mainColor,
                     borderRadius: const BorderRadius.only(
-                      topRight: const Radius.circular(25.0),
-                      bottomLeft: const Radius.circular(25.0),
+                      topRight: Radius.circular(25.0),
+                      bottomLeft: Radius.circular(25.0),
                     )),
                 child: Column(
                   children: const [
@@ -102,23 +102,27 @@ class CreateNewPasswordScreen extends StatelessWidget {
               height: 90,
             ),
             Textformfield_with_border(
-              controller_Name: passwordController,
-              keyboardtype: TextInputType.visiblePassword,
+              controllerName: passwordController,
+              keyboardType: TextInputType.visiblePassword,
               obsecure: true,
-              text_hint: 'Enter New password',
+              hintText: 'Enter New password',
               text_label: 'New Password',
               num_border: 10,
+              isPasswordField: true,
+              suffixFunction: (){},
             ),
             const SizedBox(
               height: 40,
             ),
             Textformfield_with_border(
-              controller_Name: passwordController,
-              keyboardtype: TextInputType.visiblePassword,
+              controllerName: passwordController,
+              keyboardType: TextInputType.visiblePassword,
               obsecure: true,
-              text_hint: 'Confirm new  password',
+              hintText: 'Confirm new  password',
               text_label: 'Confirm Password',
               num_border: 10,
+              isPasswordField: true,
+              suffixFunction: (){},
             ),
             const SizedBox(
               height: 30,
