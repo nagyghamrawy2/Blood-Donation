@@ -1,5 +1,5 @@
-import 'package:blood_bank/modules/add_request/Add_Request.dart';
-import 'package:blood_bank/modules/change%20password/Change_password.dart';
+import 'package:blood_bank/modules/add_request/addRequest.dart';
+import 'package:blood_bank/modules/change%20password/changePassword.dart';
 import 'package:blood_bank/modules/myInformation/myInformation.dart';
 import 'package:blood_bank/modules/request/requestScreen.dart';
 import 'package:blood_bank/shared/components/components.dart';

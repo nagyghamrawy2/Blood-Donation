@@ -83,6 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.only(left: 15.0),
                   child: Checkbox(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)),),
                     activeColor: mainColor,
                     value: this.value,
                     onChanged: (value) {
@@ -113,13 +114,16 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 60,
             ),
-            Buttons_without_icon(
-                num_hieght: 52,
-                text_button_name: 'Login',
-                button_color: Color.fromRGBO(237, 57, 74, 1),
-                num_border: 25,
-                num_fontsize: 20,
-                text_fontwwieght: FontWeight.normal)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 100.0),
+              child: Buttons_without_icon(
+                  num_hieght: 52,
+                  text_button_name: 'Login',
+                  button_color: mainColor,
+                  num_border: 25,
+                  num_fontsize: 20,
+                  text_fontwwieght: FontWeight.normal),
+            )
           ],
         ),
       ),

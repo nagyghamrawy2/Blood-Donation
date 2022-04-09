@@ -2,65 +2,64 @@ import 'package:blood_bank/shared/components/components.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import '../../shared/styles/colors.dart';
+
 class VerificationScreen extends StatelessWidget {
+  const VerificationScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(237, 57, 74, 1),
-          title: Text('Verification'),
+          title: const Text('Verification'),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
+            IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
           ],
         ),
         body: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 80),
-              child: Column(
-                children: [
-                  Transform.rotate(
-                    angle: -math.pi / 7,
-                    child: Container(
-                      height: 120.0,
-                      width: 120.0,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/verify.png'),
-                          fit: BoxFit.fill,
-                        ),
-                        //  shape: BoxShape.circle,
-                      ),
-                    ),
+            const SizedBox(
+              height: 80,
+            ),
+            Transform.rotate(
+              angle: -math.pi / 7,
+              child: Container(
+                height: 120.0,
+                width: 120.0,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/verify.png'),
+                    fit: BoxFit.fill,
                   ),
-                ],
+                  //  shape: BoxShape.circle,
+                ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Align(
+            const Align(
                 alignment: Alignment.center,
                 child: Text(
                   'OTP VERIFICATION',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                 )),
-            Align(
+            const Align(
                 alignment: Alignment.center,
                 child: Text(
                   'Enter verification code sent your Email Address',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
-                    color: Color.fromRGBO(120, 127, 143, 1),
+                    color: greyColor2,
                   ),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 17,
                 ),
                 Container(
@@ -70,12 +69,12 @@ class VerificationScreen extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(22),
                       border: Border.all(color: Colors.grey)),
-                  child: TextField(
+                  child: const TextField(
                     decoration: InputDecoration(border: InputBorder.none),
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
                 Container(
@@ -85,12 +84,12 @@ class VerificationScreen extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(22),
                       border: Border.all(color: Colors.grey)),
-                  child: TextField(
+                  child: const TextField(
                     decoration: InputDecoration(border: InputBorder.none),
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
                 Container(
@@ -100,12 +99,12 @@ class VerificationScreen extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(22),
                       border: Border.all(color: Colors.grey)),
-                  child: TextField(
+                  child: const TextField(
                     decoration: InputDecoration(border: InputBorder.none),
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
                 Container(
@@ -115,23 +114,26 @@ class VerificationScreen extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(22),
                       border: Border.all(color: Colors.grey)),
-                  child: TextField(
+                  child: const TextField(
                     decoration: InputDecoration(border: InputBorder.none),
                     textAlign: TextAlign.center,
                   ),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
-            Buttons_without_icon(
-                num_hieght: 52,
-                text_button_name: 'Verifiy',
-                button_color: Color.fromRGBO(237, 57, 74, 1),
-                num_border: 11,
-                num_fontsize: 20,
-                text_fontwwieght: FontWeight.normal)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Buttons_without_icon(
+                  num_hieght: 52,
+                  text_button_name: 'Verifiy',
+                  button_color: const Color.fromRGBO(237, 57, 74, 1),
+                  num_border: 11,
+                  num_fontsize: 20,
+                  text_fontwwieght: FontWeight.normal),
+            )
           ],
         ));
   }

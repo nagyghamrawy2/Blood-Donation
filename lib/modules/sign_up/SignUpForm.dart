@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../../shared/components/components.dart';
 import '../../shared/styles/colors.dart';
-import '../Login_Screen/Login_Screen.dart';
+import '../Login_Screen/login.dart';
 
 class SignUpScreen extends StatelessWidget {
   var firstName = TextEditingController();

@@ -1,5 +1,5 @@
-import 'package:blood_bank/modules/add_request/Add_Request.dart';
-import 'package:blood_bank/modules/home/home.dart';
+import 'package:blood_bank/modules/add_request/addRequest.dart';
+import 'package:blood_bank/modules/home/homeScreen.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:flutter/material.dart';

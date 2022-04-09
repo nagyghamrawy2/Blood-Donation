@@ -5,13 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Add_Request extends StatelessWidget {
+class AddRequestScreen extends StatelessWidget {
   TextEditingController titleController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();
   TextEditingController bagsController = new TextEditingController();
   TextEditingController phoneController = new TextEditingController();
   TextEditingController locationController = new TextEditingController();
   TextEditingController expired_dateController = new TextEditingController();
+
+  AddRequestScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

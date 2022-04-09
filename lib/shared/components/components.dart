@@ -3,6 +3,7 @@ import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -771,7 +772,7 @@ class PasswordTextField extends StatelessWidget {
                           onPressed: () {
                             cubit.changePasswordStatus();
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.remove_red_eye_outlined,
                             color: Colors.black,
                           ),
@@ -811,7 +812,7 @@ class DropDownCustom extends StatelessWidget {
             focusColor: Colors.green,
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.grey,
                 )),
             enabledBorder: OutlineInputBorder(
@@ -887,7 +888,7 @@ class Education extends StatelessWidget {
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 19.sp,
-                                color: Color(0xFF5D240C)),
+                                color: const Color(0xFF5D240C)),
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.02,
@@ -897,7 +898,7 @@ class Education extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 17.sp,
                               fontWeight: FontWeight.normal,
-                              color: Color(0xFF787F8F),
+                              color: const Color(0xFF787F8F),
                             ),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
@@ -954,7 +955,7 @@ class Education extends StatelessWidget {
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 19.sp,
-                                color: Color(0xFF5D240C)),
+                                color: const Color(0xFF5D240C)),
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.02,
@@ -964,7 +965,7 @@ class Education extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 17.sp,
                                 fontWeight: FontWeight.normal,
-                                color: Color(0xFF787F8F)),
+                                color: const Color(0xFF787F8F)),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -992,5 +993,93 @@ class Education extends StatelessWidget {
               // ),
             ),
           );
+  }
+}
+
+class BloodBankInfo extends StatelessWidget {
+
+  BloodBankInfo(
+      this.imageLink,
+      this.hospitalName,
+      this.governorate,
+      this.city, {Key? key}
+      ) : super(key: key);
+
+  late String imageLink;
+  late String hospitalName;
+  late String governorate;
+  late String city;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Container(
+        width: double.infinity,
+        height: 80,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            CircleAvatar(
+              backgroundImage: AssetImage(imageLink),
+              radius: 29,
+            ),
+            const SizedBox(
+              width: 11,
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    hospitalName,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    '$city,$governorate',
+                    style: const TextStyle(
+                      color: greyColor2,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  child: IconButton(
+                    icon: SvgPicture.asset(
+                      "assets/images/phone-call.svg",
+                      color: greenColor,
+                    ),
+                    onPressed: () {},
+                  ),
+                ),
+                Expanded(
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.location_on,
+                      color: mainColor,
+                      size: 30,
+                    ),
+                    onPressed: () {},
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

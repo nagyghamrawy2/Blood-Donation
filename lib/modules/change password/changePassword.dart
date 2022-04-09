@@ -1,3 +1,4 @@
+import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import '../../shared/components/components.dart';
 
@@ -7,7 +8,7 @@ class ChangePasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(237, 57, 74, 1),
+        backgroundColor: mainColor,
         title: Text('Change Password'),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
@@ -32,7 +33,7 @@ class ChangePasswordScreen extends StatelessWidget {
                         offset: Offset(0, 3), // changes position of shadow
                       ),
                     ],
-                    color: Color.fromRGBO(237, 57, 74, 1),
+                    color: mainColor,
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(25.0),
                       bottomLeft: Radius.circular(25.0),
@@ -106,11 +107,6 @@ class ChangePasswordScreen extends StatelessWidget {
               text_hint: 'Enter old  password',
               text_label: 'Old Password',
               num_border: 10,
-              // img_right_padding: 5,
-              // img_bottom_padding: 3,
-              // icon_name:'assets/images/profile.png',
-              // img_width: 50,
-              // img_height: 20
             ),
             SizedBox(
               height: 30,
@@ -122,11 +118,6 @@ class ChangePasswordScreen extends StatelessWidget {
               text_hint: 'Enter New password',
               text_label: 'New Password',
               num_border: 10,
-              // img_right_padding: 5,
-              // img_bottom_padding: 3,
-              // icon_name:'assets/images/profile.png',
-              // img_width: 50,
-              // img_height: 20
             ),
             SizedBox(
               height: 30,
@@ -138,22 +129,20 @@ class ChangePasswordScreen extends StatelessWidget {
               text_hint: 'Confirm password',
               text_label: 'Confirm New Password',
               num_border: 10,
-              // img_right_padding: 5,
-              // img_bottom_padding: 3,
-              // icon_name:'assets/images/profile.png',
-              // img_width: 50,
-              // img_height: 20
             ),
             SizedBox(
               height: 30,
             ),
-            Buttons_without_icon(
-                num_hieght: 52,
-                text_button_name: 'Change Password',
-                button_color: Color.fromRGBO(237, 57, 74, 1),
-                num_border: 11,
-                num_fontsize: 20,
-                text_fontwwieght: FontWeight.normal)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Buttons_without_icon(
+                  num_hieght: 52,
+                  text_button_name: 'Change Password',
+                  button_color: mainColor,
+                  num_border: 11,
+                  num_fontsize: 20,
+                  text_fontwwieght: FontWeight.normal),
+            )
           ],
         ),
       ),

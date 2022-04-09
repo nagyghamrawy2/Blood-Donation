@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 import '../../shared/styles/colors.dart';
 
-class chat extends StatefulWidget {
+class ChatScreen extends StatefulWidget {
   @override
-  State<chat> createState() => _chatState();
+  State<ChatScreen> createState() => _chatState();
 }
 
-class _chatState extends State<chat> {
+class _chatState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
