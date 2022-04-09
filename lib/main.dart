@@ -32,11 +32,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: Size(300, 1200),
-      minTextAdapt: true,
-      splitScreenMode: true, // a2dr aft7 2 app m3 b3d
-      builder: () => MaterialApp(
+    return MaterialApp(
         theme: ThemeData(
           primarySwatch: Colors.blue,
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -67,16 +63,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         debugShowCheckedModeBanner: false,
-        builder: (context, widget) {
-          // elle hwa lma tege t3ml ay t8yeer msln t8yeer el5t myt2sr4
-          ScreenUtil.setContext(context);
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-            child: widget!,
-          );
-        },
-        home: BloodBankScreen(),
-      ),
-    );
+        home: HomeLayout(),
+      );
   }
 }

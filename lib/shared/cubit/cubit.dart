@@ -24,7 +24,7 @@ class AppCubit extends Cubit<AppStates>
   List<Widget> screens =[
     const HomeScreen(),
     const RequestScreen(),
-    const EducationScreen(),
+    // const EducationScreen(),
     const ProfileScreen(),
   ];
 
@@ -39,16 +39,16 @@ class AppCubit extends Cubit<AppStates>
     emit(AppChangeBotNavBarState());
   }
 
-  List<String> blood_group_item = [
-    "A+",
-    "A-",
-    "B+",
-    "B-",
-    "O+",
-    "O-",
-    "AB+",
-    "AB-"
-  ];
+  // List<String> blood_group_item = [
+  //   "A+",
+  //   "A-",
+  //   "B+",
+  //   "B-",
+  //   "O+",
+  //   "O-",
+  //   "AB+",
+  //   "AB-"
+  // ];
 
   int bloodGroup = -1;
 
@@ -70,11 +70,11 @@ class AppCubit extends Cubit<AppStates>
     emit(ChangePasswordState());
   }
 
-  String dropDownValue = AppCubit().blood_group_item[0];
-
-  void ChangeDropDownValue(String? value){
-    dropDownValue = value!;
-    emit(ChangeDropDownValueState());
-  }
+  // String dropDownValue = AppCubit().blood_group_item[0];
+  //
+  // void ChangeDropDownValue(String? value){
+  //   dropDownValue = value!;
+  //   emit(ChangeDropDownValueState());
+  // }
 
 }
