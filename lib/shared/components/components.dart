@@ -58,6 +58,7 @@ class Textformfield_with_border extends StatelessWidget {
     required this.text_label,
     required this.num_border,
     this.suffixFunction,
+    required this.validatorText,
   });
 
   late TextEditingController controllerName;
@@ -67,6 +68,7 @@ class Textformfield_with_border extends StatelessWidget {
   late String hintText;
   late String text_label;
   late double num_border;
+  late String validatorText;
   Function? suffixFunction;
 
   @override
@@ -78,6 +80,11 @@ class Textformfield_with_border extends StatelessWidget {
         controller: controllerName,
         keyboardType: keyboardType,
         obscureText: obsecure,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return validatorText;
+          }
+        },
         decoration: InputDecoration(
           hintText: hintText,
           floatingLabelBehavior: FloatingLabelBehavior.always,
