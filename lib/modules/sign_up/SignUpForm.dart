@@ -9,6 +9,7 @@ import '../../shared/styles/colors.dart';
 import '../Login_Screen/login.dart';
 
 class SignUpScreen extends StatelessWidget {
+  SignUpScreen({Key? key}) : super(key: key);
 
   var firstName = TextEditingController();
   var lastName = TextEditingController();
@@ -22,14 +23,12 @@ class SignUpScreen extends StatelessWidget {
   var height = TextEditingController();
   var weight = TextEditingController();
   var city = TextEditingController();
-  var formKey = GlobalKey<FormState>();
   bool value = false;
+
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AppCubit(),
-      child: BlocConsumer<AppCubit, AppStates>(
+    return  BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
@@ -65,7 +64,7 @@ class SignUpScreen extends StatelessWidget {
                     clipper: CustomClipPath(),
                   ),
                   Form(
-                      key: formKey,
+                      key: key,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 30),
                         child: Column(
@@ -110,42 +109,22 @@ class SignUpScreen extends StatelessWidget {
                             SizedBox(
                               height: 10,
                             ),
-                            // PasswordTextField(
-                            //   hintText: 'Enter your password',
-                            //   text: 'Password',
-                            //   controller: password,
-                            //   keyboardtype: TextInputType.emailAddress,
-                            //   validatorText: 'Please enter your password',
-                            // ),
-                            // SizedBox(
-                            //   height: 10,
-                            // ),
-                            SignupTextField(
+                            PasswordTextField(
                               hintText: 'Enter your password',
                               text: 'Password',
                               controller: password,
-                              keyboardtype: TextInputType.text,
+                              keyboardtype: TextInputType.emailAddress,
                               validatorText: 'Please enter your password',
-                              isPasswordField: true,
-                              secure: cubit.obsecure,
-                              suffixFunction: (){
-                                cubit.changePasswordStatus();
-                              },
                             ),
                             SizedBox(
                               height: 10,
                             ),
-                            SignupTextField(
-                              hintText: 'Enter your password',
+                            PasswordTextField(
+                              hintText: 'Enter password again',
                               text: 'Confirm Password',
                               controller: confirmPassword,
-                              keyboardtype: TextInputType.text,
-                              validatorText: 'Please enter your password',
-                              isPasswordField: true,
-                              secure: cubit.obsecure,
-                              suffixFunction: (){
-                                cubit.changePasswordStatus();
-                              },
+                              keyboardtype: TextInputType.visiblePassword,
+                              validatorText: 'Please enter your password again',
                             ),
                             SizedBox(
                               height: 10,
@@ -204,7 +183,7 @@ class SignUpScreen extends StatelessWidget {
                                           focusColor: Colors.green,
                                           focusedBorder: OutlineInputBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                               borderSide: const BorderSide(
                                                 color: greyColor,
                                               )),
@@ -213,19 +192,19 @@ class SignUpScreen extends StatelessWidget {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(10),
+                                            BorderRadius.circular(10),
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderSide: const BorderSide(
                                                 color: Colors.red, width: 1),
                                             borderRadius:
-                                                BorderRadius.circular(20),
+                                            BorderRadius.circular(20),
                                           ),
                                           hintText: "Date",
                                           focusedErrorBorder:
-                                              OutlineInputBorder(
+                                          OutlineInputBorder(
                                             borderRadius:
-                                                BorderRadius.circular(10),
+                                            BorderRadius.circular(10),
                                           ),
                                           suffixIcon: Icon(
                                             Icons.calendar_today,
@@ -237,7 +216,7 @@ class SignUpScreen extends StatelessWidget {
                                             initialDate: DateTime.now(),
                                             firstDate: DateTime(1900),
                                             lastDate:
-                                                DateTime.parse('2025-05-05'),
+                                            DateTime.parse('2025-05-05'),
                                           ).then((value) {
                                             birthDate.text = DateFormat.yMMMd()
                                                 .format(value!);
@@ -257,10 +236,6 @@ class SignUpScreen extends StatelessWidget {
                               keyboardtype: TextInputType.number,
                               validatorText: 'Please enter your weight',
                             ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            DropDownCustom(),
                             SizedBox(
                               height: 10,
                             ),
@@ -294,7 +269,7 @@ class SignUpScreen extends StatelessWidget {
                             ),
                             Buttons_without_icon(
                               num_hieght:
-                                  MediaQuery.of(context).size.height * 0.06,
+                              MediaQuery.of(context).size.height * 0.06,
                               text_button_name: 'Sign up',
                               button_color: mainColor,
                               num_border: 30,
@@ -312,8 +287,8 @@ class SignUpScreen extends StatelessWidget {
             ),
           );
         },
-      ),
-    );
+      );
+
   }
 }
 
