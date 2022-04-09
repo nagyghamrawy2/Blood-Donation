@@ -1,4 +1,3 @@
-import 'package:blood_bank/shared/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../shared/styles/colors.dart';
@@ -10,6 +9,7 @@ class BloodBankScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(237, 57, 74, 1),
         title: Text('Blood bank'),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
@@ -25,12 +25,85 @@ class BloodBankScreen extends StatelessWidget {
                 "assets/images/hospital.jpg",
               ),
             ),
-            ListView.separated(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: ListView.separated(
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) => BloodBankInfo('assets/images/pp.png', 'Ain shams university hospital', 'cairo', 'maadi'),
-                separatorBuilder: (context,index)=> const SizedBox(height: 15,),
-                itemCount: 8,
+                itemBuilder: (context, index) => Container(
+                  width: double.infinity,
+                  height: 80,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: AssetImage("assets/images/pp.png"),
+                        radius: 29,
+                      ),
+                      SizedBox(
+                        width: 11,
+                      ),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Ain Shams University Hospital",
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            Text(
+                              'Helwan,Cairo',
+                              style: TextStyle(
+                                color: greyColor2,
+                              ),
+                            ),
+                            Text(
+                              '30 Km',
+                              style: TextStyle(
+                                color: greyColor2,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          GestureDetector(
+                            onTap: () {},
+                            child: SvgPicture.asset(
+                              "assets/images/phone-call.svg",
+                              color: greenColor,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Icon(
+                              Icons.location_on,
+                              color: mainColor,
+                              size: 30,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                separatorBuilder: (context, index) =>
+                const SizedBox(
+                  height: 5,
+                ),
+                itemCount: 10,
+              ),
             ),
           ],
         ),
