@@ -308,70 +308,70 @@ class Container_with_button extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: Container(
-            width: double.infinity,
-            height: 43,
-            color: Colors.black26,
-            child: have_switch
-                ? Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: img_left_padding,
-                        ),
-                        child: Image.asset(
-                          icon_name,
-                          width: img_width,
-                          height: img_height,
-                        ),
+          width: double.infinity,
+          height: 43,
+          color: Colors.black26,
+          child: have_switch
+              ? Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: img_left_padding,
                       ),
-                      const SizedBox(
-                        width: 5,
+                      child: Image.asset(
+                        icon_name,
+                        width: img_width,
+                        height: img_height,
                       ),
-                      Expanded(
-                        child: Text(
-                          label_name,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Switch.adaptive(
-                        activeColor: Colors.green,
-                        inactiveTrackColor: Colors.red,
-                        value: cubitValueSwitch,
-                        onChanged: (value) {
-                          switchFun!(value);
-                        },
-                      ),
-                    ],
-                  )
-                : Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: img_left_padding,
-                        ),
-                        child: Image.asset(
-                          icon_name,
-                          width: img_width,
-                          height: img_height,
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: Text(
+                        label_name,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(
-                        width: 5,
+                    ),
+                    Switch.adaptive(
+                      activeColor: Colors.green,
+                      inactiveTrackColor: Colors.red,
+                      value: cubitValueSwitch,
+                      onChanged: (value) {
+                        switchFun!(value);
+                      },
+                    ),
+                  ],
+                )
+              : Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: img_left_padding,
                       ),
-                      Expanded(
-                        child: Text(
-                          label_name,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      child: Image.asset(
+                        icon_name,
+                        width: img_width,
+                        height: img_height,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: Text(
+                        label_name,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
         ),
       ),
     );
@@ -787,65 +787,65 @@ class PasswordTextField extends StatelessWidget {
   }
 }
 
-class DropDownCustom extends StatefulWidget {
-  @override
-  State<DropDownCustom> createState() => _DropDownCustomState();
-}
-
-class _DropDownCustomState extends State<DropDownCustom> {
-  String dropdownvalue = 'Item 1';
-  var items = [
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
+class DropDownCustom extends StatelessWidget {
+  String dropdownvalue = 'A+';
+  List<String> blood_group_item = [
+    "A+",
+    "A-",
+    "B+",
+    "B-",
+    "O+",
+    "O-",
+    "AB+",
+    "AB-"
   ];
+
   @override
   Widget build(BuildContext context) {
-    return   DropdownButtonFormField(
-      decoration: InputDecoration(
-        focusColor: Colors.green,
-        focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-              color: Colors.grey,
-            )),
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            width: 1,
+    return BlocConsumer<AppCubit, AppStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        AppCubit cubit = AppCubit.get(context);
+        return DropdownButtonFormField(
+          decoration: InputDecoration(
+            focusColor: Colors.green,
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.grey,
+                )),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                width: 1,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.red, width: 1),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red,
-              width: 1),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-      // Initial Value
-      value: dropdownvalue,
+          // Initial Value
+          value: cubit.dropDownValue,
 
-      // Down Arrow Icon
-      icon: const Icon(Icons.keyboard_arrow_down),
-      isExpanded: true,
-      // Array list of items
-      items: items.map((String items) {
-        return DropdownMenuItem(
-          value: items,
-          child: Text(items),
+          // Down Arrow Icon
+          icon: const Icon(Icons.keyboard_arrow_down),
+          items: cubit.blood_group_item.map((String items) {
+            return DropdownMenuItem(
+              value: items,
+              child: Text(items),
+            );
+          }).toList(),
+          // After selecting the desired option,it will
+          // change button value to selected value
+          onChanged: (String? newValue) {
+            print(newValue);
+            cubit.ChangeDropDownValue(newValue);
+          },
         );
-      }).toList(),
-      // After selecting the desired option,it will
-      // change button value to selected value
-      onChanged: (String? newValue) {
-        print(newValue);
-        setState(() {
-          dropdownvalue = newValue!;
-        });
       },
     );
   }
