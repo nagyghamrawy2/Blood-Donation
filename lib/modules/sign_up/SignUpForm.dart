@@ -24,25 +24,16 @@ class SignUpScreen extends StatelessWidget {
   var weight = TextEditingController();
   var city = TextEditingController();
   bool value = false;
-  String dropdownvalue = 'Item 1';
-  var items = [
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-  ];
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider(
-        create: (context) => AppCubit(),
-        child: BlocConsumer<AppCubit, AppStates>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            AppCubit cubit = AppCubit.get(context);
-            return SingleChildScrollView(
+    return  BlocConsumer<AppCubit, AppStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          AppCubit cubit = AppCubit.get(context);
+          return Scaffold(
+            body: SingleChildScrollView(
               child: Column(
                 children: [
                   ClipPath(
@@ -192,7 +183,7 @@ class SignUpScreen extends StatelessWidget {
                                           focusColor: Colors.green,
                                           focusedBorder: OutlineInputBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                               borderSide: const BorderSide(
                                                 color: greyColor,
                                               )),
@@ -201,19 +192,19 @@ class SignUpScreen extends StatelessWidget {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(10),
+                                            BorderRadius.circular(10),
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderSide: const BorderSide(
                                                 color: Colors.red, width: 1),
                                             borderRadius:
-                                                BorderRadius.circular(20),
+                                            BorderRadius.circular(20),
                                           ),
                                           hintText: "Date",
                                           focusedErrorBorder:
-                                              OutlineInputBorder(
+                                          OutlineInputBorder(
                                             borderRadius:
-                                                BorderRadius.circular(10),
+                                            BorderRadius.circular(10),
                                           ),
                                           suffixIcon: Icon(
                                             Icons.calendar_today,
@@ -225,7 +216,7 @@ class SignUpScreen extends StatelessWidget {
                                             initialDate: DateTime.now(),
                                             firstDate: DateTime(1900),
                                             lastDate:
-                                                DateTime.parse('2025-05-05'),
+                                            DateTime.parse('2025-05-05'),
                                           ).then((value) {
                                             birthDate.text = DateFormat.yMMMd()
                                                 .format(value!);
@@ -244,54 +235,6 @@ class SignUpScreen extends StatelessWidget {
                               controller: weight,
                               keyboardtype: TextInputType.number,
                               validatorText: 'Please enter your weight',
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            DropdownButtonFormField(
-                              decoration: InputDecoration(
-                                focusColor: Colors.green,
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                      color: Colors.grey,
-                                    )),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Colors.red,
-                                      width: 1),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              // Initial Value
-                              value: dropdownvalue,
-
-                              // Down Arrow Icon
-                              icon: const Icon(Icons.keyboard_arrow_down),
-                              isExpanded: true,
-                              // Array list of items
-                              items: items.map((String items) {
-                                return DropdownMenuItem(
-                                  value: items,
-                                  child: Text(items),
-                                );
-                              }).toList(),
-                              // After selecting the desired option,it will
-                              // change button value to selected value
-                              onChanged: (String? newValue) {
-                                print(newValue);
-                                // setState(() {
-                                //   dropdownvalue = newValue!;
-                                // });
-                              },
                             ),
                             SizedBox(
                               height: 10,
@@ -326,7 +269,7 @@ class SignUpScreen extends StatelessWidget {
                             ),
                             Buttons_without_icon(
                               num_hieght:
-                                  MediaQuery.of(context).size.height * 0.06,
+                              MediaQuery.of(context).size.height * 0.06,
                               text_button_name: 'Sign up',
                               button_color: mainColor,
                               num_border: 30,
@@ -341,11 +284,11 @@ class SignUpScreen extends StatelessWidget {
                       )),
                 ],
               ),
-            );
-          },
-        ),
-      ),
-    );
+            ),
+          );
+        },
+      );
+
   }
 }
 

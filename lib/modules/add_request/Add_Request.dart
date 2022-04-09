@@ -16,29 +16,29 @@ class Add_Request extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFFED394A),
-        title: Text(
-          "Request for blood",
-          style: TextStyle(
-              fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-        actions: [
-          Icon(
-            Icons.notifications,
-            color: Colors.white,
-            size: 30,
-          )
-        ],
-      ),
-      body: BlocProvider(
-        create: (context) => AppCubit(),
-        child: BlocConsumer<AppCubit, AppStates>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            AppCubit cubit = AppCubit.get(context);
-            return ListView(
+
+
+      return BlocConsumer<AppCubit, AppStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          AppCubit cubit = AppCubit.get(context);
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Color(0xFFED394A),
+              title: Text(
+                "Request for blood",
+                style: TextStyle(
+                    fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              actions: [
+                Icon(
+                  Icons.notifications,
+                  color: Colors.white,
+                  size: 30,
+                )
+              ],
+            ),
+            body: ListView(
               padding: EdgeInsets.symmetric(horizontal: 30,vertical: 10),
               children: [
                 Requst_textformfield(
@@ -197,10 +197,10 @@ class Add_Request extends StatelessWidget {
                     text_fontwwieght: FontWeight.normal,
                 ),
               ],
-            );
-          },
-        ),
-      ),
-    );
+            ),
+          );
+        },
+      );
+
   }
 }

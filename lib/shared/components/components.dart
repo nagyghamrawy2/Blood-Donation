@@ -787,6 +787,71 @@ class PasswordTextField extends StatelessWidget {
   }
 }
 
+class DropDownCustom extends StatefulWidget {
+  @override
+  State<DropDownCustom> createState() => _DropDownCustomState();
+}
+
+class _DropDownCustomState extends State<DropDownCustom> {
+  String dropdownvalue = 'Item 1';
+  var items = [
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+    'Item 5',
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return   DropdownButtonFormField(
+      decoration: InputDecoration(
+        focusColor: Colors.green,
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: Colors.grey,
+            )),
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red,
+              width: 1),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      // Initial Value
+      value: dropdownvalue,
+
+      // Down Arrow Icon
+      icon: const Icon(Icons.keyboard_arrow_down),
+      isExpanded: true,
+      // Array list of items
+      items: items.map((String items) {
+        return DropdownMenuItem(
+          value: items,
+          child: Text(items),
+        );
+      }).toList(),
+      // After selecting the desired option,it will
+      // change button value to selected value
+      onChanged: (String? newValue) {
+        print(newValue);
+        setState(() {
+          dropdownvalue = newValue!;
+        });
+      },
+    );
+  }
+}
+
+
 // class SignupTextFieldcustom extends StatelessWidget {
 //   SignupTextFieldcustom({
 //     this.hintText = '',
