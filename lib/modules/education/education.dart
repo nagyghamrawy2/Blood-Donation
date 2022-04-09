@@ -43,7 +43,7 @@ class EducationScreen extends StatelessWidget {
             Expanded(
               child: ListView.separated(
                   itemBuilder: (context, index) {
-                    return Education(index: index);
+                    return EducationInfo(index: index);
                   },
                   separatorBuilder: (context, index) {
                     return SizedBox(

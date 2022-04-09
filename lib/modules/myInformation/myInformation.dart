@@ -76,7 +76,7 @@ class MyInformationScreen extends StatelessWidget {
                     child: ListView.separated(
                       padding: const EdgeInsets.only(bottom: 10),
                       shrinkWrap: true,
-                      itemBuilder: (context, index) => InformationOfProfile(
+                      itemBuilder: (context, index) => ProfileInfo(
                           label: label[index], leftLabel: apiInfo[index],
                       ),
                       separatorBuilder: (context, index) => const Divider(

@@ -165,22 +165,20 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 29.0,),
-                    Container_with_button(
+                    ProfileButton(
                       switchFun: (value){
                         cubit.changeValueSwitch(value);
                       },
                       have_switch: true,
                       cubitValueSwitch: cubit.valueSwitch,
                       function: (){},
-                      img_left_padding: 13,
                       icon_name: 'assets/images/profile.png',
                       img_width: 35,
                       img_height: 35,
                       label_name: 'Availabe to donate',
                     ),
                     const SizedBox(height: 14.0,),
-                    Container_with_button(
-                      img_left_padding: 13,
+                    ProfileButton(
                       icon_name: 'assets/images/invite.png',
                       img_width: 35,
                       img_height: 35,
@@ -188,8 +186,7 @@ class ProfileScreen extends StatelessWidget {
                       function: (){},
                     ),
                     const SizedBox(height: 14.0,),
-                    Container_with_button(
-                      img_left_padding: 13,
+                    ProfileButton(
                       icon_name: 'assets/images/information.png',
                       img_width: 35,
                       img_height: 35,
@@ -202,8 +199,7 @@ class ProfileScreen extends StatelessWidget {
                       }
                     ),
                     const SizedBox(height: 14.0,),
-                    Container_with_button(
-                      img_left_padding: 13,
+                    ProfileButton(
                       icon_name: 'assets/images/chat.png',
                       img_width: 35,
                       img_height: 35,
@@ -211,8 +207,7 @@ class ProfileScreen extends StatelessWidget {
                       function: (){},
                     ),
                     const SizedBox(height: 14.0,),
-                    Container_with_button(
-                      img_left_padding: 13,
+                    ProfileButton(
                       icon_name: 'assets/images/lock_profile.png',
                       img_width: 30,
                       img_height: 30,
@@ -225,8 +220,7 @@ class ProfileScreen extends StatelessWidget {
                       },
                     ),
                     const SizedBox(height: 14.0,),
-                    Container_with_button(
-                      img_left_padding: 13,
+                    ProfileButton(
                       icon_name: 'assets/images/profile.png',
                       img_width: 35,
                       img_height: 35,
