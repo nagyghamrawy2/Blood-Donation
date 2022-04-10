@@ -229,6 +229,58 @@ class SignUpScreen extends StatelessWidget {
                             SizedBox(
                               height: 10,
                             ),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                "Blood type",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            DropDownCustom(),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                "City",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            LocationCityCustom(),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                "Region",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            LocationRegionCustom(),
+                            SizedBox(
+                              height: 10,
+                            ),
+
                             SignupTextField(
                               hintText: 'Enter your Weight',
                               text: 'Weight',

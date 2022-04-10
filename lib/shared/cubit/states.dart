@@ -8,3 +8,4 @@ class BloodValueChangeState extends AppStates{}
 class PolicyTermsChangeState extends AppStates{}
 class ChangePasswordState extends AppStates {}
 class ChangeDropDownValueState extends AppStates{}
+class ChangeLocationValueState extends AppStates{}

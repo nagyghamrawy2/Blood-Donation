@@ -517,10 +517,11 @@ class DropDownCustom extends StatelessWidget {
           decoration: InputDecoration(
             focusColor: Colors.green,
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(
-                  color: Colors.grey,
-                )),
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(
+                color: greyColor,
+              ),
+            ),
             enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(
                 width: 1,
@@ -551,6 +552,114 @@ class DropDownCustom extends StatelessWidget {
           onChanged: (String? newValue) {
             print(newValue);
             cubit.ChangeDropDownValue(newValue);
+          },
+        );
+      },
+    );
+  }
+}
+class LocationCityCustom extends StatelessWidget {
+
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<AppCubit, AppStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        AppCubit cubit = AppCubit.get(context);
+        return DropdownButtonFormField(
+          decoration: InputDecoration(
+            focusColor: Colors.green,
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(
+                color: greyColor,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                width: 1,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.red, width: 1),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          // Initial Value
+          value: cubit.locationcityvalue,
+
+          // Down Arrow Icon
+          icon: const Icon(Icons.keyboard_arrow_down),
+          items: cubit.location__item.map((String items) {
+            return DropdownMenuItem(
+              value: items,
+              child: Text(items),
+            );
+          }).toList(),
+          // After selecting the desired option,it will
+          // change button value to selected value
+          onChanged: (String? newValue) {
+            print(newValue);
+            cubit.ChangeLocationCityValue(newValue);
+          },
+        );
+      },
+    );
+  }
+}
+class LocationRegionCustom extends StatelessWidget {
+
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<AppCubit, AppStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        AppCubit cubit = AppCubit.get(context);
+        return DropdownButtonFormField(
+          decoration: InputDecoration(
+            focusColor: Colors.green,
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(
+                color: greyColor,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                width: 1,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.red, width: 1),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          // Initial Value
+          value: cubit.locationcityvalue,
+
+          // Down Arrow Icon
+          icon: const Icon(Icons.keyboard_arrow_down),
+          items: cubit.location__item.map((String items) {
+            return DropdownMenuItem(
+              value: items,
+              child: Text(items),
+            );
+          }).toList(),
+          // After selecting the desired option,it will
+          // change button value to selected value
+          onChanged: (String? newValue) {
+            print(newValue);
+            cubit.ChangeLocationCityValue(newValue);
           },
         );
       },

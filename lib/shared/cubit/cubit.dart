@@ -78,4 +78,34 @@ class AppCubit extends Cubit<AppStates> {
     dropDownValue = value!;
     emit(ChangeDropDownValueState());
   }
+
+  String locationcityvalue = 'Cairo';
+  List<String> location__item = [
+    "Cairo",
+    "Alex",
+    "Mansoura",
+    "tanta",
+    "mnofya",
+    "dkahlya",
+    "embaba",
+    "helwan",
+    "ma",
+    "hen",
+    "heaswan",
+    "helwsadasdasdan",
+    "helwfffffan",
+    "helwaggn",
+    "helwhhhhhan","hejjjjlwan",
+    "helwasfdasdfasan",
+    "helwcxvcvan",
+    "helwcxvcxan",
+    "helwcxvan",
+    "helwavxcxcvn","heladsfwan","hesadlwan","heldasdaswwdan","hewdasdlwan","hwdawdelwan","helwawdadn","helwdawdwan","helwdwadan","helwdwdawdan","hewdaalwan","hewdaawdlwan","helwadwadawn","helwadwan",
+  ];
+  void ChangeLocationCityValue(String? value) {
+    locationcityvalue = value!;
+    emit(ChangeLocationValueState());
+  }
+
+
 }
