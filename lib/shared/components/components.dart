@@ -80,7 +80,7 @@ class Textformfield_with_border extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.9,
-      height: 66,
+      height: 75,
       child: TextFormField(
         controller: controllerName,
         keyboardType: keyboardType,
