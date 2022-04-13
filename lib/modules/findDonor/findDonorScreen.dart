@@ -1,3 +1,4 @@
+import 'package:blood_bank/shared/components/components.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../shared/styles/colors.dart';
@@ -33,92 +34,7 @@ class FindDonorScreen extends StatelessWidget {
               child: ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (context, index) => Container(
-                        height: 110,
-                        width: double.infinity,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            CircleAvatar(
-                              backgroundImage: AssetImage(
-                                "assets/images/pp.png",
-                              ),
-                              radius: 40,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Text(
-                                    'Hesham ahmed',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 12,
-                                  ),
-                                  Text(
-                                    'Helwan,Cairo',
-                                    style: TextStyle(
-                                      color: greyColor2,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                    height: 28,
-                                    width: 85,
-                                    child: Center(
-                                      child: Text(
-                                        'Ask for help',
-                                        textScaleFactor: 1,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      color: mainColor,
-                                    ),
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                    height: 21,
-                                    width: 35,
-                                    decoration: BoxDecoration(
-                                        color: Colors.black26,
-                                        borderRadius:
-                                            BorderRadius.circular(26)),
-                                    child: Center(
-                                        child: Text(
-                                      "A+",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                  itemBuilder: (context, index) => FindDonorInfo("assets/images/pp.png", "Hesham ahmed", "helwan", "15mayo"),
                   separatorBuilder: (context, index) => const SizedBox(
                         height: 3,
                       ),

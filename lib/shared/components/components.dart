@@ -59,7 +59,6 @@ class Textformfield_with_border extends StatelessWidget {
     required this.num_border,
     this.suffixFunction,
     required this.validatorText,
-
     required this.haveIcon,
     this.iconName,
   });
@@ -108,24 +107,27 @@ class Textformfield_with_border extends StatelessWidget {
             borderSide: const BorderSide(color: Colors.black26, width: 3.0),
             borderRadius: BorderRadius.circular(num_border),
           ),
-          suffixIcon: (haveIcon == true) ? (isPasswordField == true ?  IconButton(
-            onPressed: () {
-              suffixFunction!();
-            },
-            icon: Icon(
-              obsecure == true ? Icons.lock : Icons.lock_open,
-              color: Colors.deepOrange,
-              size: 35,
-            ),
-          ) : Padding(
-            padding: const EdgeInsets.only(
-                right: 10, bottom: 4),
-            child: Image.asset(
-              iconName!,
-              width: 10,
-              height: 15,
-            ),
-          )) : null,
+          suffixIcon: (haveIcon == true)
+              ? (isPasswordField == true
+                  ? IconButton(
+                      onPressed: () {
+                        suffixFunction!();
+                      },
+                      icon: Icon(
+                        obsecure == true ? Icons.lock : Icons.lock_open,
+                        color: Colors.deepOrange,
+                        size: 35,
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(right: 10, bottom: 4),
+                      child: Image.asset(
+                        iconName!,
+                        width: 10,
+                        height: 15,
+                      ),
+                    ))
+              : null,
         ),
       ),
     );
@@ -975,6 +977,106 @@ class ProfileButton extends StatelessWidget {
                     ),
                   ],
                 ),
+        ),
+      ),
+    );
+  }
+}
+
+class FindDonorInfo extends StatelessWidget {
+  FindDonorInfo(this.imageLink, this.name, this.governorate, this.city,
+      {Key? key})
+      : super(key: key);
+  late String imageLink;
+  late String name;
+  late String governorate;
+  late String city;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Container(
+        height: 110,
+        width: double.infinity,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            CircleAvatar(
+              backgroundImage: AssetImage(
+                imageLink,
+              ),
+              radius: 40,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children:  [
+                  Text(
+                    name,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    '$governorate,$city',
+                    style: TextStyle(
+                      color: greyColor2,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    height: 28,
+                    width: 85,
+                    child: Center(
+                      child: Text(
+                        'Ask for help',
+                        textScaleFactor: 1,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      color: mainColor,
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    height: 21,
+                    width: 35,
+                    decoration: BoxDecoration(
+                        color: Colors.black26,
+                        borderRadius: BorderRadius.circular(26)),
+                    child: Center(
+                        child: Text(
+                      "A+",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    )),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
