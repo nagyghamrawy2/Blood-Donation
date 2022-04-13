@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'dart:io';
 import 'package:blood_bank/modules/add_request/addRequest.dart';
 import 'package:blood_bank/modules/education/education.dart';
 import 'package:blood_bank/modules/home/homeScreen.dart';
@@ -7,6 +8,7 @@ import 'package:blood_bank/modules/request/requestScreen.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
@@ -105,6 +107,19 @@ class AppCubit extends Cubit<AppStates> {
   void ChangeLocationCityValue(String? value) {
     locationcityvalue = value!;
     emit(ChangeLocationValueState());
+  }
+
+  ImagePicker a=new ImagePicker();
+  dynamic x;
+  void CameraImage()async{
+    dynamic b =await a.pickImage(source: ImageSource.camera);
+    x = File(b.path);
+    emit(ChangeCameraValueState());
+  }
+  void GalleryImage()async{
+    dynamic b =await a.pickImage(source: ImageSource.gallery);
+    x = File(b.path);
+    emit(ChangeGalleryValueState());
   }
 
 

@@ -11,7 +11,7 @@ import '../Login_Screen/login.dart';
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key}) : super(key: key);
 
-  var firstName = TextEditingController();
+  var name = TextEditingController();
   var lastName = TextEditingController();
   var emailAddress = TextEditingController();
   var password = TextEditingController();
@@ -70,31 +70,11 @@ class SignUpScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             SignupTextField(
-                              hintText: 'Enter your first name',
-                              text: 'First Name',
-                              controller: firstName,
+                              hintText: 'Enter your name',
+                              text: 'Name',
+                              controller: name,
                               keyboardtype: TextInputType.text,
                               validatorText: 'Please enter your first name',
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            SignupTextField(
-                              hintText: 'Enter your last name',
-                              text: 'Last Name',
-                              controller: lastName,
-                              keyboardtype: TextInputType.text,
-                              validatorText: 'Please enter your last name',
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            SignupTextField(
-                              hintText: 'Enter your city',
-                              text: 'City',
-                              controller: city,
-                              keyboardtype: TextInputType.text,
-                              validatorText: 'Please enter your city',
                             ),
                             const SizedBox(
                               height: 10,
@@ -137,205 +117,12 @@ class SignUpScreen extends StatelessWidget {
                               },
                             ),
                             const SizedBox(
-                              height: 10,
-                            ),
-                            SignupTextField(
-                              hintText: 'Enter your phone number',
-                              text: 'Phone',
-                              controller: phone,
-                              keyboardtype: TextInputType.phone,
-                              validatorText: 'Please enter your phone number',
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            SignupTextField(
-                              hintText: 'Enter your location',
-                              text: 'location',
-                              controller: location,
-                              keyboardtype: TextInputType.text,
-                              validatorText: 'Please enter your location',
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                                width: double.infinity,
-                                height: 100,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      "Birth Date",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 4,
-                                    ),
-                                    Flexible(
-                                      fit: FlexFit.tight,
-                                      flex: 1,
-                                      child: TextFormField(
-                                        readOnly: true,
-                                        keyboardType: TextInputType.datetime,
-                                        controller: birthDate,
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'Date must not be empty';
-                                          } else {
-                                            birthDate.text = value;
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          focusColor: Colors.green,
-                                          focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(10),
-                                              borderSide: const BorderSide(
-                                                color: greyColor,
-                                              )),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                            BorderRadius.circular(10),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                                color: Colors.red, width: 1),
-                                            borderRadius:
-                                            BorderRadius.circular(20),
-                                          ),
-                                          hintText: "Date",
-                                          focusedErrorBorder:
-                                          OutlineInputBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(10),
-                                          ),
-                                          suffixIcon: const Icon(
-                                            Icons.calendar_today,
-                                          ),
-                                        ),
-                                        onTap: () {
-                                          showDatePicker(
-                                            context: context,
-                                            initialDate: DateTime.now(),
-                                            firstDate: DateTime(1900),
-                                            lastDate:
-                                            DateTime.parse('2025-05-05'),
-                                          ).then((value) {
-                                            birthDate.text = DateFormat.yMMMd()
-                                                .format(value!);
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: const Text(
-                                "Blood type",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            DropDownCustom(),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: const Text(
-                                "City",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            LocationCityCustom(),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: const Text(
-                                "Region",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            LocationRegionCustom(),
-                            const SizedBox(
-                              height: 10,
-                            ),
-
-                            SignupTextField(
-                              hintText: 'Enter your Weight',
-                              text: 'Weight',
-                              controller: weight,
-                              keyboardtype: TextInputType.number,
-                              validatorText: 'Please enter your weight',
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            SignupTextField(
-                              hintText: 'Enter your Height',
-                              text: 'Height',
-                              controller: height,
-                              keyboardtype: TextInputType.number,
-                              validatorText: 'Please enter your height',
-                            ),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5.0),
-                                  child: Checkbox(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                                    ),
-                                    activeColor: mainColor,
-                                    value: cubit.policyTerms,
-                                    onChanged: (value) {
-                                      cubit.acceptPolicy(value!);
-                                    },
-                                  ),
-                                ),
-                                const Text('I accept the policy and terms',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold)),
-                              ],
-                            ),
-                            const SizedBox(
                               height: 20,
                             ),
                             Buttons_without_icon(
                               num_hieght:
                               MediaQuery.of(context).size.height * 0.06,
-                              text_button_name: 'Sign up',
+                              text_button_name: 'Continue',
                               button_color: mainColor,
                               num_border: 30,
                               num_fontsize: 20,
