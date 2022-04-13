@@ -23,8 +23,8 @@ class AddRequestScreen extends StatelessWidget {
         AppCubit cubit = AppCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xFFED394A),
-            title: Text(
+            backgroundColor: const Color(0xFFED394A),
+            title: const Text(
               "Request for blood",
               style: TextStyle(
                   fontSize: 18,
@@ -32,7 +32,7 @@ class AddRequestScreen extends StatelessWidget {
                   color: Colors.white),
             ),
             actions: [
-              Icon(
+              const Icon(
                 Icons.notifications,
                 color: Colors.white,
                 size: 30,
@@ -40,7 +40,7 @@ class AddRequestScreen extends StatelessWidget {
             ],
           ),
           body: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             children: [
               Requst_textformfield(
                   controller_Name: titleController,
@@ -67,11 +67,11 @@ class AddRequestScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Choose blood group",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 2,
                   ),
                   Card(
@@ -80,9 +80,9 @@ class AddRequestScreen extends StatelessWidget {
                       height: MediaQuery.of(context).size.height * 0.14,
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: GridView.builder(
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: cubit.blood_group_item.length,
-                        padding: EdgeInsets.fromLTRB(13, 10, 9, 5),
+                        padding: const EdgeInsets.fromLTRB(13, 10, 9, 5),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 4,
                             crossAxisSpacing:
@@ -194,7 +194,7 @@ class AddRequestScreen extends StatelessWidget {
               Buttons_without_icon(
                 num_hieght: MediaQuery.of(context).size.height * 0.07,
                 text_button_name: "Post a request",
-                button_color: Color(0xffED394A),
+                button_color: const Color(0xffED394A),
                 num_border: 12.r,
                 num_fontsize: 20.sp,
                 text_fontwwieght: FontWeight.normal,

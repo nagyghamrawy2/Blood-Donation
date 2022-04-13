@@ -74,6 +74,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                 text_label: 'Email address',
                 num_border: 10,
                 validatorText: 'Email address must not be empty',
+                haveIcon: false,
               ),
               const SizedBox(
                 height: 30,

@@ -40,18 +40,18 @@ class SignUpScreen extends StatelessWidget {
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.36,
-                      color: Color.fromRGBO(237, 57, 74, 1),
+                      color: const Color.fromRGBO(237, 57, 74, 1),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             'Hello,',
                             style: TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
-                          Text(
+                          const Text(
                             'Sign Up ',
                             style: TextStyle(
                                 fontSize: 30,
@@ -76,7 +76,7 @@ class SignUpScreen extends StatelessWidget {
                               keyboardtype: TextInputType.text,
                               validatorText: 'Please enter your first name',
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             SignupTextField(
@@ -86,7 +86,7 @@ class SignUpScreen extends StatelessWidget {
                               keyboardtype: TextInputType.text,
                               validatorText: 'Please enter your last name',
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             SignupTextField(
@@ -96,7 +96,7 @@ class SignUpScreen extends StatelessWidget {
                               keyboardtype: TextInputType.text,
                               validatorText: 'Please enter your city',
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             SignupTextField(
@@ -106,27 +106,37 @@ class SignUpScreen extends StatelessWidget {
                               keyboardtype: TextInputType.emailAddress,
                               validatorText: 'Please enter your email',
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
-                            PasswordTextField(
+                            SignupTextField(
                               hintText: 'Enter your password',
                               text: 'Password',
                               controller: password,
                               keyboardtype: TextInputType.emailAddress,
                               validatorText: 'Please enter your password',
+                              isPasswordField: true,
+                              secure: cubit.obsecure,
+                              suffixFunction: () {
+                                cubit.changePasswordStatus();
+                              },
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
-                            PasswordTextField(
+                            SignupTextField(
                               hintText: 'Enter password again',
                               text: 'Confirm Password',
                               controller: confirmPassword,
                               keyboardtype: TextInputType.visiblePassword,
                               validatorText: 'Please enter your password again',
+                              isPasswordField: true,
+                              secure: cubit.obsecure,
+                              suffixFunction: () {
+                                cubit.changePasswordStatus();
+                              },
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             SignupTextField(
@@ -136,7 +146,7 @@ class SignUpScreen extends StatelessWidget {
                               keyboardtype: TextInputType.phone,
                               validatorText: 'Please enter your phone number',
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             SignupTextField(
@@ -146,7 +156,7 @@ class SignUpScreen extends StatelessWidget {
                               keyboardtype: TextInputType.text,
                               validatorText: 'Please enter your location',
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Container(
@@ -155,9 +165,9 @@ class SignUpScreen extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       "Birth Date",
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 17,
                                       ),
@@ -206,7 +216,7 @@ class SignUpScreen extends StatelessWidget {
                                             borderRadius:
                                             BorderRadius.circular(10),
                                           ),
-                                          suffixIcon: Icon(
+                                          suffixIcon: const Icon(
                                             Icons.calendar_today,
                                           ),
                                         ),
@@ -226,14 +236,14 @@ class SignUpScreen extends StatelessWidget {
                                     ),
                                   ],
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Align(
                               alignment: Alignment.topLeft,
-                              child: Text(
+                              child: const Text(
                                 "Blood type",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 17,
                                 ),
@@ -243,14 +253,14 @@ class SignUpScreen extends StatelessWidget {
                               height: 4,
                             ),
                             DropDownCustom(),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Align(
                               alignment: Alignment.topLeft,
-                              child: Text(
+                              child: const Text(
                                 "City",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 17,
                                 ),
@@ -260,14 +270,14 @@ class SignUpScreen extends StatelessWidget {
                               height: 4,
                             ),
                             LocationCityCustom(),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Align(
                               alignment: Alignment.topLeft,
-                              child: Text(
+                              child: const Text(
                                 "Region",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 17,
                                 ),
@@ -277,7 +287,7 @@ class SignUpScreen extends StatelessWidget {
                               height: 4,
                             ),
                             LocationRegionCustom(),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
 
@@ -288,7 +298,7 @@ class SignUpScreen extends StatelessWidget {
                               keyboardtype: TextInputType.number,
                               validatorText: 'Please enter your weight',
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             SignupTextField(
@@ -303,6 +313,9 @@ class SignUpScreen extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5.0),
                                   child: Checkbox(
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                                    ),
                                     activeColor: mainColor,
                                     value: cubit.policyTerms,
                                     onChanged: (value) {
@@ -310,13 +323,13 @@ class SignUpScreen extends StatelessWidget {
                                     },
                                   ),
                                 ),
-                                Text('I accept the policy and terms',
+                                const Text('I accept the policy and terms',
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Buttons_without_icon(
@@ -328,7 +341,7 @@ class SignUpScreen extends StatelessWidget {
                               num_fontsize: 20,
                               text_fontwwieght: FontWeight.normal,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                           ],

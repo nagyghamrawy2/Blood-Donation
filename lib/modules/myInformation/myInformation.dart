@@ -49,12 +49,12 @@ class MyInformationScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 40.0,top: 10),
                     child: Column(
-                      children: [
+                      children: const [
                         CircleAvatar(
                           radius: 90,
                           backgroundImage: AssetImage('assets/images/pp.png'),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 10,
                         ),
                         Text(

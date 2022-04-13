@@ -59,6 +59,9 @@ class Textformfield_with_border extends StatelessWidget {
     required this.num_border,
     this.suffixFunction,
     required this.validatorText,
+
+    required this.haveIcon,
+    this.iconName,
   });
 
   late TextEditingController controllerName;
@@ -70,6 +73,9 @@ class Textformfield_with_border extends StatelessWidget {
   late double num_border;
   late String validatorText;
   Function? suffixFunction;
+
+  late bool haveIcon;
+  String? iconName;
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +97,9 @@ class Textformfield_with_border extends StatelessWidget {
           hintStyle: const TextStyle(fontSize: 16),
           labelText: text_label,
           labelStyle: const TextStyle(
-              fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black,
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
           ),
           border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.black26, width: 3.0),
@@ -100,18 +108,24 @@ class Textformfield_with_border extends StatelessWidget {
             borderSide: const BorderSide(color: Colors.black26, width: 3.0),
             borderRadius: BorderRadius.circular(num_border),
           ),
-          suffixIcon: isPasswordField == false
-              ? null
-              : IconButton(
+          suffixIcon: (haveIcon == true) ? (isPasswordField == true ?  IconButton(
             onPressed: () {
               suffixFunction!();
             },
             icon: Icon(
-              obsecure == true ? Icons.visibility : Icons.visibility_off,
-              color: Colors.black,
+              obsecure == true ? Icons.lock : Icons.lock_open,
+              color: Colors.deepOrange,
+              size: 35,
             ),
-          ),
-
+          ) : Padding(
+            padding: const EdgeInsets.only(
+                right: 10, bottom: 4),
+            child: Image.asset(
+              iconName!,
+              width: 10,
+              height: 15,
+            ),
+          )) : null,
         ),
       ),
     );
@@ -335,78 +349,11 @@ class Requst_textformfield extends StatelessWidget {
   }
 }
 
-class Textformfield_with_border_with_icon2 extends StatelessWidget {
-  Textformfield_with_border_with_icon2(
-      {required this.controller_Name,
-      required this.keyboardtype,
-      required this.obsecure,
-      required this.text_hint,
-      required this.text_label,
-      required this.num_border,
-      required this.img_right_padding,
-      required this.img_bottom_padding,
-      required this.icon_name,
-      required this.img_width,
-      required this.img_height});
-
-  late TextInputType keyboardtype;
-  late bool obsecure;
-  late String text_hint;
-  late String text_label;
-  late double num_border;
-  late double img_right_padding;
-  late double img_bottom_padding;
-  late String icon_name;
-  late double img_width;
-  late double img_height;
-  TextEditingController controller_Name;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.9,
-      height: 66,
-      child: TextFormField(
-        controller: controller_Name,
-        keyboardType: keyboardtype,
-        obscureText: obsecure,
-        decoration: InputDecoration(
-          hintText: text_hint,
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          hintStyle: const TextStyle(fontSize: 16),
-          labelText: text_label,
-          labelStyle: const TextStyle(
-              fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black),
-          border: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.black26, width: 3.0),
-              borderRadius: BorderRadius.circular(num_border)),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.black26, width: 3.0),
-            borderRadius: BorderRadius.circular(num_border),
-          ),
-          suffixIcon: Padding(
-            padding: EdgeInsets.only(
-                right: img_right_padding, bottom: img_bottom_padding),
-            child: Image.asset(
-              icon_name,
-              width: img_width,
-              height: img_height,
-            ),
-          ),
-        ),
-        onChanged: (value) {
-          // do something
-        },
-      ),
-    );
-  }
-}
-
 class SignupTextField extends StatelessWidget {
   SignupTextField({
     this.hintText = '',
     this.secure = false,
-    this.isPasswordField=false,
+    this.isPasswordField = false,
     required this.text,
     required this.controller,
     required this.keyboardtype,
@@ -482,7 +429,9 @@ class SignupTextField extends StatelessWidget {
                             suffixFunction!();
                           },
                           icon: Icon(
-                            secure == true ? Icons.visibility : Icons.visibility_off,
+                            secure == true
+                                ? Icons.visibility
+                                : Icons.visibility_off,
                             color: Colors.black,
                           ),
                         ),
@@ -558,9 +507,8 @@ class DropDownCustom extends StatelessWidget {
     );
   }
 }
+
 class LocationCityCustom extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -612,9 +560,8 @@ class LocationCityCustom extends StatelessWidget {
     );
   }
 }
+
 class LocationRegionCustom extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -1033,181 +980,3 @@ class ProfileButton extends StatelessWidget {
     );
   }
 }
-
-class PasswordTextField extends StatelessWidget {
-  PasswordTextField({
-    this.hintText = '',
-    this.secure = false,
-    required this.text,
-    required this.controller,
-    required this.keyboardtype,
-    required this.validatorText,
-  });
-
-  final String hintText;
-  final bool secure;
-  late String text;
-  late TextEditingController controller;
-  late TextInputType keyboardtype;
-  late String validatorText;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AppCubit(),
-      child: BlocConsumer<AppCubit, AppStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          AppCubit cubit = AppCubit.get(context);
-          return Container(
-              width: double.infinity,
-              height: 100,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    text,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  Flexible(
-                    fit: FlexFit.tight,
-                    flex: 1,
-                    child: TextFormField(
-                      obscureText: cubit.obsecure,
-                      controller: controller,
-                      keyboardType: keyboardtype,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return '$validatorText';
-                        }
-                      },
-                      decoration: InputDecoration(
-                        focusColor: Colors.green,
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(
-                              color: greyColor,
-                            )),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide:
-                          const BorderSide(color: Colors.red, width: 1),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        hintText: hintText,
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            cubit.changePasswordStatus();
-                          },
-                          icon: const Icon(
-                            Icons.remove_red_eye_outlined,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ));
-        },
-      ),
-    );
-  }
-}//never used
-class Textformfield2_with_border_with_icon extends StatelessWidget {
-  Textformfield2_with_border_with_icon(
-      {required this.controller_Name,
-        required this.text_name,
-        required this.num_width,
-        required this.num_height,
-        required this.keyboardtype,
-        required this.obsecure,
-        required this.text_hint,
-        required this.img_right_padding,
-        required this.img_bottom_padding,
-        required this.icon_name,
-        required this.img_width,
-        required this.img_height});
-
-  late String text_name;
-  late double num_width;
-  late double num_height;
-  late TextInputType keyboardtype;
-  late bool obsecure;
-  late String text_hint;
-  late double img_right_padding;
-  late double img_bottom_padding;
-  late String icon_name;
-  late double img_width;
-  late double img_height;
-  TextEditingController controller_Name;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Align(
-          alignment: Alignment.topLeft,
-          child: Container(
-            child: Text(
-              text_name,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: Container(
-            width: MediaQuery.of(context).size.width * num_width,
-            height: num_height,
-            child: TextField(
-              controller: controller_Name,
-              keyboardType: keyboardtype,
-              obscureText: obsecure,
-              decoration: InputDecoration(
-                hintText: text_hint,
-                contentPadding: const EdgeInsets.all(15),
-                hintStyle: const TextStyle(fontSize: 16),
-                border: OutlineInputBorder(
-                    borderSide:
-                    const BorderSide(color: Colors.black12, width: 2.0),
-                    borderRadius: BorderRadius.circular(10)),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                  const BorderSide(color: Colors.black26, width: 2.0),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                suffixIcon: Padding(
-                  padding: EdgeInsets.only(
-                      right: img_right_padding, bottom: img_bottom_padding),
-                  child: Image.asset(
-                    icon_name,
-                    width: img_width,
-                    height: img_height,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-} //never used

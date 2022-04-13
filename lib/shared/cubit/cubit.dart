@@ -25,7 +25,7 @@ class AppCubit extends Cubit<AppStates> {
     const HomeScreen(),
     const RequestScreen(),
     // const EducationScreen(),
-    const ProfileScreen(),
+    //const ProfileScreen(),
   ];
 
   List<String> titles = [

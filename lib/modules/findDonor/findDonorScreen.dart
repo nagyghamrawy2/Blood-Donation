@@ -8,11 +8,13 @@ class FindDonorScreen extends StatelessWidget {
   var scaffoldkey = GlobalKey<ScaffoldState>();
   bool isButtomSheetShown = false;
 
+  FindDonorScreen({Key? key}) : super(key: key);
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldkey,
       appBar: AppBar(
-        backgroundColor: mainColor,
         title: Text('Find a donor'),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
@@ -29,10 +31,9 @@ class FindDonorScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: ListView.separated(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (context, index) =>
-                      Container(
+                  itemBuilder: (context, index) => Container(
                         height: 110,
                         width: double.infinity,
                         child: Row(
@@ -40,7 +41,8 @@ class FindDonorScreen extends StatelessWidget {
                           children: [
                             CircleAvatar(
                               backgroundImage: AssetImage(
-                                  "assets/images/pp.png"),
+                                "assets/images/pp.png",
+                              ),
                               radius: 40,
                             ),
                             const SizedBox(
@@ -50,7 +52,7 @@ class FindDonorScreen extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
+                                children: const [
                                   Text(
                                     'Hesham ahmed',
                                     style: TextStyle(
@@ -62,12 +64,6 @@ class FindDonorScreen extends StatelessWidget {
                                   ),
                                   Text(
                                     'Helwan,Cairo',
-                                    style: TextStyle(
-                                      color: greyColor2,
-                                    ),
-                                  ),
-                                  Text(
-                                    '30 Km',
                                     style: TextStyle(
                                       color: greyColor2,
                                     ),
@@ -95,7 +91,7 @@ class FindDonorScreen extends StatelessWidget {
                                     ),
                                     decoration: BoxDecoration(
                                       borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
+                                          BorderRadius.all(Radius.circular(10)),
                                       color: mainColor,
                                     ),
                                   ),
@@ -107,15 +103,15 @@ class FindDonorScreen extends StatelessWidget {
                                     width: 35,
                                     decoration: BoxDecoration(
                                         color: Colors.black26,
-                                        borderRadius: BorderRadius.circular(
-                                            26)),
+                                        borderRadius:
+                                            BorderRadius.circular(26)),
                                     child: Center(
                                         child: Text(
-                                          "A+",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        )),
+                                      "A+",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    )),
                                   ),
                                 ),
                               ],
@@ -123,11 +119,10 @@ class FindDonorScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                  separatorBuilder: (context, index) =>
-                  const SizedBox(
-                    height: 3,
-                  ),
-                  itemCount: 20),
+                  separatorBuilder: (context, index) => const SizedBox(
+                        height: 3,
+                      ),
+                  itemCount: 20,),
             ),
           ],
         ),
@@ -141,18 +136,15 @@ class FindDonorScreen extends StatelessWidget {
               Navigator.pop(context);
               isButtomSheetShown = false;
             } else {
-              scaffoldkey.currentState?.showBottomSheet((context) =>
-                  Container(
+              scaffoldkey.currentState?.showBottomSheet((context) => Container(
                     height: 275,
-                    decoration: BoxDecoration(
-                        color: Color.fromRGBO(182, 182, 182, 0.45)),
+                    color: greyColor,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 6, horizontal: 50),
+                      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 50),
                       child: Column(
                         children: [
                           Align(
-                            alignment: Alignment.topCenter,
+                            alignment: Alignment.topCenter,//eh lzmtha ??
                             child: Container(
                               width: double.infinity,
                               child: Text(
@@ -160,7 +152,8 @@ class FindDonorScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
-                                    color: Color.fromRGBO(237, 57, 74, 1.0)),
+                                    color: mainColor,
+                                ),
                               ),
                             ),
                           ),
@@ -183,15 +176,23 @@ class FindDonorScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              items: ["A+", "B+", "A-", "B-","AB+","AB-","O+","O-"]
-                                  .map((label) =>
-                                  DropdownMenuItem(
-                                    child: Text(
-                                      label,
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    value: label,
-                                  ))
+                              items: [
+                                "A+",
+                                "B+",
+                                "A-",
+                                "B-",
+                                "AB+",
+                                "AB-",
+                                "O+",
+                                "O-"
+                              ]
+                                  .map((label) => DropdownMenuItem(
+                                        child: Text(
+                                          label,
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        value: label,
+                                      ))
                                   .toList(),
                               onChanged: (value) {
                                 bloodtype = value.toString();
@@ -210,7 +211,8 @@ class FindDonorScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
-                                    color: Color.fromRGBO(237, 57, 74, 1.0)),
+                                    color: mainColor,
+                                ),
                               ),
                             ),
                           ),
@@ -234,14 +236,13 @@ class FindDonorScreen extends StatelessWidget {
                                 ),
                               ),
                               items: ["Cairo", "Alex", "Tanta", "helwan"]
-                                  .map((label) =>
-                                  DropdownMenuItem(
-                                    child: Text(
-                                      label,
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    value: label,
-                                  ))
+                                  .map((label) => DropdownMenuItem(
+                                        child: Text(
+                                          label,
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        value: label,
+                                      ))
                                   .toList(),
                               onChanged: (value) {
                                 bloodtype = value.toString();
@@ -260,7 +261,8 @@ class FindDonorScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
-                                    color: Color.fromRGBO(237, 57, 74, 1.0)),
+                                    color: mainColor,
+                                ),
                               ),
                             ),
                           ),
@@ -284,14 +286,13 @@ class FindDonorScreen extends StatelessWidget {
                                 ),
                               ),
                               items: ["15 mayo", "ma3sara", "masaken"]
-                                  .map((label) =>
-                                  DropdownMenuItem(
-                                    child: Text(
-                                      label,
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    value: label,
-                                  ))
+                                  .map((label) => DropdownMenuItem(
+                                        child: Text(
+                                          label,
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        value: label,
+                                      ))
                                   .toList(),
                               onChanged: (value) {
                                 bloodtype = value.toString();
@@ -305,7 +306,7 @@ class FindDonorScreen extends StatelessWidget {
               isButtomSheetShown = true;
             }
           },
-          backgroundColor: Color.fromRGBO(237, 57, 74, 1.0),
+          backgroundColor: mainColor,
           child: const Icon(Icons.filter_alt_outlined),
         ),
       ),

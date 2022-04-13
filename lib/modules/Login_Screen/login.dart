@@ -3,17 +3,10 @@ import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import '../../shared/styles/colors.dart';
 
-class LoginScreen extends StatefulWidget {
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
+class LoginScreen extends StatelessWidget {
 
-class _LoginScreenState extends State<LoginScreen> {
-  var emailcontroller = TextEditingController();
-  var passwordcontroller = TextEditingController();
-
-  bool value = false;
-  void initState(){}
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +18,17 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: 280,
-                color: Color.fromRGBO(237, 57, 74, 1),
+                color: mainColor,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text(
                       'Welcome back,',
                       style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                     Text(
                       'Login !',
@@ -48,70 +42,72 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               clipper: CustomClipPath(),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
-            Textformfield_with_border_with_icon2(
-                controller_Name: emailcontroller,
-                keyboardtype: TextInputType.emailAddress,
-                obsecure: false,
-                text_hint: 'Enter your email address',
-                text_label: 'Email adderss',
-                num_border: 10,
-                img_right_padding: 5,
-                img_bottom_padding: 3,
-                icon_name: 'assets/images/emaillogin.png',
-                img_width: 50,
-                img_height: 20),
-            SizedBox(
+            Textformfield_with_border(
+              controllerName: emailcontroller,
+              keyboardType: TextInputType.emailAddress,
+              hintText: 'Enter your Email address',
+              text_label: 'Email address',
+              num_border: 10,
+              haveIcon: true,
+              iconName: 'assets/images/emaillogin.png',
+              validatorText: 'Email address must not empty',
+            ),
+            const SizedBox(
               height: 50,
             ),
-            Textformfield_with_border_with_icon2(
-                controller_Name: passwordcontroller,
-                keyboardtype: TextInputType.visiblePassword,
-                obsecure: true,
-                text_hint: 'Enter your Password',
-                text_label: 'Password',
-                num_border: 10,
-                img_right_padding: 5,
-                img_bottom_padding: 3,
-                icon_name: 'assets/images/lock.png',
-                img_width: 50,
-                img_height: 20),
+            Textformfield_with_border(
+              controllerName: passwordcontroller,
+              keyboardType: TextInputType.visiblePassword,
+              obsecure: true,
+              hintText: 'Enter your Password',
+              text_label: 'Password',
+              num_border: 10,
+              haveIcon: true,
+              isPasswordField: true,
+              validatorText: 'Password must not empty',
+              suffixFunction: () {},
+            ),
             Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 15.0),
                   child: Checkbox(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)),),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
                     activeColor: mainColor,
-                    value: this.value,
+                    value: true,
                     onChanged: (value) {
-                      setState(() {
-                        this.value = value!;
-                      });
+                      // setState(() {
+                      //   this.value = value!;
+                      // });
                     },
                   ),
                 ),
-                Expanded(
-                  child:
-                      Text('Remember me', style: TextStyle(color:mainColor,fontWeight: FontWeight.bold)),
+                const Expanded(
+                  child: Text('Remember me',
+                      style: const TextStyle(
+                          color: mainColor, fontWeight: FontWeight.bold)),
                 ),
                 MaterialButton(
                   onPressed: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 5),
+                  child: const Padding(
+                    padding: EdgeInsets.only(right: 5),
                     child: Align(
                         alignment: Alignment.centerRight,
                         child: Text(
                           'Forget password ?',
-                          style: TextStyle(color:mainColor,fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: mainColor, fontWeight: FontWeight.bold),
                         )),
                   ),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 60,
             ),
             Padding(
