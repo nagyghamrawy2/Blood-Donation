@@ -376,7 +376,7 @@ class SignupTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        height: 100,
+        height: MediaQuery.of(context).size.height*0.12,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -387,8 +387,8 @@ class SignupTextField extends StatelessWidget {
                 fontSize: 17,
               ),
             ),
-            const SizedBox(
-              height: 4,
+             SizedBox(
+              height: MediaQuery.of(context).size.height * 0.008,
             ),
             Flexible(
               fit: FlexFit.tight,

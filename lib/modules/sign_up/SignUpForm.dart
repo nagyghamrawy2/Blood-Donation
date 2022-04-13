@@ -3,7 +3,7 @@ import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../shared/components/components.dart';
 import '../../shared/styles/colors.dart';
 import '../Login_Screen/login.dart';
@@ -16,13 +16,6 @@ class SignUpScreen extends StatelessWidget {
   var emailAddress = TextEditingController();
   var password = TextEditingController();
   var confirmPassword = TextEditingController();
-  var phone = TextEditingController();
-  var location = TextEditingController();
-  var birthDate = TextEditingController();
-  var bloodType = TextEditingController();
-  var height = TextEditingController();
-  var weight = TextEditingController();
-  var city = TextEditingController();
   bool value = false;
 
 
@@ -39,22 +32,22 @@ class SignUpScreen extends StatelessWidget {
                   ClipPath(
                     child: Container(
                       width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height * 0.36,
+                      height: 450.h, //MediaQuery.of(context).size.height * 0.36,
                       color: const Color.fromRGBO(237, 57, 74, 1),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
+                           Text(
                             'Hello,',
                             style: TextStyle(
-                                fontSize: 30,
+                                fontSize: 50.sp,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
-                          const Text(
+                           Text(
                             'Sign Up ',
                             style: TextStyle(
-                                fontSize: 30,
+                                fontSize: 50.sp,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
@@ -66,7 +59,7 @@ class SignUpScreen extends StatelessWidget {
                   Form(
                       key: key,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.08),
                         child: Column(
                           children: [
                             SignupTextField(
@@ -76,8 +69,8 @@ class SignUpScreen extends StatelessWidget {
                               keyboardtype: TextInputType.text,
                               validatorText: 'Please enter your first name',
                             ),
-                            const SizedBox(
-                              height: 10,
+                             SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.008,
                             ),
                             SignupTextField(
                               hintText: 'Enter your email',
@@ -86,8 +79,8 @@ class SignUpScreen extends StatelessWidget {
                               keyboardtype: TextInputType.emailAddress,
                               validatorText: 'Please enter your email',
                             ),
-                            const SizedBox(
-                              height: 10,
+                             SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.008,
                             ),
                             SignupTextField(
                               hintText: 'Enter your password',
@@ -101,8 +94,8 @@ class SignUpScreen extends StatelessWidget {
                                 cubit.changePasswordStatus();
                               },
                             ),
-                            const SizedBox(
-                              height: 10,
+                             SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.008,
                             ),
                             SignupTextField(
                               hintText: 'Enter password again',
@@ -116,8 +109,8 @@ class SignUpScreen extends StatelessWidget {
                                 cubit.changePasswordStatus();
                               },
                             ),
-                            const SizedBox(
-                              height: 20,
+                             SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.02,
                             ),
                             Buttons_without_icon(
                               num_hieght:
@@ -128,8 +121,8 @@ class SignUpScreen extends StatelessWidget {
                               num_fontsize: 20,
                               text_fontwwieght: FontWeight.normal,
                             ),
-                            const SizedBox(
-                              height: 20,
+                             SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.02,
                             ),
                           ],
                         ),
