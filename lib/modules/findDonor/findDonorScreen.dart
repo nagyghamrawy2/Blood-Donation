@@ -32,11 +32,11 @@ class FindDonorScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: ListView.separated(
-                  physics: const NeverScrollableScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (context, index) => FindDonorInfo("assets/images/pp.png", "Hesham ahmed", "helwan", "15mayo"),
+                  itemBuilder: (context, index) => FindDonorInfo("assets/images/pp.png", "Hesham ahmed", "helwan", "cairo",'A+'),
                   separatorBuilder: (context, index) => const SizedBox(
-                        height: 3,
+                        height: 30,
                       ),
                   itemCount: 20,),
             ),

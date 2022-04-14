@@ -458,6 +458,8 @@ class DropDownCustom extends StatelessWidget {
     "AB-"
   ];
 
+  DropDownCustom({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -511,6 +513,8 @@ class DropDownCustom extends StatelessWidget {
 }
 
 class LocationCityCustom extends StatelessWidget {
+  const LocationCityCustom({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -564,6 +568,8 @@ class LocationCityCustom extends StatelessWidget {
 }
 
 class LocationRegionCustom extends StatelessWidget {
+  const LocationRegionCustom({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -984,23 +990,23 @@ class ProfileButton extends StatelessWidget {
 }
 
 class FindDonorInfo extends StatelessWidget {
-  FindDonorInfo(this.imageLink, this.name, this.governorate, this.city,
+  FindDonorInfo(this.imageLink, this.name, this.governorate, this.city,this.bloodType,
       {Key? key})
       : super(key: key);
   late String imageLink;
   late String name;
   late String governorate;
   late String city;
+  late String bloodType;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Container(
-        height: 110,
+        height: 80,
         width: double.infinity,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             CircleAvatar(
               backgroundImage: AssetImage(
@@ -1011,39 +1017,39 @@ class FindDonorInfo extends StatelessWidget {
             const SizedBox(
               width: 10,
             ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children:  [
-                  Text(
-                    name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:  [
+                const SizedBox(height: 10,),
+                Text(
+                  name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
-                  SizedBox(
-                    height: 12,
+                ),
+                const Spacer(),
+                Text(
+                  '$governorate,$city',
+                  style: const TextStyle(
+                    color: greyColor2,
+                    fontSize: 14,
                   ),
-                  Text(
-                    '$governorate,$city',
-                    style: TextStyle(
-                      color: greyColor2,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(height: 10,),
+              ],
             ),
+            const Spacer(),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                GestureDetector(
+                InkWell(
                   onTap: () {},
                   child: Container(
                     height: 28,
                     width: 85,
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         'Ask for help',
                         textScaleFactor: 1,
@@ -1052,13 +1058,13 @@ class FindDonorInfo extends StatelessWidget {
                         ),
                       ),
                     ),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: mainColor,
                     ),
                   ),
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () {},
                   child: Container(
                     height: 21,
@@ -1068,8 +1074,8 @@ class FindDonorInfo extends StatelessWidget {
                         borderRadius: BorderRadius.circular(26)),
                     child: Center(
                         child: Text(
-                      "A+",
-                      style: TextStyle(
+                          bloodType,
+                      style: const TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     )),
                   ),
