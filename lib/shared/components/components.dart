@@ -374,74 +374,71 @@ class SignupTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: double.infinity,
-        height: MediaQuery.of(context).size.height*0.12,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              text,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 17,
-              ),
-            ),
-             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.008,
-            ),
-            Flexible(
-              fit: FlexFit.tight,
-              flex: 1,
-              child: TextFormField(
-                obscureText: secure,
-                controller: controller,
-                keyboardType: keyboardtype,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return validatorText;
-                  }
-                },
-                decoration: InputDecoration(
-                  focusColor: Colors.green,
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: greyColor,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.red, width: 1),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  hintText: hintText,
-                  suffixIcon: isPasswordField == false
-                      ? null
-                      : IconButton(
-                          onPressed: () {
-                            suffixFunction!();
-                          },
-                          icon: Icon(
-                            secure == true
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: Colors.black,
-                          ),
-                        ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          text,
+          style:  TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 27.sp,
+          ),
+        ),
+         SizedBox(
+          height: MediaQuery.of(context).size.height * 0.008,
+        ),
+        Flexible(
+          fit: FlexFit.tight,
+          flex: 0,
+          child: TextFormField(
+            obscureText: secure,
+            controller: controller,
+            keyboardType: keyboardtype,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return validatorText;
+              }
+            },
+            decoration: InputDecoration(
+              focusColor: Colors.green,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                  color: greyColor,
                 ),
               ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.red, width: 1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              hintText: hintText,
+              suffixIcon: isPasswordField == false
+                  ? null
+                  : IconButton(
+                      onPressed: () {
+                        suffixFunction!();
+                      },
+                      icon: Icon(
+                        secure == true
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Colors.black,
+                      ),
+                    ),
             ),
-          ],
-        ));
+          ),
+        ),
+      ],
+    );
   }
 }
 
@@ -467,6 +464,11 @@ class DropDownCustom extends StatelessWidget {
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
         return DropdownButtonFormField(
+          validator: (String? value) {
+            if (value == "no blood selected") {
+              return "Please select your blood type";
+            }
+          },
           decoration: InputDecoration(
             focusColor: Colors.green,
             focusedBorder: OutlineInputBorder(
@@ -494,7 +496,7 @@ class DropDownCustom extends StatelessWidget {
 
           // Down Arrow Icon
           icon: const Icon(Icons.keyboard_arrow_down),
-          items: cubit.blood_group_item.map((String items) {
+          items: cubit.drop_down_blood_group_item.map((String items) {
             return DropdownMenuItem(
               value: items,
               child: Text(items),
@@ -522,6 +524,11 @@ class LocationCityCustom extends StatelessWidget {
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
         return DropdownButtonFormField(
+          validator: (String? value) {
+            if (value == "no city") {
+              return "Please choose your governorate";
+            }
+          },
           decoration: InputDecoration(
             focusColor: Colors.green,
             focusedBorder: OutlineInputBorder(
@@ -577,6 +584,11 @@ class LocationRegionCustom extends StatelessWidget {
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
         return DropdownButtonFormField(
+          validator: (String? value) {
+            if (value == "no city") {
+              return "Please choose your governorate";
+            }
+          },
           decoration: InputDecoration(
             focusColor: Colors.green,
             focusedBorder: OutlineInputBorder(

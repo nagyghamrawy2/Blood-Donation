@@ -7,11 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignUpScreen2 extends StatelessWidget {
   TextEditingController phone = new TextEditingController();
   TextEditingController birthDate = new TextEditingController();
-
+  var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -25,22 +26,22 @@ class SignUpScreen2 extends StatelessWidget {
                   ClipPath(
                     child: Container(
                       width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height * 0.36,
+                      height: 450.h,
                       color: const Color.fromRGBO(237, 57, 74, 1),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
+                           Text(
                             'Continue,',
                             style: TextStyle(
-                                fontSize: 30,
+                                fontSize: 50.sp,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
-                          const Text(
+                           Text(
                             'Sign Up ',
                             style: TextStyle(
-                                fontSize: 30,
+                                fontSize: 50.sp,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
@@ -50,11 +51,29 @@ class SignUpScreen2 extends StatelessWidget {
                     clipper: CustomClipPath(),
                   ),
                   Form(
-                    key: key,
+                    key: formKey,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      padding: EdgeInsets.symmetric(horizontal: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.08),
                       child: Column(
                         children: [
+                          Container(
+                            width: 300.w,
+                            height: 7.h,
+                            color: Colors.red[200],
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              width: 100.w ,
+                              height: 7.h,
+                              color: mainColor,
+                            ),
+                          ),
+                          SizedBox(height: MediaQuery
+                              .of(context)
+                              .size
+                              .height * 0.008,),
                           SignupTextField(
                             hintText: 'Enter your phone number',
                             text: 'Phone Number',
@@ -62,135 +81,158 @@ class SignUpScreen2 extends StatelessWidget {
                             keyboardtype: TextInputType.phone,
                             validatorText: 'Please enter your phone number',
                           ),
-                          const SizedBox(
-                            height: 10,
+                           SizedBox(
+                            height: MediaQuery
+                                .of(context)
+                                .size
+                                .height * 0.008,
                           ),
-                          Container(
-                              width: double.infinity,
-                              height: 100,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    "Birth Date",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                               Text(
+                                "Birth Date",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 27.sp,
+                                ),
+                              ),
+                               SizedBox(
+                                height: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height * 0.008,
+                              ),
+                              TextFormField(
+                                readOnly: true,
+                                keyboardType: TextInputType.datetime,
+                                controller: birthDate,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Date must not be empty';
+                                  } else {
+                                    birthDate.text = value;
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                  focusColor: Colors.green,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                      borderSide: const BorderSide(
+                                        color: greyColor,
+                                      )),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      width: 1,
                                     ),
+                                    borderRadius:
+                                    BorderRadius.circular(10),
                                   ),
-                                  const SizedBox(
-                                    height: 4,
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Colors.red, width: 1),
+                                    borderRadius:
+                                    BorderRadius.circular(20),
                                   ),
-                                  Flexible(
-                                    fit: FlexFit.tight,
-                                    flex: 1,
-                                    child: TextFormField(
-                                      readOnly: true,
-                                      keyboardType: TextInputType.datetime,
-                                      controller: birthDate,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Date must not be empty';
-                                        } else {
-                                          birthDate.text = value;
-                                        }
-                                      },
-                                      decoration: InputDecoration(
-                                        focusColor: Colors.green,
-                                        focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(10),
-                                            borderSide: const BorderSide(
-                                              color: greyColor,
-                                            )),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                          BorderRadius.circular(10),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.red, width: 1),
-                                          borderRadius:
-                                          BorderRadius.circular(20),
-                                        ),
-                                        hintText: "Date",
-                                        focusedErrorBorder:
-                                        OutlineInputBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(10),
-                                        ),
-                                        suffixIcon: const Icon(
-                                          Icons.calendar_today,
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        showDatePicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                          firstDate: DateTime(1900),
-                                          lastDate:
-                                          DateTime.parse('2025-05-05'),
-                                        ).then((value) {
-                                          birthDate.text = DateFormat.yMMMd()
-                                              .format(value!);
-                                        });
-                                      },
-                                    ),
+                                  hintText: "Date",
+                                  focusedErrorBorder:
+                                  OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(10),
                                   ),
-                                ],
-                              )),
-                          const SizedBox(
-                            height: 10,
+                                  suffixIcon: const Icon(
+                                    Icons.calendar_today,
+                                  ),
+                                ),
+                                onTap: () {
+                                  showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime(1900),
+                                    lastDate:
+                                    DateTime.parse('2025-05-05'),
+                                  ).then((value) {
+                                    birthDate.text = DateFormat.yMMMd()
+                                        .format(value!);
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                           SizedBox(
+                            height: MediaQuery
+                                .of(context)
+                                .size
+                                .height * 0.008,
                           ),
                           Align(
                             alignment: Alignment.topLeft,
-                            child: const Text(
+                            child:  Text(
                               "Governorate",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 17,
+                                fontSize: 27.sp,
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 4,
+                           SizedBox(
+                            height: MediaQuery
+                                .of(context)
+                                .size
+                                .height * 0.005,
                           ),
                           LocationCityCustom(),
-                          const SizedBox(
-                            height: 10,
+                           SizedBox(
+                            height: MediaQuery
+                                .of(context)
+                                .size
+                                .height * 0.008,
                           ),
                           Align(
                             alignment: Alignment.topLeft,
-                            child: const Text(
+                            child:  Text(
                               "City",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 17,
+                                fontSize: 27.sp,
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 4,
+                          SizedBox(
+                            height: MediaQuery
+                                .of(context)
+                                .size
+                                .height * 0.005,
                           ),
                           LocationRegionCustom(),
-                          const SizedBox(
-                            height: 20,
+                          SizedBox(
+                            height: MediaQuery
+                                .of(context)
+                                .size
+                                .height * 0.02,
                           ),
-                          Buttons_without_icon(
-                            num_hieght:
-                            MediaQuery.of(context).size.height * 0.06,
-                            text_button_name: 'Continue',
-                            button_color: mainColor,
-                            num_border: 30,
-                            num_fontsize: 20,
-                            text_fontwwieght: FontWeight.normal,
+                          Padding(
+                            padding:  EdgeInsets.symmetric(horizontal: 50.w),
+                            child: Buttons_without_icon(
+                              function: () {
+                                if(formKey.currentState!.validate()){
+                                  print('done');
+                                }else{
+                                  print('not done');
+                                }
+                              },
+                              num_hieght:
+                              90.h,
+                              text_button_name: 'Next Step >',
+                              button_color: mainColor,
+                              num_border: 30,
+                              num_fontsize: 20,
+                              text_fontwwieght: FontWeight.normal,
+
+                            ),
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
+                          SizedBox(height: 10,)
                         ],
                       ),
                     ),
@@ -198,54 +240,6 @@ class SignUpScreen2 extends StatelessWidget {
                 ],
               ),
             )
-          // Center(
-          //   child: Column(
-          //     children: [
-          //       (cubit.x != null) ? CircleAvatar(
-          //         radius: 100,
-          //         backgroundImage: FileImage(cubit.x),
-          //         //Text
-          //       ) :
-          //       CircleAvatar(
-          //         radius: 100,
-          //         backgroundImage: AssetImage(
-          //             "assets/images/noImage.png"
-          //         ), //Text
-          //       ),
-          //       RaisedButton(
-          //         child: Text("pick"),
-          //         onPressed: () {
-          //           showDialog(
-          //             context: context,
-          //             builder: (context) =>
-          //                 AlertDialog(
-          //                   title: Text('Pick Image'),
-          //                   actions: [
-          //                     ElevatedButton(
-          //                         onPressed: () {
-          //                           cubit.GalleryImage();
-          //                           Navigator.pop(context);
-          //                         },
-          //                         child: Text('Gallery')),
-          //                     ElevatedButton(
-          //                         onPressed: () {
-          //                           cubit.CameraImage();
-          //                           Navigator.pop(context);
-          //                         },
-          //                         child: Text('Camera')),
-          //                     ElevatedButton(
-          //                         onPressed: () {
-          //                           Navigator.pop(context);
-          //                         },
-          //                         child: Text('Go Back'))
-          //                   ],
-          //                 ),
-          //           );
-          //         },
-          //       ),
-          //     ],
-          //   ),
-          // )
         );
       },
     );

@@ -83,15 +83,28 @@ class AppCubit extends Cubit<AppStates> {
     emit(ChangeactiveState());
   }
 
-  String dropDownValue = "A+";
+  String dropDownValue = "no blood selected";
+
+  List<String> drop_down_blood_group_item = [
+    'no blood selected',
+    "A+",
+    "A-",
+    "B+",
+    "B-",
+    "O+",
+    "O-",
+    "AB+",
+    "AB-"
+  ];
 
   void ChangeDropDownValue(String? value) {
     dropDownValue = value!;
     emit(ChangeDropDownValueState());
   }
 
-  String locationcityvalue = 'Cairo';
+  String locationcityvalue = 'no city selected';
   List<String> location__item = [
+    'no city selected',
     "Cairo",
     "Alex",
     "Mansoura",

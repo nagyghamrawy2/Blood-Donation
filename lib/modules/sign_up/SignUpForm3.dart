@@ -6,10 +6,12 @@ import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignUpScreen3 extends StatelessWidget {
   TextEditingController height = new TextEditingController();
   TextEditingController weight = new TextEditingController();
+  var formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -19,27 +21,27 @@ class SignUpScreen3 extends StatelessWidget {
         AppCubit cubit = AppCubit.get(context);
         return Scaffold(
             body: SingleChildScrollView(
-              child: Column(
-          children: [
+          child: Column(
+            children: [
               ClipPath(
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.36,
+                  height: 450.h,
                   color: const Color.fromRGBO(237, 57, 74, 1),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         'Hello,',
                         style: TextStyle(
-                            fontSize: 30,
+                            fontSize: 50.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
-                      const Text(
+                      Text(
                         'Sign Up ',
                         style: TextStyle(
-                            fontSize: 30,
+                            fontSize: 50.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
@@ -49,40 +51,92 @@ class SignUpScreen3 extends StatelessWidget {
                 clipper: CustomClipPath(),
               ),
               Form(
-                key: key,
+                key: formKey,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width * 0.08),
                   child: Column(
                     children: [
-                      (cubit.x != null)
-                          ? CircleAvatar(
-                              radius: 50,
+                      // (cubit.x != null)
+                      //     ? CircleAvatar(
+                      //         radius: 70.r,
+                      //         backgroundImage: FileImage(cubit.x),
+                      //         //Text
+                      //       )
+                      //     : CircleAvatar(
+                      //         radius: 70.r,
+                      //         backgroundImage: AssetImage(
+                      //             "assets/images/noImage.png"), //Text
+                      //       ),
+                       Container(
+                        height: 150,
+                        child: Stack(
+                          children: [
+                            (cubit.x != null)?
+                            CircleAvatar(
+                              radius: 90.r,
                               backgroundImage: FileImage(cubit.x),
-                              //Text
-                            )
-                          : CircleAvatar(
-                              radius: 50,
-                              backgroundImage: AssetImage(
-                                  "assets/images/noImage.png"), //Text
+                            ):CircleAvatar(
+                              radius: 90.r,
+                              backgroundImage: AssetImage("assets/images/pp.png"),
                             ),
+                            Positioned(
+                              right: 25.w,
+                              bottom: -10.h,
+
+                              child: IconButton(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: Text('Pick Image'),
+                                      actions: [
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              cubit.GalleryImage();
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text('Gallery')),
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              cubit.CameraImage();
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text('Camera')),
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text('Go Back'))
+                                      ],
+                                    ),
+                                  );
+                                },
+                                icon: Icon(Icons.camera_alt  , color: mainColor,size: 50.h,),
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      ) ,
                       Align(
                         alignment: Alignment.topLeft,
-                        child: const Text(
+                        child:  Text(
                           "Blood type",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 17,
+                            fontSize: 27.sp,
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 4,
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height*0.004,
                       ),
                       DropDownCustom(),
-                      const SizedBox(
-                        height: 10,
-                      ),
-
+                      SizedBox(height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.008,),
                       SignupTextField(
                         hintText: 'Enter your Weight',
                         text: 'Weight',
@@ -90,9 +144,10 @@ class SignUpScreen3 extends StatelessWidget {
                         keyboardtype: TextInputType.number,
                         validatorText: 'Please enter your weight',
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      SizedBox(height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.008,),
                       SignupTextField(
                         hintText: 'Enter your Height',
                         text: 'Height',
@@ -100,52 +155,26 @@ class SignUpScreen3 extends StatelessWidget {
                         keyboardtype: TextInputType.number,
                         validatorText: 'Please enter your height',
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      RaisedButton(
-                        child: Text("pick"),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: Text('Pick Image'),
-                              actions: [
-                                ElevatedButton(
-                                    onPressed: () {
-                                      cubit.GalleryImage();
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Gallery')),
-                                ElevatedButton(
-                                    onPressed: () {
-                                      cubit.CameraImage();
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Camera')),
-                                ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Go Back'))
-                              ],
-                            ),
-                          );
-                        },
-                      ),
+                      SizedBox(height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.008,),
                       Row(
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 5.0),
                             child: Checkbox(
                               shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
                               ),
                               activeColor: mainColor,
                               value: cubit.policyTerms,
                               onChanged: (value) {
                                 cubit.acceptPolicy(value!);
                               },
+
+
                             ),
                           ),
                           const Text('I accept the policy and terms',
@@ -154,76 +183,37 @@ class SignUpScreen3 extends StatelessWidget {
                                   fontWeight: FontWeight.bold)),
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                      SizedBox(height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.008,),
                       Buttons_without_icon(
-                        num_hieght:
-                        MediaQuery.of(context).size.height * 0.06,
+                        function: () {
+                          if(formKey.currentState!.validate()){
+                            print('done');
+                          }else{
+                            print('not done');
+                          }
+                        },
+                        num_hieght: MediaQuery.of(context).size.height * 0.06,
                         text_button_name: 'Sign up',
                         button_color: mainColor,
                         num_border: 30,
                         num_fontsize: 20,
                         text_fontwwieght: FontWeight.normal,
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                      SizedBox(height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.008,),
                     ],
                   ),
                 ),
               ),
-          ],
-        ),
-            )
-            // Center(
-            //   child: Column(
-            //     children: [
-            //       (cubit.x != null) ? CircleAvatar(
-            //         radius: 100,
-            //         backgroundImage: FileImage(cubit.x),
-            //         //Text
-            //       ) :
-            //       CircleAvatar(
-            //         radius: 100,
-            //         backgroundImage: AssetImage(
-            //             "assets/images/noImage.png"
-            //         ), //Text
-            //       ),
-            //       RaisedButton(
-            //         child: Text("pick"),
-            //         onPressed: () {
-            //           showDialog(
-            //             context: context,
-            //             builder: (context) =>
-            //                 AlertDialog(
-            //                   title: Text('Pick Image'),
-            //                   actions: [
-            //                     ElevatedButton(
-            //                         onPressed: () {
-            //                           cubit.GalleryImage();
-            //                           Navigator.pop(context);
-            //                         },
-            //                         child: Text('Gallery')),
-            //                     ElevatedButton(
-            //                         onPressed: () {
-            //                           cubit.CameraImage();
-            //                           Navigator.pop(context);
-            //                         },
-            //                         child: Text('Camera')),
-            //                     ElevatedButton(
-            //                         onPressed: () {
-            //                           Navigator.pop(context);
-            //                         },
-            //                         child: Text('Go Back'))
-            //                   ],
-            //                 ),
-            //           );
-            //         },
-            //       ),
-            //     ],
-            //   ),
-            // )
+            ],
+          ),
+        )
+
             );
       },
     );
