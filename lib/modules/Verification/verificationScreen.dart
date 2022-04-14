@@ -8,7 +8,7 @@ import '../../shared/cubit/states.dart';
 import '../../shared/styles/colors.dart';
 
 class VerificationScreen extends StatelessWidget {
-  late String validatorText='      Error';
+  late String validatorText='    *Error*';
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -74,10 +74,8 @@ class VerificationScreen extends StatelessWidget {
                             height: 20,
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              const SizedBox(
-                                width: 17,
-                              ),
                               Container(
                                 width: 70,
                                 height: 70,
@@ -96,9 +94,7 @@ class VerificationScreen extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              const SizedBox(
-                                width: 15,
-                              ),
+
                               Container(
                                 width: 70,
                                 height: 70,
@@ -117,9 +113,7 @@ class VerificationScreen extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              const SizedBox(
-                                width: 15,
-                              ),
+
                               Container(
                                 width: 70,
                                 height: 70,
@@ -138,9 +132,7 @@ class VerificationScreen extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              const SizedBox(
-                                width: 15,
-                              ),
+
                               Container(
                                 width: 70,
                                 height: 70,

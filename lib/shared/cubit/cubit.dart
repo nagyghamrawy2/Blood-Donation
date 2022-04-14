@@ -6,7 +6,9 @@ import 'package:blood_bank/modules/home/homeScreen.dart';
 import 'package:blood_bank/modules/profile/profile.dart';
 import 'package:blood_bank/modules/request/requestScreen.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
+import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -72,6 +74,13 @@ class AppCubit extends Cubit<AppStates> {
   void changePasswordStatus() {
     obsecure = !obsecure;
     emit(ChangePasswordState());
+  }
+  Color activecolor=mainColor;
+  void changeactiveStatus(value) {
+    activecolor= Colors.amberAccent;
+    value = !value;
+
+    emit(ChangeactiveState());
   }
 
   String dropDownValue = "A+";
