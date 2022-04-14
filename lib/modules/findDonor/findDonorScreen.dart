@@ -1,6 +1,7 @@
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../shared/styles/colors.dart';
 
 class FindDonorScreen extends StatelessWidget {
@@ -22,209 +23,185 @@ class FindDonorScreen extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              height: 285.33,
-              child: Image.asset("assets/images/finddonor.jpg"),
-            ),
+            Image.asset("assets/images/finddonor.jpg"),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: ListView.separated(
-                  physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index) => FindDonorInfo("assets/images/pp.png", "Hesham ahmed", "helwan", "cairo",'A+'),
-                  separatorBuilder: (context, index) => const SizedBox(
-                        height: 30,
+                  separatorBuilder: (context, index) => SizedBox(
+                        height: 30.h,
                       ),
-                  itemCount: 20,),
+                  itemCount: 20,
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: Container(
-        width: 60,
-        height: 60,
-        child: FloatingActionButton(
-          onPressed: () {
-            if (isButtomSheetShown) {
-              Navigator.pop(context);
-              isButtomSheetShown = false;
-            } else {
-              scaffoldkey.currentState?.showBottomSheet((context) => Container(
-                    height: 275,
-                    color: greyColor,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 50),
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.topCenter,//eh lzmtha ??
-                            child: Container(
-                              width: double.infinity,
-                              child: Text(
-                                "Blood type",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: mainColor,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          if (isButtomSheetShown) {
+            Navigator.pop(context);
+            isButtomSheetShown = false;
+          } else {
+            scaffoldkey.currentState?.showBottomSheet((context) => Container(
+                  height: 420.h,
+                  color: greyColor,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 40),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Blood type",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 28.sp,
+                              color: mainColor,
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          height: 60,
+                          width: double.infinity,
+                          child: DropdownButtonFormField<String>(
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  width: 1,
                                 ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
                               ),
                             ),
+                            items: [
+                              "A+",
+                              "B+",
+                              "A-",
+                              "B-",
+                              "AB+",
+                              "AB-",
+                              "O+",
+                              "O-"
+                            ]
+                                .map((label) => DropdownMenuItem(
+                                      child: Text(
+                                        label,
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      value: label,
+                                    ))
+                                .toList(),
+                            onChanged: (value) {
+                              bloodtype = value.toString();
+                            },
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                            ),
-                            height: 60,
-                            width: double.infinity,
-                            child: DropdownButtonFormField<String>(
-                              decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
+                        ),
+                        SizedBox(
+                          height: 6.h,
+                        ),
+                        Text(
+                          "Governorate",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            fontSize: 28.sp,
+                              color: mainColor,
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          height: 60,
+                          width: double.infinity,
+                          child: DropdownButtonFormField<String>(
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  width: 1,
                                 ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              items: [
-                                "A+",
-                                "B+",
-                                "A-",
-                                "B-",
-                                "AB+",
-                                "AB-",
-                                "O+",
-                                "O-"
-                              ]
-                                  .map((label) => DropdownMenuItem(
-                                        child: Text(
-                                          label,
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                        value: label,
-                                      ))
-                                  .toList(),
-                              onChanged: (value) {
-                                bloodtype = value.toString();
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          Align(
-                            alignment: Alignment.topCenter,
-                            child: Container(
-                              width: double.infinity,
-                              child: Text(
-                                "Governorate",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: mainColor,
-                                ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
                               ),
                             ),
+                            items: ["Cairo", "Alex", "Tanta", "helwan"]
+                                .map((label) => DropdownMenuItem(
+                                      child: Text(
+                                        label,
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      value: label,
+                                    ))
+                                .toList(),
+                            onChanged: (value) {
+                              bloodtype = value.toString();
+                            },
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                            ),
-                            height: 60,
-                            width: double.infinity,
-                            child: DropdownButtonFormField<String>(
-                              decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
+                        ),
+                        SizedBox(
+                          height: 6.h,
+                        ),
+                        Text(
+                          "City",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 28.sp,
+                              color: mainColor,
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          height: 60,
+                          width: double.infinity,
+                          child: DropdownButtonFormField<String>(
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  width: 1,
                                 ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              items: ["Cairo", "Alex", "Tanta", "helwan"]
-                                  .map((label) => DropdownMenuItem(
-                                        child: Text(
-                                          label,
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                        value: label,
-                                      ))
-                                  .toList(),
-                              onChanged: (value) {
-                                bloodtype = value.toString();
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          Align(
-                            alignment: Alignment.topCenter,
-                            child: Container(
-                              width: double.infinity,
-                              child: Text(
-                                "City",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: mainColor,
-                                ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
                               ),
                             ),
+                            items: ["15 mayo", "ma3sara", "masaken"]
+                                .map((label) => DropdownMenuItem(
+                                      child: Text(
+                                        label,
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      value: label,
+                                    ))
+                                .toList(),
+                            onChanged: (value) {
+                              bloodtype = value.toString();
+                            },
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                            ),
-                            height: 60,
-                            width: double.infinity,
-                            child: DropdownButtonFormField<String>(
-                              decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              items: ["15 mayo", "ma3sara", "masaken"]
-                                  .map((label) => DropdownMenuItem(
-                                        child: Text(
-                                          label,
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                        value: label,
-                                      ))
-                                  .toList(),
-                              onChanged: (value) {
-                                bloodtype = value.toString();
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ));
-              isButtomSheetShown = true;
-            }
-          },
-          backgroundColor: mainColor,
-          child: const Icon(Icons.filter_alt_outlined),
-        ),
+                  ),
+                ));
+            isButtomSheetShown = true;
+          }
+        },
+        backgroundColor: mainColor,
+        child: const Icon(Icons.filter_alt_outlined),
       ),
     );
   }

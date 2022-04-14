@@ -78,57 +78,54 @@ class Textformfield_with_border extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.9,
-      height: 77,
-      child: TextFormField(
-        controller: controllerName,
-        keyboardType: keyboardType,
-        obscureText: obsecure,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return validatorText;
-          }
-        },
-        decoration: InputDecoration(
-          hintText: hintText,
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          hintStyle: const TextStyle(fontSize: 16),
-          labelText: text_label,
-          labelStyle: const TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-          border: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.black26, width: 3.0),
-              borderRadius: BorderRadius.circular(num_border)),
-          focusedBorder: OutlineInputBorder(
+    return TextFormField(
+      controller: controllerName,
+      keyboardType: keyboardType,
+      obscureText: obsecure,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return validatorText;
+        }
+      },
+      decoration: InputDecoration(
+        hintText: hintText,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        hintStyle: const TextStyle(fontSize: 16),
+        labelText: text_label,
+        labelStyle: const TextStyle(
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        ),
+        border: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.black26, width: 3.0),
             borderRadius: BorderRadius.circular(num_border),
-          ),
-          suffixIcon: (haveIcon == true)
-              ? (isPasswordField == true
-                  ? IconButton(
-                      onPressed: () {
-                        suffixFunction!();
-                      },
-                      icon: Icon(
-                        obsecure == true ? Icons.lock : Icons.lock_open,
-                        color: Colors.deepOrange,
-                        size: 35,
-                      ),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.only(right: 10, bottom: 4),
-                      child: Image.asset(
-                        iconName!,
-                        width: 10,
-                        height: 15,
-                      ),
-                    ))
-              : null,
         ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.black26, width: 3.0),
+          borderRadius: BorderRadius.circular(num_border),
+        ),
+        suffixIcon: (haveIcon == true)
+            ? (isPasswordField == true
+                ? IconButton(
+                    onPressed: () {
+                      suffixFunction!();
+                    },
+                    icon: Icon(
+                      obsecure == true ? Icons.lock : Icons.lock_open,
+                      color: Colors.deepOrange,
+                      size: 50.h,
+                    ),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.only(right: 10, bottom: 4),
+                    child: Image.asset(
+                      iconName!,
+                      width: 10,
+                      height: 15,
+                    ),
+                  ))
+            : null,
       ),
     );
   }
@@ -802,8 +799,8 @@ class BloodBankInfo extends StatelessWidget {
               backgroundImage: AssetImage(imageLink),
               radius: 29,
             ),
-            const SizedBox(
-              width: 11,
+            SizedBox(
+              width: 12.h,
             ),
             Expanded(
               child: Column(
@@ -814,8 +811,8 @@ class BloodBankInfo extends StatelessWidget {
                     hospitalName,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
-                    style: const TextStyle(
-                      fontSize: 16,
+                    style: TextStyle(
+                      fontSize: 22.sp,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -824,8 +821,9 @@ class BloodBankInfo extends StatelessWidget {
                   ),
                   Text(
                     '$city,$governorate',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: greyColor2,
+                      fontSize: 20.sp,
                     ),
                   ),
                 ],

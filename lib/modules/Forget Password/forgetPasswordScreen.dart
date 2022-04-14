@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../shared/components/components.dart';
 import '../../shared/styles/colors.dart';
@@ -21,13 +22,14 @@ class ForgetPasswordScreen extends StatelessWidget {
       body: Form(
         key: formkey,
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 80,
-              ),
-              Center(
-                child: Container(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 110.h,
+                ),
+                Container(
                   width: MediaQuery.of(context).size.width * 0.9,
                   height: MediaQuery.of(context).size.height * 0.13,
                   decoration: BoxDecoration(
@@ -44,44 +46,37 @@ class ForgetPasswordScreen extends StatelessWidget {
                         topRight: Radius.circular(25.0),
                         bottomLeft: Radius.circular(25.0),
                       )),
-                  child: Column(
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.only(left: 5.0, top: 8.0),
-                        child: const Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            'Enter the email associated with your account and we`ll send an email with instructions to reset your password.',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        'Enter the email associated with your account and we`ll send an email with instructions to reset your password.',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25.sp,
+                            fontWeight: FontWeight.bold),
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 60,
-              ),
-              Textformfield_with_border(
-                controllerName: emailcontroller,
-                keyboardType: TextInputType.emailAddress,
-                obsecure: false,
-                hintText: 'Enter your email',
-                text_label: 'Email address',
-                num_border: 10,
-                validatorText: 'Email address must not be empty',
-                haveIcon: false,
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Buttons_without_icon(
+                SizedBox(
+                  height: 80.h,
+                ),
+                Textformfield_with_border(
+                  controllerName: emailcontroller,
+                  keyboardType: TextInputType.emailAddress,
+                  obsecure: false,
+                  hintText: 'Enter your email',
+                  text_label: 'Email address',
+                  num_border: 10,
+                  validatorText: 'Email address must not be empty',
+                  haveIcon: false,
+                ),
+                SizedBox(
+                  height: 40.h,
+                ),
+                Buttons_without_icon(
                     function: () {
                       if(formkey.currentState!.validate()){
                         print('done');
@@ -94,9 +89,10 @@ class ForgetPasswordScreen extends StatelessWidget {
                     button_color: mainColor,
                     num_border: 11,
                     num_fontsize: 20,
-                    text_fontwwieght: FontWeight.normal),
-              )
-            ],
+                    text_fontwwieght: FontWeight.normal,
+                ),
+              ],
+            ),
           ),
         ),
       ),

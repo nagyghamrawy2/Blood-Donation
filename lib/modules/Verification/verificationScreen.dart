@@ -1,6 +1,7 @@
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:math' as math;
 
 import '../../shared/cubit/cubit.dart';
@@ -53,20 +54,21 @@ class VerificationScreen extends StatelessWidget {
                           const SizedBox(
                             height: 30,
                           ),
-                          const Align(
+                          Align(
                               alignment: Alignment.center,
                               child: Text(
                                 'OTP VERIFICATION',
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 22),
+                                    fontWeight: FontWeight.bold, fontSize: 26.sp,
+                                ),
                               )),
-                          const Align(
+                          Align(
                               alignment: Alignment.center,
                               child: Text(
-                                'Enter verification code sent your Email Address',
+                                'Enter verification code sent to your Email Address',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 15,
+                                  fontSize: 20.sp,
                                   color: greyColor2,
                                 ),
                               )),
@@ -94,7 +96,6 @@ class VerificationScreen extends StatelessWidget {
                                   },
                                 ),
                               ),
-
                               Container(
                                 width: 70,
                                 height: 70,
@@ -113,7 +114,6 @@ class VerificationScreen extends StatelessWidget {
                                   },
                                 ),
                               ),
-
                               Container(
                                 width: 70,
                                 height: 70,
@@ -132,7 +132,6 @@ class VerificationScreen extends StatelessWidget {
                                   },
                                 ),
                               ),
-
                               Container(
                                 width: 70,
                                 height: 70,

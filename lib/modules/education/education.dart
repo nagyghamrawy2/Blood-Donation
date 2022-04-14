@@ -1,5 +1,6 @@
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EducationScreen extends StatelessWidget {
   const EducationScreen({Key? key}) : super(key: key);
@@ -20,28 +21,31 @@ class EducationScreen extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding:  const EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 32,
+            SizedBox(
+              height: 42.h,
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(10.0),
               child: Text(
                 "Articles",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold),
               ),
             ),
-            const SizedBox(
-              height: 19,
+            SizedBox(
+              height: 29.h,
             ),
             Expanded(
               child: ListView.separated(
-                  itemBuilder: (context, index) => EducationInfo(index: index),
-                  separatorBuilder: (context, index) => const SizedBox(height: 19,),
-                  itemCount: 20,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) => EducationInfo(index: index),
+                separatorBuilder: (context, index) => SizedBox(
+                  height: 29.h,
+                ),
+                itemCount: 20,
               ),
             ),
           ],

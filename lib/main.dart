@@ -1,4 +1,5 @@
 import 'package:blood_bank/layout/home_layout.dart';
+import 'package:blood_bank/modules/Login_Screen/login.dart';
 import 'package:blood_bank/modules/Sign_Up_with_gmail/Sign_up_with_gmail.dart';
 import 'package:blood_bank/modules/bloodBank/bloodBankScreen.dart';
 import 'package:blood_bank/modules/editProfile/editProfile.dart';
@@ -17,11 +18,15 @@ import 'package:blood_bank/shared/Network/Remote/dio_helper.dart';
 import 'package:blood_bank/shared/bloc_observer.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
+import 'package:blood_bank/shared/styles/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
+import 'modules/Create_new_password/createNewPassword.dart';
+import 'modules/Forget Password/forgetPasswordScreen.dart';
+import 'modules/Verification/verificationScreen.dart';
+import 'modules/change password/changePassword.dart';
 
 void main() {
   Bloc.observer = SimpleBlocObserver();
@@ -41,32 +46,7 @@ class MyApp extends StatelessWidget {
       builder: () => BlocProvider(
         create: (context) => AppCubit(),
         child: MaterialApp(
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            floatingActionButtonTheme: const FloatingActionButtonThemeData(
-              backgroundColor: mainColor,
-              elevation: 2,
-            ),
-            fontFamily: 'OpenSans',
-            appBarTheme: const AppBarTheme(
-              backgroundColor: mainColor,
-              titleTextStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.white,
-              ),
-            ),
-            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-              unselectedItemColor: Colors.black,
-              selectedItemColor: mainColor,
-              selectedLabelStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            tabBarTheme: const TabBarTheme(
-              labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-          ),
+          theme: lightTheme,
           debugShowCheckedModeBanner: false,
           builder: (context, widget) {
             // elle hwa lma tege t3ml ay t8yeer msln t8yeer el5t myt2sr4
@@ -76,7 +56,7 @@ class MyApp extends StatelessWidget {
               child: widget!,
             );
           },
-          home: SignUpScreen(),
+          home: VerificationScreen(),
         ),
       ),
     );
