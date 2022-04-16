@@ -52,6 +52,7 @@ class SignUpScreen2 extends StatelessWidget {
                   ),
                   Form(
                     key: formKey,
+                    autovalidateMode: AutovalidateMode.always,
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: MediaQuery
                           .of(context)
@@ -182,7 +183,7 @@ class SignUpScreen2 extends StatelessWidget {
                                 .size
                                 .height * 0.005,
                           ),
-                          LocationCityCustom(),
+                          LocationGovernorateCustom(),
                            SizedBox(
                             height: MediaQuery
                                 .of(context)
@@ -205,7 +206,7 @@ class SignUpScreen2 extends StatelessWidget {
                                 .size
                                 .height * 0.005,
                           ),
-                          LocationRegionCustom(),
+                          LocationCityCustom(),
                           SizedBox(
                             height: MediaQuery
                                 .of(context)

@@ -440,17 +440,6 @@ class SignupTextField extends StatelessWidget {
 }
 
 class DropDownCustom extends StatelessWidget {
-  String dropdownvalue = 'A+';
-  List<String> blood_group_item = [
-    "A+",
-    "A-",
-    "B+",
-    "B-",
-    "O+",
-    "O-",
-    "AB+",
-    "AB-"
-  ];
 
   DropDownCustom({Key? key}) : super(key: key);
 
@@ -461,8 +450,12 @@ class DropDownCustom extends StatelessWidget {
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
         return DropdownButtonFormField(
+          value: cubit.dropDownValue,
+          hint: Text(
+            'Blood Type',
+          ),
           validator: (String? value) {
-            if (value == "no blood selected") {
+            if (value == null) {
               return "Please select your blood type";
             }
           },
@@ -489,7 +482,7 @@ class DropDownCustom extends StatelessWidget {
             ),
           ),
           // Initial Value
-          value: cubit.dropDownValue,
+
 
           // Down Arrow Icon
           icon: const Icon(Icons.keyboard_arrow_down),
@@ -511,8 +504,8 @@ class DropDownCustom extends StatelessWidget {
   }
 }
 
-class LocationCityCustom extends StatelessWidget {
-  const LocationCityCustom({Key? key}) : super(key: key);
+class LocationGovernorateCustom extends StatelessWidget {
+  const LocationGovernorateCustom({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -521,8 +514,12 @@ class LocationCityCustom extends StatelessWidget {
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
         return DropdownButtonFormField(
+          value: cubit.locationcityvalue,
+          hint: Text(
+            'Governorate',
+          ),
           validator: (String? value) {
-            if (value == "no city") {
+            if (value == null) {
               return "Please choose your governorate";
             }
           },
@@ -549,7 +546,6 @@ class LocationCityCustom extends StatelessWidget {
             ),
           ),
           // Initial Value
-          value: cubit.locationcityvalue,
 
           // Down Arrow Icon
           icon: const Icon(Icons.keyboard_arrow_down),
@@ -571,8 +567,8 @@ class LocationCityCustom extends StatelessWidget {
   }
 }
 
-class LocationRegionCustom extends StatelessWidget {
-  const LocationRegionCustom({Key? key}) : super(key: key);
+class LocationCityCustom extends StatelessWidget {
+  const LocationCityCustom({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -581,9 +577,13 @@ class LocationRegionCustom extends StatelessWidget {
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
         return DropdownButtonFormField(
+          value: cubit.locationcityvalue,
+          hint: Text(
+            'City',
+          ),
           validator: (String? value) {
-            if (value == "no city") {
-              return "Please choose your governorate";
+            if (value == null) {
+              return "Please choose your city";
             }
           },
           decoration: InputDecoration(
@@ -609,7 +609,7 @@ class LocationRegionCustom extends StatelessWidget {
             ),
           ),
           // Initial Value
-          value: cubit.locationcityvalue,
+
 
           // Down Arrow Icon
           icon: const Icon(Icons.keyboard_arrow_down),
