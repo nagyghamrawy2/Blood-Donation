@@ -1,3 +1,4 @@
+import 'package:blood_bank/modules/sign_up/SignUpForm2.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:flutter/material.dart';
@@ -28,11 +29,6 @@ class SignUpScreen extends StatelessWidget {
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
-            // FloatingActionButton.extended(
-            //   onPressed: (){},
-            //   label: Text("Next"),
-            //  icon: Icon(Icons.arrow_forward_outlined),
-            // ),
             body: SingleChildScrollView(
               child: Column(
                 children: [
@@ -72,6 +68,13 @@ class SignUpScreen extends StatelessWidget {
                                 MediaQuery.of(context).size.width * 0.08),
                         child: Column(
                           children: [
+                            Align(
+                                alignment: Alignment.bottomLeft,
+                              child: Text(
+                                  "step 1 of 3",
+                                style: TextStyle(fontSize: 22.h , fontStyle: FontStyle.italic , color: mainColor),
+                              ),
+                            ),
                             Container(
                               width: 300.w,
                               height: 7.h,
@@ -123,6 +126,7 @@ class SignUpScreen extends StatelessWidget {
                               secure: cubit.obsecure,
                               suffixFunction: () {
                                 cubit.changePasswordStatus();
+
                               },
                             ),
                             SizedBox(
@@ -136,9 +140,10 @@ class SignUpScreen extends StatelessWidget {
                               keyboardtype: TextInputType.visiblePassword,
                               validatorText: 'Please enter your password again',
                               isPasswordField: true,
-                              secure: cubit.obsecure,
+                              secure: cubit.confirmObsecure,
                               suffixFunction: () {
-                                cubit.changePasswordStatus();
+                                cubit.changeConfirmPasswordStatus();
+
                               },
                             ),
                             SizedBox(
@@ -150,9 +155,11 @@ class SignUpScreen extends StatelessWidget {
                                 function: () {
                                   if (formKey.currentState!.validate()) {
                                     print('done');
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen2()));
                                   } else {
                                     print('not done');
                                   }
+
                                 },
                                 num_hieght: 90.h,
                                 text_button_name: 'Next Step >',

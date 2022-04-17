@@ -1,4 +1,5 @@
 import 'package:blood_bank/modules/Login_Screen/login.dart';
+import 'package:blood_bank/modules/sign_up/SignUpForm3.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
@@ -61,13 +62,20 @@ class SignUpScreen2 extends StatelessWidget {
                         horizontal: MediaQuery.of(context).size.width * 0.08),
                     child: Column(
                       children: [
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Text(
+                            "step 2 of 3",
+                            style: TextStyle(fontSize: 22.h , fontStyle: FontStyle.italic , color: mainColor),
+                          ),
+                        ),
                         Container(
                           width: 300.w,
                           height: 7.h,
                           color: Colors.red[200],
                           alignment: Alignment.centerLeft,
                           child: Container(
-                            width: 100.w,
+                            width: 150.w,
                             height: 7.h,
                             color: mainColor,
                           ),
@@ -166,7 +174,7 @@ class SignUpScreen2 extends StatelessWidget {
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.005,
                         ),
-                        LocationGovernorateCustom(),
+                        LocationGovernorateCustom(border: true,),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.008,
                         ),
@@ -183,7 +191,7 @@ class SignUpScreen2 extends StatelessWidget {
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.005,
                         ),
-                        LocationCityCustom(),
+                        LocationCityCustom(border: true,),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.02,
                         ),
@@ -193,9 +201,11 @@ class SignUpScreen2 extends StatelessWidget {
                             function: () {
                               if (formKey.currentState!.validate()) {
                                 print('done');
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen3()));
                               } else {
                                 print('not done');
                               }
+
                             },
                             num_hieght: 90.h,
                             text_button_name: 'Next Step >',

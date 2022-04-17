@@ -144,7 +144,9 @@ class Textformfield_with_icon extends StatelessWidget {
       required this.img_bottom_padding,
       required this.icon_name,
       required this.img_width,
-      required this.img_height});
+      required this.img_height,
+      required this.validatorText,
+      });
 
   late String text_name;
   late double num_width;
@@ -158,6 +160,7 @@ class Textformfield_with_icon extends StatelessWidget {
   late double img_width;
   late double img_height;
   TextEditingController controller_Name;
+  late String validatorText;
 
   @override
   Widget build(BuildContext context) {
@@ -171,7 +174,7 @@ class Textformfield_with_icon extends StatelessWidget {
               child: Text(
                 text_name,
                 style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                     TextStyle(fontWeight: FontWeight.bold, fontSize: 26.sp),
               ),
             ),
           ),
@@ -180,29 +183,30 @@ class Textformfield_with_icon extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.topLeft,
-            child: Container(
-              width: MediaQuery.of(context).size.width * num_width,
-              height: MediaQuery.of(context).size.height * num_height,
-              child: Material(
-                elevation: 10.0,
-                shadowColor: Colors.white,
-                child: TextField(
-                  controller: controller_Name,
-                  keyboardType: keyboardtype,
-                  obscureText: obsecure,
-                  decoration: InputDecoration(
-                    hintText: text_hint,
-                    contentPadding: const EdgeInsets.all(15),
-                    hintStyle: const TextStyle(fontSize: 16),
-                    border: InputBorder.none,
-                    suffixIcon: Padding(
-                      padding: EdgeInsets.only(
-                          right: img_right_padding, bottom: img_bottom_padding),
-                      child: Image.asset(
-                        icon_name,
-                        width: img_width,
-                        height: img_height,
-                      ),
+            child: Card(
+              elevation: 5.0,
+              shadowColor: Colors.white,
+              child: TextFormField(
+                controller: controller_Name,
+                keyboardType: keyboardtype,
+                obscureText: obsecure,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return validatorText;
+                  }
+                },
+                decoration: InputDecoration(
+                  hintText: text_hint,
+                  contentPadding: const EdgeInsets.all(15),
+                  hintStyle: const TextStyle(fontSize: 16),
+                  border: InputBorder.none,
+                  suffixIcon: Padding(
+                    padding: EdgeInsets.only(
+                        right: img_right_padding, bottom: img_bottom_padding),
+                    child: Image.asset(
+                      icon_name,
+                      width: img_width,
+                      height: img_height,
                     ),
                   ),
                 ),
@@ -295,6 +299,7 @@ class Requst_textformfield extends StatelessWidget {
     required this.keyboardtype,
     required this.obsecure,
     required this.text_hint,
+    required this.validatorText,
   });
 
   late String text_name;
@@ -304,6 +309,7 @@ class Requst_textformfield extends StatelessWidget {
   late bool obsecure;
   late String text_hint;
   TextEditingController controller_Name;
+  late String validatorText;
 
   @override
   Widget build(BuildContext context) {
@@ -323,22 +329,25 @@ class Requst_textformfield extends StatelessWidget {
         ),
         Align(
           alignment: Alignment.topLeft,
-          child: Container(
-            width: MediaQuery.of(context).size.width * num_width,
-            height: MediaQuery.of(context).size.height * num_height,
-            child: Material(
-              elevation: 10.0,
-              shadowColor: Colors.white,
-              child: TextFormField(
-                controller: controller_Name,
-                keyboardType: keyboardtype,
-                obscureText: obsecure,
-                decoration: InputDecoration(
-                  hintText: text_hint,
-                  hintStyle:
-                      const TextStyle(fontSize: 16, color: Color(0xFF808080)),
-                  border: InputBorder.none,
-                ),
+          child: Card(
+            elevation: 5.0,
+            shadowColor: Colors.white,
+            child: TextFormField(
+              controller: controller_Name,
+              keyboardType: keyboardtype,
+              obscureText: obsecure,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return validatorText;
+                }
+              },
+              decoration: InputDecoration(
+
+                contentPadding: const EdgeInsets.all(15),
+                hintText: text_hint,
+                hintStyle:
+                    const TextStyle(fontSize: 16, color: Color(0xFF808080) ,),
+                border: InputBorder.none,
               ),
             ),
           ),
@@ -505,15 +514,15 @@ class DropDownCustom extends StatelessWidget {
 }
 
 class LocationGovernorateCustom extends StatelessWidget {
-  const LocationGovernorateCustom({Key? key}) : super(key: key);
-
+  LocationGovernorateCustom({required this.border});
+  late bool border;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
-        return DropdownButtonFormField(
+        return(border == true)? DropdownButtonFormField(
           value: cubit.locationcityvalue,
           hint: Text(
             'Governorate',
@@ -561,6 +570,42 @@ class LocationGovernorateCustom extends StatelessWidget {
             print(newValue);
             cubit.ChangeLocationCityValue(newValue);
           },
+        ):
+        Card(
+          elevation: 5.0,
+          child: DropdownButtonFormField(
+            value: cubit.locationcityvalue,
+            hint: Text(
+              'Governorate',
+            ),
+            validator: (String? value) {
+              if (value == null) {
+                return "Please choose your governorate";
+              }
+            },
+            decoration:InputDecoration(
+              border: InputBorder.none,
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            // Initial Value
+
+            // Down Arrow Icon
+            icon: const Icon(Icons.keyboard_arrow_down),
+            items: cubit.location__item.map((String items) {
+              return DropdownMenuItem(
+                value: items,
+                child: Text(items),
+              );
+            }).toList(),
+            // After selecting the desired option,it will
+            // change button value to selected value
+            onChanged: (String? newValue) {
+              print(newValue);
+              cubit.ChangeLocationCityValue(newValue);
+            },
+          ),
         );
       },
     );
@@ -568,7 +613,8 @@ class LocationGovernorateCustom extends StatelessWidget {
 }
 
 class LocationCityCustom extends StatelessWidget {
-  const LocationCityCustom({Key? key}) : super(key: key);
+  LocationCityCustom({required this.border});
+  late bool border;
 
   @override
   Widget build(BuildContext context) {
@@ -576,7 +622,7 @@ class LocationCityCustom extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
-        return DropdownButtonFormField(
+        return (border == true)?DropdownButtonFormField(
           value: cubit.locationcityvalue,
           hint: Text(
             'City',
@@ -625,8 +671,46 @@ class LocationCityCustom extends StatelessWidget {
             print(newValue);
             cubit.ChangeLocationCityValue(newValue);
           },
+        ):
+        Card(
+          elevation: 5.0,
+          child: DropdownButtonFormField(
+            value: cubit.locationcityvalue,
+            hint: Text(
+              'City',
+            ),
+            validator: (String? value) {
+              if (value == null) {
+                return "Please choose your city";
+              }
+            },
+            decoration:  InputDecoration(
+              border: InputBorder.none,
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            // Initial Value
+
+
+            // Down Arrow Icon
+            icon: const Icon(Icons.keyboard_arrow_down),
+            items: cubit.location__item.map((String items) {
+              return DropdownMenuItem(
+                value: items,
+                child: Text(items),
+              );
+            }).toList(),
+            // After selecting the desired option,it will
+            // change button value to selected value
+            onChanged: (String? newValue) {
+              print(newValue);
+              cubit.ChangeLocationCityValue(newValue);
+            },
+          ),
         );
       },
     );
   }
 }
+

@@ -88,6 +88,14 @@ class AppCubit extends Cubit<AppStates> {
     emit(ChangePasswordState());
   }
 
+  bool confirmObsecure = true;
+
+  void changeConfirmPasswordStatus() {
+    confirmObsecure = !confirmObsecure;
+    emit(ChangeConfirmPasswordState());
+  }
+
+
   Color activecolor = mainColor;
 
   void changeactiveStatus(value) {

@@ -59,17 +59,21 @@ class SignUpScreen3 extends StatelessWidget {
                         horizontal: MediaQuery.of(context).size.width * 0.08),
                     child: Column(
                       children: [
-                        // (cubit.x != null)
-                        //     ? CircleAvatar(
-                        //         radius: 70.r,
-                        //         backgroundImage: FileImage(cubit.x),
-                        //         //Text
-                        //       )
-                        //     : CircleAvatar(
-                        //         radius: 70.r,
-                        //         backgroundImage: AssetImage(
-                        //             "assets/images/noImage.png"), //Text
-                        //       ),
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Text(
+                            "step 3 of 3",
+                            style: TextStyle(fontSize: 22.h , fontStyle: FontStyle.italic , color: mainColor),
+                          ),
+                        ),
+                        Container(
+                          width: 300.w,
+                          height: 7.h,
+                          color: mainColor,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.04,
+                        ),
                         Container(
                           height: 150,
                           child: Stack(
@@ -181,9 +185,9 @@ class SignUpScreen3 extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('I accept the policy and terms',
+                                 Text('I accept the policy and terms',
                                     style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 22.sp,
                                         color: Colors.black,
                                         fontWeight: FontWeight.bold)),
                                 (cubit.check != true)
@@ -192,7 +196,7 @@ class SignUpScreen3 extends StatelessWidget {
                                         child: Text(
                                           "Please accept the policy ",
                                           style: TextStyle(
-                                              color: Colors.red, fontSize: 14),
+                                              color: Colors.red, fontSize: 18.sp),
                                         ))
                                     : Text(""),
                               ],
@@ -200,7 +204,7 @@ class SignUpScreen3 extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.008,
+                          height: 20.h,
                         ),
                         Buttons_without_icon(
                           function: () {
@@ -213,7 +217,7 @@ class SignUpScreen3 extends StatelessWidget {
                               print('not done');
                             }
                           },
-                          num_hieght: MediaQuery.of(context).size.height * 0.06,
+                          num_hieght: 80.h,
                           text_button_name: 'Sign up',
                           button_color: mainColor,
                           num_border: 30,

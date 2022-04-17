@@ -7,6 +7,7 @@ class ColorChangeValueState extends AppStates{}
 class BloodValueChangeState extends AppStates{}
 class PolicyTermsChangeState extends AppStates{}
 class ChangePasswordState extends AppStates {}
+class ChangeConfirmPasswordState extends AppStates {}
 class ChangeactiveState extends AppStates {}
 class ChangeDropDownValueState extends AppStates{}
 class ChangeLocationValueState extends AppStates{}
