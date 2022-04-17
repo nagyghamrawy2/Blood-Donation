@@ -54,3 +54,147 @@ class EducationScreen extends StatelessWidget {
     );
   }
 }
+
+class EducationInfo extends StatelessWidget {
+  EducationInfo({required this.index});
+
+  late int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return index % 2 == 0
+        ? Card(
+      elevation: 10.0,
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: 125,
+        decoration: const BoxDecoration(
+          color: Color(0xFFFFEEE6),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            children: [
+              const CircleAvatar(
+                backgroundImage: AssetImage("assets/images/test.png"),
+                radius: 60,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.05,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "The Concept of Red Blood Cell",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 19.sp,
+                          color: const Color(0xFF5D240C)),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.02,
+                    ),
+                    Text(
+                      "Hellosadfas asdfasdfcs swadsdasdasdasadsadasdasdasdasdsadsadsadasdasdsad asdasdsaddasdasdasdasda",
+                      style: TextStyle(
+                        fontSize: 17.sp,
+                        fontWeight: FontWeight.normal,
+                        color: const Color(0xFF787F8F),
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.02,
+                    ),
+                    const InkWell(
+                      child: Text(
+                        "Learn more",
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                            color: Color(0xFFFF0000)),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+        // child: Material(
+        //   elevation: 10.0,
+        //   shadowColor: Colors.white,
+        // ),
+      ),
+    )
+        : Card(
+      elevation: 10.0,
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: 125,
+        decoration: const BoxDecoration(
+          color: Color(0xFFF8F8F8),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            children: [
+              const CircleAvatar(
+                backgroundImage: AssetImage("assets/images/test.png"),
+                radius: 60,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.05,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "The Concept of Red Blood Cell",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 19.sp,
+                          color: const Color(0xFF5D240C)),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.02,
+                    ),
+                    Text(
+                      "Hellosadfas asdfasdfcs swadsdasdasdasadsadasdasdasdasdsadsadsadasdasdsad asdasdsaddasdasdasdasda",
+                      style: TextStyle(
+                          fontSize: 17.sp,
+                          fontWeight: FontWeight.normal,
+                          color: const Color(0xFF787F8F)),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.02,
+                    ),
+                    const InkWell(
+                      child: Text(
+                        "Learn more",
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                            color: Color(0xFFFF0000)),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+        // child: Material(
+        //   elevation: 10.0,
+        //   shadowColor: Colors.white,
+        // ),
+      ),
+    );
+  }
+}

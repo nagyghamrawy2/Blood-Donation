@@ -122,3 +122,42 @@ class MyInformationScreen extends StatelessWidget {
     );
   }
 }
+
+class ProfileInfo extends StatelessWidget {
+  ProfileInfo({
+    Key? key,
+    required this.label,
+    required this.leftLabel,
+  }) : super(key: key);
+
+  late String label;
+  late String leftLabel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 30,
+        right: 30,
+        top: 15.0,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+              child: Text(
+                '$label',
+              )),
+          Flexible(
+            fit: FlexFit.loose,
+            child: Text(
+              '$leftLabel',
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+

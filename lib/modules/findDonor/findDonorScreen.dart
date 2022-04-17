@@ -206,3 +206,104 @@ class FindDonorScreen extends StatelessWidget {
     );
   }
 }
+
+class FindDonorInfo extends StatelessWidget {
+  FindDonorInfo(this.imageLink, this.name, this.governorate, this.city,this.bloodType,
+      {Key? key})
+      : super(key: key);
+  late String imageLink;
+  late String name;
+  late String governorate;
+  late String city;
+  late String bloodType;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Container(
+        height: 80,
+        width: double.infinity,
+        child: Row(
+          children: [
+            CircleAvatar(
+              backgroundImage: AssetImage(
+                imageLink,
+              ),
+              radius: 40,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:  [
+                const SizedBox(height: 10,),
+                Text(
+                  name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                const Spacer(),
+                Text(
+                  '$governorate,$city',
+                  style: const TextStyle(
+                    color: greyColor2,
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(height: 10,),
+              ],
+            ),
+            const Spacer(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    height: 28,
+                    width: 85,
+                    child: const Center(
+                      child: Text(
+                        'Ask for help',
+                        textScaleFactor: 1,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      color: mainColor,
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    height: 21,
+                    width: 35,
+                    decoration: BoxDecoration(
+                        color: Colors.black26,
+                        borderRadius: BorderRadius.circular(26)),
+                    child: Center(
+                        child: Text(
+                          bloodType,
+                          style: const TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        )),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
