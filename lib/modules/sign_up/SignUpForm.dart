@@ -19,172 +19,161 @@ class SignUpScreen extends StatelessWidget {
   bool value = false;
   var formKey = GlobalKey<FormState>();
 
-
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        AppCubit cubit = AppCubit.get(context);
-        return Scaffold(
-          // FloatingActionButton.extended(
-          //   onPressed: (){},
-          //   label: Text("Next"),
-          //  icon: Icon(Icons.arrow_forward_outlined),
-          // ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                ClipPath(
-                  child: Container(
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width,
-                    height: 450.h, //MediaQuery.of(context).size.height * 0.36,
-                    color: const Color.fromRGBO(237, 57, 74, 1),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Hello,',
-                          style: TextStyle(
-                              fontSize: 50.sp,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
-                        Text(
-                          'Sign Up ',
-                          style: TextStyle(
-                              fontSize: 50.sp,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  ),
-                  clipper: CustomClipPath(),
-                ),
-                Form(
-                    key: formKey,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: MediaQuery
-                          .of(context)
-                          .size
-                          .width * 0.08),
+    return BlocProvider(
+      create: (context) => AppCubit(),
+      child: BlocConsumer<AppCubit, AppStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          AppCubit cubit = AppCubit.get(context);
+          return Scaffold(
+            // FloatingActionButton.extended(
+            //   onPressed: (){},
+            //   label: Text("Next"),
+            //  icon: Icon(Icons.arrow_forward_outlined),
+            // ),
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ClipPath(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 450.h,
+                      //MediaQuery.of(context).size.height * 0.36,
+                      color: const Color.fromRGBO(237, 57, 74, 1),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            width: 300.w,
-                            height: 7.h,
-                            color: Colors.red[200],
-                            alignment: Alignment.centerLeft,
-                            child: Container(
-                              width: 100.w ,
-                              height: 7.h,
-                              color: mainColor,
-                            ),
+                          Text(
+                            'Hello,',
+                            style: TextStyle(
+                                fontSize: 50.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
-                          SizedBox(height: MediaQuery
-                              .of(context)
-                              .size
-                              .height * 0.008,),
-                          SizedBox(
-                            height: MediaQuery
-                                .of(context)
-                                .size
-                                .height * 0.008,
+                          Text(
+                            'Sign Up ',
+                            style: TextStyle(
+                                fontSize: 50.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
-                          SignupTextField(
-                            hintText: 'Enter your name',
-                            text: 'Name',
-                            controller: name,
-                            keyboardtype: TextInputType.text,
-                            validatorText: 'Please enter your first name',
-                          ),
-                          SizedBox(
-                            height: MediaQuery
-                                .of(context)
-                                .size
-                                .height * 0.008,
-                          ),
-                          SignupTextField(
-                            hintText: 'Enter your email',
-                            text: 'Email',
-                            controller: emailAddress,
-                            keyboardtype: TextInputType.emailAddress,
-                            validatorText: 'Please enter your email',
-                          ),
-                          SizedBox(
-                            height: MediaQuery
-                                .of(context)
-                                .size
-                                .height * 0.008,
-                          ),
-                          SignupTextField(
-                            hintText: 'Enter your password',
-                            text: 'Password',
-                            controller: password,
-                            keyboardtype: TextInputType.emailAddress,
-                            validatorText: 'Please enter your password',
-                            isPasswordField: true,
-                            secure: cubit.obsecure,
-                            suffixFunction: () {
-                              cubit.changePasswordStatus();
-                            },
-                          ),
-                          SizedBox(
-                            height: MediaQuery
-                                .of(context)
-                                .size
-                                .height * 0.008,
-                          ),
-                          SignupTextField(
-                            hintText: 'Enter password again',
-                            text: 'Confirm Password',
-                            controller: confirmPassword,
-                            keyboardtype: TextInputType.visiblePassword,
-                            validatorText: 'Please enter your password again',
-                            isPasswordField: true,
-                            secure: cubit.obsecure,
-                            suffixFunction: () {
-                              cubit.changePasswordStatus();
-                            },
-                          ),
-                          SizedBox(
-                            height: MediaQuery
-                                .of(context)
-                                .size
-                                .height * 0.02,
-                          ),
-                          Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 50.w),
-                            child: Buttons_without_icon(
-                              function: () {
-                                if(formKey.currentState!.validate()){
-                                  print('done');
-                                }else{
-                                  print('not done');
-                                }
-                              },
-                              num_hieght:
-                              90.h,
-                              text_button_name: 'Next Step >',
-                              button_color: mainColor,
-                              num_border: 30,
-                              num_fontsize: 20,
-                              text_fontwwieght: FontWeight.normal,
-                            ),
-                          ),
-                          SizedBox(height: 10,)
                         ],
                       ),
-                    )),
-              ],
+                    ),
+                    clipper: CustomClipPath(),
+                  ),
+                  Form(
+                      key: formKey,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal:
+                                MediaQuery.of(context).size.width * 0.08),
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 300.w,
+                              height: 7.h,
+                              color: Colors.red[200],
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                width: 100.w,
+                                height: 7.h,
+                                color: mainColor,
+                              ),
+                            ),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.008,
+                            ),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.008,
+                            ),
+                            SignupTextField(
+                              hintText: 'Enter your name',
+                              text: 'Name',
+                              controller: name,
+                              keyboardtype: TextInputType.text,
+                              validatorText: 'Please enter your first name',
+                            ),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.008,
+                            ),
+                            SignupTextField(
+                              hintText: 'Enter your email',
+                              text: 'Email',
+                              controller: emailAddress,
+                              keyboardtype: TextInputType.emailAddress,
+                              validatorText: 'Please enter your email',
+                            ),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.008,
+                            ),
+                            SignupTextField(
+                              hintText: 'Enter your password',
+                              text: 'Password',
+                              controller: password,
+                              keyboardtype: TextInputType.emailAddress,
+                              validatorText: 'Please enter your password',
+                              isPasswordField: true,
+                              secure: cubit.obsecure,
+                              suffixFunction: () {
+                                cubit.changePasswordStatus();
+                              },
+                            ),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.008,
+                            ),
+                            SignupTextField(
+                              hintText: 'Enter password again',
+                              text: 'Confirm Password',
+                              controller: confirmPassword,
+                              keyboardtype: TextInputType.visiblePassword,
+                              validatorText: 'Please enter your password again',
+                              isPasswordField: true,
+                              secure: cubit.obsecure,
+                              suffixFunction: () {
+                                cubit.changePasswordStatus();
+                              },
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.02,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 50.w),
+                              child: Buttons_without_icon(
+                                function: () {
+                                  if (formKey.currentState!.validate()) {
+                                    print('done');
+                                  } else {
+                                    print('not done');
+                                  }
+                                },
+                                num_hieght: 90.h,
+                                text_button_name: 'Next Step >',
+                                button_color: mainColor,
+                                num_border: 30,
+                                num_fontsize: 20,
+                                text_fontwwieght: FontWeight.normal,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            )
+                          ],
+                        ),
+                      )),
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

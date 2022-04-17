@@ -48,13 +48,13 @@ class EducationArticlesScreen extends StatelessWidget {
                           left: 11, right: 10, bottom: 28, top: 7),
                       child: Text(
                         "Helloasdasdasdsadasdasdsssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                            "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                            "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                            "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                            "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                            "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                            "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                            "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss nagy",
+                        "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+                        "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+                        "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+                        "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+                        "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+                        "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+                        "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss nagy",
                         style: TextStyle(
                           fontSize: 25.sp,
                           color: Color(0xFF5D240C),

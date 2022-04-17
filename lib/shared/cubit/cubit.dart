@@ -69,21 +69,35 @@ class AppCubit extends Cubit<AppStates> {
     emit(PolicyTermsChangeState());
   }
 
+  bool check = true;
+
+  void ChangeCheck() {
+    if (policyTerms == true) {
+      check = true;
+      emit(ChangeCheckValueState());
+    } else {
+      check = false;
+      emit(ChangeCheckValueState());
+    }
+  }
+
   bool obsecure = true;
 
   void changePasswordStatus() {
     obsecure = !obsecure;
     emit(ChangePasswordState());
   }
-  Color activecolor=mainColor;
+
+  Color activecolor = mainColor;
+
   void changeactiveStatus(value) {
-    activecolor= Colors.amberAccent;
+    activecolor = Colors.amberAccent;
     value = !value;
 
     emit(ChangeactiveState());
   }
 
-  String? dropDownValue ;
+  String? dropDownValue;
 
   List<String> drop_down_blood_group_item = [
     "A+",
@@ -117,30 +131,45 @@ class AppCubit extends Cubit<AppStates> {
     "helwsadasdasdan",
     "helwfffffan",
     "helwaggn",
-    "helwhhhhhan","hejjjjlwan",
+    "helwhhhhhan",
+    "hejjjjlwan",
     "helwasfdasdfasan",
     "helwcxvcvan",
     "helwcxvcxan",
     "helwcxvan",
-    "helwavxcxcvn","heladsfwan","hesadlwan","heldasdaswwdan","hewdasdlwan","hwdawdelwan","helwawdadn","helwdawdwan","helwdwadan","helwdwdawdan","hewdaalwan","hewdaawdlwan","helwadwadawn","helwadwan",
+    "helwavxcxcvn",
+    "heladsfwan",
+    "hesadlwan",
+    "heldasdaswwdan",
+    "hewdasdlwan",
+    "hwdawdelwan",
+    "helwawdadn",
+    "helwdawdwan",
+    "helwdwadan",
+    "helwdwdawdan",
+    "hewdaalwan",
+    "hewdaawdlwan",
+    "helwadwadawn",
+    "helwadwan",
   ];
+
   void ChangeLocationCityValue(String? value) {
     locationcityvalue = value!;
     emit(ChangeLocationValueState());
   }
 
-  ImagePicker a=new ImagePicker();
+  ImagePicker a = new ImagePicker();
   dynamic x;
-  void CameraImage()async{
-    dynamic b =await a.pickImage(source: ImageSource.camera);
+
+  void CameraImage() async {
+    dynamic b = await a.pickImage(source: ImageSource.camera);
     x = File(b.path);
     emit(ChangeCameraValueState());
   }
-  void GalleryImage()async{
-    dynamic b =await a.pickImage(source: ImageSource.gallery);
+
+  void GalleryImage() async {
+    dynamic b = await a.pickImage(source: ImageSource.gallery);
     x = File(b.path);
     emit(ChangeGalleryValueState());
   }
-
-
 }

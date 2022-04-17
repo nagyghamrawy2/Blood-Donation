@@ -12,3 +12,5 @@ class ChangeDropDownValueState extends AppStates{}
 class ChangeLocationValueState extends AppStates{}
 class ChangeCameraValueState extends AppStates{}
 class ChangeGalleryValueState extends AppStates{}
+class ChangeCheckValueState extends AppStates{}
+
