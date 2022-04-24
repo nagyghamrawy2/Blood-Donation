@@ -1,26 +1,39 @@
 import 'package:dio/dio.dart';
 class DioHelper {
-  static late Dio dio;
+  static Dio? dio;
 
   static init() {
     dio = Dio(
       BaseOptions(
-        baseUrl: '',
+        baseUrl: 'http://blood-bank2022.herokuapp.com/api/v1/',
         receiveDataWhenStatusError: true,
       ),
     );
   }
   static Future<Response> getData({
     required String url,
-    required Map<String , dynamic> query,
+    Map<String , dynamic>? query,
+    String? token,
   }) async {
-    return await dio.get(url, queryParameters: query,);
+    dio!.options.headers ={
+      'Authorization' : 'bearer ${token}',
+      'accept' : 'application/json' ,
+    };
+    return await dio!.get(url, queryParameters: query,);
   }
   static Future<Response> postData({
     required String url,
     Map<String, dynamic>? query,
-    required Map<String, dynamic> data,
+    Map<String, dynamic>? data,
+    String? token,
   }) async {
-    return dio.post(url, queryParameters: query, data: data);
+    dio!.options.headers ={
+      'Authorization' : 'Bearer ${token}',
+    };
+    return dio!.post(
+        url,
+        queryParameters: query,
+        data: data,
+    );
   }
 }

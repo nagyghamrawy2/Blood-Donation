@@ -1,0 +1,1 @@
+const USER_DATA = 'show-donor';

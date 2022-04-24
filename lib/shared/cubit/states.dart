@@ -8,10 +8,14 @@ class BloodValueChangeState extends AppStates{}
 class PolicyTermsChangeState extends AppStates{}
 class ChangePasswordState extends AppStates {}
 class ChangeConfirmPasswordState extends AppStates {}
-class ChangeactiveState extends AppStates {}
+class ChangeActiveState extends AppStates {}
 class ChangeDropDownValueState extends AppStates{}
 class ChangeLocationValueState extends AppStates{}
 class ChangeCameraValueState extends AppStates{}
 class ChangeGalleryValueState extends AppStates{}
 class ChangeCheckValueState extends AppStates{}
+
+class AppLoadingUserDataState extends AppStates{}
+class AppSuccessUserDataState extends AppStates{}
+class AppErrorUserDataState extends AppStates{}
 
