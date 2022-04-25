@@ -1,5 +1,6 @@
 import 'dart:core';
 import 'dart:io';
+import 'package:blood_bank/models/register_model.dart';
 import 'package:blood_bank/models/user_model.dart';
 import 'package:blood_bank/modules/add_request/addRequest.dart';
 import 'package:blood_bank/modules/education/education.dart';
@@ -196,6 +197,41 @@ class AppCubit extends Cubit<AppStates> {
       print('hi');
       model = Response.fromJson(value.data);
       print(model!.message);
+      print('bye');
+      emit(AppSuccessUserDataState());
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(AppErrorUserDataState());
+    });
+  }
+
+  Register? registerModel;
+
+  void registerData() {
+    emit(AppLoadingUserDataState());
+    DioHelper.postData(
+      url: 'register',
+      data: {
+        "name": "hesham ahmed",
+        "email": "atch71@gmail.com",
+        "phone_number": "0106331875",
+        "password": '123456Ha@',
+        "password_confirmation": '123456Ha@',
+        "date_of_birth": "1996-07-7",
+        "blood_type": "A+",
+        "governorate_id": "1",
+        "city_id": "2",
+        "last_donate_time": "2022-1-7",
+      }
+
+    ).then((value) {
+      print(value.data);
+      print('hi');
+      registerModel = Register.fromJson(value.data);
+      print(registerModel!.status);
+      print(registerModel!.message);
+      print(registerModel!.errors);
+      print(registerModel!.user);
       print('bye');
       emit(AppSuccessUserDataState());
     }).catchError((onError) {

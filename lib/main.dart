@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         designSize: Size(300, 1200),
         minTextAdapt: true,
         splitScreenMode: true, // a2dr aft7 2 app m3 b3d
-        builder: () =>BlocProvider( create: (context) =>AppCubit()..getUserData(),
+        builder: () =>BlocProvider( create: (context) =>AppCubit()..registerData(),
                 child: BlocConsumer<AppCubit,AppStates>(
                   builder: (context, state) {
                     return MaterialApp(
