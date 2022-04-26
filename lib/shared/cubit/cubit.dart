@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:blood_bank/models/register_model.dart';
 import 'package:blood_bank/models/user_model.dart';
 import 'package:blood_bank/modules/add_request/addRequest.dart';
+import 'package:blood_bank/modules/chat/messageModel.dart';
 import 'package:blood_bank/modules/education/education.dart';
 import 'package:blood_bank/modules/home/homeScreen.dart';
 import 'package:blood_bank/modules/profile/profile.dart';
@@ -11,7 +12,7 @@ import 'package:blood_bank/shared/Network/Remote/dio_helper.dart';
 import 'package:blood_bank/shared/Network/end_points.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -99,7 +100,6 @@ class AppCubit extends Cubit<AppStates> {
     emit(ChangeConfirmPasswordState());
   }
 
-
   Color activecolor = mainColor;
 
   void changeactiveStatus(value) {
@@ -184,6 +184,7 @@ class AppCubit extends Cubit<AppStates> {
     x = File(b.path);
     emit(ChangeGalleryValueState());
   }
+
   // userModel? model;
   Response? model;
 
@@ -191,7 +192,8 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppLoadingUserDataState());
     DioHelper.postData(
       url: USER_DATA,
-      token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYmxvb2QtYmFuazIwMjIuaGVyb2t1YXBwLmNvbS9hcGkvdjEvbG9naW4iLCJpYXQiOjE2NTA3NDI0NjIsImV4cCI6NTU2NTA3NDI0NjIsIm5iZiI6MTY1MDc0MjQ2MiwianRpIjoiN2ZKVE1jWUdkVUl1ejZSOSIsInN1YiI6IjUiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.v-VnmKz8Xc812w2ybUm_xbdtMAYfjUXBxZQ2ghKkEtg',
+      token:
+          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYmxvb2QtYmFuazIwMjIuaGVyb2t1YXBwLmNvbS9hcGkvdjEvbG9naW4iLCJpYXQiOjE2NTA3NDI0NjIsImV4cCI6NTU2NTA3NDI0NjIsIm5iZiI6MTY1MDc0MjQ2MiwianRpIjoiN2ZKVE1jWUdkVUl1ejZSOSIsInN1YiI6IjUiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.v-VnmKz8Xc812w2ybUm_xbdtMAYfjUXBxZQ2ghKkEtg',
     ).then((value) {
       print(value.data);
       print('hi');
@@ -209,22 +211,18 @@ class AppCubit extends Cubit<AppStates> {
 
   void registerData() {
     emit(AppLoadingUserDataState());
-    DioHelper.postData(
-      url: 'register',
-      data: {
-        "name": "hesham ahmed",
-        "email": "atch71@gmail.com",
-        "phone_number": "0106331875",
-        "password": '123456Ha@',
-        "password_confirmation": '123456Ha@',
-        "date_of_birth": "1996-07-7",
-        "blood_type": "A+",
-        "governorate_id": "1",
-        "city_id": "2",
-        "last_donate_time": "2022-1-7",
-      }
-
-    ).then((value) {
+    DioHelper.postData(url: 'register', data: {
+      "name": "hesham ahmed",
+      "email": "atch71@gmail.com",
+      "phone_number": "0106331875",
+      "password": '123456Ha@',
+      "password_confirmation": '123456Ha@',
+      "date_of_birth": "1996-07-7",
+      "blood_type": "A+",
+      "governorate_id": "1",
+      "city_id": "2",
+      "last_donate_time": "2022-1-7",
+    }).then((value) {
       print(value.data);
       print('hi');
       registerModel = UserModel.fromJson(value.data);
@@ -265,4 +263,59 @@ class AppCubit extends Cubit<AppStates> {
       emit(AppErrorUserDataState());
     });
   }
+
+  // void sendMessage({
+  //   required String reciverId,
+  //   required String date,
+  //   required String text,
+  // }) {
+  //   MessageModel model = MessageModel(
+  //       senderId: usermodel.uid, reciverId: reciverId, date: date, text: text);
+  //   FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(usermodel.uid)
+  //       .collection("chats")
+  //       .doc(reciverId)
+  //       .collection("messages")
+  //       .add(model.toMap())
+  //       .then((value) {
+  //     emit(SendMessageSuccessState());
+  //   }).catchError((error) {
+  //     emit(SendMessageErrorState());
+  //   });
+  //   FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(reciverId)
+  //       .collection("chats")
+  //       .doc(usermodel.uid)
+  //       .collection("messages")
+  //       .add(model.toMap())
+  //       .then((value) {
+  //     emit(SendMessageSuccessState());
+  //   }).catchError((error) {
+  //     emit(SendMessageErrorState());
+  //   });
+  // }
+  //
+  // List<MessageModel> messages = [];
+  //
+  // void getMessages({
+  //   required String reciverId,
+  // }) {
+  //   FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(usermodel.uid)
+  //       .collection('chats')
+  //       .doc(reciverId)
+  //       .collection('messages')
+  //       .orderBy('datetime')
+  //       .snapshots()
+  //       .listen((event) {
+  //     messages = [];
+  //     event.docs.forEach((element) {
+  //       messages.add(MessageModel.fromJason(element.data()));
+  //     });
+  //     emit(GetMessagesSuccessState());
+  //   });
+  // }
 }

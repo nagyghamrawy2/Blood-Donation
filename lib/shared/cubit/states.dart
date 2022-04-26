@@ -14,7 +14,9 @@ class ChangeLocationValueState extends AppStates{}
 class ChangeCameraValueState extends AppStates{}
 class ChangeGalleryValueState extends AppStates{}
 class ChangeCheckValueState extends AppStates{}
-
+class SendMessageSuccessState extends AppStates{}
+class SendMessageErrorState extends AppStates{}
+class GetMessagesSuccessState extends AppStates{}
 class AppLoadingUserDataState extends AppStates{}
 class AppSuccessUserDataState extends AppStates{}
 class AppErrorUserDataState extends AppStates{}

@@ -71,6 +71,7 @@ class FindDonorScreen extends StatelessWidget {
                           height: 60,
                           width: double.infinity,
                           child: DropdownButtonFormField<String>(
+
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
