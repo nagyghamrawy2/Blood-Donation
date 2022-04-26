@@ -39,141 +39,146 @@ class LoginScreen extends StatelessWidget {
         },
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
-          return Scaffold(
-            body: SingleChildScrollView(
-              child: Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    ClipPath(
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 280,
-                        color: mainColor,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Text(
-                              'Welcome back,',
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Text(
-                              'Login !',
-                              style: TextStyle(
+          return GestureDetector(
+          onTap: () {
+          FocusScope.of(context).unfocus();
+          },
+            child: Scaffold(
+              body: SingleChildScrollView(
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      ClipPath(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 280,
+                          color: mainColor,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text(
+                                'Welcome back,',
+                                style: TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ],
-                        ),
-                      ),
-                      clipper: CustomClipPath(),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.95,
-                      child: Textformfield_with_border(
-                        controllerName: emailcontroller,
-                        keyboardType: TextInputType.emailAddress,
-                        hintText: 'Enter your Email address',
-                        text_label: 'Email address',
-                        num_border: 10,
-                        haveIcon: true,
-                        iconName: 'assets/images/emaillogin.png',
-                        validatorText: 'Email address must not empty',
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.95,
-                      child: Textformfield_with_border(
-                        controllerName: passwordcontroller,
-                        keyboardType: TextInputType.visiblePassword,
-                        obsecure: AppLoginCubit.get(context).obsecure,
-                        onFieldSubmitted: (value) {
-                          if (formKey.currentState!.validate()) {
-                            AppLoginCubit.get(context).UserLogin(
-                              email: emailcontroller.text,
-                              Password: passwordcontroller.text,
-                            );
-                          }
-                        },
-                        hintText: 'Enter your Password',
-                        text_label: 'Password',
-                        num_border: 10,
-                        haveIcon: true,
-                        isPasswordField: true,
-                        validatorText: 'Password must be not empty',
-                        suffixFunction: () {
-                          AppLoginCubit.get(context).changePasswordStatus();
-                        },
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        // Padding(
-                        //   padding: const EdgeInsets.only(left: 5),
-                        //   child: Checkbox(
-                        //     shape: const RoundedRectangleBorder(
-                        //       borderRadius:
-                        //           BorderRadius.all(Radius.circular(10)),
-                        //     ),
-                        //     activeColor: mainColor,
-                        //     value: true,
-                        //     onChanged: (value) {
-                        //       cubit.changeactiveStatus(value);
-                        //     },
-                        //   ),
-                        // ),
-                        // Text('Remember me',maxLines: 1,
-                        //     style: const TextStyle(
-                        //         color: mainColor,
-                        //         fontWeight: FontWeight.bold)),
-                        Spacer(),
-                        MaterialButton(
-                          onPressed: ()
-                          {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => ForgetPasswordScreen()));
-                          },
-                          child: Text(
-                            'Forget password ?',
-                            style: TextStyle(
-                                color: mainColor,
-                                fontWeight: FontWeight.bold),
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                'Login !',
+                                style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 60,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 100.0),
-                      child: Buttons_without_icon(
-                          function: () {
+                        clipper: CustomClipPath(),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.95,
+                        child: Textformfield_with_border(
+                          controllerName: emailcontroller,
+                          keyboardType: TextInputType.emailAddress,
+                          hintText: 'Enter your Email address',
+                          text_label: 'Email address',
+                          num_border: 10,
+                          haveIcon: true,
+                          iconName: 'assets/images/emaillogin.png',
+                          validatorText: 'Email address must not empty',
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.95,
+                        child: Textformfield_with_border(
+                          controllerName: passwordcontroller,
+                          keyboardType: TextInputType.visiblePassword,
+                          obsecure: AppLoginCubit.get(context).obsecure,
+                          onFieldSubmitted: (value) {
                             if (formKey.currentState!.validate()) {
                               AppLoginCubit.get(context).UserLogin(
-                                  email: emailcontroller.text,
-                                  Password: passwordcontroller.text);
+                                email: emailcontroller.text,
+                                Password: passwordcontroller.text,
+                              );
                             }
                           },
-                          num_hieght: 52,
-                          text_button_name: 'Login',
-                          button_color: mainColor,
-                          num_border: 25,
-                          num_fontsize: 20,
-                          text_fontwwieght: FontWeight.normal),
-                    )
-                  ],
+                          hintText: 'Enter your Password',
+                          text_label: 'Password',
+                          num_border: 10,
+                          haveIcon: true,
+                          isPasswordField: true,
+                          validatorText: 'Password must be not empty',
+                          suffixFunction: () {
+                            AppLoginCubit.get(context).changePasswordStatus();
+                          },
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          // Padding(
+                          //   padding: const EdgeInsets.only(left: 5),
+                          //   child: Checkbox(
+                          //     shape: const RoundedRectangleBorder(
+                          //       borderRadius:
+                          //           BorderRadius.all(Radius.circular(10)),
+                          //     ),
+                          //     activeColor: mainColor,
+                          //     value: true,
+                          //     onChanged: (value) {
+                          //       cubit.changeactiveStatus(value);
+                          //     },
+                          //   ),
+                          // ),
+                          // Text('Remember me',maxLines: 1,
+                          //     style: const TextStyle(
+                          //         color: mainColor,
+                          //         fontWeight: FontWeight.bold)),
+                          Spacer(),
+                          MaterialButton(
+                            onPressed: ()
+                            {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => ForgetPasswordScreen()));
+                            },
+                            child: Text(
+                              'Forget password ?',
+                              style: TextStyle(
+                                  color: mainColor,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 60,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                        child: Buttons_without_icon(
+                            function: () {
+                              if (formKey.currentState!.validate()) {
+                                AppLoginCubit.get(context).UserLogin(
+                                    email: emailcontroller.text,
+                                    Password: passwordcontroller.text);
+                              }
+                            },
+                            num_hieght: 52,
+                            text_button_name: 'Login',
+                            button_color: mainColor,
+                            num_border: 25,
+                            num_fontsize: 20,
+                            text_fontwwieght: FontWeight.normal),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
