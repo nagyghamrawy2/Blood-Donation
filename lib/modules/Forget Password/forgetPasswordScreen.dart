@@ -63,15 +63,18 @@ class ForgetPasswordScreen extends StatelessWidget {
                 SizedBox(
                   height: 80.h,
                 ),
-                Textformfield_with_border(
-                  controllerName: emailcontroller,
-                  keyboardType: TextInputType.emailAddress,
-                  obsecure: false,
-                  hintText: 'Enter your email',
-                  text_label: 'Email address',
-                  num_border: 10,
-                  validatorText: 'Email address must not be empty',
-                  haveIcon: false,
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  child: Textformfield_with_border(
+                    controllerName: emailcontroller,
+                    keyboardType: TextInputType.emailAddress,
+                    obsecure: false,
+                    hintText: 'Enter your email',
+                    text_label: 'Email address',
+                    num_border: 10,
+                    validatorText: 'Email address must not be empty',
+                    haveIcon: false,
+                  ),
                 ),
                 SizedBox(
                   height: 40.h,

@@ -205,7 +205,7 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  Register? registerModel;
+  UserModel? registerModel;
 
   void registerData() {
     emit(AppLoadingUserDataState());
@@ -227,11 +227,37 @@ class AppCubit extends Cubit<AppStates> {
     ).then((value) {
       print(value.data);
       print('hi');
-      registerModel = Register.fromJson(value.data);
+      registerModel = UserModel.fromJson(value.data);
       print(registerModel!.status);
       print(registerModel!.message);
       print(registerModel!.errors);
       print(registerModel!.user);
+      print('bye');
+      emit(AppSuccessUserDataState());
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(AppErrorUserDataState());
+    });
+  }
+  UserModel? LoginModel;
+
+  void LoginData() {
+    emit(AppLoadingUserDataState());
+    DioHelper.postData(
+        url: LOGIN,
+        data: {
+          "email": "atch71@gmail.com",
+          "password": '123456Ha@',
+        }
+
+    ).then((value) {
+      print(value.data);
+      print('hi');
+      LoginModel = UserModel.fromJson(value.data);
+      print(LoginModel!.status);
+      print(LoginModel!.message);
+      print(LoginModel!.errors);
+      print(LoginModel!.user);
       print('bye');
       emit(AppSuccessUserDataState());
     }).catchError((onError) {

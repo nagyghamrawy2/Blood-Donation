@@ -2,6 +2,7 @@ import 'package:blood_bank/modules/add_request/addRequest.dart';
 import 'package:blood_bank/modules/change%20password/changePassword.dart';
 import 'package:blood_bank/modules/myInformation/myInformation.dart';
 import 'package:blood_bank/modules/request/requestScreen.dart';
+import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
@@ -225,7 +226,7 @@ class ProfileScreen extends StatelessWidget {
                       img_width: 35,
                       img_height: 35,
                       label_name: 'Sign out',
-                      function: (){},
+                      function: (){Signout(context);},
                     ),
                     const SizedBox(height: 14.0,),
                   ],

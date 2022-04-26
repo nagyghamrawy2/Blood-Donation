@@ -14,6 +14,7 @@ import 'package:blood_bank/modules/request/requestScreen.dart';
 import 'package:blood_bank/modules/sign_up/SignUpForm.dart';
 import 'package:blood_bank/modules/sign_up/SignUpForm2.dart';
 import 'package:blood_bank/modules/sign_up/SignUpForm3.dart';
+import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/Network/Remote/dio_helper.dart';
 import 'package:blood_bank/shared/bloc_observer.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
@@ -29,44 +30,53 @@ import 'modules/Forget Password/forgetPasswordScreen.dart';
 import 'modules/Verification/verificationScreen.dart';
 import 'modules/change password/changePassword.dart';
 import 'shared/Network/local/Cache_helper.dart';
-
-void main() {
+void main() async {
   Bloc.observer = SimpleBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
-  runApp(const MyApp());
+  await CacheHelper.init();
+  token  = CacheHelper.getData(key: 'token');
+  Widget widget;
+  if(token != null)
+    {
+      widget=HomeLayout();
+    }
+  else
+    widget=LoginScreen();
+  runApp(MyApp(StartWidget:widget));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+final Widget StartWidget;
 
+  const MyApp({Key? key, required this.StartWidget}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: Size(300, 1200),
-        minTextAdapt: true,
-        splitScreenMode: true, // a2dr aft7 2 app m3 b3d
-        builder: () =>BlocProvider( create: (context) =>AppCubit()..registerData(),
-                child: BlocConsumer<AppCubit,AppStates>(
-                  builder: (context, state) {
-                    return MaterialApp(
-                      theme: lightTheme,
-                      debugShowCheckedModeBanner: false,
-                      builder: (context, widget) {
-                        // elle hwa lma tege t3ml ay t8yeer msln t8yeer el5t myt2sr4
-                        ScreenUtil.setContext(context);
-                        return MediaQuery(
-                          data: MediaQuery.of(context).copyWith(
-                              textScaleFactor: 1.0),
-                          child: widget!,
-                        );
-                      },
-                      home: MyInformationScreen(),
-                    );
-                  },
-                  listener: (context, state) {},
-                ),
+      designSize: Size(300, 1200),
+      minTextAdapt: true,
+      splitScreenMode: true, // a2dr aft7 2 app m3 b3d
+      builder: () =>BlocProvider( create: (context) =>AppCubit(),
+        child: BlocConsumer<AppCubit,AppStates>(
+          builder: (context, state) {
+            return MaterialApp(
+              theme: lightTheme,
+              debugShowCheckedModeBanner: false,
+              builder: (context, widget) {
+                // elle hwa lma tege t3ml ay t8yeer msln t8yeer el5t myt2sr4
+                ScreenUtil.setContext(context);
+                return MediaQuery(
+                  data: MediaQuery.of(context).copyWith(
+                      textScaleFactor: 1.0),
+                  child: widget!,
+                );
+              },
+              home: StartWidget,
+            );
+          },
+          listener: (context, state) {},
         ),
+      ),
     );
   }
 }

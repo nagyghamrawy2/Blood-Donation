@@ -4,6 +4,7 @@ import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,6 +59,7 @@ class Textformfield_with_border extends StatelessWidget {
     required this.text_label,
     required this.num_border,
     this.suffixFunction,
+    this.onFieldSubmitted,
     required this.validatorText,
     required this.haveIcon,
     this.iconName,
@@ -72,6 +74,7 @@ class Textformfield_with_border extends StatelessWidget {
   late double num_border;
   late String validatorText;
   Function? suffixFunction;
+  Function? onFieldSubmitted;
 
   late bool haveIcon;
   String? iconName;
@@ -82,6 +85,11 @@ class Textformfield_with_border extends StatelessWidget {
       controller: controllerName,
       keyboardType: keyboardType,
       obscureText: obsecure,
+      onFieldSubmitted:(value)
+      {
+        onFieldSubmitted!(value);
+      }
+      ,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return validatorText;
@@ -130,6 +138,48 @@ class Textformfield_with_border extends StatelessWidget {
     );
   }
 }
+void ShowToast({
+  required String text,
+  required ToastStates state,
+}){
+  Fluttertoast.showToast(
+      msg: text,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 5,
+      backgroundColor: ChooseToastColor(state),
+      textColor: Colors.white,
+      fontSize: 16.0
+  );
+}
+enum ToastStates{SUCCESS,ERROR,WARING}
+
+Color ChooseToastColor(ToastStates state){
+  Color color;
+
+  switch(state)
+  {
+    case ToastStates.SUCCESS:
+      color = Colors.green;
+      break;
+    case ToastStates.ERROR:
+      color = Colors.red;
+      break;
+    case ToastStates.WARING:
+      color = Colors.yellow;
+      break;
+  }
+  return color;
+}
+void navigateAndFinish(context,widget) => Navigator.pushAndRemoveUntil(
+  context,
+  MaterialPageRoute(
+    builder: (context) => widget,
+  ),
+      (route) {
+    return false;
+  },
+);
 
 class Textformfield_with_icon extends StatelessWidget {
   Textformfield_with_icon(
