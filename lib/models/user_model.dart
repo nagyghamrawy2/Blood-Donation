@@ -10,7 +10,6 @@ class UserModel {
     errors= json['errors'] != null ? Errors.fromJson(json["errors"]) : null;
     user= json['user'] != null ? UserData.fromJson(json['user']) : null;
   }
-
 }
 
 class UserData {

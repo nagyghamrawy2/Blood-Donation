@@ -1,3 +1,4 @@
+import 'package:blood_bank/models/profile_model.dart';
 import 'package:blood_bank/modules/editProfile/editProfile.dart';
 import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/components/components.dart';
@@ -19,21 +20,24 @@ class MyInformationScreen extends StatelessWidget {
     'Weight',
     'Height',
   ];
-  final List<String> apiInfo = [
-    // '${userDataModel?.user?.email}',
-    // '${userDataModel?.user?.phoneNumber}',
-    // '${userDataModel?.user?.cityId},${userDataModel?.user?.governorateId}',
-    // '${userDataModel?.user?.dateOfBirth}',
-    // '${userDataModel?.user?.bloodType}',
-    // userDataModel?.user?.weight != null ? '${userDataModel?.user?.weight} KG' : 'not entered yet',
-    // userDataModel?.user?.height != null ? '${userDataModel?.user?.height} CM' : 'not entered yet',
-  ];
+
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
+        AppCubit cubit = AppCubit.get(context);
+        List<String> apiInfo = [
+          '${cubit.profileModel?.user?.email}',
+          '${cubit.profileModel?.user?.phoneNumber}',
+          '${cubit.profileModel?.user?.city?.cityName},${cubit.profileModel?.user?.governorate?.governorateName}',
+          '${cubit.profileModel?.user?.dateOfBirth}',
+          '${cubit.profileModel?.user?.bloodType}',
+          cubit.profileModel?.user?.weight != null ? '${cubit.profileModel?.user?.weight} KG' : '',
+          cubit.profileModel?.user?.height != null ? '${cubit.profileModel?.user?.height} CM' : '',
+        ];
+        String image = cubit.profileModel?.user?.profilePicture != null ? '${cubit.profileModel?.user?.profilePicture}' : 'assets/images/noImage.png';
         return Scaffold(
           appBar: AppBar(
             title: const Text(
@@ -57,16 +61,16 @@ class MyInformationScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 40.0,top: 10),
                         child: Column(
-                          children: const [
+                          children: [
                             CircleAvatar(
                               radius: 90,
-                              backgroundImage: AssetImage('assets/images/pp.png'),
+                              backgroundImage: AssetImage(image),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
-                              'Hesham Ahmed',
+                              '${cubit.profileModel?.user?.name}',
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,

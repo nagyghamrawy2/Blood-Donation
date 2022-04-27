@@ -21,7 +21,7 @@ class ChangePasswordScreen extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => AppChangePasswordCubit(),
       child: BlocConsumer<AppChangePasswordCubit, AppChangePasswordStates>(
-        listener: (context, state) {
+        listener: (context, state){
           if (state is AppChangePasswordSuccessState) {
             if (state.changePassword.status) {
               // print(state.changePassword.message);

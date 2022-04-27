@@ -1,5 +1,6 @@
 import 'dart:core';
 import 'dart:io';
+import 'package:blood_bank/models/profile_model.dart';
 import 'package:blood_bank/models/user_model.dart';
 import 'package:blood_bank/modules/add_request/addRequest.dart';
 import 'package:blood_bank/modules/chat/messageModel.dart';
@@ -7,14 +8,17 @@ import 'package:blood_bank/modules/education/education.dart';
 import 'package:blood_bank/modules/home/homeScreen.dart';
 import 'package:blood_bank/modules/profile/profile.dart';
 import 'package:blood_bank/modules/request/requestScreen.dart';
+import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/Network/Remote/dio_helper.dart';
 import 'package:blood_bank/shared/Network/end_points.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
+
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
@@ -184,114 +188,112 @@ class AppCubit extends Cubit<AppStates> {
     emit(ChangeGalleryValueState());
   }
 
-  UserModel? registerModel;
-  void registerData() {
+  // UserModel? registerModel;
+  //
+  // void registerData() {
+  //   emit(AppLoadingUserDataState());
+  //   DioHelper.postData(url: 'register', data: {
+  //     "name": "hesham ahmed",
+  //     "email": "atch71@gmail.com",
+  //     "phone_number": "0106331875",
+  //     "password": '123456Ha@',
+  //     "password_confirmation": '123456Ha@',
+  //     "date_of_birth": "1996-07-7",
+  //     "blood_type": "A+",
+  //     "governorate_id": "1",
+  //     "city_id": "2",
+  //     "last_donate_time": "2022-1-7",
+  //   }).then((value) {
+  //     print(value.data);
+  //     print('hi');
+  //     registerModel = UserModel.fromJson(value.data);
+  //     print(registerModel!.status);
+  //     print(registerModel!.message);
+  //     print(registerModel!.errors);
+  //     print(registerModel!.user);
+  //     print('bye');
+  //     emit(AppSuccessUserDataState());
+  //   }).catchError((onError) {
+  //     print(onError.toString());
+  //     emit(AppErrorUserDataState());
+  //   });
+  // }
+
+  ProfileModel? profileModel;
+
+  void getUserData() {
     emit(AppLoadingUserDataState());
-    DioHelper.postData(url: 'register', data: {
-      "name": "hesham ahmed",
-      "email": "atch71@gmail.com",
-      "phone_number": "0106331875",
-      "password": '123456Ha@',
-      "password_confirmation": '123456Ha@',
-      "date_of_birth": "1996-07-7",
-      "blood_type": "A+",
-      "governorate_id": "1",
-      "city_id": "2",
-      "last_donate_time": "2022-1-7",
-    }).then((value) {
+    DioHelper.getData(
+      url: PROFILE,
+      token: token,
+    ).then((value){
       print(value.data);
       print('hi');
-      registerModel = UserModel.fromJson(value.data);
-      print(registerModel!.status);
-      print(registerModel!.message);
-      print(registerModel!.errors);
-      print(registerModel!.user);
+      profileModel = ProfileModel.fromJson(value.data);
+      print(profileModel?.status);
+      print(profileModel?.message);
+      print(profileModel?.user);
+      print(profileModel?.user?.dateOfBirth);
       print('bye');
       emit(AppSuccessUserDataState());
-    }).catchError((onError) {
+    }).catchError((onError){
       print(onError.toString());
       emit(AppErrorUserDataState());
     });
   }
-  UserModel? LoginModel;
 
-  void LoginData() {
-    emit(AppLoadingUserDataState());
-    DioHelper.postData(
-        url: LOGIN,
-        data: {
-          "email": "atch71@gmail.com",
-          "password": '123456Ha@',
-        }
-
-    ).then((value) {
-      print(value.data);
-      print('hi');
-      LoginModel = UserModel.fromJson(value.data);
-      print(LoginModel!.status);
-      print(LoginModel!.message);
-      print(LoginModel!.errors);
-      print(LoginModel!.user);
-      print('bye');
-      emit(AppSuccessUserDataState());
-    }).catchError((onError) {
-      print(onError.toString());
-      emit(AppErrorUserDataState());
-    });
-  }
-
-  // void sendMessage({
-  //   required String reciverId,
-  //   required String date,
-  //   required String text,
-  // }) {
-  //   MessageModel model = MessageModel(
-  //       senderId: usermodel.uid, reciverId: reciverId, date: date, text: text);
-  //   FirebaseFirestore.instance
-  //       .collection('users')
-  //       .doc(usermodel.uid)
-  //       .collection("chats")
-  //       .doc(reciverId)
-  //       .collection("messages")
-  //       .add(model.toMap())
-  //       .then((value) {
-  //     emit(SendMessageSuccessState());
-  //   }).catchError((error) {
-  //     emit(SendMessageErrorState());
-  //   });
-  //   FirebaseFirestore.instance
-  //       .collection('users')
-  //       .doc(reciverId)
-  //       .collection("chats")
-  //       .doc(usermodel.uid)
-  //       .collection("messages")
-  //       .add(model.toMap())
-  //       .then((value) {
-  //     emit(SendMessageSuccessState());
-  //   }).catchError((error) {
-  //     emit(SendMessageErrorState());
-  //   });
-  // }
-  //
-  // List<MessageModel> messages = [];
-  //
-  // void getMessages({
-  //   required String reciverId,
-  // }) {
-  //   FirebaseFirestore.instance
-  //       .collection('users')
-  //       .doc(usermodel.uid)
-  //       .collection('chats')
-  //       .doc(reciverId)
-  //       .collection('messages')
-  //       .orderBy('datetime')
-  //       .snapshots()
-  //       .listen((event) {
-  //     messages = [];
-  //     event.docs.forEach((element) {
-  //       messages.add(MessageModel.fromJason(element.data()));
-  //     });
-  //     emit(GetMessagesSuccessState());
-  //   });
-  // }
+// void sendMessage({
+//   required String reciverId,
+//   required String date,
+//   required String text,
+// }) {
+//   MessageModel model = MessageModel(
+//       senderId: usermodel.uid, reciverId: reciverId, date: date, text: text);
+//   FirebaseFirestore.instance
+//       .collection('users')
+//       .doc(usermodel.uid)
+//       .collection("chats")
+//       .doc(reciverId)
+//       .collection("messages")
+//       .add(model.toMap())
+//       .then((value) {
+//     emit(SendMessageSuccessState());
+//   }).catchError((error) {
+//     emit(SendMessageErrorState());
+//   });
+//   FirebaseFirestore.instance
+//       .collection('users')
+//       .doc(reciverId)
+//       .collection("chats")
+//       .doc(usermodel.uid)
+//       .collection("messages")
+//       .add(model.toMap())
+//       .then((value) {
+//     emit(SendMessageSuccessState());
+//   }).catchError((error) {
+//     emit(SendMessageErrorState());
+//   });
+// }
+//
+// List<MessageModel> messages = [];
+//
+// void getMessages({
+//   required String reciverId,
+// }) {
+//   FirebaseFirestore.instance
+//       .collection('users')
+//       .doc(usermodel.uid)
+//       .collection('chats')
+//       .doc(reciverId)
+//       .collection('messages')
+//       .orderBy('datetime')
+//       .snapshots()
+//       .listen((event) {
+//     messages = [];
+//     event.docs.forEach((element) {
+//       messages.add(MessageModel.fromJason(element.data()));
+//     });
+//     emit(GetMessagesSuccessState());
+//   });
+// }
 }
