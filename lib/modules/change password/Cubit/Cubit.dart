@@ -1,4 +1,4 @@
-import 'package:blood_bank/models/register_model.dart';
+import 'package:blood_bank/models/user_model.dart';
 import 'package:blood_bank/modules/Login_Screen/Cubit/States.dart';
 import 'package:blood_bank/modules/change%20password/Cubit/States.dart';
 import 'package:blood_bank/shared/Constant.dart';
