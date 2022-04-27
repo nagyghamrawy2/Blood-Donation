@@ -8,17 +8,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class EditProfileScreen extends StatelessWidget {
-  EditProfileScreen({
-    Key? key,
-    this.listOfApi,
-  }) : super(key: key);
-
-  final List? listOfApi;
+  EditProfileScreen({Key? key}) : super(key: key);
 
   var name = TextEditingController();
   var emailAddress = TextEditingController();
   var phone = TextEditingController();
-  var location = TextEditingController();
+  var govId = TextEditingController();
+  var cityId = TextEditingController();
   var birthDate = TextEditingController();
   var bloodType = TextEditingController();
   var height = TextEditingController();
@@ -28,22 +24,35 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
         User? model = cubit.profileModel?.user;
+
         name = TextEditingController(text: model?.name);
         emailAddress = TextEditingController(text: model?.email);
         phone = TextEditingController(text: model?.phoneNumber);
-        location = TextEditingController();
+        govId = TextEditingController();
+        cityId = TextEditingController();
         birthDate = TextEditingController(text: model?.dateOfBirth);
         bloodType = TextEditingController(text: model?.bloodType);
-        height = TextEditingController(text: model?.height);
+        height = TextEditingController(text: model?.height.toString());
         weight = TextEditingController(text: model?.weight);
 
-        String image = model?.profilePicture != null ? '${model?.profilePicture}' : 'assets/images/noImage.png';
+        // print(name.text);
+        // print(emailAddress.text);
+        // print(phone.text);
+        // print(govId.text);
+        // print(cityId.text);
+        // print(birthDate.text);
+        // print(bloodType.text);
+        // print(height.text);
+        // print(weight.text);
+
+        String image = model?.profilePicture != null
+            ? '${model?.profilePicture}'
+            : 'assets/images/noImage.png';
 
         return Scaffold(
           appBar: AppBar(
@@ -96,16 +105,28 @@ class EditProfileScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          SignupTextField(
-                            hintText: 'Enter your location',
-                            text: 'location',
-                            controller: location,
-                            keyboardtype: TextInputType.text,
-                            validatorText: 'Location must not be empty',
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
+
+                          // //location
+                          // SignupTextField(
+                          //   hintText: 'Enter your location',
+                          //   text: 'governorate',
+                          //   controller: location,
+                          //   keyboardtype: TextInputType.text,
+                          //   validatorText: 'Location must not be empty',
+                          // ),
+                          // const SizedBox(
+                          //   height: 10,
+                          // ),
+                          // SignupTextField(
+                          //   hintText: 'Enter your location',
+                          //   text: 'city',
+                          //   controller: location,
+                          //   keyboardtype: TextInputType.text,
+                          //   validatorText: 'Location must not be empty',
+                          // ),
+                          // const SizedBox(
+                          //   height: 10,
+                          // ),
                           Container(
                               width: double.infinity,
                               height: 100,
@@ -137,11 +158,15 @@ class EditProfileScreen extends StatelessWidget {
                                       onTap: () {
                                         showDatePicker(
                                           context: context,
-                                          initialDate: DateTime.parse(birthDate.text),
+                                          initialDate:
+                                              DateTime.parse(birthDate.text),
                                           firstDate: DateTime(1900),
-                                          lastDate: DateTime.parse('2025-05-05'),
+                                          lastDate:
+                                              DateTime.parse('2025-05-05'),
                                         ).then((value) {
-                                          birthDate.text =DateFormat('yyyy-MM-dd').format(value!);
+                                          birthDate.text =
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(value!);
                                         });
                                       },
                                       decoration: InputDecoration(
@@ -177,12 +202,27 @@ class EditProfileScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          SignupTextField(
-                            hintText: 'Enter your Blood type',
-                            text: 'Blood type',
-                            controller: bloodType,
-                            keyboardtype: TextInputType.text,
-                            validatorText: 'BloodType must not be empty',
+                          DropdownButtonFormField<String>(
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(width: 1),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                            ),
+                            items: cubit.bloodGroupItem.map((label) {
+                              return DropdownMenuItem(
+                                child: Text(
+                                  label,
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                                value: label,
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              bloodType.text = value!;
+                            },
                           ),
                           const SizedBox(
                             height: 10,
@@ -210,6 +250,18 @@ class EditProfileScreen extends StatelessWidget {
                           Buttons_without_icon(
                             function: () {
                               if (formKey.currentState!.validate()) {
+                                cubit.updateUserData(
+                                  name: name.text,
+                                  email: emailAddress.text,
+                                  phone: phone.text,
+                                  dateOfBirth: birthDate.text,
+                                  bloodType: bloodType.text,
+                                  govId: 2,
+                                  cityId: 2,
+                                  height: int.parse(height.text),
+                                  weight: weight.text,
+                                  lastDonateDate: birthDate.text,
+                                );
                                 print('done');
                               } else {
                                 print('not done');

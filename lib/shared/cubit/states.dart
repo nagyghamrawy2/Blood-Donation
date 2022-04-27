@@ -18,7 +18,12 @@ class ChangeCheckValueState extends AppStates{}
 class SendMessageSuccessState extends AppStates{}
 class SendMessageErrorState extends AppStates{}
 class GetMessagesSuccessState extends AppStates{}
+
 class AppLoadingUserDataState extends AppStates{}
 class AppSuccessUserDataState extends AppStates{}
 class AppErrorUserDataState extends AppStates{}
+
+class AppLoadingUpdateUserDataState extends AppStates{}
+class AppSuccessUpdateUserDataState extends AppStates{}
+class AppErrorUpdateUserDataState extends AppStates{}
 

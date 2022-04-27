@@ -21,8 +21,8 @@ class User {
   var dateOfBirth;
   dynamic profilePicture;
   String? bloodType;
-  dynamic height;
-  dynamic weight;
+  int? height;
+  String? weight;
   Governorate? governorate;
   City? city;
 

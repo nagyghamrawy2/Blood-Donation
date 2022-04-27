@@ -545,7 +545,7 @@ class DropDownCustom extends StatelessWidget {
 
           // Down Arrow Icon
           icon: const Icon(Icons.keyboard_arrow_down),
-          items: cubit.drop_down_blood_group_item.map((String items) {
+          items: cubit.bloodGroupItem.map((String items) {
             return DropdownMenuItem(
               value: items,
               child: Text(items),

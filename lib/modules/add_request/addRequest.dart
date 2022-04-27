@@ -92,7 +92,7 @@ class AddRequestScreen extends StatelessWidget {
                               width: MediaQuery.of(context).size.width * 0.9,
                               child: GridView.builder(
                                 physics: const NeverScrollableScrollPhysics(),
-                                itemCount: cubit.blood_group_item.length,
+                                itemCount: cubit.bloodGroupItem.length,
                                 padding: const EdgeInsets.fromLTRB(13, 10, 9, 5),
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
@@ -122,7 +122,7 @@ class AddRequestScreen extends StatelessWidget {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          cubit.blood_group_item[index],
+                                          cubit.bloodGroupItem[index],
                                           style: TextStyle(
                                               color: cubit.bloodGroup == index
                                                   ? Colors.white

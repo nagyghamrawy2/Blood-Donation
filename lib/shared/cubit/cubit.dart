@@ -52,7 +52,7 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppChangeBotNavBarState());
   }
 
-  List<String> blood_group_item = [
+  List<String> bloodGroupItem = [
     "A+",
     "A-",
     "B+",
@@ -114,23 +114,13 @@ class AppCubit extends Cubit<AppStates> {
 
   String? dropDownValue;
 
-  List<String> drop_down_blood_group_item = [
-    "A+",
-    "A-",
-    "B+",
-    "B-",
-    "O+",
-    "O-",
-    "AB+",
-    "AB-"
-  ];
-
   void ChangeDropDownValue(String? value) {
     dropDownValue = value!;
     emit(ChangeDropDownValueState());
   }
 
   String? locationcityvalue;
+
   List<String> location__item = [
     "Cairo",
     "Alex",
@@ -188,37 +178,6 @@ class AppCubit extends Cubit<AppStates> {
     emit(ChangeGalleryValueState());
   }
 
-  // UserModel? registerModel;
-  //
-  // void registerData() {
-  //   emit(AppLoadingUserDataState());
-  //   DioHelper.postData(url: 'register', data: {
-  //     "name": "hesham ahmed",
-  //     "email": "atch71@gmail.com",
-  //     "phone_number": "0106331875",
-  //     "password": '123456Ha@',
-  //     "password_confirmation": '123456Ha@',
-  //     "date_of_birth": "1996-07-7",
-  //     "blood_type": "A+",
-  //     "governorate_id": "1",
-  //     "city_id": "2",
-  //     "last_donate_time": "2022-1-7",
-  //   }).then((value) {
-  //     print(value.data);
-  //     print('hi');
-  //     registerModel = UserModel.fromJson(value.data);
-  //     print(registerModel!.status);
-  //     print(registerModel!.message);
-  //     print(registerModel!.errors);
-  //     print(registerModel!.user);
-  //     print('bye');
-  //     emit(AppSuccessUserDataState());
-  //   }).catchError((onError) {
-  //     print(onError.toString());
-  //     emit(AppErrorUserDataState());
-  //   });
-  // }
-
   ProfileModel? profileModel;
 
   void getUserData() {
@@ -226,7 +185,7 @@ class AppCubit extends Cubit<AppStates> {
     DioHelper.getData(
       url: PROFILE,
       token: token,
-    ).then((value){
+    ).then((value) {
       print(value.data);
       print('hi');
       profileModel = ProfileModel.fromJson(value.data);
@@ -236,12 +195,54 @@ class AppCubit extends Cubit<AppStates> {
       print(profileModel?.user?.dateOfBirth);
       print('bye');
       emit(AppSuccessUserDataState());
-    }).catchError((onError){
+    }).catchError((onError) {
       print(onError.toString());
       emit(AppErrorUserDataState());
     });
   }
 
+  ProfileModel? updateProfileModel;
+
+  void updateUserData({
+    required String name,
+    required String email,
+    required String phone,
+    required String dateOfBirth,
+    String? profilePicture,
+    String? lastDonateDate,
+    required String bloodType,
+    required int govId,
+    required int cityId,
+    required int height,
+    required String weight,
+  }) {
+    emit(AppLoadingUpdateUserDataState());
+    DioHelper.putData(
+      url: UPDATE_PROFILE,
+      data: {
+        "name": name,
+        "email": email,
+        "phone_number": phone,
+        "date_of_birth": dateOfBirth,
+        // "profile_picture": profilePicture,
+        "blood_type": bloodType,
+        'last_donate_time': lastDonateDate,
+        "height": height,
+        "weight": weight,
+        "governorate_id": govId,
+        "city_id": cityId
+      },
+      token: token,
+    ).then((value) {
+      print(value.data);
+      profileModel = ProfileModel.fromJson(value.data);
+      print('bye');
+      emit(AppSuccessUpdateUserDataState());
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(AppErrorUpdateUserDataState());
+    });
+  }
 // void sendMessage({
 //   required String reciverId,
 //   required String date,

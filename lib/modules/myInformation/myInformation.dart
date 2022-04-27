@@ -71,7 +71,7 @@ class MyInformationScreen extends StatelessWidget {
                             ),
                             Text(
                               '${cubit.profileModel?.user?.name}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -123,7 +123,7 @@ class MyInformationScreen extends StatelessWidget {
                     function: (){
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) =>  EditProfileScreen(listOfApi: apiInfo,)),
+                        MaterialPageRoute(builder: (context) =>  EditProfileScreen()),
                       );
                     },
                   ),
