@@ -1,3 +1,5 @@
+import 'package:blood_bank/models/register_model.dart';
+
 abstract class AppStates {}
 
 class AppInitialState extends AppStates {}

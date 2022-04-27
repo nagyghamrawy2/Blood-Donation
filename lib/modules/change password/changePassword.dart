@@ -1,4 +1,8 @@
-import 'package:blood_bank/shared/cubit/states.dart';
+import 'package:blood_bank/layout/home_layout.dart';
+import 'package:blood_bank/modules/change%20password/Cubit/Cubit.dart';
+import 'package:blood_bank/modules/change%20password/Cubit/States.dart';
+import 'package:blood_bank/modules/profile/profile.dart';
+import 'package:blood_bank/shared/Network/local/Cache_helper.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,18 +11,37 @@ import '../../shared/components/components.dart';
 import '../../shared/cubit/cubit.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
-  var passwordcontroller = TextEditingController();
-  var password2controller = TextEditingController();
-  var password3controller = TextEditingController();
+  var Oldpasswordcontroller = TextEditingController();
+  var Newpasswordcontroller = TextEditingController();
+  var Confirmpasswordcontroller = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => AppCubit(),
-      child: BlocConsumer<AppCubit, AppStates>(
-        listener: (context, index) {},
-        builder: (context, index) {
+      create: (BuildContext context) => AppChangePasswordCubit(),
+      child: BlocConsumer<AppChangePasswordCubit, AppChangePasswordStates>(
+        listener: (context, state) {
+          if (state is AppChangePasswordSuccessState) {
+            if (state.changePassword.status) {
+              // print(state.changePassword.message);
+              // CacheHelper.SaveData(
+              //         key: 'token', value: state.changePassword.user?.token)
+              //     .then((value) {
+              //   navigateAndFinish(context, ProfileScreen());
+              // });
+                navigateAndFinish(context, ProfileScreen());
+              ShowToast(
+                  text: state.changePassword.message,
+                  state: ToastStates.SUCCESS);
+            } else {
+              ShowToast(
+                  text: 'Please make sure the data entered is correct',
+                  state: ToastStates.ERROR);
+            }
+          }
+        },
+        builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
           return GestureDetector(
             onTap: () {
@@ -28,14 +51,15 @@ class ChangePasswordScreen extends StatelessWidget {
               appBar: AppBar(
                 title: const Text('Change Password'),
                 actions: [
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
+                  IconButton(
+                      onPressed: () {}, icon: const Icon(Icons.notifications))
                 ],
               ),
               body: Form(
                 key: formKey,
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal:25.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Column(
                       children: [
                         SizedBox(
@@ -51,8 +75,8 @@ class ChangePasswordScreen extends StatelessWidget {
                                     color: Colors.grey.withOpacity(0.8),
                                     spreadRadius: 5,
                                     blurRadius: 7,
-                                    offset:
-                                        const Offset(0, 3), // changes position of shadow
+                                    offset: const Offset(
+                                        0, 3), // changes position of shadow
                                   ),
                                 ],
                                 color: mainColor,
@@ -67,7 +91,9 @@ class ChangePasswordScreen extends StatelessWidget {
                                 child: Text(
                                   '* MAKE YOUR PASSWORD LONG.\n* MAKE YOUR PASSWORD A NONSENSE PHRASE.\n* INCLUDE NUMBERS,SYMBOLS.\n* AVOID USING OBVIOUS PERSONAL INFORMATION.\n* DO NOT REUSE PASSWORDS.',
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 20.sp,),
+                                    color: Colors.white,
+                                    fontSize: 20.sp,
+                                  ),
                                 ),
                               ),
                             ),
@@ -77,16 +103,18 @@ class ChangePasswordScreen extends StatelessWidget {
                           height: 70.h,
                         ),
                         Textformfield_with_border(
-                          controllerName: passwordcontroller,
+                          controllerName: Oldpasswordcontroller,
                           keyboardType: TextInputType.visiblePassword,
-                          obsecure: cubit.obsecure,
+                          obsecure:
+                              AppChangePasswordCubit.get(context).obsecure,
                           hintText: 'Enter old  password',
                           text_label: 'Old Password',
                           num_border: 10,
                           isPasswordField: true,
                           validatorText: 'Password must not be empty',
                           suffixFunction: () {
-                            cubit.changePasswordStatus();
+                            AppChangePasswordCubit.get(context)
+                                .changePasswordStatus();
                           },
                           haveIcon: true,
                         ),
@@ -94,17 +122,18 @@ class ChangePasswordScreen extends StatelessWidget {
                           height: 40.h,
                         ),
                         Textformfield_with_border(
-                          controllerName: password2controller,
+                          controllerName: Newpasswordcontroller,
                           keyboardType: TextInputType.visiblePassword,
-                          obsecure: cubit.obsecure,
+                          obsecure:
+                              AppChangePasswordCubit.get(context).obsecure,
                           hintText: 'Enter New password',
                           text_label: 'New Password',
                           num_border: 10,
                           isPasswordField: true,
                           validatorText: 'Password must not be empty',
-                          suffixFunction: ()
-                          {
-                            cubit.changePasswordStatus();
+                          suffixFunction: () {
+                            AppChangePasswordCubit.get(context)
+                                .changePasswordStatus();
                           },
                           haveIcon: true,
                         ),
@@ -112,39 +141,53 @@ class ChangePasswordScreen extends StatelessWidget {
                           height: 40.h,
                         ),
                         Textformfield_with_border(
-                          controllerName: password3controller,
+                          controllerName: Confirmpasswordcontroller,
                           keyboardType: TextInputType.visiblePassword,
-                          obsecure: cubit.obsecure,
+                          onFieldSubmitted: (value) {
+                            if (formKey.currentState!.validate()) {
+                              AppChangePasswordCubit.get(context)
+                                  .ChangePassword(
+                                      oldPassword: Oldpasswordcontroller.text,
+                                      newPassword: Newpasswordcontroller.text,
+                                      confirmPassword:
+                                          Confirmpasswordcontroller.text);
+                            }
+                          },
+                          obsecure:
+                              AppChangePasswordCubit.get(context).obsecure,
                           hintText: 'Confirm password',
                           text_label: 'Confirm New Password',
                           num_border: 10,
                           isPasswordField: true,
                           validatorText: 'Password must not be empty',
-                          suffixFunction: ()
-                          {
-                            cubit.changePasswordStatus();
+                          suffixFunction: () {
+                            AppChangePasswordCubit.get(context)
+                                .changePasswordStatus();
                           },
                           haveIcon: true,
                         ),
-                         SizedBox(
+                        SizedBox(
                           height: 40.h,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15.0),
                           child: Buttons_without_icon(
-                              function: () {
-                                if(formKey.currentState!.validate()){
-                                  print('done');
-                                }else{
-                                  print('not done');
-                                }
-                              },
-                              num_hieght: 52,
-                              text_button_name: 'Change Password',
-                              button_color: mainColor,
-                              num_border: 11,
-                              num_fontsize: 20,
-                              text_fontwwieght: FontWeight.normal,
+                            function: () {
+                              if (formKey.currentState!.validate()) {
+                                AppChangePasswordCubit.get(context)
+                                    .ChangePassword(
+                                        oldPassword: Oldpasswordcontroller.text,
+                                        newPassword: Newpasswordcontroller.text,
+                                        confirmPassword:
+                                            Confirmpasswordcontroller.text);
+                              }
+                            },
+                            num_hieght: 52,
+                            text_button_name: 'Change Password',
+                            button_color: mainColor,
+                            num_border: 11,
+                            num_fontsize: 20,
+                            text_fontwwieght: FontWeight.normal,
                           ),
                         )
                       ],

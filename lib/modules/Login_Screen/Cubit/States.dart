@@ -1,4 +1,3 @@
-
 import 'package:blood_bank/models/register_model.dart';
 
 abstract class AppLoginStates {}
@@ -7,7 +6,7 @@ class AppLoginInitialState extends AppLoginStates {}
 class AppLoginLoadingState extends AppLoginStates {}
 class AppLoginSuccessState extends AppLoginStates
 {
-   final UserModel login;
+  final UserModel login;
 
   AppLoginSuccessState(this.login);
 }
@@ -19,5 +18,3 @@ class AppLoginFailedState extends AppLoginStates {
 
 }
 class changePasswordState extends AppLoginStates {}
-
-

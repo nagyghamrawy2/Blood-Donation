@@ -38,7 +38,6 @@ class LoginScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          AppCubit cubit = AppCubit.get(context);
           return GestureDetector(
           onTap: () {
           FocusScope.of(context).unfocus();
