@@ -40,16 +40,6 @@ class EditProfileScreen extends StatelessWidget {
         height = TextEditingController(text: model?.height.toString());
         weight = TextEditingController(text: model?.weight);
 
-        // print(name.text);
-        // print(emailAddress.text);
-        // print(phone.text);
-        // print(govId.text);
-        // print(cityId.text);
-        // print(birthDate.text);
-        // print(bloodType.text);
-        // print(height.text);
-        // print(weight.text);
-
         String image = model?.profilePicture != null
             ? '${model?.profilePicture}'
             : 'assets/images/noImage.png';
@@ -203,6 +193,8 @@ class EditProfileScreen extends StatelessWidget {
                             height: 10,
                           ),
                           DropdownButtonFormField<String>(
+                            value: bloodType.text,
+                            hint: const Text('Blood type'),
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(width: 1),
@@ -227,6 +219,10 @@ class EditProfileScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
+                          BloodTypeDropDown(),
+                          // const SizedBox(
+                          //   height: 10,
+                          // ),
                           SignupTextField(
                             hintText: 'Enter your Weight',
                             text: 'Weight',

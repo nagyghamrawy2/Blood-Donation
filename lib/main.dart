@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
                   child: widget!,
                 );
               },
-              home: StartWidget,
+              home: EditProfileScreen(),
             );
           },
           listener: (context, state) {},

@@ -142,7 +142,7 @@ class SignUpScreen3 extends StatelessWidget {
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.004,
                         ),
-                        DropDownCustom(),
+                        BloodTypeDropDown(),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.008,
                         ),

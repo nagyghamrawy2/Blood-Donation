@@ -138,6 +138,7 @@ class Textformfield_with_border extends StatelessWidget {
     );
   }
 }
+
 void ShowToast({
   required String? text,
   required ToastStates state,
@@ -171,6 +172,7 @@ Color ChooseToastColor(ToastStates state){
   }
   return color;
 }
+
 void navigateAndFinish(context,widget) => Navigator.pushAndRemoveUntil(
   context,
   MaterialPageRoute(
@@ -498,9 +500,9 @@ class SignupTextField extends StatelessWidget {
   }
 }
 
-class DropDownCustom extends StatelessWidget {
+class BloodTypeDropDown extends StatelessWidget {
 
-  DropDownCustom({Key? key}) : super(key: key);
+  BloodTypeDropDown({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -510,10 +512,10 @@ class DropDownCustom extends StatelessWidget {
         AppCubit cubit = AppCubit.get(context);
         return DropdownButtonFormField(
           value: cubit.dropDownValue,
-          hint: Text(
+          hint: const Text(
             'Blood Type',
           ),
-          validator: (String? value) {
+          validator: (value){
             if (value == null) {
               return "Please select your blood type";
             }
@@ -540,10 +542,6 @@ class DropDownCustom extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          // Initial Value
-
-
-          // Down Arrow Icon
           icon: const Icon(Icons.keyboard_arrow_down),
           items: cubit.bloodGroupItem.map((String items) {
             return DropdownMenuItem(
@@ -564,7 +562,7 @@ class DropDownCustom extends StatelessWidget {
 }
 
 class LocationGovernorateCustom extends StatelessWidget {
-  LocationGovernorateCustom({required this.border});
+  LocationGovernorateCustom({Key? key, required this.border}) : super(key: key);
   late bool border;
   @override
   Widget build(BuildContext context) {
@@ -574,7 +572,7 @@ class LocationGovernorateCustom extends StatelessWidget {
         AppCubit cubit = AppCubit.get(context);
         return(border == true)? DropdownButtonFormField(
           value: cubit.locationcityvalue,
-          hint: Text(
+          hint: const Text(
             'Governorate',
           ),
           validator: (String? value) {
@@ -625,7 +623,7 @@ class LocationGovernorateCustom extends StatelessWidget {
           elevation: 5.0,
           child: DropdownButtonFormField(
             value: cubit.locationcityvalue,
-            hint: Text(
+            hint: const Text(
               'Governorate',
             ),
             validator: (String? value) {
@@ -674,7 +672,7 @@ class LocationCityCustom extends StatelessWidget {
         AppCubit cubit = AppCubit.get(context);
         return (border == true)?DropdownButtonFormField(
           value: cubit.locationcityvalue,
-          hint: Text(
+          hint: const Text(
             'City',
           ),
           validator: (String? value) {
@@ -726,7 +724,7 @@ class LocationCityCustom extends StatelessWidget {
           elevation: 5.0,
           child: DropdownButtonFormField(
             value: cubit.locationcityvalue,
-            hint: Text(
+            hint: const Text(
               'City',
             ),
             validator: (String? value) {
