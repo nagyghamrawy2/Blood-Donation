@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(width: 5,),
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.6,
+                    width: MediaQuery.of(context).size.width * 0.5,
                     child: const Text(
                       'Hello Hesham Ahmed !\nHow are you?',
                       style: TextStyle(

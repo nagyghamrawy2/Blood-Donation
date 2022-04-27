@@ -1,4 +1,3 @@
-import 'package:blood_bank/layout/home_layout.dart';
 import 'package:blood_bank/modules/change%20password/Cubit/Cubit.dart';
 import 'package:blood_bank/modules/change%20password/Cubit/States.dart';
 import 'package:blood_bank/modules/profile/profile.dart';
@@ -30,7 +29,7 @@ class ChangePasswordScreen extends StatelessWidget {
               //     .then((value) {
               //   navigateAndFinish(context, ProfileScreen());
               // });
-                navigateAndFinish(context, ProfileScreen());
+              navigateAndFinish(context, ProfileScreen());
               ShowToast(
                   text: state.changePassword.message,
                   state: ToastStates.SUCCESS);
@@ -125,7 +124,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           controllerName: Newpasswordcontroller,
                           keyboardType: TextInputType.visiblePassword,
                           obsecure:
-                              AppChangePasswordCubit.get(context).obsecure,
+                              AppChangePasswordCubit.get(context).obsecureNew,
                           hintText: 'Enter New password',
                           text_label: 'New Password',
                           num_border: 10,
@@ -133,7 +132,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           validatorText: 'Password must not be empty',
                           suffixFunction: () {
                             AppChangePasswordCubit.get(context)
-                                .changePasswordStatus();
+                                .changeNewPasswordStatus();
                           },
                           haveIcon: true,
                         ),
@@ -154,7 +153,7 @@ class ChangePasswordScreen extends StatelessWidget {
                             }
                           },
                           obsecure:
-                              AppChangePasswordCubit.get(context).obsecure,
+                              AppChangePasswordCubit.get(context).obsecureConfirm,
                           hintText: 'Confirm password',
                           text_label: 'Confirm New Password',
                           num_border: 10,
@@ -162,7 +161,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           validatorText: 'Password must not be empty',
                           suffixFunction: () {
                             AppChangePasswordCubit.get(context)
-                                .changePasswordStatus();
+                                .changeConfirmPasswordStatus();
                           },
                           haveIcon: true,
                         ),

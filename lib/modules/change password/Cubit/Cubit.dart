@@ -44,4 +44,14 @@ void changePasswordStatus() {
   obsecure = !obsecure;
   emit(changePassworddState());
 }
+  bool obsecureNew = true;
+  void changeNewPasswordStatus() {
+    obsecureNew = !obsecureNew;
+    emit(changeNewPassworddState());
+  }
+  bool obsecureConfirm = true;
+  void changeConfirmPasswordStatus() {
+    obsecureConfirm = !obsecureConfirm;
+    emit(changeConfirmPassworddState());
+  }
 }

@@ -18,6 +18,8 @@ class AppChangePasswordFailedState extends AppChangePasswordStates {
 
 }
 class changePassworddState extends AppChangePasswordStates {}
+class changeNewPassworddState extends AppChangePasswordStates {}
+class changeConfirmPassworddState extends AppChangePasswordStates {}
 
 
 
