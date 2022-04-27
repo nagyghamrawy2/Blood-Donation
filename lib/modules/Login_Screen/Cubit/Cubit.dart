@@ -1,10 +1,8 @@
-import 'package:blood_bank/models/register_model.dart';
+import 'package:blood_bank/models/user_model.dart';
 import 'package:blood_bank/modules/Login_Screen/Cubit/States.dart';
+import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/Network/Remote/dio_helper.dart';
 import 'package:blood_bank/shared/Network/end_points.dart';
-import 'package:blood_bank/shared/cubit/cubit.dart';
-import 'package:blood_bank/shared/cubit/states.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,7 +12,7 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
   static AppLoginCubit get(context) => BlocProvider.of(context);
   late UserModel login;
 
-  void UserLogin({required String email, required String Password}) {
+  void userLogin({required String email, required String Password}) {
     emit(AppLoginLoadingState());
     DioHelper.postData(
         url: LOGIN, data: {'email': email, 'password': Password}).then((value) {

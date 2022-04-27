@@ -30,34 +30,35 @@ import 'modules/Forget Password/forgetPasswordScreen.dart';
 import 'modules/Verification/verificationScreen.dart';
 import 'modules/change password/changePassword.dart';
 import 'shared/Network/local/Cache_helper.dart';
+
 void main() async {
   Bloc.observer = SimpleBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   await CacheHelper.init();
-  token  = CacheHelper.getData(key: 'token');
+  token = CacheHelper.getData(key: 'token');
   Widget widget;
-  if(token != null)
-    {
-      widget=HomeLayout();
-    }
-  else
-    widget=LoginScreen();
-  runApp(MyApp(StartWidget:widget));
+  if (token != null) {
+    widget = HomeLayout();
+  } else
+    widget = LoginScreen();
+  runApp(MyApp(StartWidget: widget));
 }
 
 class MyApp extends StatelessWidget {
-final Widget StartWidget;
+  final Widget StartWidget;
 
   const MyApp({Key? key, required this.StartWidget}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(300, 1200),
       minTextAdapt: true,
       splitScreenMode: true, // a2dr aft7 2 app m3 b3d
-      builder: () =>BlocProvider( create: (context) =>AppCubit(),
-        child: BlocConsumer<AppCubit,AppStates>(
+      builder: () => BlocProvider(
+        create: (context) => AppCubit(),
+        child: BlocConsumer<AppCubit, AppStates>(
           builder: (context, state) {
             return MaterialApp(
               theme: lightTheme,
@@ -66,8 +67,7 @@ final Widget StartWidget;
                 // elle hwa lma tege t3ml ay t8yeer msln t8yeer el5t myt2sr4
                 ScreenUtil.setContext(context);
                 return MediaQuery(
-                  data: MediaQuery.of(context).copyWith(
-                      textScaleFactor: 1.0),
+                  data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
                   child: widget!,
                 );
               },

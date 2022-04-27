@@ -103,7 +103,7 @@ class LoginScreen extends StatelessWidget {
                           obsecure: AppLoginCubit.get(context).obsecure,
                           onFieldSubmitted: (value) {
                             if (formKey.currentState!.validate()) {
-                              AppLoginCubit.get(context).UserLogin(
+                              AppLoginCubit.get(context).userLogin(
                                 email: emailcontroller.text,
                                 Password: passwordcontroller.text,
                               );
@@ -164,7 +164,7 @@ class LoginScreen extends StatelessWidget {
                         child: Buttons_without_icon(
                             function: () {
                               if (formKey.currentState!.validate()) {
-                                AppLoginCubit.get(context).UserLogin(
+                                AppLoginCubit.get(context).userLogin(
                                     email: emailcontroller.text,
                                     Password: passwordcontroller.text);
                               }
