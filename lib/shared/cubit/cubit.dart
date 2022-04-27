@@ -1,6 +1,6 @@
 import 'dart:core';
 import 'dart:io';
-import 'package:blood_bank/models/register_model.dart';
+import 'package:blood_bank/models/user_model.dart';
 import 'package:blood_bank/models/user_model.dart';
 import 'package:blood_bank/modules/add_request/addRequest.dart';
 import 'package:blood_bank/modules/chat/messageModel.dart';
@@ -8,8 +8,10 @@ import 'package:blood_bank/modules/education/education.dart';
 import 'package:blood_bank/modules/home/homeScreen.dart';
 import 'package:blood_bank/modules/profile/profile.dart';
 import 'package:blood_bank/modules/request/requestScreen.dart';
+import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/Network/Remote/dio_helper.dart';
 import 'package:blood_bank/shared/Network/end_points.dart';
+import 'package:blood_bank/shared/Network/local/Cache_helper.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 //import 'package:flutter/cupertino.dart';
@@ -185,30 +187,8 @@ class AppCubit extends Cubit<AppStates> {
     emit(ChangeGalleryValueState());
   }
 
-  // userModel? model;
-  Response? model;
-
-  void getUserData() {
-    emit(AppLoadingUserDataState());
-    DioHelper.postData(
-      url: USER_DATA,
-      token:
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYmxvb2QtYmFuazIwMjIuaGVyb2t1YXBwLmNvbS9hcGkvdjEvbG9naW4iLCJpYXQiOjE2NTA3NDI0NjIsImV4cCI6NTU2NTA3NDI0NjIsIm5iZiI6MTY1MDc0MjQ2MiwianRpIjoiN2ZKVE1jWUdkVUl1ejZSOSIsInN1YiI6IjUiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.v-VnmKz8Xc812w2ybUm_xbdtMAYfjUXBxZQ2ghKkEtg',
-    ).then((value) {
-      print(value.data);
-      print('hi');
-      model = Response.fromJson(value.data);
-      print(model!.message);
-      print('bye');
-      emit(AppSuccessUserDataState());
-    }).catchError((onError) {
-      print(onError.toString());
-      emit(AppErrorUserDataState());
-    });
-  }
 
   UserModel? registerModel;
-
   void registerData() {
     emit(AppLoadingUserDataState());
     DioHelper.postData(url: 'register', data: {
@@ -237,32 +217,7 @@ class AppCubit extends Cubit<AppStates> {
       emit(AppErrorUserDataState());
     });
   }
-  UserModel? LoginModel;
 
-  void LoginData() {
-    emit(AppLoadingUserDataState());
-    DioHelper.postData(
-        url: LOGIN,
-        data: {
-          "email": "atch71@gmail.com",
-          "password": '123456Ha@',
-        }
-
-    ).then((value) {
-      print(value.data);
-      print('hi');
-      LoginModel = UserModel.fromJson(value.data);
-      print(LoginModel!.status);
-      print(LoginModel!.message);
-      print(LoginModel!.errors);
-      print(LoginModel!.user);
-      print('bye');
-      emit(AppSuccessUserDataState());
-    }).catchError((onError) {
-      print(onError.toString());
-      emit(AppErrorUserDataState());
-    });
-  }
 
   // void sendMessage({
   //   required String reciverId,
