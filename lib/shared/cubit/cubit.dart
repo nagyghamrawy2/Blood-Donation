@@ -1,5 +1,6 @@
 import 'dart:core';
 import 'dart:io';
+import 'package:blood_bank/models/governate_model.dart';
 import 'package:blood_bank/models/profile_model.dart';
 import 'package:blood_bank/models/user_model.dart';
 import 'package:blood_bank/modules/add_request/addRequest.dart';
@@ -120,14 +121,10 @@ class AppCubit extends Cubit<AppStates> {
 
   String? locationcityvalue;
 
-  List<String> location__item = [
-    "Cairo",
-    "Alex",
-    "Mansoura",
-  ];
 
-  void ChangeLocationCityValue(String? value) {
-    locationcityvalue = value!;
+
+  void ChangeLocationCityValue(String value) {
+    locationcityvalue = value;
     emit(ChangeLocationValueState());
   }
 
@@ -207,6 +204,27 @@ class AppCubit extends Cubit<AppStates> {
     }).catchError((onError) {
       print(onError.toString());
       emit(AppErrorUpdateUserDataState());
+    });
+  }
+
+  List<String> governorateItemList =[] ;
+  late GovernorateModel governorateModel;
+  void getGovernorateData()
+  {
+    emit(AppLoadingGovernorateDataState());
+    DioHelper.getData(
+        url: GOVERNORATE
+    ).then((value){
+      governorateModel = GovernorateModel.fromJson(value.data);
+      governorateModel.governorates.forEach((e){
+        governorateItemList.add(e.governorateName);
+      });
+     print(governorateItemList);
+      emit(AppSuccessGovernorateDataState());
+
+    }).catchError((error){
+      print(error.toString());
+      emit(AppErrorGovernorateDataState());
     });
   }
 // void sendMessage({

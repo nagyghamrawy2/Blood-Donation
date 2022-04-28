@@ -13,7 +13,6 @@ class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key}) : super(key: key);
 
   var name = TextEditingController();
-  var lastName = TextEditingController();
   var emailAddress = TextEditingController();
   var password = TextEditingController();
   var confirmPassword = TextEditingController();

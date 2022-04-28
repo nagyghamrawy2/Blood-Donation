@@ -7,10 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class SignUpScreen3 extends StatelessWidget {
   TextEditingController height = new TextEditingController();
   TextEditingController weight = new TextEditingController();
+  TextEditingController lastDonationDate = new TextEditingController();
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -74,61 +76,6 @@ class SignUpScreen3 extends StatelessWidget {
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.04,
                         ),
-                        Container(
-                          height: 150,
-                          child: Stack(
-                            children: [
-                              (cubit.x != null)
-                                  ? CircleAvatar(
-                                      radius: 90.r,
-                                      backgroundImage: FileImage(cubit.x),
-                                    )
-                                  : CircleAvatar(
-                                      radius: 90.r,
-                                      backgroundImage:
-                                          AssetImage("assets/images/pp.png"),
-                                    ),
-                              Positioned(
-                                right: 25.w,
-                                bottom: -10.h,
-                                child: IconButton(
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        title: Text('Pick Image'),
-                                        actions: [
-                                          ElevatedButton(
-                                              onPressed: () {
-                                                cubit.GalleryImage();
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text('Gallery')),
-                                          ElevatedButton(
-                                              onPressed: () {
-                                                cubit.CameraImage();
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text('Camera')),
-                                          ElevatedButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text('Go Back'))
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                  icon: Icon(
-                                    Icons.camera_alt,
-                                    color: mainColor,
-                                    size: 50.h,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(
@@ -146,22 +93,70 @@ class SignUpScreen3 extends StatelessWidget {
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.008,
                         ),
-                        SignupTextField(
-                          hintText: 'Enter your Weight',
-                          text: 'Weight',
-                          controller: weight,
-                          keyboardtype: TextInputType.number,
-                          validatorText: 'Please enter your weight',
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.008,
-                        ),
-                        SignupTextField(
-                          hintText: 'Enter your Height',
-                          text: 'Height',
-                          controller: height,
-                          keyboardtype: TextInputType.number,
-                          validatorText: 'Please enter your height',
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Last Donation Date",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 27.sp,
+                              ),
+                            ),
+                            SizedBox(
+                              height:
+                              MediaQuery.of(context).size.height * 0.008,
+                            ),
+                            TextFormField(
+                              readOnly: true,
+                              keyboardType: TextInputType.datetime,
+                              controller: lastDonationDate,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Date must not be empty';
+                                } else {
+                                  lastDonationDate.text = value;
+                                }
+                              },
+                              decoration: InputDecoration(
+                                focusColor: Colors.green,
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                      color: greyColor,
+                                    )),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.red, width: 1),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                hintText: "Date",
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                suffixIcon: const Icon(
+                                  Icons.calendar_today,
+                                ),
+                              ),
+                              onTap: () {
+                                showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1900),
+                                  lastDate: DateTime.parse('2025-05-05'),
+                                ).then((value) {
+                                  lastDonationDate.text =
+                                      DateFormat.yMMMd().format(value!);
+                                });
+                              },
+                            ),
+                          ],
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.008,
