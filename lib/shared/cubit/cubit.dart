@@ -6,6 +6,7 @@ import 'package:blood_bank/models/user_model.dart';
 import 'package:blood_bank/modules/add_request/addRequest.dart';
 import 'package:blood_bank/modules/chat/messageModel.dart';
 import 'package:blood_bank/modules/education/education.dart';
+import 'package:blood_bank/modules/findDonor/Donermodel.dart';
 import 'package:blood_bank/modules/home/homeScreen.dart';
 import 'package:blood_bank/modules/profile/profile.dart';
 import 'package:blood_bank/modules/request/requestScreen.dart';
@@ -14,8 +15,8 @@ import 'package:blood_bank/shared/Network/Remote/dio_helper.dart';
 import 'package:blood_bank/shared/Network/end_points.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
-
-//import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -227,16 +228,17 @@ class AppCubit extends Cubit<AppStates> {
       emit(AppErrorGovernorateDataState());
     });
   }
+
 // void sendMessage({
-//   required String reciverId,
-//   required String date,
-//   required String text,
+//   required int? reciverId,
+//   required String? date,
+//   required String? text,
 // }) {
 //   MessageModel model = MessageModel(
-//       senderId: usermodel.uid, reciverId: reciverId, date: date, text: text);
+//       senderId: "${profileModel!.user!.id}", reciverId: DonarModel?.users[].id, date: date, text: text);
 //   FirebaseFirestore.instance
 //       .collection('users')
-//       .doc(usermodel.uid)
+//       .doc("${profileModel!.user!.id}")
 //       .collection("chats")
 //       .doc(reciverId)
 //       .collection("messages")
@@ -250,7 +252,7 @@ class AppCubit extends Cubit<AppStates> {
 //       .collection('users')
 //       .doc(reciverId)
 //       .collection("chats")
-//       .doc(usermodel.uid)
+//       .doc("${profileModel!.user!.id}")
 //       .collection("messages")
 //       .add(model.toMap())
 //       .then((value) {
@@ -267,7 +269,7 @@ class AppCubit extends Cubit<AppStates> {
 // }) {
 //   FirebaseFirestore.instance
 //       .collection('users')
-//       .doc(usermodel.uid)
+//       .doc("${profileModel!.user!.id}")
 //       .collection('chats')
 //       .doc(reciverId)
 //       .collection('messages')
@@ -281,4 +283,20 @@ class AppCubit extends Cubit<AppStates> {
 //     emit(GetMessagesSuccessState());
 //   });
 // }
+   donarModel? DonarModel;
+
+  void getDonorData() {
+    emit(AppDonorDataState());
+    DioHelper.getData(
+        url: DONORDATA,
+        token: token)
+        .then((value) {
+          print(value.data);
+      DonarModel = donarModel.fromJson(value.data);
+      print(DonarModel?.users[0].governorate?.governorateName);
+      emit(AppSuccesDonorDataState());
+    }).catchError((error) {
+      emit(AppErrorDonorDataState());
+    });
+  }
 }

@@ -1,6 +1,5 @@
-
-
 import 'package:blood_bank/models/user_model.dart';
+
 
 abstract class AppLoginStates {}
 

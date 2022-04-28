@@ -18,7 +18,7 @@ class DioHelper {
     String? token,
   }) async {
     dio!.options.headers = {
-      'Authorization': 'bearer ${token}',
+      'Authorization': 'Bearer ${token}',
       'accept': 'application/json',
     };
     return await dio!.get(

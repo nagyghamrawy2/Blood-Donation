@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 class MessageModel {
 
+   int? senderId;
+   int? reciverId;
+   String? date;
+   String? text;
 
-  late String senderId;
-  late String reciverId;
-  late String date;
-  late String text;
 
-  MessageModel({
-    required this.senderId,
-    required this.reciverId,
-    required this.date,
-    required this.text,
-  });
 
   MessageModel.fromJason(Map<String, dynamic>json)
   {

@@ -6,6 +6,7 @@ import 'package:blood_bank/shared/Network/end_points.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
 class AppLoginCubit extends Cubit<AppLoginStates> {
   AppLoginCubit() : super(AppLoginInitialState());
 
