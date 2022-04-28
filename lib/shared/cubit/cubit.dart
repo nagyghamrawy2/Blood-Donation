@@ -62,7 +62,6 @@ class AppCubit extends Cubit<AppStates> {
     "AB+",
     "AB-"
   ];
-
   int bloodGroup = -1;
 
   void changeBloodValue(int value) {
@@ -159,9 +158,7 @@ class AppCubit extends Cubit<AppStates> {
       print('hi');
       profileModel = ProfileModel.fromJson(value.data);
       print(profileModel?.status);
-      print(profileModel?.message);
       print(profileModel?.user);
-      print(profileModel?.user?.dateOfBirth);
       print('bye');
       emit(AppSuccessUserDataState());
     }).catchError((onError) {

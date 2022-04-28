@@ -5,6 +5,7 @@ import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class EditProfileScreen extends StatelessWidget {
@@ -16,6 +17,7 @@ class EditProfileScreen extends StatelessWidget {
   var govId = TextEditingController();
   var cityId = TextEditingController();
   var birthDate = TextEditingController();
+  var donationDate = TextEditingController();
   var bloodType = TextEditingController();
   var height = TextEditingController();
   var weight = TextEditingController();
@@ -24,26 +26,24 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit, AppStates>(
+    AppCubit cubit = AppCubit.get(context);
+    User? model = cubit.profileModel?.user;
+    name = TextEditingController(text: model?.name);
+    emailAddress = TextEditingController(text: model?.email);
+    phone = TextEditingController(text: model?.phoneNumber);
+    govId = TextEditingController();
+    cityId = TextEditingController();
+    birthDate = TextEditingController(text: model?.dateOfBirth);
+    donationDate = TextEditingController(text: model?.donationDate);
+    bloodType = TextEditingController(text: model?.bloodType);
+    height = TextEditingController(text: model?.height.toString());
+    weight = TextEditingController(text: model?.weight);
+     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        AppCubit cubit = AppCubit.get(context);
-        User? model = cubit.profileModel?.user;
-
-        name = TextEditingController(text: model?.name);
-        emailAddress = TextEditingController(text: model?.email);
-        phone = TextEditingController(text: model?.phoneNumber);
-        govId = TextEditingController();
-        cityId = TextEditingController();
-        birthDate = TextEditingController(text: model?.dateOfBirth);
-        bloodType = TextEditingController(text: model?.bloodType);
-        height = TextEditingController(text: model?.height.toString());
-        weight = TextEditingController(text: model?.weight);
-
         String image = model?.profilePicture != null
             ? '${model?.profilePicture}'
             : 'assets/images/noImage.png';
-
         return Scaffold(
           appBar: AppBar(
             title: const Text('Edit profile'),
@@ -95,28 +95,6 @@ class EditProfileScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-
-                          // //location
-                          // SignupTextField(
-                          //   hintText: 'Enter your location',
-                          //   text: 'governorate',
-                          //   controller: location,
-                          //   keyboardtype: TextInputType.text,
-                          //   validatorText: 'Location must not be empty',
-                          // ),
-                          // const SizedBox(
-                          //   height: 10,
-                          // ),
-                          // SignupTextField(
-                          //   hintText: 'Enter your location',
-                          //   text: 'city',
-                          //   controller: location,
-                          //   keyboardtype: TextInputType.text,
-                          //   validatorText: 'Location must not be empty',
-                          // ),
-                          // const SizedBox(
-                          //   height: 10,
-                          // ),
                           Container(
                               width: double.infinity,
                               height: 100,
@@ -149,7 +127,7 @@ class EditProfileScreen extends StatelessWidget {
                                         showDatePicker(
                                           context: context,
                                           initialDate:
-                                              DateTime.parse(birthDate.text),
+                                              DateTime.parse(birthDate.text,),
                                           firstDate: DateTime(1900),
                                           lastDate:
                                               DateTime.parse('2025-05-05'),
@@ -157,7 +135,7 @@ class EditProfileScreen extends StatelessWidget {
                                           birthDate.text =
                                               DateFormat('yyyy-MM-dd')
                                                   .format(value!);
-                                        });
+                                        },);
                                       },
                                       decoration: InputDecoration(
                                         focusedBorder: OutlineInputBorder(
@@ -192,37 +170,127 @@ class EditProfileScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          DropdownButtonFormField<String>(
-                            value: bloodType.text,
-                            hint: const Text('Blood type'),
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(width: 1),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                            ),
-                            items: cubit.bloodGroupItem.map((label) {
-                              return DropdownMenuItem(
-                                child: Text(
-                                  label,
-                                  style: const TextStyle(fontSize: 16),
+                          Container(
+                              width: double.infinity,
+                              height: 100,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'Last donation date',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Flexible(
+                                    fit: FlexFit.tight,
+                                    flex: 1,
+                                    child: TextFormField(
+                                      readOnly: true,
+                                      controller: donationDate,
+                                      keyboardType: TextInputType.datetime,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Last donation date must not be empty';
+                                        }
+                                      },
+                                      onTap: () {
+                                        showDatePicker(
+                                          context: context,
+                                          initialDate:
+                                              DateTime.parse(donationDate.text,),
+                                          firstDate: DateTime(1900),
+                                          lastDate:
+                                              DateTime.parse('2025-05-05'),
+                                        ).then((value) {
+                                          donationDate.text =
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(value!);
+                                        },);
+                                      },
+                                      decoration: InputDecoration(
+                                        focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: const BorderSide(
+                                              color: greyColor,
+                                            )),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.red, width: 1),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        hintText: 'Enter your birthdate',
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Blood group',
+                                style:  TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 27.sp,
                                 ),
-                                value: label,
-                              );
-                            }).toList(),
-                            onChanged: (value) {
-                              bloodType.text = value!;
-                            },
+                              ),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height * 0.008,
+                              ),
+                              DropdownButtonFormField<String>(
+                                value: bloodType.text,
+                                items: cubit.bloodGroupItem.map((label) => DropdownMenuItem(
+                                    child: Text(
+                                      label,
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                    value: label,
+                                  )).toList(),
+                                onChanged: (value) {
+                                  bloodType.text = value!;
+                                },
+                                validator: (value){
+                                  if (value == null) {
+                                    return "Blood type must not be empty";
+                                  }
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(width: 1),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                ),
+                                hint: const Text('Blood type'),
+                              ),
+                            ],
                           ),
                           const SizedBox(
                             height: 10,
                           ),
-                          BloodTypeDropDown(),
-                          // const SizedBox(
-                          //   height: 10,
-                          // ),
                           SignupTextField(
                             hintText: 'Enter your Weight',
                             text: 'Weight',
@@ -256,7 +324,7 @@ class EditProfileScreen extends StatelessWidget {
                                   cityId: 2,
                                   height: int.parse(height.text),
                                   weight: weight.text,
-                                  lastDonateDate: birthDate.text,
+                                  lastDonateDate: donationDate.text,
                                 );
                                 print('done');
                               } else {

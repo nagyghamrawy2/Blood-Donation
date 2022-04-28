@@ -174,7 +174,7 @@ class SignUpScreen2 extends StatelessWidget {
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.005,
                         ),
-                        LocationGovernorateCustom(border: true,),
+                        // LocationGovernorateCustom(border: true,),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.008,
                         ),
@@ -191,7 +191,7 @@ class SignUpScreen2 extends StatelessWidget {
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.005,
                         ),
-                        LocationCityCustom(border: true,),
+                        // LocationCityCustom(border: true,),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.02,
                         ),

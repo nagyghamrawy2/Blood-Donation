@@ -19,6 +19,7 @@ class User {
   String? email;
   String? phoneNumber;
   var dateOfBirth;
+  var donationDate;
   dynamic profilePicture;
   String? bloodType;
   int? height;
@@ -32,6 +33,7 @@ class User {
     email= json["email"];
     phoneNumber= json["phone_number"];
     dateOfBirth= DateFormat('yyyy-MM-dd').format(DateTime.parse(json["date_of_birth"]));
+    donationDate= DateFormat('yyyy-MM-dd').format(DateTime.parse(json["last_donate_time"]));
     profilePicture= json["profile_picture"];
     bloodType= json["blood_type"];
     height= json["height"];
