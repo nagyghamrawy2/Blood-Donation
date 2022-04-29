@@ -13,7 +13,7 @@ class EditProfileScreen extends StatelessWidget {
   var name = TextEditingController();
   var emailAddress = TextEditingController();
   var phone = TextEditingController();
-  var govId = TextEditingController();
+  int? govId;
   var cityId = TextEditingController();
   var birthDate = TextEditingController();
   var donationDate = TextEditingController();
@@ -33,7 +33,7 @@ class EditProfileScreen extends StatelessWidget {
     phone = TextEditingController(text: model?.phoneNumber);
     govValue = model?.governorate?.governorateName;
     cityValue = model?.city?.cityName;
-    govId = TextEditingController(text: model?.governorate?.id.toString());
+    govId = model?.governorate?.id;
     cityId = TextEditingController(text: model?.city?.id.toString());
     birthDate = TextEditingController(text: model?.dateOfBirth);
     donationDate = TextEditingController(text: model?.donationDate);
@@ -311,10 +311,11 @@ class EditProfileScreen extends StatelessWidget {
                                 onChanged: (String? newValue) {
                                   govValue = newValue;
                                   print(newValue);
-                                  int id = cubit.governorateItemList.indexWhere((element) => element.governorateName == newValue);
-                                  govId.text = (cubit.governorateItemList[id].id).toString();
-                                  cubit.getCityData(id: int.parse(govId.text));
-                                  print(govId.text);
+                                  int id = cubit.governorateItemList.indexWhere((element) => element.governorateName == govValue);
+                                  print('id of gov  = $id');
+                                  govId = (cubit.governorateItemList[id].id);
+                                  cubit.getCityData(id: govId!);
+                                  print(govId);
 
                                 },
                                 onSaved: (value){
@@ -496,14 +497,14 @@ class EditProfileScreen extends StatelessWidget {
                                       phone: phone.text,
                                       dateOfBirth: birthDate.text,
                                       bloodType: bloodType.text,
-                                      govId: int.parse(govId.text),
+                                      govId: govId!,
                                       cityId: int.parse(cityId.text),
                                       height: int.parse(height.text),
                                       weight: weight.text,
                                       lastDonateDate: donationDate.text,
                                     );
                                     print('done');
-                                    print(int.parse(govId.text));
+                                    print(govId);
                                     print(int.parse(cityId.text));
                                   } else {
                                     print('not done');

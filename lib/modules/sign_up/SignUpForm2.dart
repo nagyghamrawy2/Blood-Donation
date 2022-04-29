@@ -172,54 +172,54 @@ class SignUpScreen2 extends StatelessWidget {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.005,
                       ),
-                      DropdownButtonFormField(
-                        hint: const Text(
-                          'Governorate',
-                        ),
-                        validator: (value) {
-                          if (value == null) {
-                            return "Please choose your governorate";
-                          }
-                        },
-                        decoration: InputDecoration(
-                          focusColor: Colors.green,
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(
-                              color: greyColor,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red, width: 1),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        // Initial Value
-
-                        // Down Arrow Icon
-                        icon: const Icon(Icons.keyboard_arrow_down),
-                        items: cubit.governorateItemList.map((String items) {
-                          return DropdownMenuItem(
-                            value: items,
-                            child: Text(items),
-                          );
-                        }).toList(),
-                        // After selecting the desired option,it will
-                        // change button value to selected value
-                        onChanged: (newValue) {
-                          print(newValue);
-                          //cubit.ChangeLocationCityValue(newValue);
-                        },
-                      ),
+                      // DropdownButtonFormField(
+                      //   hint: const Text(
+                      //     'Governorate',
+                      //   ),
+                      //   validator: (value) {
+                      //     if (value == null) {
+                      //       return "Please choose your governorate";
+                      //     }
+                      //   },
+                      //   decoration: InputDecoration(
+                      //     focusColor: Colors.green,
+                      //     focusedBorder: OutlineInputBorder(
+                      //       borderRadius: BorderRadius.circular(10),
+                      //       borderSide: const BorderSide(
+                      //         color: greyColor,
+                      //       ),
+                      //     ),
+                      //     enabledBorder: OutlineInputBorder(
+                      //       borderSide: const BorderSide(
+                      //         width: 1,
+                      //       ),
+                      //       borderRadius: BorderRadius.circular(10),
+                      //     ),
+                      //     errorBorder: OutlineInputBorder(
+                      //       borderSide: const BorderSide(color: Colors.red, width: 1),
+                      //       borderRadius: BorderRadius.circular(20),
+                      //     ),
+                      //     focusedErrorBorder: OutlineInputBorder(
+                      //       borderRadius: BorderRadius.circular(10),
+                      //     ),
+                      //   ),
+                      //   // Initial Value
+                      //
+                      //   // Down Arrow Icon
+                      //   icon: const Icon(Icons.keyboard_arrow_down),
+                      //   items: cubit.governorateItemList.map((String items) {
+                      //     return DropdownMenuItem(
+                      //       value: items,
+                      //       child: Text(items),
+                      //     );
+                      //   }).toList(),
+                      //   // After selecting the desired option,it will
+                      //   // change button value to selected value
+                      //   onChanged: (newValue) {
+                      //     print(newValue);
+                      //     //cubit.ChangeLocationCityValue(newValue);
+                      //   },
+                      // ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.008,
                       ),
