@@ -1,5 +1,6 @@
 import 'dart:core';
 import 'dart:io';
+import 'package:blood_bank/models/city_model.dart';
 import 'package:blood_bank/models/governate_model.dart';
 import 'package:blood_bank/models/profile_model.dart';
 import 'package:blood_bank/models/user_model.dart';
@@ -21,7 +22,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
-import '../../models/city_model.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
@@ -175,8 +175,8 @@ class AppCubit extends Cubit<AppStates> {
     String? profilePicture,
     String? lastDonateDate,
     required String bloodType,
-    int? govId,
-    int? cityId,
+    required int govId,
+    required int cityId,
     required int height,
     required String weight,
   }) {
@@ -193,8 +193,8 @@ class AppCubit extends Cubit<AppStates> {
         'last_donate_time': lastDonateDate,
         "height": height,
         "weight": weight,
-        "governorate_id": 2,
-        "city_id": 2
+        "governorate_id": govId,
+        "city_id": cityId
       },
       token: token,
     ).then((value) {
@@ -208,16 +208,14 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  List<String> governorateItemList = [];
-
+  List<Governorates> governorateItemList = [];
   late GovernorateModel governorateModel;
-
   void getGovernorateData() {
     emit(AppLoadingGovernorateDataState());
     DioHelper.getData(url: GOVERNORATE).then((value) {
       governorateModel = GovernorateModel.fromJson(value.data);
-      governorateModel.governorates.forEach((e) {
-        governorateItemList.add(e.governorateName);
+      governorateModel.governorates?.forEach((e) {
+        governorateItemList.add(e);
       });
       emit(AppSuccessGovernorateDataState());
     }).catchError((error) {
@@ -226,25 +224,24 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+
   //hesham 29/4
-  List<String> cityItemList = [];
+  List<Cities> cityItemList = [];
   late CityModel cityModel;
   void getCityData({required int id}) {
     emit(AppLoadingCityDataState());
     cityItemList.clear();
     DioHelper.getData(url: '$CITY/$id').then((value) {
       cityModel = CityModel.fromJson(value.data);
-      cityModel.cities.forEach((e) {
-        cityItemList.add(e.cityName);
+      cityModel.cities?.forEach((e) {
+        cityItemList.add(e);
       });
-      print(cityItemList);
       emit(AppSuccessCityDataState());
     }).catchError((error) {
       print(error.toString());
       emit(AppErrorCityDataState());
     });
   }
-
 // void sendMessage({
 //   required String reciverId,
 //   required String date,

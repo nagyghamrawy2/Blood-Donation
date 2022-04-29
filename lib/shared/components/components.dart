@@ -419,6 +419,7 @@ class SignupTextField extends StatelessWidget {
     required this.keyboardtype,
     required this.validatorText,
     this.suffixFunction,
+    this.intialValue
   });
 
   final bool isPasswordField;
@@ -429,7 +430,7 @@ class SignupTextField extends StatelessWidget {
   late TextInputType keyboardtype;
   late String validatorText;
   Function? suffixFunction;
-
+  String? intialValue;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -449,6 +450,7 @@ class SignupTextField extends StatelessWidget {
           fit: FlexFit.tight,
           flex: 0,
           child: TextFormField(
+            initialValue: intialValue,
             obscureText: secure,
             controller: controller,
             keyboardType: keyboardtype,
