@@ -6,3 +6,4 @@ const UPDATE_PROFILE ='update-user-data';
 const DONORDATA='users';
 const REGISTER = 'register';
 const GOVERNORATE = 'governorate';
+const CITY = 'city';

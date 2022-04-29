@@ -9,7 +9,11 @@ class ChangePasswordState extends AppStates {}
 class ChangeConfirmPasswordState extends AppStates {}
 class ChangeActiveState extends AppStates {}
 class ChangeDropDownValueState extends AppStates{}
-class ChangeLocationValueState extends AppStates{}
+
+class ChangeGovernorateValueState extends AppStates{}
+
+class SelectedSuccessfullyGovernorateState extends AppStates{}
+
 class ChangeCameraValueState extends AppStates{}
 class ChangeGalleryValueState extends AppStates{}
 class ChangeCheckValueState extends AppStates{}
@@ -29,4 +33,8 @@ class AppErrorDonorDataState extends AppStates{}
 class AppLoadingGovernorateDataState extends AppStates{}
 class AppSuccessGovernorateDataState extends AppStates{}
 class AppErrorGovernorateDataState extends AppStates{}
+
+class AppLoadingCityDataState extends AppStates{}
+class AppSuccessCityDataState extends AppStates{}
+class AppErrorCityDataState extends AppStates{}
 

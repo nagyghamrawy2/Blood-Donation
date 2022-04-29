@@ -31,13 +31,15 @@ class EditProfileScreen extends StatelessWidget {
     name = TextEditingController(text: model?.name);
     emailAddress = TextEditingController(text: model?.email);
     phone = TextEditingController(text: model?.phoneNumber);
-    govId = TextEditingController();
+    govId = TextEditingController(text: model?.governorate?.id.toString());
     cityId = TextEditingController();
     birthDate = TextEditingController(text: model?.dateOfBirth);
     donationDate = TextEditingController(text: model?.donationDate);
     bloodType = TextEditingController(text: model?.bloodType);
     height = TextEditingController(text: model?.height.toString());
     weight = TextEditingController(text: model?.weight);
+
+    String valueDropDown = 'Cairo';
      return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -245,6 +247,98 @@ class EditProfileScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
+                          DropdownButtonFormField(
+                            hint: const Text(
+                              'Governorate',
+                            ),
+                            validator: (value) {
+                              if (value == null) {
+                                return "Governorate must not be empty";
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              focusColor: Colors.green,
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  color: greyColor,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(color: Colors.red, width: 1),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            items: cubit.governorateItemList.map((String items) {
+                              return DropdownMenuItem(
+                                value: items,
+                                child: Text(items),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              govId.text = (cubit.governorateItemList.indexOf(newValue!)+1).toString();
+                              cubit.getCityData(id: int.parse(govId.text));
+                            },
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          DropdownButtonFormField(
+                            hint: const Text(
+                              'City',
+                            ),
+                            validator: (value) {
+                              if (value == null) {
+                                return "City must not be empty";
+                              }
+                            },
+                            decoration: InputDecoration(
+                              focusColor: Colors.green,
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  color: greyColor,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(color: Colors.red, width: 1),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            items: cubit.cityItemList.map((String items) {
+                              return DropdownMenuItem(
+                                value: items,
+                                child: Text(items),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              cityId.text = (cubit.cityItemList.indexOf(newValue!)+1).toString();
+                            },
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -320,8 +414,8 @@ class EditProfileScreen extends StatelessWidget {
                                   phone: phone.text,
                                   dateOfBirth: birthDate.text,
                                   bloodType: bloodType.text,
-                                  govId: 2,
-                                  cityId: 2,
+                                  govId: int.parse(govId.text),
+                                  cityId: int.parse(cityId.text),
                                   height: int.parse(height.text),
                                   weight: weight.text,
                                   lastDonateDate: donationDate.text,

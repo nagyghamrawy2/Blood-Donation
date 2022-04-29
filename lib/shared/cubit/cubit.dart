@@ -6,7 +6,6 @@ import 'package:blood_bank/models/user_model.dart';
 import 'package:blood_bank/modules/add_request/addRequest.dart';
 import 'package:blood_bank/modules/chat/messageModel.dart';
 import 'package:blood_bank/modules/education/education.dart';
-import 'package:blood_bank/modules/findDonor/Donermodel.dart';
 import 'package:blood_bank/modules/home/homeScreen.dart';
 import 'package:blood_bank/modules/profile/profile.dart';
 import 'package:blood_bank/modules/request/requestScreen.dart';
@@ -15,12 +14,14 @@ import 'package:blood_bank/shared/Network/Remote/dio_helper.dart';
 import 'package:blood_bank/shared/Network/end_points.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
+
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+
+import '../../models/city_model.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
@@ -126,7 +127,7 @@ class AppCubit extends Cubit<AppStates> {
 
   void ChangeLocationCityValue(String value) {
     locationcityvalue = value;
-    emit(ChangeLocationValueState());
+    // emit(ChangeLocationValueState());
   }
 
   ImagePicker a = new ImagePicker();
@@ -229,16 +230,38 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+  //hesham 29/4
+  List<String> cityItemList =[] ;
+  late CityModel cityModel;
+  void getCityData({required int id})
+  {
+    emit(AppLoadingCityDataState());
+    DioHelper.getData(
+        url: '$CITY/$id'
+    ).then((value){
+      cityModel = CityModel.fromJson(value.data);
+      cityModel.cities.forEach((e){
+        cityItemList.add(e.cityName);
+      });
+      print(cityItemList);
+      emit(AppSuccessCityDataState());
+
+    }).catchError((error){
+      print(error.toString());
+      emit(AppErrorCityDataState());
+    });
+  }
+
 // void sendMessage({
-//   required int? reciverId,
-//   required String? date,
-//   required String? text,
+//   required String reciverId,
+//   required String date,
+//   required String text,
 // }) {
 //   MessageModel model = MessageModel(
-//       senderId: "${profileModel!.user!.id}", reciverId: DonarModel?.users[].id, date: date, text: text);
+//       senderId: usermodel.uid, reciverId: reciverId, date: date, text: text);
 //   FirebaseFirestore.instance
 //       .collection('users')
-//       .doc("${profileModel!.user!.id}")
+//       .doc(usermodel.uid)
 //       .collection("chats")
 //       .doc(reciverId)
 //       .collection("messages")
@@ -252,7 +275,7 @@ class AppCubit extends Cubit<AppStates> {
 //       .collection('users')
 //       .doc(reciverId)
 //       .collection("chats")
-//       .doc("${profileModel!.user!.id}")
+//       .doc(usermodel.uid)
 //       .collection("messages")
 //       .add(model.toMap())
 //       .then((value) {
@@ -269,7 +292,7 @@ class AppCubit extends Cubit<AppStates> {
 // }) {
 //   FirebaseFirestore.instance
 //       .collection('users')
-//       .doc("${profileModel!.user!.id}")
+//       .doc(usermodel.uid)
 //       .collection('chats')
 //       .doc(reciverId)
 //       .collection('messages')
@@ -283,20 +306,4 @@ class AppCubit extends Cubit<AppStates> {
 //     emit(GetMessagesSuccessState());
 //   });
 // }
-   donarModel? DonarModel;
-
-  void getDonorData() {
-    emit(AppDonorDataState());
-    DioHelper.getData(
-        url: DONORDATA,
-        token: token)
-        .then((value) {
-          print(value.data);
-      DonarModel = donarModel.fromJson(value.data);
-      print(DonarModel?.users[0].governorate?.governorateName);
-      emit(AppSuccesDonorDataState());
-    }).catchError((error) {
-      emit(AppErrorDonorDataState());
-    });
-  }
 }
