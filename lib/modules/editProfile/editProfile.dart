@@ -3,26 +3,44 @@ import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
-class EditProfileScreen extends StatelessWidget {
+class EditProfileScreen extends StatefulWidget {
   EditProfileScreen({Key? key}) : super(key: key);
 
+  @override
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
+}
+
+class _EditProfileScreenState extends State<EditProfileScreen> {
   var name = TextEditingController();
+
   var emailAddress = TextEditingController();
+
   var phone = TextEditingController();
+
   var govId = TextEditingController();
+
   var cityId = TextEditingController();
+
   var birthDate = TextEditingController();
+
   var donationDate = TextEditingController();
+
   var bloodType = TextEditingController();
+
   var height = TextEditingController();
+
   var weight = TextEditingController();
 
   var formKey = GlobalKey<FormState>();
+
+  String? govValue;
+  String? cityValue;
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +49,20 @@ class EditProfileScreen extends StatelessWidget {
     name = TextEditingController(text: model?.name);
     emailAddress = TextEditingController(text: model?.email);
     phone = TextEditingController(text: model?.phoneNumber);
-    govId = TextEditingController(text: model?.governorate?.id.toString());
-    cityId = TextEditingController();
+    // govValue = model?.governorate?.governorateName;
+    // cityValue = model?.city?.cityName;
+    // govId = TextEditingController(text: model?.governorate?.id.toString());
+    // cityId = TextEditingController();
     birthDate = TextEditingController(text: model?.dateOfBirth);
     donationDate = TextEditingController(text: model?.donationDate);
     bloodType = TextEditingController(text: model?.bloodType);
     height = TextEditingController(text: model?.height.toString());
     weight = TextEditingController(text: model?.weight);
 
-    String valueDropDown = 'Cairo';
-     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+    return BlocConsumer<AppCubit, AppStates>(
+      listener: (context, state) {
+
+      },
       builder: (context, state) {
         String image = model?.profilePicture != null
             ? '${model?.profilePicture}'
@@ -50,395 +71,444 @@ class EditProfileScreen extends StatelessWidget {
           appBar: AppBar(
             title: const Text('Edit profile'),
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 75,
-                  backgroundImage: AssetImage(image),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Form(
-                    key: formKey,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
-                      child: Column(
-                        children: [
-                          SignupTextField(
-                            hintText: 'Enter your name',
-                            text: 'Name',
-                            controller: name,
-                            keyboardtype: TextInputType.text,
-                            validatorText: 'Name must not be empty',
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          SignupTextField(
-                            hintText: 'Enter your email',
-                            text: 'Email',
-                            controller: emailAddress,
-                            keyboardtype: TextInputType.emailAddress,
-                            validatorText: 'Email must not be empty',
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          SignupTextField(
-                            hintText: 'Enter your phone number',
-                            text: 'Phone',
-                            controller: phone,
-                            keyboardtype: TextInputType.phone,
-                            validatorText: 'Phone must not be empty',
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                              width: double.infinity,
-                              height: 100,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    'Birth Date',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 4,
-                                  ),
-                                  Flexible(
-                                    fit: FlexFit.tight,
-                                    flex: 1,
-                                    child: TextFormField(
-                                      readOnly: true,
-                                      controller: birthDate,
-                                      keyboardType: TextInputType.datetime,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Birthdate must not be empty';
-                                        }
-                                      },
-                                      onTap: () {
-                                        showDatePicker(
-                                          context: context,
-                                          initialDate:
-                                              DateTime.parse(birthDate.text,),
-                                          firstDate: DateTime(1900),
-                                          lastDate:
-                                              DateTime.parse('2025-05-05'),
-                                        ).then((value) {
-                                          birthDate.text =
-                                              DateFormat('yyyy-MM-dd')
-                                                  .format(value!);
-                                        },);
-                                      },
-                                      decoration: InputDecoration(
-                                        focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            borderSide: const BorderSide(
-                                              color: greyColor,
-                                            )),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.red, width: 1),
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        hintText: 'Enter your birthdate',
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                              width: double.infinity,
-                              height: 100,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    'Last donation date',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 4,
-                                  ),
-                                  Flexible(
-                                    fit: FlexFit.tight,
-                                    flex: 1,
-                                    child: TextFormField(
-                                      readOnly: true,
-                                      controller: donationDate,
-                                      keyboardType: TextInputType.datetime,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Last donation date must not be empty';
-                                        }
-                                      },
-                                      onTap: () {
-                                        showDatePicker(
-                                          context: context,
-                                          initialDate:
-                                              DateTime.parse(donationDate.text,),
-                                          firstDate: DateTime(1900),
-                                          lastDate:
-                                              DateTime.parse('2025-05-05'),
-                                        ).then((value) {
-                                          donationDate.text =
-                                              DateFormat('yyyy-MM-dd')
-                                                  .format(value!);
-                                        },);
-                                      },
-                                      decoration: InputDecoration(
-                                        focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            borderSide: const BorderSide(
-                                              color: greyColor,
-                                            )),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.red, width: 1),
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        hintText: 'Enter your birthdate',
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          DropdownButtonFormField(
-                            hint: const Text(
-                              'Governorate',
-                            ),
-                            validator: (value) {
-                              if (value == null) {
-                                return "Governorate must not be empty";
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                              focusColor: Colors.green,
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: const BorderSide(
-                                  color: greyColor,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(color: Colors.red, width: 1),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            icon: const Icon(Icons.keyboard_arrow_down),
-                            items: cubit.governorateItemList.map((String items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              govId.text = (cubit.governorateItemList.indexOf(newValue!)+1).toString();
-                              cubit.getCityData(id: int.parse(govId.text));
-                            },
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          DropdownButtonFormField(
-                            hint: const Text(
-                              'City',
-                            ),
-                            validator: (value) {
-                              if (value == null) {
-                                return "City must not be empty";
-                              }
-                            },
-                            decoration: InputDecoration(
-                              focusColor: Colors.green,
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: const BorderSide(
-                                  color: greyColor,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(color: Colors.red, width: 1),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            icon: const Icon(Icons.keyboard_arrow_down),
-                            items: cubit.cityItemList.map((String items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
-                              );
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              cityId.text = (cubit.cityItemList.indexOf(newValue!)+1).toString();
-                            },
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+          body: ConditionalBuilder(
+            condition: model != null,
+            builder: (context) {
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 75,
+                      backgroundImage: AssetImage(image),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Form(
+                        key: formKey,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
+                          child: Column(
                             children: [
-                              Text(
-                                'Blood group',
-                                style:  TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 27.sp,
-                                ),
+                              SignupTextField(
+                                hintText: 'Enter your name',
+                                text: 'Name',
+                                controller: name,
+                                keyboardtype: TextInputType.text,
+                                validatorText: cubit.profileModel?.errors?.name![0] != null ? cubit.profileModel!.errors!.name![0] : 'Name must not be empty',
                               ),
-                              SizedBox(
-                                height: MediaQuery.of(context).size.height * 0.008,
+                              const SizedBox(
+                                height: 10,
                               ),
-                              DropdownButtonFormField<String>(
-                                value: bloodType.text,
-                                items: cubit.bloodGroupItem.map((label) => DropdownMenuItem(
-                                    child: Text(
-                                      label,
-                                      style: const TextStyle(fontSize: 16),
-                                    ),
-                                    value: label,
-                                  )).toList(),
-                                onChanged: (value) {
-                                  bloodType.text = value!;
-                                },
-                                validator: (value){
-                                  if (value == null) {
-                                    return "Blood type must not be empty";
+                              SignupTextField(
+                                hintText: 'Enter your email',
+                                text: 'Email',
+                                controller: emailAddress,
+                                keyboardtype: TextInputType.emailAddress,
+                                validatorText: 'Email must not be empty',
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              SignupTextField(
+                                hintText: 'Enter your phone number',
+                                text: 'Phone',
+                                controller: phone,
+                                keyboardtype: TextInputType.phone,
+                                validatorText: 'Phone must not be empty',
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                  width: double.infinity,
+                                  height: 100,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'Birth Date',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 4,
+                                      ),
+                                      Flexible(
+                                        fit: FlexFit.tight,
+                                        flex: 1,
+                                        child: TextFormField(
+                                          readOnly: true,
+                                          controller: birthDate,
+                                          keyboardType: TextInputType.datetime,
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'Birthdate must not be empty';
+                                            }
+                                          },
+                                          onTap: () {
+                                            showDatePicker(
+                                              context: context,
+                                              initialDate: DateTime.parse(
+                                                birthDate.text,
+                                              ),
+                                              firstDate: DateTime(1900),
+                                              lastDate:
+                                                  DateTime.parse('2025-05-05'),
+                                            ).then(
+                                              (value) {
+                                                birthDate.text =
+                                                    DateFormat('yyyy-MM-dd')
+                                                        .format(value!);
+                                              },
+                                            );
+                                          },
+                                          decoration: InputDecoration(
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                borderSide: const BorderSide(
+                                                  color: greyColor,
+                                                )),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.red, width: 1),
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            ),
+                                            hintText: 'Enter your birthdate',
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                  width: double.infinity,
+                                  height: 100,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'Last donation date',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 4,
+                                      ),
+                                      Flexible(
+                                        fit: FlexFit.tight,
+                                        flex: 1,
+                                        child: TextFormField(
+                                          readOnly: true,
+                                          controller: donationDate,
+                                          keyboardType: TextInputType.datetime,
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'Last donation date must not be empty';
+                                            }
+                                          },
+                                          onTap: () {
+                                            showDatePicker(
+                                              context: context,
+                                              initialDate: DateTime.parse(
+                                                donationDate.text,
+                                              ),
+                                              firstDate: DateTime(1900),
+                                              lastDate:
+                                                  DateTime.parse('2025-05-05'),
+                                            ).then(
+                                              (value) {
+                                                donationDate.text =
+                                                    DateFormat('yyyy-MM-dd')
+                                                        .format(value!);
+                                              },
+                                            );
+                                          },
+                                          decoration: InputDecoration(
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                borderSide: const BorderSide(
+                                                  color: greyColor,
+                                                )),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                  color: Colors.red, width: 1),
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            ),
+                                            hintText: 'Enter your birthdate',
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              // DropdownButtonFormField(
+                              //   value: govValue,
+                              //   hint: const Text(
+                              //     'Governorate',
+                              //   ),
+                              //   validator: (value) {
+                              //     if (value == null) {
+                              //       return "Governorate must not be empty";
+                              //     }
+                              //     return null;
+                              //   },
+                              //   decoration: InputDecoration(
+                              //     focusColor: Colors.green,
+                              //     focusedBorder: OutlineInputBorder(
+                              //       borderRadius: BorderRadius.circular(10),
+                              //       borderSide: const BorderSide(
+                              //         color: greyColor,
+                              //       ),
+                              //     ),
+                              //     enabledBorder: OutlineInputBorder(
+                              //       borderSide: const BorderSide(
+                              //         width: 1,
+                              //       ),
+                              //       borderRadius: BorderRadius.circular(10),
+                              //     ),
+                              //     errorBorder: OutlineInputBorder(
+                              //       borderSide: const BorderSide(
+                              //           color: Colors.red, width: 1),
+                              //       borderRadius: BorderRadius.circular(20),
+                              //     ),
+                              //     focusedErrorBorder: OutlineInputBorder(
+                              //       borderRadius: BorderRadius.circular(10),
+                              //     ),
+                              //   ),
+                              //   icon: const Icon(Icons.keyboard_arrow_down),
+                              //   items: cubit.governorateItemList
+                              //       .map((String items) {
+                              //     return DropdownMenuItem(
+                              //       value: items,
+                              //       child: Text(items),
+                              //     );
+                              //   }).toList(),
+                              //   onChanged: (String? newValue) {
+                              //     setState(() {
+                              //       govValue = newValue;
+                              //       govId.text = (cubit.governorateItemList.indexOf(newValue!)+1).toString();
+                              //       print(govId.text);
+                              //       cityValue = cubit.governorateItemList[0];
+                              //       cubit.getCityData(
+                              //           id: int.parse(govId.text));
+                              //     });
+                              //   },
+                              // ),
+                              // const SizedBox(
+                              //   height: 10,
+                              // ),
+                              // ConditionalBuilder(
+                              //   condition: cubit.cityItemList.isNotEmpty,
+                              //   builder: (context) => DropdownButtonFormField(
+                              //     hint: const Text(
+                              //       'City',
+                              //     ),
+                              //     validator: (value) {
+                              //       if (value == null) {
+                              //         return "City must not be empty";
+                              //       }
+                              //     },
+                              //     decoration: InputDecoration(
+                              //       focusColor: Colors.green,
+                              //       focusedBorder: OutlineInputBorder(
+                              //         borderRadius: BorderRadius.circular(10),
+                              //         borderSide: const BorderSide(
+                              //           color: greyColor,
+                              //         ),
+                              //       ),
+                              //       enabledBorder: OutlineInputBorder(
+                              //         borderSide: const BorderSide(
+                              //           width: 1,
+                              //         ),
+                              //         borderRadius: BorderRadius.circular(10),
+                              //       ),
+                              //       errorBorder: OutlineInputBorder(
+                              //         borderSide: const BorderSide(
+                              //             color: Colors.red, width: 1),
+                              //         borderRadius: BorderRadius.circular(20),
+                              //       ),
+                              //       focusedErrorBorder: OutlineInputBorder(
+                              //         borderRadius: BorderRadius.circular(10),
+                              //       ),
+                              //     ),
+                              //     icon: const Icon(Icons.keyboard_arrow_down),
+                              //     items: cubit.cityItemList.map((String items) {
+                              //       return DropdownMenuItem(
+                              //         value: items,
+                              //         child: Text(items),
+                              //       );
+                              //     }).toList(),
+                              //     onChanged: (String? newValue) {
+                              //       cityId.text =
+                              //           (cubit.cityItemList.indexOf(newValue!) +
+                              //                   1)
+                              //               .toString();
+                              //     },
+                              //   ),
+                              //   fallback: (context) => const Center(
+                              //     child: CircularProgressIndicator(),
+                              //   ),
+                              // ),
+                              // const SizedBox(
+                              //   height: 10,
+                              // ),
+                              // Column(
+                              //   crossAxisAlignment: CrossAxisAlignment.start,
+                              //   children: [
+                              //     Text(
+                              //       'Blood group',
+                              //       style:  TextStyle(
+                              //         fontWeight: FontWeight.bold,
+                              //         fontSize: 27.sp,
+                              //       ),
+                              //     ),
+                              //     SizedBox(
+                              //       height: MediaQuery.of(context).size.height * 0.008,
+                              //     ),
+                              //     DropdownButtonFormField<String>(
+                              //       value: bloodType.text,
+                              //       items: cubit.bloodGroupItem.map((label) => DropdownMenuItem(
+                              //           child: Text(
+                              //             label,
+                              //             style: const TextStyle(fontSize: 16),
+                              //           ),
+                              //           value: label,
+                              //         )).toList(),
+                              //       onChanged: (value) {
+                              //         bloodType.text = value!;
+                              //       },
+                              //       validator: (value){
+                              //         if (value == null) {
+                              //           return "Blood type must not be empty";
+                              //         }
+                              //         return null;
+                              //       },
+                              //       decoration: InputDecoration(
+                              //         enabledBorder: OutlineInputBorder(
+                              //           borderSide: const BorderSide(width: 1),
+                              //           borderRadius: BorderRadius.circular(10),
+                              //         ),
+                              //         focusedBorder: OutlineInputBorder(
+                              //             borderRadius: BorderRadius.circular(10)),
+                              //       ),
+                              //       hint: const Text('Blood type'),
+                              //     ),
+                              //   ],
+                              // ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              SignupTextField(
+                                hintText: 'Enter your Weight',
+                                text: 'Weight',
+                                controller: weight,
+                                keyboardtype: TextInputType.number,
+                                validatorText: 'Weight must not be empty',
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              SignupTextField(
+                                hintText: 'Enter your Height',
+                                text: 'Height',
+                                controller: height,
+                                keyboardtype: TextInputType.number,
+                                validatorText: 'Height must not be empty',
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Buttons_without_icon(
+                                function: () {
+                                  if (formKey.currentState!.validate()) {
+                                    cubit.updateUserData(
+                                      name: name.text,
+                                      email: emailAddress.text,
+                                      phone: phone.text,
+                                      dateOfBirth: birthDate.text,
+                                      bloodType: bloodType.text,
+                                      // govId: int.parse(govId.text),
+                                      // cityId: int.parse(cityId.text),
+                                      height: int.parse(height.text),
+                                      weight: weight.text,
+                                      lastDonateDate: donationDate.text,
+                                    );
+                                    cubit.getUserData();
+                                    print('done');
+                                    // print(cubit.governorateItemList.length);
+                                    // print(cubit.cityItemList.length);
+                                    // print(cubit.governorateItemList);
+                                    // print(cubit.cityItemList);
+                                    // print(int.parse(govId.text));
+                                    // print(int.parse(cityId.text));
+                                    // print(cubit.governorateItemList[int.parse(govId.text)]);
+                                    // print(cubit.cityItemList[int.parse(cityId.text)]);
+                                  } else {
+                                    cubit.getUserData();
+                                    print('not done');
                                   }
-                                  return null;
                                 },
-                                decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(width: 1),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10)),
-                                ),
-                                hint: const Text('Blood type'),
+                                num_hieght: 52,
+                                text_button_name: 'Save data',
+                                button_color: mainColor,
+                                num_border: 12,
+                                num_fontsize: 20,
+                                text_fontwwieght: FontWeight.normal,
+                              ),
+                              const SizedBox(
+                                height: 20,
                               ),
                             ],
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          SignupTextField(
-                            hintText: 'Enter your Weight',
-                            text: 'Weight',
-                            controller: weight,
-                            keyboardtype: TextInputType.number,
-                            validatorText: 'Weight must not be empty',
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          SignupTextField(
-                            hintText: 'Enter your Height',
-                            text: 'Height',
-                            controller: height,
-                            keyboardtype: TextInputType.number,
-                            validatorText: 'Height must not be empty',
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Buttons_without_icon(
-                            function: () {
-                              if (formKey.currentState!.validate()) {
-                                cubit.updateUserData(
-                                  name: name.text,
-                                  email: emailAddress.text,
-                                  phone: phone.text,
-                                  dateOfBirth: birthDate.text,
-                                  bloodType: bloodType.text,
-                                  govId: int.parse(govId.text),
-                                  cityId: int.parse(cityId.text),
-                                  height: int.parse(height.text),
-                                  weight: weight.text,
-                                  lastDonateDate: donationDate.text,
-                                );
-                                print('done');
-                              } else {
-                                print('not done');
-                              }
-                            },
-                            num_hieght: 52,
-                            text_button_name: 'Save data',
-                            button_color: mainColor,
-                            num_border: 12,
-                            num_fontsize: 20,
-                            text_fontwwieght: FontWeight.normal,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                        ],
-                      ),
-                    )),
-              ],
+                        )),
+                  ],
+                ),
+              );
+            },
+            fallback: (context) => const Center(
+              child: CircularProgressIndicator(color: mainColor),
             ),
           ),
         );
