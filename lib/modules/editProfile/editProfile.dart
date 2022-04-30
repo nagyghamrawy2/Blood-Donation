@@ -1,4 +1,5 @@
 import 'package:blood_bank/models/profile_model.dart';
+import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
@@ -9,21 +10,39 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
-class EditProfileScreen extends StatelessWidget {
+class EditProfileScreen extends StatefulWidget {
+  @override
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
+}
+
+class _EditProfileScreenState extends State<EditProfileScreen> {
   var name = TextEditingController();
+
   var emailAddress = TextEditingController();
+
   var phone = TextEditingController();
-  int? govId;
-  var cityId = TextEditingController();
+
+  // int? govId;
+
+  int? cityId;
+
   var birthDate = TextEditingController();
+
   var donationDate = TextEditingController();
+
   var bloodType = TextEditingController();
+
   var height = TextEditingController();
+
   var weight = TextEditingController();
+
   var formKey = GlobalKey<FormState>();
 
   String? govValue;
+
   String? cityValue;
+  int? id;
+
   @override
   Widget build(BuildContext context) {
     AppCubit cubit = AppCubit.get(context);
@@ -33,8 +52,8 @@ class EditProfileScreen extends StatelessWidget {
     phone = TextEditingController(text: model?.phoneNumber);
     govValue = model?.governorate?.governorateName;
     cityValue = model?.city?.cityName;
-    govId = model?.governorate?.id;
-    cityId = TextEditingController(text: model?.city?.id.toString());
+    // govId = model?.governorate?.id;
+    cityId = model?.city?.id;
     birthDate = TextEditingController(text: model?.dateOfBirth);
     donationDate = TextEditingController(text: model?.donationDate);
     bloodType = TextEditingController(text: model?.bloodType);
@@ -42,11 +61,7 @@ class EditProfileScreen extends StatelessWidget {
     weight = TextEditingController(text: model?.weight);
 
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {
-        if(state is AppLoadingUserDataState){
-
-        }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         String image = model?.profilePicture != null
             ? '${model?.profilePicture}'
@@ -58,6 +73,7 @@ class EditProfileScreen extends StatelessWidget {
           body: ConditionalBuilder(
             condition: model != null,
             builder: (context) {
+              govIdConstant = model?.governorate?.id;
               return SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -267,71 +283,68 @@ class EditProfileScreen extends StatelessWidget {
                               const SizedBox(
                                 height: 10,
                               ),
+                              // DropdownButtonFormField(
+                              //   value: govValue,
+                              //   hint: const Text(
+                              //     'Governorate',
+                              //   ),
+                              //   validator: (value) {
+                              //     if (value == null) {
+                              //       return "Governorate must not be empty";
+                              //     }
+                              //     return null;
+                              //   },
+                              //   decoration: InputDecoration(
+                              //     focusColor: Colors.green,
+                              //     focusedBorder: OutlineInputBorder(
+                              //       borderRadius: BorderRadius.circular(10),
+                              //       borderSide: const BorderSide(
+                              //         color: greyColor,
+                              //       ),
+                              //     ),
+                              //     enabledBorder: OutlineInputBorder(
+                              //       borderSide: const BorderSide(
+                              //         width: 1,
+                              //       ),
+                              //       borderRadius: BorderRadius.circular(10),
+                              //     ),
+                              //     errorBorder: OutlineInputBorder(
+                              //       borderSide: const BorderSide(
+                              //           color: Colors.red, width: 1),
+                              //       borderRadius: BorderRadius.circular(20),
+                              //     ),
+                              //     focusedErrorBorder: OutlineInputBorder(
+                              //       borderRadius: BorderRadius.circular(10),
+                              //     ),
+                              //   ),
+                              //   icon: const Icon(Icons.keyboard_arrow_down),
+                              //   items: cubit.governorateItemList.asMap().entries.map((items) {
+                              //     return DropdownMenuItem(
+                              //       value: items.value.governorateName,
+                              //       child: Text(items.value.governorateName!),
+                              //     );
+                              //   }).toList(),
+                              //   onChanged: (newValue) {
+                              //     setState(() {
+                              //       print(newValue);
+                              //       int id = cubit.governorateItemList.indexWhere((element) => element.governorateName == newValue);
+                              //       print('id of gov  = $id');
+                              //       govId = cubit.governorateItemList[id].id;
+                              //       print(govId);
+                              //     });
+                              //     cubit.getCityData(id: govId!);
+                              //   },
+                              //   onSaved: (value){
+                              //   },
+                              // ),
                               DropdownButtonFormField(
-                                value: govValue,
-                                hint: const Text(
-                                  'Governorate',
-                                ),
-                                validator: (value) {
-                                  if (value == null) {
-                                    return "Governorate must not be empty";
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  focusColor: Colors.green,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                      color: greyColor,
-                                    ),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: Colors.red, width: 1),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                                icon: const Icon(Icons.keyboard_arrow_down),
-                                items: cubit.governorateItemList.asMap().entries.map((items) {
-                                  return DropdownMenuItem(
-                                    value: items.value.governorateName,
-                                    child: Text(items.value.governorateName!),
-                                  );
-                                }).toList(),
-                                onChanged: (String? newValue) {
-                                  govValue = newValue;
-                                  print(newValue);
-                                  int id = cubit.governorateItemList.indexWhere((element) => element.governorateName == govValue);
-                                  print('id of gov  = $id');
-                                  govId = (cubit.governorateItemList[id].id);
-                                  cubit.getCityData(id: govId!);
-                                  print(govId);
-
-                                },
-                                onSaved: (value){
-                                  print(value);
-                                },
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              DropdownButtonFormField(
+                                value: cubit.governorateItemList[govIdConstant!].governorateName,
                                   hint: const Text(
-                                    'City',
+                                    'Governorate',
                                   ),
                                   validator: (value) {
                                     if (value == null) {
-                                      return "City must not be empty";
+                                      return "Governorate must not be empty";
                                     }
                                   },
                                   decoration: InputDecoration(
@@ -358,67 +371,75 @@ class EditProfileScreen extends StatelessWidget {
                                     ),
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down),
-                                  items: cubit.cityItemList.asMap().entries.map((items) {
+                                  items: cubit.governorateItemList.asMap().entries.map((items) {
                                     return DropdownMenuItem(
-                                      value: items.value.cityName,
-                                      child: Text(items.value.cityName!),
+                                      value: items.value.governorateName,
+                                      child: Text(items.value.governorateName!),
                                     );
                                   }).toList(),
                                   onChanged: (newValue) {
-                                    int id = cubit.cityItemList.indexWhere((element) => element.cityName == newValue);
-                                    cityId.text =(cubit.cityItemList[id].id).toString();
-                                  }
+                                    id = cubit.governorateItemList.indexWhere((element) => element.governorateName == newValue);
+                                    // govId = cubit.governorateItemList[id!].id;
+                                    govIdConstant = cubit.governorateItemList[id!].id;
+                                    cubit.getCityData(id: govIdConstant!);
+                                    print(id);
+                                    // print(govId);
+                                    print(govIdConstant);
+                                  },
                               ),
-                              // ConditionalBuilder(
-                              //   condition: cubit.cityItemList.isNotEmpty,
-                              //   builder: (context) => DropdownButtonFormField(
-                              //     hint: const Text(
-                              //       'City',
-                              //     ),
-                              //     validator: (value) {
-                              //       if (value == null) {
-                              //         return "City must not be empty";
-                              //       }
-                              //     },
-                              //     decoration: InputDecoration(
-                              //       focusColor: Colors.green,
-                              //       focusedBorder: OutlineInputBorder(
-                              //         borderRadius: BorderRadius.circular(10),
-                              //         borderSide: const BorderSide(
-                              //           color: greyColor,
-                              //         ),
-                              //       ),
-                              //       enabledBorder: OutlineInputBorder(
-                              //         borderSide: const BorderSide(
-                              //           width: 1,
-                              //         ),
-                              //         borderRadius: BorderRadius.circular(10),
-                              //       ),
-                              //       errorBorder: OutlineInputBorder(
-                              //         borderSide: const BorderSide(
-                              //             color: Colors.red, width: 1),
-                              //         borderRadius: BorderRadius.circular(20),
-                              //       ),
-                              //       focusedErrorBorder: OutlineInputBorder(
-                              //         borderRadius: BorderRadius.circular(10),
-                              //       ),
-                              //     ),
-                              //     icon: const Icon(Icons.keyboard_arrow_down),
-                              //     items: cubit.cityItemList.asMap().entries.map((items) {
-                              //       return DropdownMenuItem(
-                              //         value: items.value.cityName,
-                              //         child: Text(items.value.cityName!),
-                              //       );
-                              //     }).toList(),
-                              //     onChanged: (newValue) {
-                              //       int id = cubit.cityItemList.indexWhere((element) => element.cityName == newValue);
-                              //       cityId.text =(cubit.cityItemList[id].id).toString();
-                              //     }
-                              //   ),
-                              //   fallback: (context) => const Center(
-                              //     child: CircularProgressIndicator(),
-                              //   ),
-                              // ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              ConditionalBuilder(
+                                condition: cubit.cityItemList.isNotEmpty,
+                                builder: (context)=>DropdownButtonFormField(
+                                    hint: const Text(
+                                      'City',
+                                    ),
+                                    validator: (value) {
+                                      if (value == null) {
+                                        return "City must not be empty";
+                                      }
+                                    },
+                                    decoration: InputDecoration(
+                                      focusColor: Colors.green,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                          color: greyColor,
+                                        ),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.red, width: 1),
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    icon: const Icon(Icons.keyboard_arrow_down),
+                                    items: cubit.cityItemList.asMap().entries.map((items) {
+                                      return DropdownMenuItem(
+                                        value: items.value.cityName,
+                                        child: Text(items.value.cityName!),
+                                      );
+                                    }).toList(),
+                                    onChanged: (newValue) {
+                                      int id = cubit.cityItemList.indexWhere((element) => element.cityName == newValue);
+                                      cityIdConstant = cubit.cityItemList[id].id;
+                                      // print(govId);
+                                      // print(govIdConstant);
+                                    }
+                                ),
+                                fallback: (context)=>Center(child: CircularProgressIndicator(color: mainColor,),),
+                              ),
                               const SizedBox(
                                 height: 10,
                               ),
@@ -497,15 +518,14 @@ class EditProfileScreen extends StatelessWidget {
                                       phone: phone.text,
                                       dateOfBirth: birthDate.text,
                                       bloodType: bloodType.text,
-                                      govId: govId!,
-                                      cityId: int.parse(cityId.text),
+                                      govId: govIdConstant!,
+                                      cityId: cityIdConstant!,
                                       height: int.parse(height.text),
                                       weight: weight.text,
                                       lastDonateDate: donationDate.text,
                                     );
                                     print('done');
-                                    print(govId);
-                                    print(int.parse(cityId.text));
+                                    print(cityId);
                                   } else {
                                     print('not done');
                                   }

@@ -121,6 +121,10 @@ class MyInformationScreen extends StatelessWidget {
                     num_fontsize: 20,
                     text_fontwwieght: FontWeight.normal,
                     function: (){
+                      print(cityIdConstant);
+                      print(govIdConstant);
+                      print(cubit.governorateItemList);
+                      print(cubit.cityItemList);
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) =>  EditProfileScreen()),

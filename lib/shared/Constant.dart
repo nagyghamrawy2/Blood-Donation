@@ -15,3 +15,5 @@ void Signout(context)
 }
 String? token='';
 
+int? govIdConstant;
+int? cityIdConstant;
