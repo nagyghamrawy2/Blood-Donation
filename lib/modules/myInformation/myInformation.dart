@@ -123,8 +123,6 @@ class MyInformationScreen extends StatelessWidget {
                     function: (){
                       print(cityIdConstant);
                       print(govIdConstant);
-                      print(cubit.governorateItemList);
-                      print(cubit.cityItemList);
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) =>  EditProfileScreen()),

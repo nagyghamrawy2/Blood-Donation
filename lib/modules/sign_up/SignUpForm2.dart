@@ -1,9 +1,12 @@
 import 'package:blood_bank/modules/Login_Screen/login.dart';
 import 'package:blood_bank/modules/sign_up/SignUpForm3.dart';
+import 'package:blood_bank/modules/sign_up/cubit/register_cubit.dart';
+import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -13,14 +16,26 @@ class SignUpScreen2 extends StatelessWidget {
   TextEditingController phone = new TextEditingController();
   TextEditingController birthDate = new TextEditingController();
   var formKey = GlobalKey<FormState>();
+  late String name;
+  late String emailAddress;
+  late String password;
+  late String confirmPassword;
+  int? id;
 
+  SignUpScreen2(
+      {required this.name,
+      required this.password,
+      required this.confirmPassword,
+      required this.emailAddress});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit, AppStates>(
+    return BlocProvider(
+  create: (context) => RegisterCubit(),
+  child: BlocConsumer<RegisterCubit, RegisterStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        AppCubit cubit = AppCubit.get(context);
+        RegisterCubit cubit = RegisterCubit.get(context);
         return Scaffold(
             body: SingleChildScrollView(
           child: Column(
@@ -64,7 +79,10 @@ class SignUpScreen2 extends StatelessWidget {
                         alignment: Alignment.bottomLeft,
                         child: Text(
                           "step 2 of 3",
-                          style: TextStyle(fontSize: 22.h , fontStyle: FontStyle.italic , color: mainColor),
+                          style: TextStyle(
+                              fontSize: 22.h,
+                              fontStyle: FontStyle.italic,
+                              color: mainColor),
                         ),
                       ),
                       Container(
@@ -102,8 +120,7 @@ class SignUpScreen2 extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height:
-                                MediaQuery.of(context).size.height * 0.008,
+                            height: MediaQuery.of(context).size.height * 0.008,
                           ),
                           TextFormField(
                             readOnly: true,
@@ -150,7 +167,8 @@ class SignUpScreen2 extends StatelessWidget {
                                 lastDate: DateTime.parse('2025-05-05'),
                               ).then((value) {
                                 birthDate.text =
-                                    DateFormat.yMMMd().format(value!);
+                                    DateFormat('yyyy-MM-dd')
+                                        .format(value!);
                               });
                             },
                           ),
@@ -172,54 +190,59 @@ class SignUpScreen2 extends StatelessWidget {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.005,
                       ),
-                      // DropdownButtonFormField(
-                      //   hint: const Text(
-                      //     'Governorate',
-                      //   ),
-                      //   validator: (value) {
-                      //     if (value == null) {
-                      //       return "Please choose your governorate";
-                      //     }
-                      //   },
-                      //   decoration: InputDecoration(
-                      //     focusColor: Colors.green,
-                      //     focusedBorder: OutlineInputBorder(
-                      //       borderRadius: BorderRadius.circular(10),
-                      //       borderSide: const BorderSide(
-                      //         color: greyColor,
-                      //       ),
-                      //     ),
-                      //     enabledBorder: OutlineInputBorder(
-                      //       borderSide: const BorderSide(
-                      //         width: 1,
-                      //       ),
-                      //       borderRadius: BorderRadius.circular(10),
-                      //     ),
-                      //     errorBorder: OutlineInputBorder(
-                      //       borderSide: const BorderSide(color: Colors.red, width: 1),
-                      //       borderRadius: BorderRadius.circular(20),
-                      //     ),
-                      //     focusedErrorBorder: OutlineInputBorder(
-                      //       borderRadius: BorderRadius.circular(10),
-                      //     ),
-                      //   ),
-                      //   // Initial Value
-                      //
-                      //   // Down Arrow Icon
-                      //   icon: const Icon(Icons.keyboard_arrow_down),
-                      //   items: cubit.governorateItemList.map((String items) {
-                      //     return DropdownMenuItem(
-                      //       value: items,
-                      //       child: Text(items),
-                      //     );
-                      //   }).toList(),
-                      //   // After selecting the desired option,it will
-                      //   // change button value to selected value
-                      //   onChanged: (newValue) {
-                      //     print(newValue);
-                      //     //cubit.ChangeLocationCityValue(newValue);
-                      //   },
-                      // ),
+                      DropdownButtonFormField(
+                        hint: const Text(
+                          'Governorate',
+                        ),
+                        validator: (value) {
+                          if (value == null) {
+                            return "Governorate must not be empty";
+                          }
+                        },
+                        decoration: InputDecoration(
+                          focusColor: Colors.green,
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                              color: greyColor,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.red, width: 1),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        items: governorateItemList
+                            .asMap()
+                            .entries
+                            .map((items) {
+                          return DropdownMenuItem(
+                            value: items.value.governorateName,
+                            child: Text(items.value.governorateName!),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          id = governorateItemList.indexWhere(
+                              (element) => element.governorateName == newValue);
+                          // govId = cubit.governorateItemList[id!].id;
+                          govIdConstant = governorateItemList[id!].id;
+                          cubit.getCityData(id: govIdConstant!);
+                          print(id);
+                          // print(govId);
+                          print(govIdConstant);
+                        },
+                      ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.008,
                       ),
@@ -233,10 +256,61 @@ class SignUpScreen2 extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.005,
+                      ConditionalBuilder(
+                        condition: cityItemList.isNotEmpty,
+                        builder: (context) => DropdownButtonFormField(
+                            hint: const Text(
+                              'City',
+                            ),
+                            validator: (value) {
+                              if (value == null) {
+                                return "City must not be empty";
+                              }
+                            },
+                            decoration: InputDecoration(
+                              focusColor: Colors.green,
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  color: greyColor,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.red, width: 1),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            items:
+                                cityItemList.asMap().entries.map((items) {
+                              return DropdownMenuItem(
+                                value: items.value.cityName,
+                                child: Text(items.value.cityName!),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              int id = cityItemList.indexWhere(
+                                  (element) => element.cityName == newValue);
+                              cityIdConstant = cityItemList[id].id;
+                              // print(govId);
+                              // print(govIdConstant);
+                            }),
+                        fallback: (context) => Center(
+                          child: CircularProgressIndicator(
+                            color: mainColor,
+                          ),
+                        ),
                       ),
-                      //LocationCityCustom(border: true,),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.02,
                       ),
@@ -246,11 +320,20 @@ class SignUpScreen2 extends StatelessWidget {
                           function: () {
                             if (formKey.currentState!.validate()) {
                               print('done');
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen3()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignUpScreen3(
+                                            birthDate: birthDate.text,
+                                            confirmPassword: confirmPassword,
+                                            emailAddress: emailAddress,
+                                            name: name,
+                                            password: password,
+                                            phone: phone.text,
+                                          )));
                             } else {
                               print('not done');
                             }
-
                           },
                           num_hieght: 90.h,
                           text_button_name: 'Next Step >',
@@ -271,6 +354,7 @@ class SignUpScreen2 extends StatelessWidget {
           ),
         ));
       },
-    );
+    ),
+);
   }
 }

@@ -72,24 +72,8 @@ class AppCubit extends Cubit<AppStates> {
     emit(BloodValueChangeState());
   }
 
-  bool policyTerms = false;
 
-  void acceptPolicy(bool value) {
-    policyTerms = value;
-    emit(PolicyTermsChangeState());
-  }
 
-  bool check = true;
-
-  void ChangeCheck() {
-    if (policyTerms == true) {
-      check = true;
-      emit(ChangeCheckValueState());
-    } else {
-      check = false;
-      emit(ChangeCheckValueState());
-    }
-  }
 
   bool obsecure = true;
 
@@ -208,7 +192,7 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  List<Governorates> governorateItemList = [];
+
   late GovernorateModel governorateModel;
   void getGovernorateData() {
     emit(AppLoadingGovernorateDataState());
@@ -226,7 +210,7 @@ class AppCubit extends Cubit<AppStates> {
 
 
   //hesham 29/4
-  List<Cities> cityItemList = [];
+
   late CityModel cityModel;
   void getCityData({required int id}) {
     emit(AppLoadingCityDataState());

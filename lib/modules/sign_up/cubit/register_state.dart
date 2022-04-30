@@ -7,8 +7,8 @@ class RegisterInitial extends RegisterStates {}
 
 class RegisterLoadingState extends RegisterStates{}
 class RegisterSuccessState extends RegisterStates{
-  final UserModel loginModel;
- RegisterSuccessState(this.loginModel);
+  final RegisterModel registerModel;
+ RegisterSuccessState(this.registerModel);
 }
 class RegisterErrorState extends RegisterStates{
   final String error;
@@ -16,3 +16,11 @@ class RegisterErrorState extends RegisterStates{
   RegisterErrorState(this.error);
 }
 
+class PolicyTermsChangeState extends RegisterStates{}
+class ChangeCheckValueState extends RegisterStates{}
+
+class AppLoadingCityDataState extends RegisterStates{}
+class AppSuccessCityDataState extends RegisterStates{}
+class AppErrorCityDataState extends RegisterStates{}
+class ChangeConfirmPasswordState extends RegisterStates{}
+class ChangePasswordState extends RegisterStates{}

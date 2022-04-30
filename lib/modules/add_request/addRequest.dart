@@ -292,14 +292,14 @@ class AddRequestScreen extends StatelessWidget {
                         num_fontsize: 25.sp,
                         text_fontwwieght: FontWeight.normal,
                         function: () {
-                          if (formKey.currentState!.validate() &&
-                              (cubit.policyTerms)) {
-                            cubit.ChangeCheck();
-                            print('done');
-                          } else {
-                            cubit.ChangeCheck();
-                            print('not done');
-                          }
+                          // if (formKey.currentState!.validate() &&
+                          //     (cubit.policyTerms)) {
+                          //   cubit.ChangeCheck();
+                          //   print('done');
+                          // } else {
+                          //   cubit.ChangeCheck();
+                          //   print('not done');
+                          // }
                         },
                       ),
                     ],

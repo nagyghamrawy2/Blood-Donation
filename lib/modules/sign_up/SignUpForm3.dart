@@ -1,4 +1,6 @@
 import 'package:blood_bank/modules/Login_Screen/login.dart';
+import 'package:blood_bank/modules/sign_up/cubit/register_cubit.dart';
+import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
@@ -10,19 +12,34 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class SignUpScreen3 extends StatelessWidget {
-  TextEditingController height = new TextEditingController();
-  TextEditingController weight = new TextEditingController();
   TextEditingController lastDonationDate = new TextEditingController();
+  var bloodType = TextEditingController();
   var formKey = GlobalKey<FormState>();
+  late String phone;
+
+  late String birthDate;
+
+  late String name;
+  late String emailAddress;
+  late String password;
+  late String confirmPassword;
+
+  SignUpScreen3(
+      {required this.phone,
+      required this.birthDate,
+      required this.name,
+      required this.emailAddress,
+      required this.password,
+      required this.confirmPassword});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppCubit(),
-      child: BlocConsumer<AppCubit, AppStates>(
+      create: (context) => RegisterCubit(),
+      child: BlocConsumer<RegisterCubit, RegisterStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          AppCubit cubit = AppCubit.get(context);
+          RegisterCubit cubit = RegisterCubit.get(context);
           return Scaffold(
               body: SingleChildScrollView(
             child: Column(
@@ -65,7 +82,10 @@ class SignUpScreen3 extends StatelessWidget {
                           alignment: Alignment.bottomLeft,
                           child: Text(
                             "step 3 of 3",
-                            style: TextStyle(fontSize: 22.h , fontStyle: FontStyle.italic , color: mainColor),
+                            style: TextStyle(
+                                fontSize: 22.h,
+                                fontStyle: FontStyle.italic,
+                                color: mainColor),
                           ),
                         ),
                         Container(
@@ -89,7 +109,35 @@ class SignUpScreen3 extends StatelessWidget {
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.004,
                         ),
-                        BloodTypeDropDown(),
+                        DropdownButtonFormField<String>(
+                          items: cubit.bloodGroupItem
+                              .map((label) => DropdownMenuItem(
+                                    child: Text(
+                                      label,
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                    value: label,
+                                  ))
+                              .toList(),
+                          onChanged: (value) {
+                            bloodType.text = value!;
+                          },
+                          validator: (value) {
+                            if (value == null) {
+                              return "Blood type must not be empty";
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(width: 1),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                          ),
+                          hint: const Text('Blood type'),
+                        ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.008,
                         ),
@@ -105,7 +153,7 @@ class SignUpScreen3 extends StatelessWidget {
                             ),
                             SizedBox(
                               height:
-                              MediaQuery.of(context).size.height * 0.008,
+                                  MediaQuery.of(context).size.height * 0.008,
                             ),
                             TextFormField(
                               readOnly: true,
@@ -152,7 +200,8 @@ class SignUpScreen3 extends StatelessWidget {
                                   lastDate: DateTime.parse('2025-05-05'),
                                 ).then((value) {
                                   lastDonationDate.text =
-                                      DateFormat.yMMMd().format(value!);
+                                      DateFormat('yyyy-MM-dd')
+                                          .format(value!);
                                 });
                               },
                             ),
@@ -180,7 +229,7 @@ class SignUpScreen3 extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                 Text('I accept the policy and terms',
+                                Text('I accept the policy and terms',
                                     style: TextStyle(
                                         fontSize: 22.sp,
                                         color: Colors.black,
@@ -191,7 +240,8 @@ class SignUpScreen3 extends StatelessWidget {
                                         child: Text(
                                           "Please accept the policy ",
                                           style: TextStyle(
-                                              color: Colors.red, fontSize: 18.sp),
+                                              color: Colors.red,
+                                              fontSize: 18.sp),
                                         ))
                                     : Text(""),
                               ],
@@ -206,7 +256,19 @@ class SignUpScreen3 extends StatelessWidget {
                             if (formKey.currentState!.validate() &&
                                 (cubit.policyTerms)) {
                               cubit.ChangeCheck();
-                              print('done');
+                              cubit.userRegister(
+                                email: emailAddress,
+                                name: name,
+                                phone: phone,
+                                password: password,
+                                dateOfBirth: birthDate,
+                                bloodType: bloodType.text,
+                                lastDonateTime: lastDonationDate.text,
+                                cityId: cityIdConstant!,
+                                govId: govIdConstant!,
+                                confirmPassword: confirmPassword,
+                              );
+                              print("done");
                             } else {
                               cubit.ChangeCheck();
                               print('not done');

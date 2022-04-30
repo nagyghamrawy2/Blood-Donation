@@ -338,7 +338,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               //   },
                               // ),
                               DropdownButtonFormField(
-                                value: cubit.governorateItemList[govIdConstant!].governorateName,
+                                value: governorateItemList[govIdConstant!].governorateName,
                                   hint: const Text(
                                     'Governorate',
                                   ),
@@ -371,16 +371,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     ),
                                   ),
                                   icon: const Icon(Icons.keyboard_arrow_down),
-                                  items: cubit.governorateItemList.asMap().entries.map((items) {
+                                  items: governorateItemList.asMap().entries.map((items) {
                                     return DropdownMenuItem(
                                       value: items.value.governorateName,
                                       child: Text(items.value.governorateName!),
                                     );
                                   }).toList(),
                                   onChanged: (newValue) {
-                                    id = cubit.governorateItemList.indexWhere((element) => element.governorateName == newValue);
+                                    id = governorateItemList.indexWhere((element) => element.governorateName == newValue);
                                     // govId = cubit.governorateItemList[id!].id;
-                                    govIdConstant = cubit.governorateItemList[id!].id;
+                                    govIdConstant = governorateItemList[id!].id;
                                     cubit.getCityData(id: govIdConstant!);
                                     print(id);
                                     // print(govId);
@@ -391,7 +391,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 height: 10,
                               ),
                               ConditionalBuilder(
-                                condition: cubit.cityItemList.isNotEmpty,
+                                condition: cityItemList.isNotEmpty,
                                 builder: (context)=>DropdownButtonFormField(
                                     hint: const Text(
                                       'City',
@@ -425,15 +425,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       ),
                                     ),
                                     icon: const Icon(Icons.keyboard_arrow_down),
-                                    items: cubit.cityItemList.asMap().entries.map((items) {
+                                    items: cityItemList.asMap().entries.map((items) {
                                       return DropdownMenuItem(
                                         value: items.value.cityName,
                                         child: Text(items.value.cityName!),
                                       );
                                     }).toList(),
                                     onChanged: (newValue) {
-                                      int id = cubit.cityItemList.indexWhere((element) => element.cityName == newValue);
-                                      cityIdConstant = cubit.cityItemList[id].id;
+                                      int id = cityItemList.indexWhere((element) => element.cityName == newValue);
+                                      cityIdConstant = cityItemList[id].id;
                                       // print(govId);
                                       // print(govIdConstant);
                                     }

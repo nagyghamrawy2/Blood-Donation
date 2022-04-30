@@ -1,4 +1,5 @@
 import 'package:blood_bank/modules/sign_up/SignUpForm2.dart';
+import 'package:blood_bank/modules/sign_up/cubit/register_cubit.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:flutter/material.dart';
@@ -22,11 +23,11 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppCubit(),
-      child: BlocConsumer<AppCubit, AppStates>(
+      create: (context) => RegisterCubit(),
+      child: BlocConsumer<RegisterCubit, RegisterStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          AppCubit cubit = AppCubit.get(context);
+          RegisterCubit cubit = RegisterCubit.get(context);
           return Scaffold(
             body: SingleChildScrollView(
               child: Column(
@@ -64,14 +65,17 @@ class SignUpScreen extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal:
-                                MediaQuery.of(context).size.width * 0.08),
+                            MediaQuery.of(context).size.width * 0.08),
                         child: Column(
                           children: [
                             Align(
-                                alignment: Alignment.bottomLeft,
+                              alignment: Alignment.bottomLeft,
                               child: Text(
-                                  "step 1 of 3",
-                                style: TextStyle(fontSize: 22.h , fontStyle: FontStyle.italic , color: mainColor),
+                                "step 1 of 3",
+                                style: TextStyle(
+                                    fontSize: 22.h,
+                                    fontStyle: FontStyle.italic,
+                                    color: mainColor),
                               ),
                             ),
                             Container(
@@ -87,11 +91,11 @@ class SignUpScreen extends StatelessWidget {
                             ),
                             SizedBox(
                               height:
-                                  MediaQuery.of(context).size.height * 0.008,
+                              MediaQuery.of(context).size.height * 0.008,
                             ),
                             SizedBox(
                               height:
-                                  MediaQuery.of(context).size.height * 0.008,
+                              MediaQuery.of(context).size.height * 0.008,
                             ),
                             SignupTextField(
                               hintText: 'Enter your name',
@@ -102,7 +106,7 @@ class SignUpScreen extends StatelessWidget {
                             ),
                             SizedBox(
                               height:
-                                  MediaQuery.of(context).size.height * 0.008,
+                              MediaQuery.of(context).size.height * 0.008,
                             ),
                             SignupTextField(
                               hintText: 'Enter your email',
@@ -113,7 +117,7 @@ class SignUpScreen extends StatelessWidget {
                             ),
                             SizedBox(
                               height:
-                                  MediaQuery.of(context).size.height * 0.008,
+                              MediaQuery.of(context).size.height * 0.008,
                             ),
                             SignupTextField(
                               hintText: 'Enter your password',
@@ -125,12 +129,11 @@ class SignUpScreen extends StatelessWidget {
                               secure: cubit.obsecure,
                               suffixFunction: () {
                                 cubit.changePasswordStatus();
-
                               },
                             ),
                             SizedBox(
                               height:
-                                  MediaQuery.of(context).size.height * 0.008,
+                              MediaQuery.of(context).size.height * 0.008,
                             ),
                             SignupTextField(
                               hintText: 'Enter password again',
@@ -142,7 +145,6 @@ class SignUpScreen extends StatelessWidget {
                               secure: cubit.confirmObsecure,
                               suffixFunction: () {
                                 cubit.changeConfirmPasswordStatus();
-
                               },
                             ),
                             SizedBox(
@@ -154,11 +156,18 @@ class SignUpScreen extends StatelessWidget {
                                 function: () {
                                   if (formKey.currentState!.validate()) {
                                     print('done');
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen2()));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => SignUpScreen2(
+                                              name: name.text,
+                                              password: password.text,
+                                              confirmPassword: confirmPassword.text,
+                                              emailAddress: emailAddress.text,
+                                            )));
                                   } else {
                                     print('not done');
                                   }
-
                                 },
                                 num_hieght: 90.h,
                                 text_button_name: 'Next Step >',
