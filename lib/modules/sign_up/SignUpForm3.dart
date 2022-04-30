@@ -37,7 +37,18 @@ class SignUpScreen3 extends StatelessWidget {
     return BlocProvider(
       create: (context) => RegisterCubit(),
       child: BlocConsumer<RegisterCubit, RegisterStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if(state is RegisterSuccessState)
+          {
+            if(state.registerModel.status)
+            {
+              ShowToast(state: ToastStates.SUCCESS , text: "Register successfully" );
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
+            } else{
+              ShowToast(state: ToastStates.ERROR , text: "Please make sure the data enter is correct" );
+            }
+          }
+        },
         builder: (context, state) {
           RegisterCubit cubit = RegisterCubit.get(context);
           return Scaffold(

@@ -127,8 +127,6 @@ class AppCubit extends Cubit<AppStates> {
     emit(ChangeGalleryValueState());
   }
 
-  ProfileModel? profileModel;
-
   void getUserData() {
     emit(AppLoadingUserDataState());
     DioHelper.getData(

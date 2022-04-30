@@ -46,7 +46,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     AppCubit cubit = AppCubit.get(context);
-    User? model = cubit.profileModel?.user;
+    User? model = profileModel?.user;
     name = TextEditingController(text: model?.name);
     emailAddress = TextEditingController(text: model?.email);
     phone = TextEditingController(text: model?.phoneNumber);
@@ -96,7 +96,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 text: 'Name',
                                 controller: name,
                                 keyboardtype: TextInputType.text,
-                                validatorText: cubit.profileModel?.errors?.name![0] != null ? cubit.profileModel!.errors!.name![0] : 'Name must not be empty',
+                                validatorText: profileModel?.errors?.name![0] != null ? profileModel!.errors!.name![0] : 'Name must not be empty',
                               ),
                               const SizedBox(
                                 height: 10,

@@ -30,6 +30,7 @@ class LoginScreen extends StatelessWidget {
                 navigateAndFinish(context, HomeLayout());
               });
               ShowToast(text: 'LOGIN SUCCESSFULLY', state: ToastStates.SUCCESS);
+
             } else {
               ShowToast(
                   text: 'Please make sure the data entered is correct',

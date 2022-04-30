@@ -1,6 +1,7 @@
 import 'package:blood_bank/models/profile_model.dart';
 import 'package:blood_bank/modules/editProfile/editProfile.dart';
 import 'package:blood_bank/shared/Constant.dart';
+import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
@@ -29,15 +30,15 @@ class MyInformationScreen extends StatelessWidget {
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
         List<String> apiInfo = [
-          '${cubit.profileModel?.user?.email}',
-          '${cubit.profileModel?.user?.phoneNumber}',
-          '${cubit.profileModel?.user?.city?.cityName},${cubit.profileModel?.user?.governorate?.governorateName}',
-          '${cubit.profileModel?.user?.dateOfBirth}',
-          '${cubit.profileModel?.user?.bloodType}',
-          cubit.profileModel?.user?.weight != null ? '${cubit.profileModel?.user?.weight} KG' : '',
-          cubit.profileModel?.user?.height != null ? '${cubit.profileModel?.user?.height} CM' : '',
+          '${profileModel?.user?.email}',
+          '${profileModel?.user?.phoneNumber}',
+          '${profileModel?.user?.city?.cityName},${profileModel?.user?.governorate?.governorateName}',
+          '${profileModel?.user?.dateOfBirth}',
+          '${profileModel?.user?.bloodType}',
+          profileModel?.user?.weight != null ? '${profileModel?.user?.weight} KG' : '',
+          profileModel?.user?.height != null ? '${profileModel?.user?.height} CM' : '',
         ];
-        String image = cubit.profileModel?.user?.profilePicture != null ? '${cubit.profileModel?.user?.profilePicture}' : 'assets/images/noImage.png';
+        String image = profileModel?.user?.profilePicture != null ? '${profileModel?.user?.profilePicture}' : 'assets/images/noImage.png';
         return Scaffold(
           appBar: AppBar(
             title: const Text(
@@ -70,7 +71,7 @@ class MyInformationScreen extends StatelessWidget {
                               height: 10,
                             ),
                             Text(
-                              '${cubit.profileModel?.user?.name}',
+                              '${profileModel?.user?.name}',
                               style: const TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,
