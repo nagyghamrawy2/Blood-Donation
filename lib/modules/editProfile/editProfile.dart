@@ -538,7 +538,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 text_fontwwieght: FontWeight.normal,
                               ),
                               const SizedBox(
-                                height: 20,
+                                height: 25,
                               ),
                             ],
                           ),
