@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:blood_bank/models/city_model.dart';
 import 'package:blood_bank/models/governate_model.dart';
 import 'package:blood_bank/models/profile_model.dart';
+import 'package:blood_bank/models/request_model.dart';
 import 'package:blood_bank/modules/add_request/addRequest.dart';
 import 'package:blood_bank/modules/chat/messageModel.dart';
 import 'package:blood_bank/modules/education/education.dart';
@@ -147,7 +148,6 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   ProfileModel? updateProfileModel;
-
   void updateUserData({
     required String name,
     required String email,
@@ -189,7 +189,6 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-
   late GovernorateModel governorateModel;
   void getGovernorateData() {
     emit(AppLoadingGovernorateDataState());
@@ -204,10 +203,7 @@ class AppCubit extends Cubit<AppStates> {
       emit(AppErrorGovernorateDataState());
     });
   }
-
-
-  //hesham 29/4
-
+  
   late CityModel cityModel;
   void getCityData({required int id}) {
     emit(AppLoadingCityDataState());
@@ -223,6 +219,39 @@ class AppCubit extends Cubit<AppStates> {
     }).catchError((error) {
       print(error.toString());
       emit(AppErrorCityDataState());
+    });
+  }
+  
+  RequestModel? requestModel;
+  void getAllRequests(){
+    emit(AppLoadingAllRequestsDataState());
+    DioHelper.getData(url: REQUESTS,token: token).then((value){
+      requestModel = RequestModel.fromJson(value.data);
+      emit(AppSuccessAllRequestsDataState());
+    }).catchError((onError){
+      print(onError.toString());
+      emit(AppErrorAllRequestsDataState());
+    });
+  }
+
+  RequestModel? myRequestModel;
+  void getMyRequests(){
+    emit(AppLoadingMyRequestsDataState());
+    DioHelper.getData(url: MY_REQUESTS,token: token).then((value){
+      myRequestModel = RequestModel.fromJson(value.data);
+      emit(AppSuccessMyRequestsDataState());
+    }).catchError((onError){
+      print(onError.toString());
+      emit(AppErrorMyRequestsDataState());
+    });
+  }
+  void deleteMyRequests({required int id}){
+    emit(AppLoadingDeleteMyRequestsDataState());
+    DioHelper.deleteData(url: '$REQUESTS/$id',token: token).then((value){
+      emit(AppSuccessDeleteMyRequestsDataState());
+    }).catchError((onError){
+      print(onError.toString());
+      emit(AppErrorDeleteMyRequestsDataState());
     });
   }
 // void sendMessage({

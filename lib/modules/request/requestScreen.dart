@@ -1,214 +1,233 @@
 import 'package:blood_bank/modules/request/editRequest.dart';
+import 'package:blood_bank/shared/cubit/cubit.dart';
+import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
-class RequestScreen extends StatelessWidget {
+class RequestScreen extends StatefulWidget {
   const RequestScreen({Key? key}) : super(key: key);
 
   @override
+  State<RequestScreen> createState() => _RequestScreenState();
+}
+
+class _RequestScreenState extends State<RequestScreen> {
+  @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Requests'),
-          bottom: const TabBar(
-            indicatorColor: mainColor,
-            tabs: <Widget>[
-              Tab(
-                child: Text('All requests',),
+    return BlocConsumer<AppCubit,AppStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        AppCubit cubit = AppCubit.get(context);
+        return DefaultTabController(
+          length: 2,
+          child: Scaffold(
+            appBar: AppBar(
+              title: const Text('Requests'),
+              bottom: const TabBar(
+                indicatorColor: mainColor,
+                tabs: <Widget>[
+                  Tab(
+                    child: Text('All requests',),
+                  ),
+                  Tab(
+                    child: Text('My requests'),
+                  ),
+                ],
               ),
-              Tab(
-                child: Text('My requests'),
-              ),
-            ],
-          ),
-        ),
-        body: TabBarView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: ListView.separated(
-                itemBuilder: (context, index) => Container(
-                  height: 110,
-                  width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      const CircleAvatar(
-                        radius: 20,
-                        child: const Text(
-                          'A+',
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        backgroundColor: mainColor,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Hesham ahmed needs blood',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            const Text(
-                              'no of bags    2',
-                              style: const TextStyle(
-                                color: greyColor2,
-                              ),
-                            ),
-                            const Text(
-                              'Date      Dec,6,2022',
-                              style: const TextStyle(
-                                color: greyColor2,
-                              ),
-                            ),
-                            const Text(
-                              'Location    Cairo,helwan',
-                              style: const TextStyle(
-                                color: greyColor2,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+            ),
+            body: TabBarView(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: ListView.separated(
+                    itemBuilder: (context, index) => Container(
+                      height: 110,
+                      width: double.infinity,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(greenColor),
+                          CircleAvatar(
+                            radius: 20,
+                            child: Text(
+                              '${cubit.requestModel?.requests[index].bloodType}',
+                              style: const TextStyle(color: Colors.white),
                             ),
-                            onPressed: () {},
-                            child: Row(
+                            backgroundColor: mainColor,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  'Contact ',
-                                  style: const TextStyle(
+                                Text(
+                                  '${cubit.requestModel?.requests[index].user?.name} needs blood',
+                                  style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const Icon(Icons.chat,size: 20,),
+                                const SizedBox(
+                                  height: 12,
+                                ),
+                                Text(
+                                  'no of bags    ${cubit.requestModel?.requests[index].noOfBags}',
+                                  style: const TextStyle(
+                                    color: greyColor2,
+                                  ),
+                                ),
+                                Text(
+                                  'Date      ${DateFormat('yMMMd').format(cubit.requestModel!.requests[index].requestExpiredDate!)}',
+                                  style: const TextStyle(
+                                    color: greyColor2,
+                                  ),
+                                ),
+                                Text(
+                                  'Location    ${cubit.requestModel?.requests[index].governorate?.governorateName},${cubit.requestModel?.requests[index].city?.cityName}',
+                                  style: const TextStyle(
+                                    color: greyColor2,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(mainColor),
-                            ),
-                            onPressed: () {},
-                            child: const Text(
-                              'I can donate',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(greenColor),
+                                ),
+                                onPressed: () {},
+                                child: Row(
+                                  children: [
+                                    const Text(
+                                      'Contact ',
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const Icon(Icons.chat,size: 20,),
+                                  ],
+                                ),
+                              ),
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(mainColor),
+                                ),
+                                onPressed: () {},
+                                child: const Text(
+                                  'I can donate',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
+                    ),
+                    separatorBuilder: (context, index) => const SizedBox(
+                      height: 5,
+                    ),
+                    itemCount: cubit.requestModel!.requests.length,
                   ),
                 ),
-                separatorBuilder: (context, index) => const SizedBox(
-                  height: 5,
-                ),
-                itemCount: 20,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: ListView.separated(
-                itemBuilder: (context, index) => Container(
-                  height: 110,
-                  width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      const CircleAvatar(
-                        radius: 20,
-                        child: const Text(
-                          'A+',
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        backgroundColor: mainColor,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Hesham ahmed needs blood',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            const Text(
-                              'no of bags    2',
-                              style: const TextStyle(
-                                color: greyColor2,
-                              ),
-                            ),
-                            const Text(
-                              'Date      Dec,6,2022',
-                              style: const TextStyle(
-                                color: greyColor2,
-                              ),
-                            ),
-                            const Text(
-                              'Location    Cairo,helwan',
-                              style: const TextStyle(
-                                color: greyColor2,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: ListView.separated(
+                    itemBuilder: (context, index) => Container(
+                      height: 110,
+                      width: double.infinity,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => EditRequestScreen()),
-                              );
-                            },
-                            icon: const Icon(Icons.edit),
+                          CircleAvatar(
+                            radius: 20,
+                            child: Text(
+                              '${cubit.myRequestModel?.requests[index].bloodType}',
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            backgroundColor: mainColor,
                           ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.delete_outline),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${cubit.myRequestModel?.requests[index].user?.name} needs blood',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 12,
+                                ),
+                                Text(
+                                  'no of bags    ${cubit.myRequestModel?.requests[index].noOfBags}',
+                                  style: const TextStyle(
+                                    color: greyColor2,
+                                  ),
+                                ),
+                                Text(
+                                  'Date      ${DateFormat('yMMMd').format(cubit.myRequestModel!.requests[index].requestExpiredDate!)}',
+                                  style: const TextStyle(
+                                    color: greyColor2,
+                                  ),
+                                ),
+                                Text(
+                                  'Location    ${cubit.myRequestModel?.requests[index].governorate?.governorateName},${cubit.myRequestModel?.requests[index].city?.cityName}',
+                                  style: const TextStyle(
+                                    color: greyColor2,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => EditRequestScreen()),
+                                  );
+                                },
+                                icon: const Icon(Icons.edit),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    cubit.deleteMyRequests(id: cubit.myRequestModel!.requests[index].id!);
+                                    cubit.getMyRequests();
+                                  });
+                                },
+                                icon: const Icon(Icons.delete_outline),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
+                    ),
+                    separatorBuilder: (context, index) => const SizedBox(
+                      height: 5,
+                    ),
+                    itemCount: cubit.myRequestModel!.requests.length,
                   ),
                 ),
-                separatorBuilder: (context, index) => const SizedBox(
-                  height: 5,
-                ),
-                itemCount: 2,
-              ),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        );
+      });
   }
 }

@@ -38,3 +38,15 @@ class AppLoadingCityDataState extends AppStates{}
 class AppSuccessCityDataState extends AppStates{}
 class AppErrorCityDataState extends AppStates{}
 
+class AppLoadingAllRequestsDataState extends AppStates{}
+class AppSuccessAllRequestsDataState extends AppStates{}
+class AppErrorAllRequestsDataState extends AppStates{}
+
+class AppLoadingMyRequestsDataState extends AppStates{}
+class AppSuccessMyRequestsDataState extends AppStates{}
+class AppErrorMyRequestsDataState extends AppStates{}
+
+class AppLoadingDeleteMyRequestsDataState extends AppStates{}
+class AppSuccessDeleteMyRequestsDataState extends AppStates{}
+class AppErrorDeleteMyRequestsDataState extends AppStates{}
+

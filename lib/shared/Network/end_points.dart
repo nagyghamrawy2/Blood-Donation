@@ -7,3 +7,5 @@ const DONORDATA='users';
 const REGISTER = 'register';
 const GOVERNORATE = 'governorate';
 const CITY = 'city';
+const REQUESTS = 'requests';
+const MY_REQUESTS = 'my-requests';

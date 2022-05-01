@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true, // a2dr aft7 2 app m3 b3d
       builder: () => BlocProvider(
-        create: (context) => AppCubit()..getUserData()..getGovernorateData(),
+        create: (context) => AppCubit()..getUserData()..getGovernorateData()..getAllRequests()..getMyRequests(),
         child: BlocConsumer<AppCubit, AppStates>(
           builder: (context, state) {
             return MaterialApp(
