@@ -1,7 +1,6 @@
 import 'package:blood_bank/models/city_model.dart';
 import 'package:blood_bank/models/governate_model.dart';
 import 'package:blood_bank/models/profile_model.dart';
-import 'package:blood_bank/models/user_model.dart';
 import 'package:blood_bank/modules/Login_Screen/login.dart';
 import 'package:blood_bank/shared/Network/local/Cache_helper.dart';
 import 'package:flutter/material.dart';

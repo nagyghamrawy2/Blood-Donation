@@ -1,5 +1,4 @@
 import 'package:blood_bank/models/profile_model.dart';
-import 'package:blood_bank/models/user_model.dart';
 import 'package:blood_bank/modules/Login_Screen/Cubit/States.dart';
 import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/Network/Remote/dio_helper.dart';
