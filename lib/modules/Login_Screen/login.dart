@@ -2,12 +2,15 @@ import 'package:blood_bank/layout/home_layout.dart';
 import 'package:blood_bank/modules/Forget%20Password/forgetPasswordScreen.dart';
 import 'package:blood_bank/modules/Login_Screen/Cubit/Cubit.dart';
 import 'package:blood_bank/modules/Login_Screen/Cubit/States.dart';
+import 'package:blood_bank/modules/sign_up/SignUpForm.dart';
 import 'package:blood_bank/shared/Network/local/Cache_helper.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../shared/Constant.dart';
+import '../../shared/Constant.dart';
 import '../../shared/styles/colors.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -22,9 +25,12 @@ class LoginScreen extends StatelessWidget {
       child: BlocConsumer<AppLoginCubit, AppLoginStates>(
         listener: (context, state) {
           if (state is AppLoginSuccessState) {
-            if (state.login.status) {
-              print(state.login.message);
+            if (state.login.status!) {
               print(state.login.user!.token);
+              govIdConstant = userDataModel?.user?.governorate?.id;
+              cityIdConstant = userDataModel?.user?.city?.id;
+              CacheHelper.SaveData(key: 'govId', value: state.login.user?.governorate?.id);
+              CacheHelper.SaveData(key: 'cityId', value: state.login.user?.city?.id);
               CacheHelper.SaveData(key: 'token', value: state.login.user?.token)
                   .then((value) {
                 navigateAndFinish(context, HomeLayout());
@@ -146,10 +152,10 @@ class LoginScreen extends StatelessWidget {
                             onPressed: ()
                             {
                               Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => ForgetPasswordScreen()));
+                                  MaterialPageRoute(builder: (context) => SignUpScreen()));
                             },
-                            child: Text(
-                              'Forget password ?',
+                            child: const Text(
+                              'don\'t have an account ?',
                               style: TextStyle(
                                   color: mainColor,
                                   fontWeight: FontWeight.bold),

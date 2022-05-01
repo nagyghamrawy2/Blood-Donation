@@ -1,5 +1,5 @@
 import 'package:blood_bank/modules/chat/chatscreen.dart';
-import 'package:blood_bank/modules/findDonor/Donermodel.dart';
+import 'package:blood_bank/models/Donermodel.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';

@@ -1,9 +1,9 @@
-class donarModel {
+class DonarModel {
   bool? status;
   String? message;
   late List<User> users;
 
-  donarModel.fromJson(Map<String, dynamic> json) {
+  DonarModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
     users = List<User>.from(json["users"].map((x) => User.fromJson(x)));

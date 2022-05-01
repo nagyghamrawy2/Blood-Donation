@@ -20,7 +20,9 @@ String? token='';
 
 int? govIdConstant;
 int? cityIdConstant;
+String? cityDropDownValue = cityItemList[cityIdConstant!-1].cityName;
+
 List<Governorates> governorateItemList = [];
 List<Cities> cityItemList = [];
 
-ProfileModel? profileModel;
+ProfileModel? userDataModel;

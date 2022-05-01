@@ -37,6 +37,8 @@ void main() async {
   DioHelper.init();
   await CacheHelper.init();
   token = CacheHelper.getData(key: 'token');
+  govIdConstant = CacheHelper.getData(key: 'govId');
+  cityIdConstant = CacheHelper.getData(key: 'cityId');
   Widget widget;
   if (token != null) {
     widget = HomeLayout();

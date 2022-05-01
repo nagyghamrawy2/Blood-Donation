@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:blood_bank/models/city_model.dart';
-import 'package:blood_bank/models/register_model.dart';
+import 'package:blood_bank/models/profile_model.dart';
 import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/Network/Remote/dio_helper.dart';
 import 'package:blood_bank/shared/Network/end_points.dart';
@@ -12,7 +12,7 @@ part 'register_state.dart';
 class RegisterCubit extends Cubit<RegisterStates> {
   RegisterCubit() : super(RegisterInitial());
   static RegisterCubit get(context) => BlocProvider.of(context);
-  late RegisterModel registerModel;
+  late ProfileModel registerModel;
 
   void userRegister({
     required String email,
@@ -44,7 +44,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
       },
     ).then((value) {
       print(value.data);
-      registerModel = RegisterModel.fromJson(value.data);
+      registerModel = ProfileModel.fromJson(value.data);
       print(registerModel);
       emit(RegisterSuccessState(registerModel));
     }).catchError((error) {

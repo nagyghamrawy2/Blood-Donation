@@ -1,3 +1,4 @@
+import 'package:blood_bank/models/profile_model.dart';
 import 'package:blood_bank/models/user_model.dart';
 
 abstract class AppChangePasswordStates {}
@@ -6,7 +7,7 @@ class AppChangePasswordInitialState extends AppChangePasswordStates {}
 class AppChangePasswordLoadingState extends AppChangePasswordStates {}
 class AppChangePasswordSuccessState extends AppChangePasswordStates
 {
-  final UserModel changePassword;
+  final ProfileModel changePassword;
 
   AppChangePasswordSuccessState(this.changePassword);
 }

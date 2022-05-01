@@ -135,10 +135,10 @@ class AppCubit extends Cubit<AppStates> {
     ).then((value) {
       print(value.data);
       print('hi');
-      profileModel = ProfileModel.fromJson(value.data);
-      print(profileModel?.status);
-      print(profileModel?.user);
-      print(profileModel?.errors);
+      userDataModel = ProfileModel.fromJson(value.data);
+      print(userDataModel?.status);
+      print(userDataModel?.user);
+      print(userDataModel?.errors);
       print('bye');
       emit(AppSuccessUserDataState());
     }).catchError((onError) {
@@ -181,7 +181,7 @@ class AppCubit extends Cubit<AppStates> {
       token: token,
     ).then((value) {
       print(value.data);
-      profileModel = ProfileModel.fromJson(value.data);
+      userDataModel = ProfileModel.fromJson(value.data);
       print('bye');
       emit(AppSuccessUpdateUserDataState());
     }).catchError((onError) {
@@ -218,6 +218,8 @@ class AppCubit extends Cubit<AppStates> {
       cityModel.cities?.forEach((e) {
         cityItemList.add(e);
       });
+      cityDropDownValue = cityItemList[0].cityName;
+      cityIdConstant = cityItemList[0].id;
       emit(AppSuccessCityDataState());
     }).catchError((error) {
       print(error.toString());

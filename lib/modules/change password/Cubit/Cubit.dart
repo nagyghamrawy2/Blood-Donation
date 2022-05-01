@@ -1,3 +1,4 @@
+import 'package:blood_bank/models/profile_model.dart';
 import 'package:blood_bank/models/user_model.dart';
 import 'package:blood_bank/modules/Login_Screen/Cubit/States.dart';
 import 'package:blood_bank/modules/change%20password/Cubit/States.dart';
@@ -11,7 +12,7 @@ class AppChangePasswordCubit extends Cubit<AppChangePasswordStates> {
   AppChangePasswordCubit() : super(AppChangePasswordInitialState());
 
   static AppChangePasswordCubit get(context) => BlocProvider.of(context);
-  late UserModel changePassword;
+  late ProfileModel changePassword;
 
   void ChangePassword({required String oldPassword,
     required String newPassword,
@@ -24,7 +25,7 @@ class AppChangePasswordCubit extends Cubit<AppChangePasswordStates> {
           'password_confirmation': confirmPassword
         }).then((value) {
       print(value.data);
-      changePassword = UserModel.fromJson(value.data);
+      changePassword = ProfileModel.fromJson(value.data);
       emit(AppChangePasswordSuccessState(changePassword));
     }).catchError((error) {
       print(error.toString());

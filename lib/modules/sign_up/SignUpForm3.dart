@@ -40,7 +40,7 @@ class SignUpScreen3 extends StatelessWidget {
         listener: (context, state) {
           if(state is RegisterSuccessState)
           {
-            if(state.registerModel.status)
+            if(state.registerModel.status!)
             {
               ShowToast(state: ToastStates.SUCCESS , text: "Register successfully" );
               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);

@@ -10,7 +10,7 @@ class ProfileModel {
   ProfileModel.fromJson(Map<String, dynamic> json){
     status= json["status"];
     message= json["message"];
-    user= User.fromJson(json["user"]);
+    user= json['user'] != null ? User.fromJson(json["user"]): null;
     errors= json['errors'] != null ? Errors.fromJson(json["errors"]) : null;
   }
 }
@@ -29,6 +29,8 @@ class User {
   String? weight;
   Governorate? governorate;
   City? city;
+  String? token;
+
 
   User.fromJson(Map<String, dynamic> json){
     id= json["id"];
@@ -43,6 +45,8 @@ class User {
     weight= json["weight"];
     governorate= Governorate.fromJson(json["governorate"]);
     city= City.fromJson(json["city"]);
+    token= json["token"];
+
   }
 }
 

@@ -12,15 +12,14 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
   AppLoginCubit() : super(AppLoginInitialState());
 
   static AppLoginCubit get(context) => BlocProvider.of(context);
-  late UserModel login;
+
   void userLogin({required String email, required String Password}) {
     emit(AppLoginLoadingState());
     DioHelper.postData(
         url: LOGIN, data: {'email': email, 'password': Password}).then((value) {
       print(value.data);
-      login=UserModel.fromJson(value.data);
-      //profileModel = ProfileModel.fromJson(value.data);
-      emit(AppLoginSuccessState(login));
+      userDataModel = ProfileModel.fromJson(value.data);
+      emit(AppLoginSuccessState(userDataModel!));
     }).catchError((error) {
       print(error.toString());
       emit(AppLoginFailedState(error.toString()));

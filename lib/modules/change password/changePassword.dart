@@ -22,7 +22,7 @@ class ChangePasswordScreen extends StatelessWidget {
       child: BlocConsumer<AppChangePasswordCubit, AppChangePasswordStates>(
         listener: (context, state) {
           if (state is AppChangePasswordSuccessState) {
-            if (state.changePassword.status) {
+            if (state.changePassword.status!) {
               // print(state.changePassword.message);
               // CacheHelper.SaveData(
               //         key: 'token', value: state.changePassword.user?.token)

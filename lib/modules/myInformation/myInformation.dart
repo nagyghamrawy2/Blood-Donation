@@ -26,19 +26,26 @@ class MyInformationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if(state is AppSuccessCityDataState){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>  EditProfileScreen()),
+          );
+        }
+      },
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
         List<String> apiInfo = [
-          '${profileModel?.user?.email}',
-          '${profileModel?.user?.phoneNumber}',
-          '${profileModel?.user?.city?.cityName},${profileModel?.user?.governorate?.governorateName}',
-          '${profileModel?.user?.dateOfBirth}',
-          '${profileModel?.user?.bloodType}',
-          profileModel?.user?.weight != null ? '${profileModel?.user?.weight} KG' : '',
-          profileModel?.user?.height != null ? '${profileModel?.user?.height} CM' : '',
+          '${userDataModel?.user?.email}',
+          '${userDataModel?.user?.phoneNumber}',
+          '${userDataModel?.user?.city?.cityName},${userDataModel?.user?.governorate?.governorateName}',
+          '${userDataModel?.user?.dateOfBirth}',
+          '${userDataModel?.user?.bloodType}',
+          userDataModel?.user?.weight != null ? '${userDataModel?.user?.weight} KG' : '',
+          userDataModel?.user?.height != null && (userDataModel?.user?.height != 0) ? '${userDataModel?.user?.height} CM' : '',
         ];
-        String image = profileModel?.user?.profilePicture != null ? '${profileModel?.user?.profilePicture}' : 'assets/images/noImage.png';
+        String image = userDataModel?.user?.profilePicture != null ? '${userDataModel?.user?.profilePicture}' : 'assets/images/noImage.png';
         return Scaffold(
           appBar: AppBar(
             title: const Text(
@@ -71,7 +78,7 @@ class MyInformationScreen extends StatelessWidget {
                               height: 10,
                             ),
                             Text(
-                              '${profileModel?.user?.name}',
+                              '${userDataModel?.user?.name}',
                               style: const TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,
@@ -124,10 +131,8 @@ class MyInformationScreen extends StatelessWidget {
                     function: (){
                       print(cityIdConstant);
                       print(govIdConstant);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) =>  EditProfileScreen()),
-                      );
+                      cubit.getCityData(id: govIdConstant!);
+
                     },
                   ),
                 ),
