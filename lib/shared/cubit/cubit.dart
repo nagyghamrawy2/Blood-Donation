@@ -1,6 +1,7 @@
 import 'dart:core';
 import 'dart:io';
 import 'package:blood_bank/models/city_model.dart';
+import 'package:blood_bank/models/education_model.dart';
 import 'package:blood_bank/models/governate_model.dart';
 import 'package:blood_bank/models/profile_model.dart';
 import 'package:blood_bank/models/request_model.dart';
@@ -314,6 +315,26 @@ class AppCubit extends Cubit<AppStates> {
       emit(AppErrorPostRequestsDataState());
     });
   }
+
+  EducationModel? educationModel;
+  List<EducationData> educationItemData = [];
+  void getEducationData(){
+        emit(AppLoadingEducationDataState());
+        DioHelper.getData(url: EDUCATION , token: token ).then((value){
+          educationModel = EducationModel.fromJson(value.data);
+          educationModel?.posts?.forEach((element) {
+            educationItemData.add(element);
+          });
+          print(educationItemData);
+          emit(AppSuccessEducationDataState());
+          print(educationItemData);
+
+        }).catchError((error){
+          print(error.toString());
+          emit(AppErrorEducationDataState());
+        });
+  }
+
 // void sendMessage({
 //   required String reciverId,
 //   required String date,

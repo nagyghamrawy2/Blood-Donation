@@ -62,3 +62,7 @@ class ChangeBloodCheckValueState extends AppStates{}
 
 class AppSuccessChangeAvailabilityState extends AppStates{}
 class AppErrorChangeAvailabilityState extends AppStates{}
+
+class AppLoadingEducationDataState extends AppStates{}
+class AppSuccessEducationDataState extends AppStates{}
+class AppErrorEducationDataState extends AppStates{}

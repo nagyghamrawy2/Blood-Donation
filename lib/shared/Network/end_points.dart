@@ -11,3 +11,4 @@ const REQUESTS = 'requests';
 const MY_REQUESTS = 'my-requests';
 const ADD_REQUEST = 'requests' ;
 const CHANGE_AVAILABILITY = 'change-availability';
+const EDUCATION = 'posts';
