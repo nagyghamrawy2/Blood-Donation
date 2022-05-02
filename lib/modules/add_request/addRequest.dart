@@ -1,6 +1,9 @@
+import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
+import 'package:blood_bank/shared/styles/colors.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +17,7 @@ class AddRequestScreen extends StatelessWidget {
   TextEditingController locationController = new TextEditingController();
   TextEditingController expired_dateController = new TextEditingController();
   var formKey = GlobalKey<FormState>();
-  AddRequestScreen({Key? key}) : super(key: key);
+  int? id;
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +193,59 @@ class AddRequestScreen extends StatelessWidget {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.005,
                       ),
-                      //LocationGovernorateCustom(border: false,),
+                      DropdownButtonFormField(
+                        hint: const Text(
+                          'Governorate',
+                        ),
+                        validator: (value) {
+                          if (value == null) {
+                            return "Governorate must not be empty";
+                          }
+                        },
+                        decoration: InputDecoration(
+                          focusColor: Colors.green,
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                              color: greyColor,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide:
+                            const BorderSide(color: Colors.red, width: 1),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        items: governorateItemList
+                            .asMap()
+                            .entries
+                            .map((items) {
+                          return DropdownMenuItem(
+                            value: items.value.governorateName,
+                            child: Text(items.value.governorateName!),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          id = governorateItemList.indexWhere(
+                                  (element) => element.governorateName == newValue);
+                          // govId = cubit.governorateItemList[id!].id;
+                          govIdConstant = governorateItemList[id!].id;
+                          cubit.getCityData(id: govIdConstant!);
+                          print(id);
+                          // print(govId);
+                          print(govIdConstant);
+                        },
+                      ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.008,
                       ),
@@ -207,7 +262,61 @@ class AddRequestScreen extends StatelessWidget {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.005,
                       ),
-                     // LocationCityCustom(border: false),
+                      ConditionalBuilder(
+                        condition: cityItemList.isNotEmpty,
+                        builder: (context) => DropdownButtonFormField(
+                            hint: const Text(
+                              'City',
+                            ),
+                            validator: (value) {
+                              if (value == null) {
+                                return "City must not be empty";
+                              }
+                            },
+                            decoration: InputDecoration(
+                              focusColor: Colors.green,
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                  color: greyColor,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Colors.red, width: 1),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            items:
+                            cityItemList.asMap().entries.map((items) {
+                              return DropdownMenuItem(
+                                value: items.value.cityName,
+                                child: Text(items.value.cityName!),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              int id = cityItemList.indexWhere(
+                                      (element) => element.cityName == newValue);
+                              cityIdConstant = cityItemList[id].id;
+                              // print(govId);
+                              // print(govIdConstant);
+                            }),
+                        fallback: (context) => Center(
+                          child: CircularProgressIndicator(
+                            color: mainColor,
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.0097,
                       ),
@@ -292,14 +401,14 @@ class AddRequestScreen extends StatelessWidget {
                         num_fontsize: 25.sp,
                         text_fontwwieght: FontWeight.normal,
                         function: () {
-                          // if (formKey.currentState!.validate() &&
-                          //     (cubit.policyTerms)) {
-                          //   cubit.ChangeCheck();
-                          //   print('done');
-                          // } else {
-                          //   cubit.ChangeCheck();
-                          //   print('not done');
-                          // }
+                           if (formKey.currentState!.validate() &&
+                              (cubit.policyTerms)) {
+                            cubit.ChangeCheck();
+                            print('done');
+                           } else {
+                             cubit.ChangeCheck();
+                             print('not done');
+                           }
                         },
                       ),
                     ],

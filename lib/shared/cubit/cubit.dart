@@ -254,6 +254,26 @@ class AppCubit extends Cubit<AppStates> {
       emit(AppErrorDeleteMyRequestsDataState());
     });
   }
+
+  bool policyTerms = false;
+
+  void acceptPolicy(bool value) {
+    policyTerms = value;
+    emit(PolicyTermsChangeState());
+  }
+
+
+  bool check = true;
+
+  void ChangeCheck() {
+    if (policyTerms == true) {
+      check = true;
+      emit(ChangeCheckValueState());
+    } else {
+      check = false;
+      emit(ChangeCheckValueState());
+    }
+  }
 // void sendMessage({
 //   required String reciverId,
 //   required String date,
