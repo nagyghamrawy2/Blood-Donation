@@ -33,11 +33,14 @@ class LoginScreen extends StatelessWidget {
               CacheHelper.SaveData(key: 'cityId', value: state.login.user?.city?.id);
               CacheHelper.SaveData(key: 'token', value: state.login.user?.token)
                   .then((value) {
+
                 navigateAndFinish(context, HomeLayout());
               });
+              print(token);
               ShowToast(text: 'LOGIN SUCCESSFULLY', state: ToastStates.SUCCESS);
 
-            } else {
+            }
+            else {
               ShowToast(
                   text: 'Please make sure the data entered is correct',
                   state: ToastStates.ERROR);

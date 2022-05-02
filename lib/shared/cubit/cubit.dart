@@ -295,7 +295,7 @@ class AppCubit extends Cubit<AppStates> {
   required String cityId,
 }){
     emit(AppLoadingPostRequestsDataState());
-    DioHelper.postData(url: ADD_REQUEST,token: token,data: {
+    DioHelper.postData(url: ADD_REQUEST,token: token, data: {
       'title' : title,
       'description' : description,
       'phone_number' : phone,
@@ -305,7 +305,9 @@ class AppCubit extends Cubit<AppStates> {
       'governorate_id' : govId,
       'city_id' : cityId,
     }).then((value){
+      print("xxxxxxxxx");
       print(value.data);
+      print("yyyyyyyyy");
       emit(AppSuccessPostRequestsDataState());
     }).catchError((error){
       print(error.toString());

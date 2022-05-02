@@ -24,7 +24,9 @@ class AddRequestScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit, AppStates>(
+    return BlocProvider(
+  create: (context) => AppCubit(),
+  child: BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
@@ -431,6 +433,7 @@ class AddRequestScreen extends StatelessWidget {
           ),
         );
       },
-    );
+    ),
+);
   }
 }
