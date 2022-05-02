@@ -22,16 +22,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
-
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
 
   static AppCubit get(context) => BlocProvider.of(context);
 
   int currentIndex = 0;
-  bool valueSwitch = false;
+  int valueSwitch = 0;
 
-  void changeValueSwitch(bool value) {
+  void changeValueSwitch(int value) {
     valueSwitch = value;
     emit(AppChangeSwitchValueState());
   }
@@ -113,13 +112,6 @@ class AppCubit extends Cubit<AppStates> {
   void ChangeDropDownValue(String? value) {
     dropDownValue = value!;
     emit(ChangeDropDownValueState());
-  }
-
-  String? locationcityvalue;
-
-  void ChangeLocationCityValue(String value) {
-    locationcityvalue = value;
-    // emit(ChangeLocationValueState());
   }
 
   ImagePicker a = new ImagePicker();
@@ -231,6 +223,23 @@ class AppCubit extends Cubit<AppStates> {
       emit(AppErrorCityDataState());
     });
   }
+
+  List<Cities> cityRequestItemList = [];
+  late CityModel cityRequestModel;
+  void getCityRequestData({required int id}) {
+    emit(AppLoadingCityRequestDataState());
+    cityRequestItemList.clear();
+    DioHelper.getData(url: '$CITY/$id').then((value) {
+      cityRequestModel = CityModel.fromJson(value.data);
+      cityRequestModel.cities?.forEach((e) {
+        cityRequestItemList.add(e);
+      });
+      emit(AppSuccessCityRequestDataState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(AppErrorCityRequestDataState());
+    });
+  }
   
   RequestModel? requestModel;
   void getAllRequests(){
@@ -265,24 +274,43 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  bool policyTerms = false;
-
-  void acceptPolicy(bool value) {
-    policyTerms = value;
-    emit(PolicyTermsChangeState());
+  void changeAvailability({required int value}){
+    DioHelper.putData(url: CHANGE_AVAILABILITY,token: token,data: {'available_for_donate' : value}).then((value){
+      print(value.data);
+      emit(AppSuccessChangeAvailabilityState());
+    }).catchError((onError){
+      print(onError.toString());
+      emit(AppErrorChangeAvailabilityState());
+    });
   }
 
-
-  bool check = true;
-
-  void ChangeCheck() {
-    if (policyTerms == true) {
-      check = true;
-      emit(ChangeCheckValueState());
-    } else {
-      check = false;
-      emit(ChangeCheckValueState());
-    }
+  void postRequest({
+  required String title,
+  required String description,
+  required String phone,
+  required String numberOfBags,
+  required String expiredDate,
+  required String bloodType,
+  required String govId,
+  required String cityId,
+}){
+    emit(AppLoadingPostRequestsDataState());
+    DioHelper.postData(url: ADD_REQUEST,token: token,data: {
+      'title' : title,
+      'description' : description,
+      'phone_number' : phone,
+      'no_of_bags' : numberOfBags,
+      'request_expiredDate' : expiredDate,
+      'blood_type' : bloodType,
+      'governorate_id' : govId,
+      'city_id' : cityId,
+    }).then((value){
+      print(value.data);
+      emit(AppSuccessPostRequestsDataState());
+    }).catchError((error){
+      print(error.toString());
+      emit(AppErrorPostRequestsDataState());
+    });
   }
 // void sendMessage({
 //   required String reciverId,

@@ -38,6 +38,10 @@ class AppLoadingCityDataState extends AppStates{}
 class AppSuccessCityDataState extends AppStates{}
 class AppErrorCityDataState extends AppStates{}
 
+class AppLoadingCityRequestDataState extends AppStates{}
+class AppSuccessCityRequestDataState extends AppStates{}
+class AppErrorCityRequestDataState extends AppStates{}
+
 class AppLoadingAllRequestsDataState extends AppStates{}
 class AppSuccessAllRequestsDataState extends AppStates{}
 class AppErrorAllRequestsDataState extends AppStates{}
@@ -50,6 +54,11 @@ class AppLoadingDeleteMyRequestsDataState extends AppStates{}
 class AppSuccessDeleteMyRequestsDataState extends AppStates{}
 class AppErrorDeleteMyRequestsDataState extends AppStates{}
 
+class AppLoadingPostRequestsDataState extends AppStates{}
+class AppSuccessPostRequestsDataState extends AppStates{}
+class AppErrorPostRequestsDataState extends AppStates{}
 
 class ChangeBloodCheckValueState extends AppStates{}
 
+class AppSuccessChangeAvailabilityState extends AppStates{}
+class AppErrorChangeAvailabilityState extends AppStates{}
