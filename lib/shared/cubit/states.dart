@@ -50,3 +50,6 @@ class AppLoadingDeleteMyRequestsDataState extends AppStates{}
 class AppSuccessDeleteMyRequestsDataState extends AppStates{}
 class AppErrorDeleteMyRequestsDataState extends AppStates{}
 
+
+class ChangeBloodCheckValueState extends AppStates{}
+

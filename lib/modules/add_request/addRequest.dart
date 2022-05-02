@@ -114,6 +114,7 @@ class AddRequestScreen extends StatelessWidget {
                                   return InkWell(
                                     onTap: () {
                                       cubit.changeBloodValue(index);
+                                      print (cubit.bloodGroupItem[index]);
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
@@ -131,7 +132,8 @@ class AddRequestScreen extends StatelessWidget {
                                                   ? Colors.white
                                                   : Colors.black,
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 27.sp),
+                                              fontSize: 27.sp
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -140,6 +142,16 @@ class AddRequestScreen extends StatelessWidget {
                               ),
                             ),
                           ),
+                          (cubit.bloodCheck != true)
+                              ? Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Text(
+                                "Blood type must not be empty",
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 18.sp),
+                              ))
+                              : Text(""),
                         ],
                       ),
                       SizedBox(
@@ -401,12 +413,11 @@ class AddRequestScreen extends StatelessWidget {
                         num_fontsize: 25.sp,
                         text_fontwwieght: FontWeight.normal,
                         function: () {
-                           if (formKey.currentState!.validate() &&
-                              (cubit.policyTerms)) {
-                            cubit.ChangeCheck();
+                           if (formKey.currentState!.validate() && cubit.bloodCheck){
+                             cubit.changeBloodCheck();
                             print('done');
                            } else {
-                             cubit.ChangeCheck();
+                             cubit.changeBloodCheck();
                              print('not done');
                            }
                         },

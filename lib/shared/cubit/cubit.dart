@@ -66,11 +66,21 @@ class AppCubit extends Cubit<AppStates> {
     "AB-"
   ];
   int bloodGroup = -1;
-
+  bool bloodCheck = true;
   void changeBloodValue(int value) {
     bloodGroup = value;
     emit(BloodValueChangeState());
   }
+  void changeBloodCheck() {
+    if (bloodGroup != -1) {
+      bloodCheck = true;
+      emit(ChangeBloodCheckValueState());
+    } else {
+      bloodCheck = false;
+      emit(ChangeBloodCheckValueState());
+    }
+  }
+
 
 
 
