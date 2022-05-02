@@ -415,6 +415,7 @@ class AddRequestScreen extends StatelessWidget {
                         function: () {
                            if (formKey.currentState!.validate() && cubit.bloodCheck){
                              cubit.changeBloodCheck();
+
                             print('done');
                            } else {
                              cubit.changeBloodCheck();
