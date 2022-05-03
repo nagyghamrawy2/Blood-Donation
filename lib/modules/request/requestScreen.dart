@@ -21,8 +21,8 @@ class _RequestScreenState extends State<RequestScreen> {
       listener: (context, state) {},
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
-        cubit.getAllRequests();
-        cubit.getMyRequests();
+        // cubit.getAllRequests();
+        // cubit.getMyRequests();
         return DefaultTabController(
           length: 2,
 

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EducationArticlesScreen extends StatelessWidget {
-  const EducationArticlesScreen({Key? key}) : super(key: key);
-
+  late String image;
+  late String title;
+  late String description;
+  EducationArticlesScreen({required this.description ,required this.title , required this.image});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,8 +19,8 @@ class EducationArticlesScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(
-              "assets/images/test.png",
+            Image.network(
+              image,
             ),
             SizedBox(
               height: 25.h,
@@ -26,7 +28,7 @@ class EducationArticlesScreen extends StatelessWidget {
             Align(
               alignment: Alignment.topLeft,
               child: Text(
-                "The Concept Of Red Blood Cells",
+                title,
                 style: TextStyle(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.bold,
@@ -47,14 +49,7 @@ class EducationArticlesScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 11, right: 10, bottom: 28, top: 7),
                       child: Text(
-                        "Helloasdasdasdsadasdasdsssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                        "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                        "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                        "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                        "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                        "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                        "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                        "Helloasdasdasdsadasdasdssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssasdsadasdsassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss nagy",
+                        description,
                         style: TextStyle(
                           fontSize: 25.sp,
                           color: Color(0xFF5D240C),

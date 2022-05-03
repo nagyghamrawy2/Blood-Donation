@@ -6,9 +6,9 @@ class EducationModel {
   List<EducationData>? posts;
 
   EducationModel.fromJson(Map<String, dynamic> json) {
-    status: json["status"];
-    message: json["message"];
-    posts: List<EducationData>.from(json["posts"].map((x) => EducationData.fromJson(x)));
+    status = json["status"];
+    message = json["message"];
+    posts =  List<EducationData>.from(json["posts"].map((x) => EducationData.fromJson(x)));
   }
 
 }
@@ -22,10 +22,10 @@ class EducationData {
   String? image;
 
   EducationData.fromJson(Map<String, dynamic> json) {
-    id: json["id"];
-    title: json["title"];
-    description: json["description"];
-    image: json["image"];
+    id =  json["id"];
+    title = json["title"];
+    description = json["description"];
+    image = json["image"];
   }
 
 }
