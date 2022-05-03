@@ -22,18 +22,10 @@ class MyInformationScreen extends StatelessWidget {
     'Height',
   ];
 
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {
-        if(state is AppSuccessCityDataState){
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) =>  EditProfileScreen()),
-          );
-        }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
         List<String> apiInfo = [
@@ -42,10 +34,17 @@ class MyInformationScreen extends StatelessWidget {
           '${userDataModel?.user?.city?.cityName},${userDataModel?.user?.governorate?.governorateName}',
           '${userDataModel?.user?.dateOfBirth}',
           '${userDataModel?.user?.bloodType}',
-          userDataModel?.user?.weight != null ? '${userDataModel?.user?.weight} KG' : '',
-          userDataModel?.user?.height != null && (userDataModel?.user?.height != 0) ? '${userDataModel?.user?.height} CM' : '',
+          userDataModel?.user?.weight != null
+              ? '${userDataModel?.user?.weight} KG'
+              : '',
+          userDataModel?.user?.height != null &&
+                  (userDataModel?.user?.height != 0)
+              ? '${userDataModel?.user?.height} CM'
+              : '',
         ];
-        String image = userDataModel?.user?.profilePicture != null ? '${userDataModel?.user?.profilePicture}' : 'assets/images/noImage.png';
+        String image = userDataModel?.user?.profilePicture != null
+            ? '${userDataModel?.user?.profilePicture}'
+            : 'assets/images/noImage.png';
         return Scaffold(
           appBar: AppBar(
             title: const Text(
@@ -67,7 +66,7 @@ class MyInformationScreen extends StatelessWidget {
                             bottomRight: Radius.circular(20)),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.only(bottom: 40.0,top: 10),
+                        padding: const EdgeInsets.only(bottom: 40.0, top: 10),
                         child: Column(
                           children: [
                             CircleAvatar(
@@ -90,14 +89,16 @@ class MyInformationScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 40, right: 40, top: 240),
+                      padding:
+                          const EdgeInsets.only(left: 40, right: 40, top: 240),
                       child: Container(
                         width: double.infinity,
                         child: ListView.separated(
                           padding: const EdgeInsets.only(bottom: 10),
                           shrinkWrap: true,
                           itemBuilder: (context, index) => ProfileInfo(
-                            label: label[index], leftLabel: apiInfo[index],
+                            label: label[index],
+                            leftLabel: apiInfo[index],
                           ),
                           separatorBuilder: (context, index) => const Divider(
                             color: greyColor2,
@@ -118,7 +119,9 @@ class MyInformationScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 30,),
+                const SizedBox(
+                  height: 30,
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40.0),
                   child: Buttons_without_icon(
@@ -128,11 +131,20 @@ class MyInformationScreen extends StatelessWidget {
                     num_border: 12,
                     num_fontsize: 20,
                     text_fontwwieght: FontWeight.normal,
-                    function: (){
-                      print(cityIdConstant);
+                    function: () {
                       print(govIdConstant);
-                      cubit.getCityData(id: govIdConstant!);
+                      print(cityIdConstant);
 
+                      print(cityItemList);
+                      print(cityItemList.indexWhere((element) =>element.cityName == userDataModel?.user?.city?.cityName));
+                      print(idIndexOfCity);
+                      // print(cityDropDownValue);
+                      print(cityItemList[idIndexOfCity].cityName);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditProfileScreen()),
+                      );
                     },
                   ),
                 ),
@@ -168,8 +180,8 @@ class ProfileInfo extends StatelessWidget {
         children: [
           Expanded(
               child: Text(
-                '$label',
-              )),
+            '$label',
+          )),
           Flexible(
             fit: FlexFit.loose,
             child: Text(
@@ -182,4 +194,3 @@ class ProfileInfo extends StatelessWidget {
     );
   }
 }
-

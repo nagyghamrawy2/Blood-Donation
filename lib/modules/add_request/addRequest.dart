@@ -1,3 +1,4 @@
+import 'package:blood_bank/modules/request/requestScreen.dart';
 import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
@@ -27,7 +28,15 @@ class AddRequestScreen extends StatelessWidget {
     return BlocProvider(
   create: (context) => AppCubit(),
   child: BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if(state is AppSuccessPostRequestsDataState){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => RequestScreen()),
+          );
+        }
+      },
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
         return Scaffold(
@@ -419,6 +428,7 @@ class AddRequestScreen extends StatelessWidget {
                             govId: govRequestId.toString(),
                             cityId: cityRequestId.toString(),
                           );
+                          print(cubit.myRequestModel?.requests);
                           print('done');
                         } else {
                           cubit.changeBloodCheck();

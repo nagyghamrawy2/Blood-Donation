@@ -321,6 +321,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           id = governorateItemList.indexWhere((element) =>element.governorateName == newValue);
                                           govIdConstant = governorateItemList[id!].id;
                                           cubit.getCityData(id: govIdConstant!);
+                                          idIndexOfCity = 0;
                                         },
                                       ),
                                     ],
@@ -346,7 +347,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         height: 4,
                                       ),
                                       DropdownButtonFormField(
-                                          value: cityDropDownValue,
+                                          value: cityItemList[idIndexOfCity].cityName,
                                           hint: const Text(
                                             'City',
                                           ),
@@ -390,11 +391,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           }).toList(),
                                           onChanged: (newValue) {
                                             int id = cityItemList.indexWhere((element) =>element.cityName == newValue);
+                                            idIndexOfCity = id;
+                                            print(idIndexOfCity);
+                                            print(cityItemList[idIndexOfCity].cityName);
                                             cityIdConstant = cityItemList[id].id;
                                           }),
                                     ],
                                   )),
-
                               const SizedBox(
                                 height: 10,
                               ),
@@ -484,6 +487,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       weight: weight.text,
                                       lastDonateDate: donationDate.text,
                                     );
+                                    print(govIdConstant);
+                                    print(cityIdConstant);
                                     print('done');
                                   } else {
                                     print('not done');

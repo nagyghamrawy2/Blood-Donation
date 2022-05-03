@@ -179,7 +179,7 @@ class ProfileScreen extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('${cubit.myRequestModel?.requests.length}'),
+                          Text('${cubit.myRequestModel?.requests?.length ?? 0 }'),
                           Text('requests'),
                         ],
                       ),

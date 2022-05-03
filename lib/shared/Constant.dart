@@ -19,7 +19,8 @@ String? token='';
 
 int? govIdConstant;
 int? cityIdConstant;
-String? cityDropDownValue = cityItemList[cityIdConstant!-1].cityName;
+int idIndexOfCity = cityItemList.indexWhere((element) =>element.cityName == userDataModel?.user?.city?.cityName);
+// String? cityDropDownValue = cityItemList[idIndexOfCity].cityName;
 
 List<Governorates> governorateItemList = [];
 List<Cities> cityItemList = [];

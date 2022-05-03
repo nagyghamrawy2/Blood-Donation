@@ -2,13 +2,12 @@ class RequestModel {
 
   bool? status;
   String? message;
-  late List<Request> requests;
+  List<Request>? requests;
 
   RequestModel.fromJson(Map<String, dynamic> json){
     status = json["status"];
     message = json["message"];
-    requests =
-    List<Request>.from(json["requests"].map((x) => Request.fromJson(x)));
+    requests = json["requests"] != null ? List<Request>.from(json["requests"].map((x) => Request.fromJson(x))) : null;
   }
 
 }
