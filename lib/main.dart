@@ -43,8 +43,9 @@ void main() async {
   Widget widget;
   if (token != null) {
     widget = HomeLayout();
-  } else
+  } else {
     widget = LoginScreen();
+  }
   runApp(MyApp(StartWidget: widget));
 }
 
@@ -60,7 +61,13 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true, // a2dr aft7 2 app m3 b3d
       builder: () => BlocProvider(
-        create: (context) => AppCubit()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getUserData()..getCityData(id: govIdConstant!),
+        create: (context){
+          if(govIdConstant != null){
+            return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getCityData(id: govIdConstant!);
+          }
+            return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests();
+        },
+        //..getCityData(id: govIdConstant!)
         child: BlocConsumer<AppCubit, AppStates>(
           builder: (context, state) {
             return MaterialApp(

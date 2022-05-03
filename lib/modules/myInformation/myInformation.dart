@@ -27,7 +27,7 @@ class MyInformationScreen extends StatelessWidget {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        AppCubit cubit = AppCubit.get(context);
+
         List<String> apiInfo = [
           '${userDataModel?.user?.email}',
           '${userDataModel?.user?.phoneNumber}',
@@ -134,12 +134,12 @@ class MyInformationScreen extends StatelessWidget {
                     function: () {
                       print(govIdConstant);
                       print(cityIdConstant);
-
                       print(cityItemList);
-                      print(cityItemList.indexWhere((element) =>element.cityName == userDataModel?.user?.city?.cityName));
+
+                      // print(cityItemList.indexWhere((element) =>element.cityName == userDataModel?.user?.city?.cityName));
+                      idIndexOfCity = cityItemList.indexWhere((element) =>element.cityName == userDataModel?.user?.city?.cityName);
                       print(idIndexOfCity);
-                      // print(cityDropDownValue);
-                      print(cityItemList[idIndexOfCity].cityName);
+                      // print(cityItemList[idIndexOfCity+1].cityName);
                       Navigator.push(
                         context,
                         MaterialPageRoute(

@@ -67,10 +67,12 @@ class AppCubit extends Cubit<AppStates> {
   ];
   int bloodGroup = -1;
   bool bloodCheck = true;
+
   void changeBloodValue(int value) {
     bloodGroup = value;
     emit(BloodValueChangeState());
   }
+
   void changeBloodCheck() {
     if (bloodGroup != -1) {
       bloodCheck = true;
@@ -80,10 +82,6 @@ class AppCubit extends Cubit<AppStates> {
       emit(ChangeBloodCheckValueState());
     }
   }
-
-
-
-
 
   bool obsecure = true;
 
@@ -146,6 +144,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   ProfileModel? updateProfileModel;
+
   void updateUserData({
     required String name,
     required String email,
@@ -188,6 +187,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   late GovernorateModel governorateModel;
+
   void getGovernorateData() {
     emit(AppLoadingGovernorateDataState());
     DioHelper.getData(url: GOVERNORATE).then((value) {
@@ -201,8 +201,9 @@ class AppCubit extends Cubit<AppStates> {
       emit(AppErrorGovernorateDataState());
     });
   }
-  
+
   late CityModel cityModel;
+
   void getCityData({required int id}) {
     emit(AppLoadingCityDataState());
     cityItemList.clear();
@@ -223,6 +224,7 @@ class AppCubit extends Cubit<AppStates> {
 
   List<Cities> cityRequestItemList = [];
   late CityModel cityRequestModel;
+
   void getCityRequestData({required int id}) {
     emit(AppLoadingCityRequestDataState());
     cityRequestItemList.clear();
@@ -237,74 +239,80 @@ class AppCubit extends Cubit<AppStates> {
       emit(AppErrorCityRequestDataState());
     });
   }
-  
+
   RequestModel? requestModel;
-  void getAllRequests(){
+
+  void getAllRequests() {
     emit(AppLoadingAllRequestsDataState());
-    DioHelper.getData(url: REQUESTS,token: token).then((value){
+    DioHelper.getData(url: REQUESTS, token: token).then((value) {
       requestModel = RequestModel.fromJson(value.data);
       emit(AppSuccessAllRequestsDataState());
-    }).catchError((onError){
+    }).catchError((onError) {
       print(onError.toString());
       emit(AppErrorAllRequestsDataState());
     });
   }
 
   RequestModel? myRequestModel;
-  void getMyRequests(){
+
+  void getMyRequests() {
     emit(AppLoadingMyRequestsDataState());
-    DioHelper.getData(url: MY_REQUESTS,token: token).then((value){
+    DioHelper.getData(url: MY_REQUESTS, token: token).then((value) {
       myRequestModel = RequestModel.fromJson(value.data);
       emit(AppSuccessMyRequestsDataState());
-    }).catchError((onError){
+    }).catchError((onError) {
       print(onError.toString());
       emit(AppErrorMyRequestsDataState());
     });
   }
-  void deleteMyRequests({required int id}){
+
+  void deleteMyRequests({required int id}) {
     emit(AppLoadingDeleteMyRequestsDataState());
-    DioHelper.deleteData(url: '$REQUESTS/$id',token: token).then((value){
+    DioHelper.deleteData(url: '$REQUESTS/$id', token: token).then((value) {
       emit(AppSuccessDeleteMyRequestsDataState());
-    }).catchError((onError){
+    }).catchError((onError) {
       print(onError.toString());
       emit(AppErrorDeleteMyRequestsDataState());
     });
   }
 
-  void changeAvailability({required int value}){
-    DioHelper.putData(url: CHANGE_AVAILABILITY,token: token,data: {'available_for_donate' : value}).then((value){
+  void changeAvailability({required int value}) {
+    DioHelper.putData(
+        url: CHANGE_AVAILABILITY,
+        token: token,
+        data: {'available_for_donate': value}).then((value) {
       print(value.data);
       emit(AppSuccessChangeAvailabilityState());
-    }).catchError((onError){
+    }).catchError((onError) {
       print(onError.toString());
       emit(AppErrorChangeAvailabilityState());
     });
   }
 
   void postRequest({
-  required String title,
-  required String description,
-  required String phone,
-  required String numberOfBags,
-  required String expiredDate,
-  required String bloodType,
-  required String govId,
-  required String cityId,
-}){
+    required String title,
+    required String description,
+    required String phone,
+    required String numberOfBags,
+    required String expiredDate,
+    required String bloodType,
+    required String govId,
+    required String cityId,
+  }) {
     emit(AppLoadingPostRequestsDataState());
-    DioHelper.postData(url: ADD_REQUEST,token: token, data: {
-      'title' : title,
-      'description' : description,
-      'phone_number' : phone,
-      'no_of_bags' : numberOfBags,
-      'request_expiredDate' : expiredDate,
-      'blood_type' : bloodType,
-      'governorate_id' : govId,
-      'city_id' : cityId,
-    }).then((value){
+    DioHelper.postData(url: ADD_REQUEST, token: token, data: {
+      'title': title,
+      'description': description,
+      'phone_number': phone,
+      'no_of_bags': numberOfBags,
+      'request_expiredDate': expiredDate,
+      'blood_type': bloodType,
+      'governorate_id': govId,
+      'city_id': cityId,
+    }).then((value) {
       print(value.data);
       emit(AppSuccessPostRequestsDataState());
-    }).catchError((error){
+    }).catchError((error) {
       print(error.toString());
       emit(AppErrorPostRequestsDataState());
     });
@@ -312,21 +320,20 @@ class AppCubit extends Cubit<AppStates> {
 
   EducationModel? educationModel;
   List<EducationData> educationItemData = [];
-  void getEducationData(){
-        emit(AppLoadingEducationDataState());
-        DioHelper.getData(url: EDUCATION , token: token ).then((value){
-          educationModel = EducationModel.fromJson(value.data);
-          educationModel?.posts?.forEach((element) {
-            educationItemData.add(element);
-          });
-          print(educationItemData[0].id);
-          emit(AppSuccessEducationDataState());
-          print(educationItemData);
 
-        }).catchError((error){
-          print(error.toString());
-          emit(AppErrorEducationDataState());
-        });
+  void getEducationData() {
+    emit(AppLoadingEducationDataState());
+    DioHelper.getData(url: EDUCATION, token: token).then((value) {
+      educationModel = EducationModel.fromJson(value.data);
+      educationModel?.posts?.forEach((element) {
+        educationItemData.add(element);
+      });
+      emit(AppSuccessEducationDataState());
+      // print(educationItemData);
+    }).catchError((error) {
+      print(error.toString());
+      emit(AppErrorEducationDataState());
+    });
   }
 
 // void sendMessage({

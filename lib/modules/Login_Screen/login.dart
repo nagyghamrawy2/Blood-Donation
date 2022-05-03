@@ -26,19 +26,15 @@ class LoginScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is AppLoginSuccessState) {
             if (state.login.status!) {
-              print(state.login.user!.token);
               govIdConstant = userDataModel?.user?.governorate?.id;
-              cityIdConstant = userDataModel?.user?.city?.id;
+              cityIdConstant = (userDataModel?.user?.city?.id)!;
+              AppCubit.get(context).getCityData(id: govIdConstant!);
               CacheHelper.SaveData(key: 'govId', value: state.login.user?.governorate?.id);
               CacheHelper.SaveData(key: 'cityId', value: state.login.user?.city?.id);
-              CacheHelper.SaveData(key: 'token', value: state.login.user?.token)
-                  .then((value) {
-
-                navigateAndFinish(context, HomeLayout());
+              token = state.login.user?.token;
+              CacheHelper.SaveData(key: 'token', value: state.login.user?.token).then((value) {navigateAndFinish(context, HomeLayout());
               });
-              print(token);
               ShowToast(text: 'LOGIN SUCCESSFULLY', state: ToastStates.SUCCESS);
-
             }
             else {
               ShowToast(

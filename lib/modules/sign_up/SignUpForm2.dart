@@ -301,7 +301,7 @@ class SignUpScreen2 extends StatelessWidget {
                             onChanged: (newValue) {
                               int id = cityItemList.indexWhere(
                                   (element) => element.cityName == newValue);
-                              cityIdConstant = cityItemList[id].id;
+                              cityIdConstant = (cityItemList[id].id)!;
                               // print(govId);
                               // print(govIdConstant);
                             }),

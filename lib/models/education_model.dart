@@ -8,7 +8,7 @@ class EducationModel {
   EducationModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["message"];
-    posts =  List<EducationData>.from(json["posts"].map((x) => EducationData.fromJson(x)));
+    posts =  json["posts"] != null ? List<EducationData>.from(json["posts"].map((x) => EducationData.fromJson(x))) : null;
   }
 
 }
