@@ -16,7 +16,7 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
     emit(AppLoginLoadingState());
     DioHelper.postData(
         url: LOGIN, data: {'email': email, 'password': Password}).then((value) {
-      print(value.data);
+      print('login done');
       userDataModel = ProfileModel.fromJson(value.data);
       emit(AppLoginSuccessState(userDataModel!));
     }).catchError((error) {

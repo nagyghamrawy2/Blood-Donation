@@ -1,3 +1,4 @@
+import 'package:blood_bank/layout/home_layout.dart';
 import 'package:blood_bank/modules/request/requestScreen.dart';
 import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/components/components.dart';
@@ -10,7 +11,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
-class AddRequestScreen extends StatelessWidget {
+class AddRequestScreen extends StatefulWidget {
+  @override
+  State<AddRequestScreen> createState() => _AddRequestScreenState();
+}
+
+class _AddRequestScreenState extends State<AddRequestScreen> {
   TextEditingController titleController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();
   TextEditingController bagsController = new TextEditingController();
@@ -19,22 +25,21 @@ class AddRequestScreen extends StatelessWidget {
   TextEditingController expired_dateController = new TextEditingController();
   var formKey = GlobalKey<FormState>();
   int? id;
-
   int? govRequestId;
   int? cityRequestId;
-
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-  create: (context) => AppCubit(),
-  child: BlocConsumer<AppCubit, AppStates>(
+    return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {
-        if(state is AppSuccessPostRequestsDataState){
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => RequestScreen()),
-          );
+        if (state is AppSuccessPostRequestsDataState) {
+          AppCubit.get(context).getMyRequests();
+          AppCubit.get(context).getAllRequests();
+          Navigator.pop(context);
+          // Navigator.pushAndRemoveUntil(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (BuildContext context) => HomeLayout(),
+          //   ),(route) => false);
         }
       },
       builder: (context, state) {
@@ -49,8 +54,8 @@ class AddRequestScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
-            actions: [
-              const Icon(
+            actions: const [
+              Icon(
                 Icons.notifications,
                 color: Colors.white,
                 size: 30,
@@ -59,7 +64,8 @@ class AddRequestScreen extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               child: Form(
                 key: formKey,
                 child: Column(
@@ -104,24 +110,30 @@ class AddRequestScreen extends StatelessWidget {
                         Card(
                           elevation: 10.0,
                           child: Container(
-                            height: MediaQuery.of(context).size.height * 0.154,
+                            height:
+                                MediaQuery.of(context).size.height * 0.154,
                             width: MediaQuery.of(context).size.width * 0.9,
                             child: GridView.builder(
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: cubit.bloodGroupItem.length,
-                              padding: const EdgeInsets.fromLTRB(13, 10, 9, 5),
+                              padding:
+                                  const EdgeInsets.fromLTRB(13, 10, 9, 5),
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 4,
-                                      crossAxisSpacing:
-                                          MediaQuery.of(context).size.height *
-                                              0.059,
-                                      childAspectRatio: (MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              0.65) /
-                                          (MediaQuery.of(context).size.height /
-                                              1.2),
+                                      crossAxisSpacing: MediaQuery.of(context)
+                                              .size
+                                              .height *
+                                          0.059,
+                                      childAspectRatio:
+                                          (MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  0.65) /
+                                              (MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  1.2),
                                       mainAxisSpacing: 10),
                               itemBuilder: (context, index) {
                                 return InkWell(
@@ -131,7 +143,8 @@ class AddRequestScreen extends StatelessWidget {
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15.r),
+                                      borderRadius:
+                                          BorderRadius.circular(15.r),
                                       border: Border.all(color: Colors.black),
                                       color: cubit.bloodGroup == index
                                           ? Colors.red
@@ -257,7 +270,8 @@ class AddRequestScreen extends StatelessWidget {
                         );
                       }).toList(),
                       onChanged: (newValue) {
-                        id = governorateItemList.indexWhere((element) => element.governorateName == newValue);
+                        id = governorateItemList.indexWhere(
+                            (element) => element.governorateName == newValue);
                         govRequestId = governorateItemList[id!].id;
                         cubit.getCityRequestData(id: govRequestId!);
                         print(id);
@@ -307,8 +321,8 @@ class AddRequestScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             errorBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.red, width: 1),
+                              borderSide: const BorderSide(
+                                  color: Colors.red, width: 1),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             focusedErrorBorder: OutlineInputBorder(
@@ -316,7 +330,10 @@ class AddRequestScreen extends StatelessWidget {
                             ),
                           ),
                           icon: const Icon(Icons.keyboard_arrow_down),
-                          items: cubit.cityRequestItemList.asMap().entries.map((items) {
+                          items: cubit.cityRequestItemList
+                              .asMap()
+                              .entries
+                              .map((items) {
                             return DropdownMenuItem(
                               value: items.value.cityName,
                               child: Text(items.value.cityName!),
@@ -346,7 +363,8 @@ class AddRequestScreen extends StatelessWidget {
                               child: Text(
                                 "Expired Date",
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 18),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
                               ),
                             ),
                           ),
@@ -386,7 +404,8 @@ class AddRequestScreen extends StatelessWidget {
                                   decoration: InputDecoration(
                                     hintText: "Enter expired date",
                                     hintStyle: const TextStyle(
-                                        fontSize: 16, color: Color(0xFF808080)),
+                                        fontSize: 16,
+                                        color: Color(0xFF808080)),
                                     border: InputBorder.none,
                                     suffixIcon: Padding(
                                       padding: EdgeInsets.only(
@@ -428,7 +447,6 @@ class AddRequestScreen extends StatelessWidget {
                             govId: govRequestId.toString(),
                             cityId: cityRequestId.toString(),
                           );
-                          print(cubit.myRequestModel?.requests);
                           print('done');
                         } else {
                           cubit.changeBloodCheck();
@@ -443,7 +461,6 @@ class AddRequestScreen extends StatelessWidget {
           ),
         );
       },
-    ),
-);
+    );
   }
 }

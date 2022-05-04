@@ -212,9 +212,6 @@ class AppCubit extends Cubit<AppStates> {
       cityModel.cities?.forEach((e) {
         cityItemList.add(e);
       });
-      // cityDropDownValue = cityItemList[0].cityName;
-      // cityIdConstant = cityItemList[0].id;
-      print(cityItemList);
       emit(AppSuccessCityDataState());
     }).catchError((error) {
       print(error.toString());
@@ -240,12 +237,12 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  RequestModel? requestModel;
 
   void getAllRequests() {
     emit(AppLoadingAllRequestsDataState());
     DioHelper.getData(url: REQUESTS, token: token).then((value) {
       requestModel = RequestModel.fromJson(value.data);
+      print(value.data);
       emit(AppSuccessAllRequestsDataState());
     }).catchError((onError) {
       print(onError.toString());
@@ -253,12 +250,12 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  RequestModel? myRequestModel;
 
   void getMyRequests() {
     emit(AppLoadingMyRequestsDataState());
     DioHelper.getData(url: MY_REQUESTS, token: token).then((value) {
       myRequestModel = RequestModel.fromJson(value.data);
+      print(value.data);
       emit(AppSuccessMyRequestsDataState());
     }).catchError((onError) {
       print(onError.toString());
@@ -269,6 +266,8 @@ class AppCubit extends Cubit<AppStates> {
   void deleteMyRequests({required int id}) {
     emit(AppLoadingDeleteMyRequestsDataState());
     DioHelper.deleteData(url: '$REQUESTS/$id', token: token).then((value) {
+      myRequestModel?.requests?.removeWhere((item) => item.id == id);
+      requestModel?.requests?.removeWhere((item) => item.id == id);
       emit(AppSuccessDeleteMyRequestsDataState());
     }).catchError((onError) {
       print(onError.toString());

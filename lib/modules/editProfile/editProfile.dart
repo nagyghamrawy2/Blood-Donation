@@ -21,22 +21,34 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   var emailAddress = TextEditingController(text: userDataModel?.user?.email);
   var phone = TextEditingController(text: userDataModel?.user?.phoneNumber);
   var birthDate = TextEditingController(text: userDataModel?.user?.dateOfBirth);
-  var donationDate = TextEditingController(text: userDataModel?.user?.donationDate);
+  var donationDate =
+      TextEditingController(text: userDataModel?.user?.donationDate);
   var bloodType = TextEditingController(text: userDataModel?.user?.bloodType);
-  var height = TextEditingController(text: userDataModel?.user?.height.toString());
+  var height =
+      TextEditingController(text: userDataModel?.user?.height.toString());
   var weight = TextEditingController(text: userDataModel?.user?.weight);
 
   // String? govValue = userDataModel?.user?.governorate?.governorateName;
   // String? cityValue = userDataModel?.user?.city?.cityName;
-  String image = userDataModel?.user?.profilePicture != null ? '${userDataModel?.user?.profilePicture}':'assets/images/noImage.png';
+
   var formKey = GlobalKey<FormState>();
   int? id;
+
+  bool flag = true;
 
   @override
   Widget build(BuildContext context) {
     AppCubit cubit = AppCubit.get(context);
     return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if(state is AppSuccessUpdateUserDataState){
+          Navigator.pop(context);
+        }
+        if(state is AppSuccessCityDataState){
+          int id2 = cityItemList.indexWhere((element) =>element.cityName == cityItemList[0].cityName);
+          cityIdConstant = (cityItemList[id2].id)!;
+        }
+      },
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
@@ -65,9 +77,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             controller: name,
                             keyboardtype: TextInputType.text,
                             validatorText:
-                            userDataModel?.errors?.name![0] != null
-                                ? userDataModel!.errors!.name![0]
-                                : 'Name must not be empty',
+                                userDataModel?.errors?.name![0] != null
+                                    ? userDataModel!.errors!.name![0]
+                                    : 'Name must not be empty',
                           ),
                           const SizedBox(
                             height: 10,
@@ -96,8 +108,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               width: double.infinity,
                               height: 100,
                               child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
                                     'Birth Date',
@@ -117,8 +128,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       controller: birthDate,
                                       keyboardType: TextInputType.datetime,
                                       validator: (value) {
-                                        if (value == null ||
-                                            value.isEmpty) {
+                                        if (value == null || value.isEmpty) {
                                           return 'Birthdate must not be empty';
                                         }
                                       },
@@ -130,9 +140,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           ),
                                           firstDate: DateTime(1900),
                                           lastDate:
-                                          DateTime.parse('2025-05-05'),
+                                              DateTime.parse('2025-05-05'),
                                         ).then(
-                                              (value) {
+                                          (value) {
                                             birthDate.text =
                                                 DateFormat('yyyy-MM-dd')
                                                     .format(value!);
@@ -142,7 +152,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       decoration: InputDecoration(
                                         focusedBorder: OutlineInputBorder(
                                             borderRadius:
-                                            BorderRadius.circular(10),
+                                                BorderRadius.circular(10),
                                             borderSide: const BorderSide(
                                               color: greyColor,
                                             )),
@@ -151,19 +161,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             width: 1,
                                           ),
                                           borderRadius:
-                                          BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide: const BorderSide(
                                               color: Colors.red, width: 1),
                                           borderRadius:
-                                          BorderRadius.circular(20),
+                                              BorderRadius.circular(20),
                                         ),
                                         hintText: 'Enter your birthdate',
-                                        focusedErrorBorder:
-                                        OutlineInputBorder(
+                                        focusedErrorBorder: OutlineInputBorder(
                                           borderRadius:
-                                          BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                         ),
                                       ),
                                     ),
@@ -177,8 +186,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               width: double.infinity,
                               height: 100,
                               child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
                                     'Last donation date',
@@ -198,8 +206,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       controller: donationDate,
                                       keyboardType: TextInputType.datetime,
                                       validator: (value) {
-                                        if (value == null ||
-                                            value.isEmpty) {
+                                        if (value == null || value.isEmpty) {
                                           return 'Last donation date must not be empty';
                                         }
                                       },
@@ -211,9 +218,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           ),
                                           firstDate: DateTime(1900),
                                           lastDate:
-                                          DateTime.parse('2025-05-05'),
+                                              DateTime.parse('2025-05-05'),
                                         ).then(
-                                              (value) {
+                                          (value) {
                                             donationDate.text =
                                                 DateFormat('yyyy-MM-dd')
                                                     .format(value!);
@@ -223,7 +230,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       decoration: InputDecoration(
                                         focusedBorder: OutlineInputBorder(
                                             borderRadius:
-                                            BorderRadius.circular(10),
+                                                BorderRadius.circular(10),
                                             borderSide: const BorderSide(
                                               color: greyColor,
                                             )),
@@ -232,19 +239,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             width: 1,
                                           ),
                                           borderRadius:
-                                          BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide: const BorderSide(
                                               color: Colors.red, width: 1),
                                           borderRadius:
-                                          BorderRadius.circular(20),
+                                              BorderRadius.circular(20),
                                         ),
                                         hintText: 'Enter your birthdate',
-                                        focusedErrorBorder:
-                                        OutlineInputBorder(
+                                        focusedErrorBorder: OutlineInputBorder(
                                           borderRadius:
-                                          BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                         ),
                                       ),
                                     ),
@@ -258,8 +264,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               width: double.infinity,
                               height: 100,
                               child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
                                     'Governorate',
@@ -272,7 +277,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     height: 4,
                                   ),
                                   DropdownButtonFormField(
-                                    value: governorateItemList[govIdConstant!-1].governorateName,
+                                    value:
+                                        governorateItemList[govIdConstant! - 1]
+                                            .governorateName,
                                     hint: const Text(
                                       'Governorate',
                                     ),
@@ -304,18 +311,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       ),
                                     ),
                                     icon: const Icon(Icons.keyboard_arrow_down),
-                                    items: governorateItemList.asMap().entries.map((items)
-                                    {
+                                    items: governorateItemList
+                                        .asMap()
+                                        .entries
+                                        .map((items) {
                                       return DropdownMenuItem(
                                         value: items.value.governorateName,
-                                        child: Text(items.value.governorateName!),
+                                        child:
+                                            Text(items.value.governorateName!),
                                       );
                                     }).toList(),
                                     onChanged: (newValue) {
-                                      id = governorateItemList.indexWhere((element) =>element.governorateName == newValue);
-                                      govIdConstant = governorateItemList[id!].id;
+                                      id = governorateItemList.indexWhere((element) =>element.governorateName ==newValue);
+                                      govIdConstant =governorateItemList[id!].id;
                                       cubit.getCityData(id: govIdConstant!);
                                       idIndexOfCity = 0;
+                                      flag = false;
+                                      print(cityIdConstant);
                                     },
                                   ),
                                 ],
@@ -327,8 +339,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               width: double.infinity,
                               height: 100,
                               child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
                                     'City',
@@ -340,56 +351,59 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   const SizedBox(
                                     height: 4,
                                   ),
-                                  DropdownButtonFormField(
-                                      value: cityItemList[idIndexOfCity!].cityName,
-                                      hint: const Text(
-                                        'City',
-                                      ),
-                                      validator: (value) {
-                                        if (value == null) {
-                                          return "City must not be empty";
-                                        }
-                                      },
-                                      decoration: InputDecoration(
-                                        focusColor: Colors.green,
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                          borderSide: const BorderSide(
-                                            color: greyColor,
+                                  ConditionalBuilder(
+                                    condition: flag == false && state is AppSuccessCityDataState,
+                                    builder: (context)=>DropdownButtonFormField(
+                                        value: cityItemList[idIndexOfCity!].cityName,
+                                        hint: const Text(
+                                          'City',
+                                        ),
+                                        validator: (value) {
+                                          if (value == null) {
+                                            return "City must not be empty";
+                                          }
+                                        },
+                                        decoration: InputDecoration(
+                                          focusColor: Colors.green,
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                            borderSide: const BorderSide(
+                                              color: greyColor,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                              width: 1,
+                                            ),
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                                color: Colors.red, width: 1),
+                                            borderRadius: BorderRadius.circular(20),
+                                          ),
+                                          focusedErrorBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.circular(10),
                                           ),
                                         ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                            width: 1,
-                                          ),
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
-                                              color: Colors.red, width: 1),
-                                          borderRadius: BorderRadius.circular(20),
-                                        ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                      ),
-                                      icon: const Icon(Icons.keyboard_arrow_down),
-                                      items: cityItemList
-                                          .asMap()
-                                          .entries
-                                          .map((items) {
-                                        return DropdownMenuItem(
-                                          value: items.value.cityName,
-                                          child: Text(items.value.cityName!),
-                                        );
-                                      }).toList(),
-                                      onChanged: (newValue) {
-                                        int id = cityItemList.indexWhere((element) =>element.cityName == newValue);
-                                        idIndexOfCity = id;
-                                        print(idIndexOfCity);
-                                        print(cityItemList[idIndexOfCity!].cityName);
-                                        cityIdConstant = (cityItemList[id].id)!;
-                                      }),
+                                        icon: const Icon(Icons.keyboard_arrow_down),
+                                        items: cityItemList.asMap().entries.map((items)
+                                        {
+                                          return DropdownMenuItem(
+                                            value: items.value.cityName,
+                                            child: Text(items.value.cityName!),
+                                          );
+                                        }).toList(),
+                                        onChanged: (newValue) {
+                                          int id = cityItemList.indexWhere((element) =>element.cityName == newValue);
+                                          idIndexOfCity = id;
+                                          flag = true;
+                                          print(idIndexOfCity);
+                                          print(cityItemList[idIndexOfCity!].cityName);
+                                          cityIdConstant = (cityItemList[id].id)!;
+                                        }),
+                                    fallback: (context)=>Center(child: CircularProgressIndicator(color: mainColor,),),
+                                  ),
                                 ],
                               )),
                           const SizedBox(
@@ -406,20 +420,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                               ),
                               SizedBox(
-                                height: MediaQuery.of(context).size.height *
-                                    0.008,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.008,
                               ),
                               DropdownButtonFormField<String>(
                                 value: bloodType.text,
                                 items: cubit.bloodGroupItem
                                     .map((label) => DropdownMenuItem(
-                                  child: Text(
-                                    label,
-                                    style: const TextStyle(
-                                        fontSize: 16),
-                                  ),
-                                  value: label,
-                                ))
+                                          child: Text(
+                                            label,
+                                            style:
+                                                const TextStyle(fontSize: 16),
+                                          ),
+                                          value: label,
+                                        ))
                                     .toList(),
                                 onChanged: (value) {
                                   bloodType.text = value!;
@@ -436,8 +450,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.circular(10)),
+                                      borderRadius: BorderRadius.circular(10)),
                                 ),
                                 hint: const Text('Blood type'),
                               ),

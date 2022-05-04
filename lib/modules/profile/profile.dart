@@ -179,7 +179,7 @@ class ProfileScreen extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('${cubit.myRequestModel?.requests?.length ?? 0 }'),
+                          Text('${myRequestModel?.requests?.length ?? 0 }'),
                           Text('requests'),
                         ],
                       ),
@@ -263,6 +263,8 @@ class ProfileScreen extends StatelessWidget {
                   img_height: 35,
                   label_name: 'Sign out',
                   function: () {
+                    myRequestModel?.requests?.clear();
+                    requestModel?.requests?.clear();
                     Signout(context);
                   },
                 ),

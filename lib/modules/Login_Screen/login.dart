@@ -29,14 +29,19 @@ class LoginScreen extends StatelessWidget {
               govIdConstant = userDataModel?.user?.governorate?.id;
               cityIdConstant = (userDataModel?.user?.city?.id)!;
               AppCubit.get(context).getCityData(id: govIdConstant!);
-              CacheHelper.SaveData(key: 'govId', value: state.login.user?.governorate?.id);
-              CacheHelper.SaveData(key: 'cityId', value: state.login.user?.city?.id);
+              CacheHelper.SaveData(
+                  key: 'govId', value: state.login.user?.governorate?.id);
+              CacheHelper.SaveData(
+                  key: 'cityId', value: state.login.user?.city?.id);
               token = state.login.user?.token;
-              CacheHelper.SaveData(key: 'token', value: state.login.user?.token).then((value) {navigateAndFinish(context, HomeLayout());
+              CacheHelper.SaveData(key: 'token', value: state.login.user?.token)
+                  .then((value) {
+                navigateAndFinish(context, HomeLayout());
               });
+              AppCubit.get(context).getMyRequests();
+              AppCubit.get(context).getAllRequests();
               ShowToast(text: 'LOGIN SUCCESSFULLY', state: ToastStates.SUCCESS);
-            }
-            else {
+            } else {
               ShowToast(
                   text: 'Please make sure the data entered is correct',
                   state: ToastStates.ERROR);
@@ -45,9 +50,9 @@ class LoginScreen extends StatelessWidget {
         },
         builder: (context, state) {
           return GestureDetector(
-          onTap: () {
-          FocusScope.of(context).unfocus();
-          },
+            onTap: () {
+              FocusScope.of(context).unfocus();
+            },
             child: Scaffold(
               body: SingleChildScrollView(
                 child: Form(
@@ -148,10 +153,11 @@ class LoginScreen extends StatelessWidget {
                           //         fontWeight: FontWeight.bold)),
                           Spacer(),
                           MaterialButton(
-                            onPressed: ()
-                            {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => SignUpScreen()));
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignUpScreen()));
                             },
                             child: const Text(
                               'don\'t have an account ?',
@@ -171,8 +177,9 @@ class LoginScreen extends StatelessWidget {
                             function: () {
                               if (formKey.currentState!.validate()) {
                                 AppLoginCubit.get(context).userLogin(
-                                    email: emailcontroller.text,
-                                    Password: passwordcontroller.text);
+                                  email: emailcontroller.text,
+                                  Password: passwordcontroller.text,
+                                );
                               }
                             },
                             num_hieght: 52,
