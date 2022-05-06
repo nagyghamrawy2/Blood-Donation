@@ -1,7 +1,6 @@
 import 'package:blood_bank/layout/home_layout.dart';
 import 'package:blood_bank/modules/Login_Screen/login.dart';
 import 'package:blood_bank/modules/Sign_Up_with_gmail/Sign_up_with_gmail.dart';
-import 'package:blood_bank/modules/add_request/addRequest.dart';
 import 'package:blood_bank/modules/bloodBank/bloodBankScreen.dart';
 import 'package:blood_bank/modules/editProfile/editProfile.dart';
 import 'package:blood_bank/modules/education/education.dart';
@@ -43,9 +42,8 @@ void main() async {
   Widget widget;
   if (token != null) {
     widget = HomeLayout();
-  } else {
+  } else
     widget = LoginScreen();
-  }
   runApp(MyApp(StartWidget: widget));
 }
 
@@ -61,13 +59,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true, // a2dr aft7 2 app m3 b3d
       builder: () => BlocProvider(
-        create: (context){
-          if(govIdConstant != null){
-            return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getCityData(id: govIdConstant!);
-          }
-            return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests();
-        },
-        //..getCityData(id: govIdConstant!)
+        create: (context) => AppCubit()..getUserData()..getGovernorateData()..getDonarData(),
         child: BlocConsumer<AppCubit, AppStates>(
           builder: (context, state) {
             return MaterialApp(

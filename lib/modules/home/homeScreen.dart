@@ -108,11 +108,13 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(builder: (context) =>  FindDonorScreen()),
-                                // );
-                              },
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            FindDonorScreen()),
+                                  );
+                                },
                               child: Card(
                                 elevation: 3,
                                 child: Container(

@@ -1,5 +1,6 @@
 import 'dart:core';
 import 'dart:io';
+import 'package:blood_bank/models/Donermodel.dart';
 import 'package:blood_bank/models/city_model.dart';
 import 'package:blood_bank/models/education_model.dart';
 import 'package:blood_bank/models/governate_model.dart';
@@ -16,8 +17,10 @@ import 'package:blood_bank/shared/Network/Remote/dio_helper.dart';
 import 'package:blood_bank/shared/Network/end_points.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 //import 'package:flutter/cupertino.dart';
+import 'package:blood_bank/models/profile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -237,7 +240,6 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-
   void getAllRequests() {
     emit(AppLoadingAllRequestsDataState());
     DioHelper.getData(url: REQUESTS, token: token).then((value) {
@@ -249,7 +251,6 @@ class AppCubit extends Cubit<AppStates> {
       emit(AppErrorAllRequestsDataState());
     });
   }
-
 
   void getMyRequests() {
     emit(AppLoadingMyRequestsDataState());
@@ -335,58 +336,73 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-// void sendMessage({
-//   required String reciverId,
-//   required String date,
-//   required String text,
-// }) {
-//   MessageModel model = MessageModel(
-//       senderId: usermodel.uid, reciverId: reciverId, date: date, text: text);
-//   FirebaseFirestore.instance
-//       .collection('users')
-//       .doc(usermodel.uid)
-//       .collection("chats")
-//       .doc(reciverId)
-//       .collection("messages")
-//       .add(model.toMap())
-//       .then((value) {
-//     emit(SendMessageSuccessState());
-//   }).catchError((error) {
-//     emit(SendMessageErrorState());
-//   });
-//   FirebaseFirestore.instance
-//       .collection('users')
-//       .doc(reciverId)
-//       .collection("chats")
-//       .doc(usermodel.uid)
-//       .collection("messages")
-//       .add(model.toMap())
-//       .then((value) {
-//     emit(SendMessageSuccessState());
-//   }).catchError((error) {
-//     emit(SendMessageErrorState());
-//   });
-// }
-//
-// List<MessageModel> messages = [];
-//
-// void getMessages({
-//   required String reciverId,
-// }) {
-//   FirebaseFirestore.instance
-//       .collection('users')
-//       .doc(usermodel.uid)
-//       .collection('chats')
-//       .doc(reciverId)
-//       .collection('messages')
-//       .orderBy('datetime')
-//       .snapshots()
-//       .listen((event) {
-//     messages = [];
-//     event.docs.forEach((element) {
-//       messages.add(MessageModel.fromJason(element.data()));
-//     });
-//     emit(GetMessagesSuccessState());
-//   });
-// }
+  void sendMessage({
+    required String? reciverId,
+    required String date,
+    required String text,
+  }) {
+    MessageModel model = MessageModel(
+        senderId: userDataModel?.user?.id,
+        reciverId: reciverId,
+        date: date,
+        text: text);
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(userDataModel?.user?.id.toString())
+        .collection("chats")
+        .doc(reciverId)
+        .collection("messages")
+        .add(model.toMap())
+        .then((value) {
+      emit(SendMessageSuccessState());
+    }).catchError((error) {
+      emit(SendMessageErrorState());
+    });
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(reciverId)
+        .collection("chats")
+        .doc(userDataModel?.user?.id.toString())
+        .collection("messages")
+        .add(model.toMap())
+        .then((value) {
+      emit(SendMessageSuccessState());
+    }).catchError((error) {
+      emit(SendMessageErrorState());
+    });
+  }
+
+  List<MessageModel> messages = [];
+
+  void getMessages({
+    required String? reciverId,
+  }) {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(userDataModel?.user?.id.toString())
+        .collection('chats')
+        .doc(reciverId)
+        .collection('messages')
+        .orderBy('datetime')
+        .snapshots()
+        .listen((event) {
+      messages = [];
+      event.docs.forEach((element) {
+        messages.add(MessageModel.fromJason(element.data()));
+      });
+      emit(GetMessagesSuccessState());
+    });
+  }
+
+  late DonarModel donarModel;
+
+  void getDonarData() {
+    emit(AppDonorDataState());
+    DioHelper.getData(url: DONORDATA, token: token).then((value) {
+      donarModel = DonarModel.fromJson(value.data);
+      emit(AppSuccesDonorDataState());
+    }).catchError((error) {
+      emit(AppErrorDonorDataState());
+    });
+  }
 }

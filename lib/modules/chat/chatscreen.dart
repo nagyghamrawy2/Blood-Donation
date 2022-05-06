@@ -143,7 +143,7 @@
 //                     bottomStart: Radius.circular(10),
 //                     topStart: Radius.circular(10),
 //                     topEnd: Radius.circular(10))),
-//             child: Text(model.text)),
+//             child: Text(model.text!)),
 //       );
 //
 //   Widget BuildMyMessage(MessageModel model) => Align(
@@ -159,6 +159,6 @@
 //                     bottomEnd: Radius.circular(10),
 //                     topStart: Radius.circular(10),
 //                     topEnd: Radius.circular(10))),
-//             child: Text(model.text)),
+//             child: Text(model.text!)),
 //       );
 // }
