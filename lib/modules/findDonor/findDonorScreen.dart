@@ -321,7 +321,7 @@ class FindDonorInfo extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                   // Navigator.push(context, MaterialPageRoute(builder: (context) => Chat()),);
+
                   },
                   child: Container(
                     height: 28,

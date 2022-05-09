@@ -1,3 +1,4 @@
+import 'package:blood_bank/modules/chat/chatscreen.dart';
 import 'package:blood_bank/modules/request/editRequest.dart';
 import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
@@ -111,15 +112,21 @@ class _RequestScreenState extends State<RequestScreen> {
                               ),
                               Column(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   ElevatedButton(
                                     style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          greenColor),
+                                          MaterialStateProperty.all<Color>(
+                                              greenColor),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Chat()),
+                                      );
+                                    },
                                     child: Row(
                                       children: [
                                         const Text(
@@ -138,8 +145,8 @@ class _RequestScreenState extends State<RequestScreen> {
                                   ElevatedButton(
                                     style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          mainColor),
+                                          MaterialStateProperty.all<Color>(
+                                              mainColor),
                                     ),
                                     onPressed: () {},
                                     child: const Text(
@@ -228,7 +235,7 @@ class _RequestScreenState extends State<RequestScreen> {
                               ),
                               Column(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   IconButton(
                                     onPressed: () {
@@ -244,7 +251,9 @@ class _RequestScreenState extends State<RequestScreen> {
                                   IconButton(
                                     onPressed: () {
                                       setState(() {
-                                        cubit.deleteMyRequests(id: myRequestModel!.requests![index].id!);
+                                        cubit.deleteMyRequests(
+                                            id: myRequestModel!
+                                                .requests![index].id!);
                                       });
                                     },
                                     icon: const Icon(Icons.delete_outline),

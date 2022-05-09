@@ -6,7 +6,6 @@ import 'package:blood_bank/modules/editProfile/editProfile.dart';
 import 'package:blood_bank/modules/education/education.dart';
 import 'package:blood_bank/modules/education_article/Education_Article.dart';
 import 'package:blood_bank/modules/findDonor/findDonorScreen.dart';
-
 import 'package:blood_bank/modules/myInformation/myInformation.dart';
 import 'package:blood_bank/modules/profile/profile.dart';
 import 'package:blood_bank/modules/request/editRequest.dart';
@@ -24,16 +23,18 @@ import 'package:blood_bank/shared/styles/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'modules/Create_new_password/createNewPassword.dart';
 import 'modules/Forget Password/forgetPasswordScreen.dart';
 import 'modules/Verification/verificationScreen.dart';
 import 'modules/change password/changePassword.dart';
 import 'shared/Network/local/Cache_helper.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 
 void main() async {
-  Bloc.observer = SimpleBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  Bloc.observer = SimpleBlocObserver();
   DioHelper.init();
   await CacheHelper.init();
   token = CacheHelper.getData(key: 'token');
@@ -59,7 +60,12 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true, // a2dr aft7 2 app m3 b3d
       builder: () => BlocProvider(
-        create: (context) => AppCubit()..getUserData()..getGovernorateData()..getDonarData(),
+        create: (context){
+          if(govIdConstant != null){
+            return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getDonarData()..getCityData(id: govIdConstant!);
+          }
+          return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getDonarData();
+        },
         child: BlocConsumer<AppCubit, AppStates>(
           builder: (context, state) {
             return MaterialApp(
