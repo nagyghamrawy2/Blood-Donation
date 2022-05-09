@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:blood_bank/models/Donermodel.dart';
 import 'package:blood_bank/models/city_model.dart';
 import 'package:blood_bank/models/education_model.dart';
+import 'package:blood_bank/models/filterDonors_model.dart';
 import 'package:blood_bank/models/governate_model.dart';
 import 'package:blood_bank/models/profile_model.dart';
 import 'package:blood_bank/models/request_model.dart';
@@ -222,6 +223,24 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+  late CityModel filterCityModel;
+  List<Cities> filterCityItemList = [];
+
+  void getFilterCityData({required int id}) {
+    emit(AppLoadingFilterCityDataState());
+    filterCityItemList.clear();
+    DioHelper.getData(url: '$CITY/$id').then((value) {
+      filterCityModel = CityModel.fromJson(value.data);
+      filterCityModel.cities?.forEach((e) {
+        filterCityItemList.add(e);
+      });
+      emit(AppSuccessFilterCityDataState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(AppErrorFilterCityDataState());
+    });
+  }
+
   List<Cities> cityRequestItemList = [];
   late CityModel cityRequestModel;
 
@@ -394,15 +413,34 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  late DonarModel donarModel;
+  late DonarModel donorModel;
 
-  void getDonarData() {
+  void getDonorData() {
     emit(AppDonorDataState());
     DioHelper.getData(url: DONORDATA, token: token).then((value) {
-      donarModel = DonarModel.fromJson(value.data);
+      donorModel = DonarModel.fromJson(value.data);
       emit(AppSuccesDonorDataState());
     }).catchError((error) {
       emit(AppErrorDonorDataState());
+    });
+  }
+
+  FilterDonorModel? filterDonorModel;
+  void filterDonor({
+    required String bloodType,
+    required int govId,
+    required int cityId,
+  }) {
+    emit(AppLoadingFilterDonorState());
+    DioHelper.postData(
+        url: FILTER_DONORS, token: token, data: {'blood_type':bloodType,'governorate_id':govId,'city_id':cityId}
+    ).then((value){
+      filterDonorModel = FilterDonorModel.fromJson(value.data);
+      print(filterDonorModel?.donors);
+      emit(AppSuccessFilterDonorState());
+    }).catchError((onError){
+      print(onError.toString());
+      emit(AppErrorFilterDonorState());
     });
   }
 }

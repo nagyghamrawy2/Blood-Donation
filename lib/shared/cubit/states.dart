@@ -66,3 +66,11 @@ class AppErrorChangeAvailabilityState extends AppStates{}
 class AppLoadingEducationDataState extends AppStates{}
 class AppSuccessEducationDataState extends AppStates{}
 class AppErrorEducationDataState extends AppStates{}
+
+class AppLoadingFilterDonorState extends AppStates{}
+class AppSuccessFilterDonorState extends AppStates{}
+class AppErrorFilterDonorState extends AppStates{}
+
+class AppLoadingFilterCityDataState extends AppStates{}
+class AppSuccessFilterCityDataState extends AppStates{}
+class AppErrorFilterCityDataState extends AppStates{}
