@@ -8,15 +8,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Chat extends StatelessWidget {
-  Chat({Key? key}) : super(key: key);
+  Chat({required this.receiverId});
+
   var messageC = TextEditingController();
   final now = DateTime.now();
+  int? receiverId;
 
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (BuildContext context) {
       AppCubit.get(context)
-          .getMessages(reciverId: userDataModel?.user?.id.toString());
+          .getMessages(reciverId: receiverId.toString());
       return BlocConsumer<AppCubit, AppStates>(
           listener: (context, state) {},
           builder: (context, state) {
