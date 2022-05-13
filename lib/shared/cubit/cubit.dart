@@ -354,43 +354,35 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void sendMessage({
-    required int? receiverId,
+    required String? receiverId,
     required String date,
     required String text,
   }) {
     MessageModel model = MessageModel(
         senderId: userDataModel?.user?.id,
-        receiverId: receiverId,
+        receiverId: receiverId.toString(),
         date: date,
         text: text);
     FirebaseFirestore.instance
         .collection('users')
         .doc(userDataModel?.user?.id.toString())
         .collection("chats")
-        .doc(receiverId.toString())
+        .doc(receiverId)
         .collection("messages")
-        .add(<String, dynamic>{
-      "senderId": userDataModel?.user?.id.toString(),
-      "receiverId": receiverId.toString(),
-      "date": date,
-      "text": text,
-    }).then((value) {
+        .add(model.toMap())
+        .then((value) {
       emit(SendMessageSuccessState());
     }).catchError((error) {
       emit(SendMessageErrorState());
     });
     FirebaseFirestore.instance
         .collection('users')
-        .doc(receiverId.toString())
+        .doc(receiverId)
         .collection("chats")
         .doc(userDataModel?.user?.id.toString())
         .collection("messages")
-        .add(<String, dynamic>{
-      "senderId": receiverId.toString(),
-      "receiverId": userDataModel?.user?.id.toString(),
-      "date": date,
-      "text": text,
-    }).then((value) {
+        .add(model.toMap())
+        .then((value) {
       emit(SendMessageSuccessState());
     }).catchError((error) {
       emit(SendMessageErrorState());
@@ -400,7 +392,7 @@ class AppCubit extends Cubit<AppStates> {
   List<MessageModel> messages = [];
 
   void getMessages({
-    String? receiverId,
+   @required String? receiverId,
   }) {
     FirebaseFirestore.instance
         .collection('users')

@@ -6,6 +6,7 @@ import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 class Chat extends StatelessWidget {
   Chat({required this.receiverId, required this.name});
 
@@ -16,8 +17,11 @@ class Chat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (BuildContext context) {
+    return Builder(
+        builder: (BuildContext context) {
+
       AppCubit.get(context).getMessages(receiverId: receiverId.toString());
+
       return BlocConsumer<AppCubit, AppStates>(
           listener: (context, state) {},
           builder: (context, state) {
@@ -50,7 +54,7 @@ class Chat extends StatelessWidget {
                 ],
               ),
               body: ConditionalBuilder(
-                condition: true,
+                condition: AppCubit.get(context).messages.length>0,
                 builder: (context) => Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
@@ -59,11 +63,12 @@ class Chat extends StatelessWidget {
                         child: ListView.separated(
                             physics: BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
-                              var message = AppCubit.get(context).messages[index];
+                              var message =
+                                  AppCubit.get(context).messages[index];
                               if (userDataModel?.user?.id == message.senderId) {
                                 return BuildMyMessage(message);
                               }
-                                return BuildMessage(message);
+                              return BuildMessage(message);
                             },
                             separatorBuilder: (context, state) => SizedBox(
                                   height: 15,
@@ -109,7 +114,7 @@ class Chat extends StatelessWidget {
                                 ),
                                 onTap: () {
                                   AppCubit.get(context).sendMessage(
-                                      receiverId: receiverId,
+                                      receiverId: receiverId.toString(),
                                       date: DateTime.now().toString(),
                                       text: messageC.text);
                                 },
