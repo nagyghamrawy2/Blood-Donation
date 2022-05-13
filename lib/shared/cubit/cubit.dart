@@ -347,6 +347,7 @@ class AppCubit extends Cubit<AppStates> {
       educationModel?.posts?.forEach((element) {
         educationItemData.add(element);
       });
+      print(educationItemData);
       emit(AppSuccessEducationDataState());
       // print(educationItemData);
     }).catchError((error) {
