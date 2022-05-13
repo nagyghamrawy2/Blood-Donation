@@ -43,8 +43,9 @@ void main() async {
   Widget widget;
   if (token != null) {
     widget = HomeLayout();
-  } else
+  } else {
     widget = LoginScreen();
+  }
   runApp(MyApp(StartWidget: widget));
 }
 
