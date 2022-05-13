@@ -8,17 +8,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Chat extends StatelessWidget {
-  Chat({required this.receiverId});
+  Chat({required this.receiverId, required this.name});
 
   var messageC = TextEditingController();
   final now = DateTime.now();
   int? receiverId;
+  String? name;
 
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (BuildContext context) {
-      AppCubit.get(context)
-          .getMessages(reciverId: receiverId.toString());
+      AppCubit.get(context).getMessages(reciverId: receiverId.toString());
       return BlocConsumer<AppCubit, AppStates>(
           listener: (context, state) {},
           builder: (context, state) {
@@ -27,7 +27,7 @@ class Chat extends StatelessWidget {
                 backgroundColor: Color.fromRGBO(237, 57, 74, 1),
                 title: Container(
                     child: Row(
-                  children: [
+                     children: [
                     CircleAvatar(
                       backgroundImage: AssetImage("assets/images/pp.png"),
                       radius: 25,
@@ -35,7 +35,7 @@ class Chat extends StatelessWidget {
                     SizedBox(
                       width: 10,
                     ),
-                    Text('HESHAM AHMED')
+                    Text(name!)
                   ],
                 )),
                 actions: [
@@ -111,7 +111,8 @@ class Chat extends StatelessWidget {
                                 ),
                                 onTap: () {
                                   AppCubit.get(context).sendMessage(
-                                      reciverId: userDataModel?.user?.id.toString(),
+                                      reciverId:
+                                          userDataModel?.user?.id.toString(),
                                       date: DateTime.now().toString(),
                                       text: messageC.text);
                                 },

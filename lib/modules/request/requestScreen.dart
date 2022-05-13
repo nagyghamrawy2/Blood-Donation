@@ -32,9 +32,7 @@ class _RequestScreenState extends State<RequestScreen> {
                   indicatorColor: mainColor,
                   tabs: <Widget>[
                     Tab(
-                      child: Text(
-                        'All requests'
-                      ),
+                      child: Text('All requests'),
                     ),
                     Tab(
                       child: Text('My requests'),
@@ -46,7 +44,7 @@ class _RequestScreenState extends State<RequestScreen> {
                 children: [
                   ConditionalBuilder(
                     condition: requestModel!.requests != null,
-                    builder:(context)=>RefreshIndicator(
+                    builder: (context) => RefreshIndicator(
                       color: Colors.white,
                       backgroundColor: mainColor,
                       strokeWidth: 2,
@@ -79,7 +77,8 @@ class _RequestScreenState extends State<RequestScreen> {
                                 Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         '${requestModel?.requests![index].user?.name} needs blood',
@@ -114,19 +113,28 @@ class _RequestScreenState extends State<RequestScreen> {
                                 ),
                                 Column(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceAround,
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     ElevatedButton(
                                       style: ButtonStyle(
                                         backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            greenColor),
+                                            MaterialStateProperty.all<Color>(
+                                                greenColor),
                                       ),
                                       onPressed: () {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => Chat(receiverId: requestModel!.requests![index].user?.id,)),
+                                              builder: (context) => Chat(
+                                                    receiverId: requestModel!
+                                                        .requests![index]
+                                                        .user
+                                                        ?.id,
+                                                    name: requestModel!
+                                                        .requests![index]
+                                                        .user
+                                                        ?.name,
+                                                  )),
                                         );
                                       },
                                       child: Row(
@@ -147,8 +155,8 @@ class _RequestScreenState extends State<RequestScreen> {
                                     ElevatedButton(
                                       style: ButtonStyle(
                                         backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            mainColor),
+                                            MaterialStateProperty.all<Color>(
+                                                mainColor),
                                       ),
                                       onPressed: () {},
                                       child: const Text(
@@ -170,11 +178,14 @@ class _RequestScreenState extends State<RequestScreen> {
                         ),
                       ),
                     ),
-                    fallback: (context)=>Center(child: Text('No Requests Yet !',style: TextStyle(fontSize: 30)),),
+                    fallback: (context) => Center(
+                      child: Text('No Requests Yet !',
+                          style: TextStyle(fontSize: 30)),
+                    ),
                   ),
                   ConditionalBuilder(
                     condition: myRequestModel!.requests != null,
-                    builder:(context)=>RefreshIndicator(
+                    builder: (context) => RefreshIndicator(
                       color: Colors.white,
                       backgroundColor: mainColor,
                       strokeWidth: 2,
@@ -186,7 +197,7 @@ class _RequestScreenState extends State<RequestScreen> {
                       },
                       child: ConditionalBuilder(
                         condition: myRequestModel!.requests!.isNotEmpty,
-                        builder:(context)=>Padding(
+                        builder: (context) => Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: ListView.separated(
                             itemBuilder: (context, index) => Container(
@@ -199,7 +210,8 @@ class _RequestScreenState extends State<RequestScreen> {
                                     radius: 20,
                                     child: Text(
                                       '${myRequestModel?.requests![index].bloodType}',
-                                      style: const TextStyle(color: Colors.white),
+                                      style:
+                                          const TextStyle(color: Colors.white),
                                     ),
                                     backgroundColor: mainColor,
                                   ),
@@ -208,8 +220,10 @@ class _RequestScreenState extends State<RequestScreen> {
                                   ),
                                   Expanded(
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           '${myRequestModel?.requests![index].user?.name} needs blood',
@@ -243,7 +257,7 @@ class _RequestScreenState extends State<RequestScreen> {
                                   ),
                                   Column(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
                                       IconButton(
                                         onPressed: () {
@@ -271,16 +285,27 @@ class _RequestScreenState extends State<RequestScreen> {
                                 ],
                               ),
                             ),
-                            separatorBuilder: (context, index) => const SizedBox(
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(
                               height: 5,
                             ),
                             itemCount: myRequestModel!.requests!.length,
                           ),
                         ),
-                        fallback: (context)=>Center(child: Text('No Request Yet !',style: TextStyle(fontSize: 30,color: greyColor),),),
+                        fallback: (context) => Center(
+                          child: Text(
+                            'No Request Yet !',
+                            style: TextStyle(fontSize: 30, color: greyColor),
+                          ),
+                        ),
                       ),
                     ),
-                    fallback: (context)=>Center(child: Text('No Requests Yet !',style: TextStyle(fontSize: 30),),),
+                    fallback: (context) => Center(
+                      child: Text(
+                        'No Requests Yet !',
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    ),
                   ),
                   // ConditionalBuilder(
                   //   condition: myRequestModel?.requests != null,
