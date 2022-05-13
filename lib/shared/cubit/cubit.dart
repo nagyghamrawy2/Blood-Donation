@@ -8,7 +8,7 @@ import 'package:blood_bank/models/governate_model.dart';
 import 'package:blood_bank/models/profile_model.dart';
 import 'package:blood_bank/models/request_model.dart';
 import 'package:blood_bank/modules/add_request/addRequest.dart';
-import 'package:blood_bank/modules/chat/messageModel.dart';
+import 'package:blood_bank/models/messageModel.dart';
 import 'package:blood_bank/modules/education/education.dart';
 import 'package:blood_bank/modules/home/homeScreen.dart';
 import 'package:blood_bank/modules/profile/profile.dart';
@@ -227,14 +227,12 @@ class AppCubit extends Cubit<AppStates> {
   List<Cities> filterCityItemList = [];
 
   void getFilterCityData({required int id}) {
-
     filterCityItemList.clear();
     DioHelper.getData(url: '$CITY/$id').then((value) {
       filterCityModel = CityModel.fromJson(value.data);
       filterCityModel.cities?.forEach((e) {
         filterCityItemList.add(e);
       });
-
     }).catchError((error) {
       print(error.toString());
     });
@@ -356,35 +354,43 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void sendMessage({
-    required String? reciverId,
+    required int? receiverId,
     required String date,
     required String text,
   }) {
     MessageModel model = MessageModel(
         senderId: userDataModel?.user?.id,
-        reciverId: reciverId,
+        receiverId: receiverId,
         date: date,
         text: text);
     FirebaseFirestore.instance
         .collection('users')
         .doc(userDataModel?.user?.id.toString())
         .collection("chats")
-        .doc(reciverId)
+        .doc(receiverId.toString())
         .collection("messages")
-        .add(model.toMap())
-        .then((value) {
+        .add(<String, dynamic>{
+      "senderId": userDataModel?.user?.id.toString(),
+      "receiverId": receiverId.toString(),
+      "date": date,
+      "text": text,
+    }).then((value) {
       emit(SendMessageSuccessState());
     }).catchError((error) {
       emit(SendMessageErrorState());
     });
     FirebaseFirestore.instance
         .collection('users')
-        .doc(reciverId)
+        .doc(receiverId.toString())
         .collection("chats")
         .doc(userDataModel?.user?.id.toString())
         .collection("messages")
-        .add(model.toMap())
-        .then((value) {
+        .add(<String, dynamic>{
+      "senderId": receiverId.toString(),
+      "receiverId": userDataModel?.user?.id.toString(),
+      "date": date,
+      "text": text,
+    }).then((value) {
       emit(SendMessageSuccessState());
     }).catchError((error) {
       emit(SendMessageErrorState());
@@ -394,13 +400,13 @@ class AppCubit extends Cubit<AppStates> {
   List<MessageModel> messages = [];
 
   void getMessages({
-    required String? reciverId,
+    String? receiverId,
   }) {
     FirebaseFirestore.instance
         .collection('users')
         .doc(userDataModel?.user?.id.toString())
         .collection('chats')
-        .doc(reciverId)
+        .doc(receiverId)
         .collection('messages')
         .orderBy('datetime')
         .snapshots()
@@ -426,19 +432,22 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   FilterDonorModel? filterDonorModel;
+
   void filterDonor({
     required String bloodType,
     required int govId,
     required int cityId,
   }) {
     emit(AppLoadingFilterDonorState());
-    DioHelper.postData(
-        url: FILTER_DONORS, token: token, data: {'blood_type':bloodType,'governorate_id':govId,'city_id':cityId}
-    ).then((value){
+    DioHelper.postData(url: FILTER_DONORS, token: token, data: {
+      'blood_type': bloodType,
+      'governorate_id': govId,
+      'city_id': cityId
+    }).then((value) {
       filterDonorModel = FilterDonorModel.fromJson(value.data);
       print(filterDonorModel?.donors);
       emit(AppSuccessFilterDonorState());
-    }).catchError((onError){
+    }).catchError((onError) {
       print(onError.toString());
       emit(AppErrorFilterDonorState());
     });

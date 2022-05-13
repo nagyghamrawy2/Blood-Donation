@@ -1,4 +1,4 @@
-import 'package:blood_bank/modules/chat/messageModel.dart';
+import 'package:blood_bank/models/messageModel.dart';
 import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
@@ -6,7 +6,6 @@ import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 class Chat extends StatelessWidget {
   Chat({required this.receiverId, required this.name});
 
@@ -18,7 +17,7 @@ class Chat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (BuildContext context) {
-      AppCubit.get(context).getMessages(reciverId: receiverId.toString());
+      AppCubit.get(context).getMessages(receiverId: receiverId.toString());
       return BlocConsumer<AppCubit, AppStates>(
           listener: (context, state) {},
           builder: (context, state) {
@@ -27,7 +26,7 @@ class Chat extends StatelessWidget {
                 backgroundColor: Color.fromRGBO(237, 57, 74, 1),
                 title: Container(
                     child: Row(
-                     children: [
+                  children: [
                     CircleAvatar(
                       backgroundImage: AssetImage("assets/images/pp.png"),
                       radius: 25,
@@ -40,10 +39,9 @@ class Chat extends StatelessWidget {
                 )),
                 actions: [
                   IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.call, color: Colors.black, size: 40)),
-                  IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       icon: Icon(
                         Icons.close_outlined,
                         color: Colors.black,
@@ -61,11 +59,11 @@ class Chat extends StatelessWidget {
                         child: ListView.separated(
                             physics: BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
-                              var message =
-                                  AppCubit.get(context).messages[index];
-                              if (userDataModel?.user?.id == message.senderId)
+                              var message = AppCubit.get(context).messages[index];
+                              if (userDataModel?.user?.id == message.senderId) {
                                 return BuildMyMessage(message);
-                              return BuildMessage(message);
+                              }
+                                return BuildMessage(message);
                             },
                             separatorBuilder: (context, state) => SizedBox(
                                   height: 15,
@@ -104,15 +102,14 @@ class Chat extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.only(left: 18),
                               decoration: BoxDecoration(shape: BoxShape.circle),
-                              child: InkWell(
+                              child: GestureDetector(
                                 child: Icon(
                                   Icons.send,
                                   size: 40,
                                 ),
                                 onTap: () {
                                   AppCubit.get(context).sendMessage(
-                                      reciverId:
-                                          userDataModel?.user?.id.toString(),
+                                      receiverId: receiverId,
                                       date: DateTime.now().toString(),
                                       text: messageC.text);
                                 },

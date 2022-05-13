@@ -96,13 +96,13 @@ class FindDonorScreen extends StatelessWidget {
                               items: cubit.bloodGroupItem
                                   .map(
                                     (label) => DropdownMenuItem(
-                                      child: Text(
-                                        label,
-                                        style: const TextStyle(fontSize: 16),
-                                      ),
-                                      value: label,
-                                    ),
-                                  )
+                                  child: Text(
+                                    label,
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                  value: label,
+                                ),
+                              )
                                   .toList(),
                               onChanged: (value) {
                                 bloodType = value.toString();
@@ -213,12 +213,12 @@ class FindDonorScreen extends StatelessWidget {
                               ),
                               items: ["15 mayo", "ma3sara", "masaken"]
                                   .map((label) => DropdownMenuItem(
-                                        child: Text(
-                                          label,
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                        value: label,
-                                      ))
+                                child: Text(
+                                  label,
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                value: label,
+                              ))
                                   .toList(),
                               onChanged: (value) {
                                 // bloodtype = value.toString();
@@ -330,10 +330,10 @@ class FindDonorInfo extends StatelessWidget {
                       borderRadius: BorderRadius.circular(26)),
                   child: Center(
                       child: Text(
-                    bloodType,
-                    style: const TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  )),
+                        bloodType,
+                        style: const TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      )),
                 ),
               ],
             ),

@@ -1,19 +1,19 @@
 class MessageModel {
   int? senderId;
-  int? reciverId;
+  int? receiverId;
   String? date;
   String? text;
 
-  MessageModel({int? senderId, String? reciverId, String? date, String? text}) {
+  MessageModel({int? senderId, int? receiverId, String? date, String? text}) {
     this.senderId;
-    this.reciverId;
+    this.receiverId;
     this.date;
     this.text;
   }
 
   MessageModel.fromJason(Map<String, dynamic> json) {
     senderId = json['senderId'];
-    reciverId = json['reciverId'];
+    receiverId = json['receiverId'];
     date = json['date'];
     text = json['text'];
   }
@@ -21,7 +21,7 @@ class MessageModel {
   Map<String, dynamic> toMap() {
     return {
       'senderId': senderId,
-      'reciverId': reciverId,
+      'receiverId': receiverId,
       'date': date,
       'text': text,
     };
