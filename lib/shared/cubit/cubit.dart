@@ -34,7 +34,7 @@ class AppCubit extends Cubit<AppStates> {
   static AppCubit get(context) => BlocProvider.of(context);
 
   int currentIndex = 0;
-  int valueSwitch = 0;
+  int? valueSwitch;
 
   void changeValueSwitch(int value) {
     valueSwitch = value;
@@ -216,6 +216,24 @@ class AppCubit extends Cubit<AppStates> {
       cityModel = CityModel.fromJson(value.data);
       cityModel.cities?.forEach((e) {
         cityItemList.add(e);
+      });
+      emit(AppSuccessCityDataState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(AppErrorCityDataState());
+    });
+  }
+
+  late CityModel cityEditRequestModel;
+  List<Cities> cityEditRequestItemList = [];
+
+  void getCityEditRequestData({required int id}) {
+    emit(AppLoadingCityDataState());
+    cityEditRequestItemList.clear();
+    DioHelper.getData(url: '$CITY/$id').then((value) {
+      cityEditRequestModel = CityModel.fromJson(value.data);
+      cityEditRequestModel.cities?.forEach((e) {
+        cityEditRequestItemList.add(e);
       });
       emit(AppSuccessCityDataState());
     }).catchError((error) {

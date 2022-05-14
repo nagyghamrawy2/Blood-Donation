@@ -40,8 +40,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           Navigator.pop(context);
         }
         if (state is AppSuccessCityDataState) {
-          int id2 = cityItemList.indexWhere(
-              (element) => element.cityName == cityItemList[0].cityName);
+          int id2 = cityItemList.indexWhere((element) => element.cityName == cityItemList[0].cityName);
           cityIdConstant = (cityItemList[id2].id)!;
         }
       },

@@ -21,6 +21,7 @@ class User {
   String? name;
   String? email;
   String? phoneNumber;
+  int? availableForDonate;
   var dateOfBirth;
   var donationDate;
   dynamic profilePicture;
@@ -37,6 +38,7 @@ class User {
     name= json["name"];
     email= json["email"];
     phoneNumber= json["phone_number"];
+    availableForDonate = json['available_for_donate'];
     dateOfBirth= DateFormat('yyyy-MM-dd').format(DateTime.parse(json["date_of_birth"]));
     donationDate= DateFormat('yyyy-MM-dd').format(DateTime.parse(json["last_donate_time"]));
     profilePicture= json["profile_picture"];

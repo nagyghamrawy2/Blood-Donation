@@ -193,7 +193,7 @@ class ProfileScreen extends StatelessWidget {
                   switchFun: (value) {
                     if(value == true) cubit.changeValueSwitch(1);
                     if(value == false) cubit.changeValueSwitch(0);
-                    cubit.changeAvailability(value: cubit.valueSwitch);
+                    cubit.changeAvailability(value: cubit.valueSwitch!);
                   },
                   have_switch: true,
                   cubitValueSwitch: cubit.valueSwitch == 1 ? true : false,

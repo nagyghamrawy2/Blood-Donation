@@ -173,83 +173,81 @@ class EditRequestScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          // Container(
-                          //     width: double.infinity,
-                          //     height: 100,
-                          //     child: Column(
-                          //       crossAxisAlignment: CrossAxisAlignment.start,
-                          //       children: [
-                          //         const Text(
-                          //           'Governorate',
-                          //           style: TextStyle(
-                          //             fontWeight: FontWeight.bold,
-                          //             fontSize: 17,
-                          //           ),
-                          //         ),
-                          //         const SizedBox(
-                          //           height: 4,
-                          //         ),
-                          //         DropdownButtonFormField(
-                          //           value:governorateItemList[govIdConstant! - 1].governorateName,
-                          //           hint: const Text(
-                          //             'Governorate',
-                          //           ),
-                          //           validator: (value) {
-                          //             value ?? "Governorate must not be empty";
-                          //             return null;
-                          //           },
-                          //           decoration: InputDecoration(
-                          //             focusColor: Colors.green,
-                          //             focusedBorder: OutlineInputBorder(
-                          //               borderRadius: BorderRadius.circular(10),
-                          //               borderSide: const BorderSide(
-                          //                 color: greyColor,
-                          //               ),
-                          //             ),
-                          //             enabledBorder: OutlineInputBorder(
-                          //               borderSide: const BorderSide(
-                          //                 width: 1,
-                          //               ),
-                          //               borderRadius: BorderRadius.circular(10),
-                          //             ),
-                          //             errorBorder: OutlineInputBorder(
-                          //               borderSide: const BorderSide(
-                          //                   color: Colors.red, width: 1),
-                          //               borderRadius: BorderRadius.circular(20),
-                          //             ),
-                          //             focusedErrorBorder: OutlineInputBorder(
-                          //               borderRadius: BorderRadius.circular(10),
-                          //             ),
-                          //           ),
-                          //           icon: const Icon(Icons.keyboard_arrow_down),
-                          //           items: governorateItemList
-                          //               .asMap()
-                          //               .entries
-                          //               .map((items) {
-                          //             return DropdownMenuItem(
-                          //               value: items.value.governorateName,
-                          //               child:
-                          //               Text(items.value.governorateName!),
-                          //             );
-                          //           }).toList(),
-                          //           onChanged: (newValue) {
-                          //             id = governorateItemList.indexWhere(
-                          //                     (element) =>
-                          //                 element.governorateName ==
-                          //                     newValue);
-                          //             govIdConstant =
-                          //                 governorateItemList[id!].id;
-                          //             cubit.getCityData(id: govIdConstant!);
-                          //             idIndexOfCity = 0;
-                          //             flag = false;
-                          //             print(cityIdConstant);
-                          //           },
-                          //         ),
-                          //       ],
-                          //     )),
-                          // const SizedBox(
-                          //   height: 10,
-                          // ),
+                          Container(
+                              width: double.infinity,
+                              height: 100,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'Governorate',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  DropdownButtonFormField(
+                                    value:governorateItemList[govIdForRequest! - 1].governorateName,
+                                    hint: const Text(
+                                      'Governorate',
+                                    ),
+                                    validator: (value) {
+                                      value ?? "Governorate must not be empty";
+                                      return null;
+                                    },
+                                    decoration: InputDecoration(
+                                      focusColor: Colors.green,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                          color: greyColor,
+                                        ),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.red, width: 1),
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                    ),
+                                    icon: const Icon(Icons.keyboard_arrow_down),
+                                    items: governorateItemList
+                                        .asMap()
+                                        .entries
+                                        .map((items) {
+                                      return DropdownMenuItem(
+                                        value: items.value.governorateName,
+                                        child:
+                                        Text(items.value.governorateName!),
+                                      );
+                                    }).toList(),
+                                    onChanged: (newValue) {
+                                      // id = governorateItemList.indexWhere((element) =>element.governorateName == newValue);
+                                      govIdForRequest = governorateItemList.indexWhere((element) =>element.governorateName == newValue);
+                                      print(govIdForRequest);
+                                      // govIdConstant = governorateItemList[id!].id;
+                                      cubit.getCityEditRequestData(id: govIdForRequest!);
+                                      // idIndexOfCity = 0;
+                                      // flag = false;
+                                      // print(cityIdConstant);
+                                    },
+                                  ),
+                                ],
+                              )),
+                          const SizedBox(
+                            height: 10,
+                          ),
                           // Container(
                           //     width: double.infinity,
                           //     height: 100,
@@ -267,7 +265,6 @@ class EditRequestScreen extends StatelessWidget {
                           //           height: 4,
                           //         ),
                           //         DropdownButtonFormField(
-                          //
                           //           value: cityItemList[idIndexOfCity!].cityName,
                           //           hint: const Text(
                           //             'City',
@@ -396,9 +393,9 @@ class EditRequestScreen extends StatelessWidget {
                           //         // ),
                           //       ],
                           //     )),
-                          // const SizedBox(
-                          //   height: 10,
-                          // ),
+                          const SizedBox(
+                            height: 10,
+                          ),
                           //blood group
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -464,6 +461,7 @@ class EditRequestScreen extends StatelessWidget {
                                     cityId: cityIdForRequest.toString(),
                                     id: myRequestModel!.requests![indexOfMyRequest!].id!,
                                 );
+                                print(govIdForRequest);
                                 print('done');
                               } else {
                                 print('not done');

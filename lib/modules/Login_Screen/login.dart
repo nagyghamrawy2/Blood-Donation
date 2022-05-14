@@ -28,6 +28,7 @@ class LoginScreen extends StatelessWidget {
             if (state.login.status!) {
               govIdConstant = userDataModel?.user?.governorate?.id;
               cityIdConstant = (userDataModel?.user?.city?.id)!;
+              AppCubit.get(context).valueSwitch = userDataModel?.user?.availableForDonate;
               AppCubit.get(context).getCityData(id: govIdConstant!);
               CacheHelper.SaveData(
                   key: 'govId', value: state.login.user?.governorate?.id);
