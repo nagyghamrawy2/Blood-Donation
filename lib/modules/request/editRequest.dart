@@ -1,3 +1,4 @@
+import 'package:blood_bank/models/request_model.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -11,36 +12,15 @@ import '../../shared/cubit/cubit.dart';
 import '../../shared/cubit/states.dart';
 
 class EditRequestScreen extends StatelessWidget {
-  final String? title;
-  String? description;
-  String? phone;
-  String? numberOfBags;
-  String? expiredDate;
-  String? bloodType;
-  String? govId;
-  String? cityId;
-  int? id;
 
-  EditRequestScreen({
-    this.title,
-    this.description,
-    this.phone,
-    this.numberOfBags,
-    this.expiredDate,
-    this.bloodType,
-    this.govId,
-    this.cityId,
-    this.id,
-  });
-
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController bloodBagsController = TextEditingController();
-  TextEditingController expiredDateController = TextEditingController();
-  TextEditingController bloodTypeController = TextEditingController();
-  var govIdForRequest = editRequestModel?.requests?.governorate?.id;
-  var cityIdForRequest = editRequestModel?.requests?.city?.id;
+  TextEditingController titleController = TextEditingController(text: myRequestModel!.requests![indexOfMyRequest!].title);
+  TextEditingController descriptionController = TextEditingController(text: myRequestModel!.requests![indexOfMyRequest!].description);
+  TextEditingController phoneController = TextEditingController(text: myRequestModel!.requests![indexOfMyRequest!].phoneNumber);
+  TextEditingController bloodBagsController = TextEditingController(text: myRequestModel!.requests![indexOfMyRequest!].noOfBags.toString());
+  TextEditingController expiredDateController = TextEditingController(text: myRequestModel!.requests![indexOfMyRequest!].requestExpiredDate);
+  TextEditingController bloodTypeController = TextEditingController(text: myRequestModel!.requests![indexOfMyRequest!].bloodType);
+  var govIdForRequest = myRequestModel!.requests![indexOfMyRequest!].governorate?.id;
+  var cityIdForRequest = myRequestModel!.requests![indexOfMyRequest!].city?.id;
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -48,7 +28,9 @@ class EditRequestScreen extends StatelessWidget {
     AppCubit cubit = AppCubit.get(context);
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {
-        if (state is AppSuccessUpdateRequestDataState) {
+        if (state is AppSuccessUpdateRequestsDataState) {
+          cubit.getAllRequests();
+          cubit.getMyRequests();
           Navigator.pop(context);
         }
         if (state is AppSuccessCityDataState) {
@@ -73,7 +55,6 @@ class EditRequestScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           SignupTextField(
-                            intialValue: title!,
                             hintText: 'Enter request\'s title',
                             text: 'Title',
                             controller: titleController,
@@ -84,7 +65,6 @@ class EditRequestScreen extends StatelessWidget {
                             height: 10
                           ),
                           SignupTextField(
-                            intialValue: description,
                             hintText: 'Enter request\'s description',
                             text: 'Description',
                             controller: descriptionController,
@@ -95,7 +75,6 @@ class EditRequestScreen extends StatelessWidget {
                             height: 10,
                           ),
                           SignupTextField(
-                            intialValue: phone,
                             hintText: 'Enter your phone number',
                             text: 'Phone number',
                             controller: phoneController,
@@ -106,7 +85,6 @@ class EditRequestScreen extends StatelessWidget {
                             height: 10,
                           ),
                           SignupTextField(
-                            intialValue: numberOfBags,
                             hintText: 'Enter no. of bags',
                             text: 'blood bags',
                             controller: bloodBagsController,
@@ -152,8 +130,7 @@ class EditRequestScreen extends StatelessWidget {
                                             expiredDateController.text,
                                           ),
                                           firstDate: DateTime(1900),
-                                          lastDate:
-                                          DateTime.parse('2025-05-05'),
+                                          lastDate: DateTime.parse('2025-05-05'),
                                         ).then(
                                               (value) {
                                                 expiredDateController.text =
@@ -422,7 +399,7 @@ class EditRequestScreen extends StatelessWidget {
                           // const SizedBox(
                           //   height: 10,
                           // ),
-                          //blood type
+                          //blood group
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -438,7 +415,7 @@ class EditRequestScreen extends StatelessWidget {
                                 MediaQuery.of(context).size.height * 0.008,
                               ),
                               DropdownButtonFormField<String>(
-                                value: bloodType,
+                                value: bloodTypeController.text,
                                 items: cubit.bloodGroupItem
                                     .map((label) => DropdownMenuItem(
                                   child: Text(
@@ -450,7 +427,7 @@ class EditRequestScreen extends StatelessWidget {
                                 ))
                                     .toList(),
                                 onChanged: (value) {
-                                  bloodType = value!;
+                                  bloodTypeController.text = value!;
                                 },
                                 validator: (value) {
                                   if (value == null) {
@@ -485,10 +462,8 @@ class EditRequestScreen extends StatelessWidget {
                                     bloodType: bloodTypeController.text,
                                     govId: govIdForRequest.toString(),
                                     cityId: cityIdForRequest.toString(),
-                                    id: id!,
+                                    id: myRequestModel!.requests![indexOfMyRequest!].id!,
                                 );
-                                print(govIdConstant);
-                                print(cityIdConstant);
                                 print('done');
                               } else {
                                 print('not done');

@@ -362,7 +362,6 @@ class AppCubit extends Cubit<AppStates> {
       token: token,
     ).then((value){
       print(value.data);
-      editRequestModel = EditRequestModel.fromJson(value.data);
       emit(AppSuccessUpdateRequestsDataState());
     }).catchError((onError){
       print(onError.toString());

@@ -106,10 +106,9 @@ class _RequestScreenState extends State<RequestScreen> {
                                                 ),
                                               ),
                                               Text(
-                                                'Date      ${DateFormat('yMMMd')
-                                                    .format(requestModel!
+                                                'Date      ${requestModel!
                                                     .requests![index]
-                                                    .requestExpiredDate!)}',
+                                                    .requestExpiredDate!}',
                                                 style: const TextStyle(
                                                   color: greyColor2,
                                                 ),
@@ -146,10 +145,7 @@ class _RequestScreenState extends State<RequestScreen> {
                                                   MaterialPageRoute(
                                                       builder: (context) =>
                                                           Chat(
-                                                            receiverId: requestModel!
-                                                                .requests![index]
-                                                                .user
-                                                                ?.id,
+                                                            receiverId: requestModel!.requests![index].user?.id,
                                                             name: requestModel!
                                                                 .requests![index]
                                                                 .user
@@ -280,11 +276,9 @@ class _RequestScreenState extends State<RequestScreen> {
                                                       ),
                                                     ),
                                                     Text(
-                                                      'Date      ${DateFormat(
-                                                          'yMMMd').format(
-                                                          myRequestModel!
-                                                              .requests![index]
-                                                              .requestExpiredDate!)}',
+                                                      'Date      ${myRequestModel!
+                                                          .requests![index]
+                                                          .requestExpiredDate!}',
                                                       style: const TextStyle(
                                                         color: greyColor2,
                                                       ),
@@ -320,21 +314,11 @@ class _RequestScreenState extends State<RequestScreen> {
                                                       //   cityId: '2',
                                                       //   id: myRequestModel!.requests![index].id!,
                                                       // );
+                                                      indexOfMyRequest = index;
                                                       Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                EditRequestScreen(
-                                                                  title: myRequestModel?.requests?[index].title,
-                                                                  description: myRequestModel?.requests?[index].description,
-                                                                  phone: myRequestModel?.requests?[index].phoneNumber,
-                                                                  numberOfBags: myRequestModel?.requests?[index].noOfBags.toString(),
-                                                                  expiredDate: myRequestModel?.requests?[index].requestExpiredDate.toString(),
-                                                                  bloodType: myRequestModel?.requests?[index].bloodType,
-                                                                  govId: myRequestModel?.requests?[index].governorate?.id.toString(),
-                                                                  cityId: myRequestModel?.requests?[index].city?.id.toString(),
-                                                                  id: myRequestModel!.requests![index].id!,
-                                                                )),
+                                                            builder: (context) => EditRequestScreen()),
                                                       );
                                                     },
                                                     icon: const Icon(

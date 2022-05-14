@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class RequestModel {
 
   bool? status;
@@ -19,7 +21,7 @@ class Request {
   String? description;
   String? phoneNumber;
   int? noOfBags;
-  DateTime? requestExpiredDate;
+  var requestExpiredDate;
   String? bloodType;
   Governorate? governorate;
   City? city;
@@ -31,7 +33,7 @@ class Request {
     description = json["description"];
     phoneNumber = json["phone_number"];
     noOfBags = json["no_of_bags"];
-    requestExpiredDate = DateTime.parse(json["request_expiredDate"]);
+    requestExpiredDate = DateFormat('yyyy-MM-dd').format(DateTime.parse(json["request_expiredDate"]));
     bloodType = json["blood_type"];
     governorate = Governorate.fromJson(json["governorate"]);
     city = City.fromJson(json["city"]);

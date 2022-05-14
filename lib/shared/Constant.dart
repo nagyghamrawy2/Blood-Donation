@@ -31,7 +31,7 @@ List<Cities> cityItemList = [];
 ProfileModel? userDataModel;
 RequestModel? myRequestModel;
 RequestModel? requestModel;
-EditRequestModel? editRequestModel;
+int? indexOfMyRequest;
 
 
 String image = userDataModel?.user?.profilePicture != null
