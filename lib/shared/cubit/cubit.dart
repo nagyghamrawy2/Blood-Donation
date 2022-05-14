@@ -2,6 +2,7 @@ import 'dart:core';
 import 'dart:io';
 import 'package:blood_bank/models/Donermodel.dart';
 import 'package:blood_bank/models/city_model.dart';
+import 'package:blood_bank/models/edit_request_model.dart';
 import 'package:blood_bank/models/education_model.dart';
 import 'package:blood_bank/models/filterDonors_model.dart';
 import 'package:blood_bank/models/governate_model.dart';
@@ -334,6 +335,41 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+  void updateRequest({
+    required String title,
+    required String description,
+    required String phone,
+    required String numberOfBags,
+    required String expiredDate,
+    required String bloodType,
+    required String govId,
+    required String cityId,
+    required int id,
+  }) {
+    emit(AppLoadingUpdateRequestsDataState());
+    DioHelper.putData(
+      url: '$UPDATE_REQUESTS/$id',
+      data: {
+        'title': title,
+        'description': description,
+        'phone_number': phone,
+        'no_of_bags': numberOfBags,
+        'request_expiredDate': expiredDate,
+        'blood_type': bloodType,
+        'governorate_id': govId,
+        'city_id': cityId,
+      },
+      token: token,
+    ).then((value){
+      print(value.data);
+      editRequestModel = EditRequestModel.fromJson(value.data);
+      emit(AppSuccessUpdateRequestsDataState());
+    }).catchError((onError){
+      print(onError.toString());
+      emit(AppErrorUpdateRequestsDataState());
+    });
+  }
+
   EducationModel? educationModel;
   List<EducationData> educationItemData = [];
 
@@ -392,7 +428,7 @@ class AppCubit extends Cubit<AppStates> {
   List<MessageModel> messages = [];
 
   void getMessages({
-   @required String? receiverId,
+    @required String? receiverId,
   }) {
     FirebaseFirestore.instance
         .collection('users')

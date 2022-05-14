@@ -6,6 +6,8 @@ import 'package:blood_bank/modules/Login_Screen/login.dart';
 import 'package:blood_bank/shared/Network/local/Cache_helper.dart';
 import 'package:flutter/material.dart';
 
+import '../models/edit_request_model.dart';
+
 void Signout(context)
 {
   CacheHelper.Removedata(Key: 'token').then((value)
@@ -29,6 +31,8 @@ List<Cities> cityItemList = [];
 ProfileModel? userDataModel;
 RequestModel? myRequestModel;
 RequestModel? requestModel;
+EditRequestModel? editRequestModel;
+
 
 String image = userDataModel?.user?.profilePicture != null
     ? '${userDataModel?.user?.profilePicture}'

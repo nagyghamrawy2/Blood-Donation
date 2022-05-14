@@ -17,15 +17,19 @@ class SelectedSuccessfullyGovernorateState extends AppStates{}
 class ChangeCameraValueState extends AppStates{}
 class ChangeGalleryValueState extends AppStates{}
 class ChangeCheckValueState extends AppStates{}
+
 class SendMessageSuccessState extends AppStates{}
 class SendMessageErrorState extends AppStates{}
 class GetMessagesSuccessState extends AppStates{}
+
 class AppLoadingUserDataState extends AppStates{}
 class AppSuccessUserDataState extends AppStates{}
 class AppErrorUserDataState extends AppStates{}
+
 class AppLoadingUpdateUserDataState extends AppStates{}
 class AppSuccessUpdateUserDataState extends AppStates{}
 class AppErrorUpdateUserDataState extends AppStates{}
+
 class AppDonorDataState extends AppStates{}
 class AppSuccesDonorDataState extends AppStates{}
 class AppErrorDonorDataState extends AppStates{}
@@ -42,6 +46,10 @@ class AppLoadingCityRequestDataState extends AppStates{}
 class AppSuccessCityRequestDataState extends AppStates{}
 class AppErrorCityRequestDataState extends AppStates{}
 
+class AppLoadingUpdateRequestDataState extends AppStates{}
+class AppSuccessUpdateRequestDataState extends AppStates{}
+class AppErrorUpdateRequestDataState extends AppStates{}
+
 class AppLoadingAllRequestsDataState extends AppStates{}
 class AppSuccessAllRequestsDataState extends AppStates{}
 class AppErrorAllRequestsDataState extends AppStates{}
@@ -57,6 +65,10 @@ class AppErrorDeleteMyRequestsDataState extends AppStates{}
 class AppLoadingPostRequestsDataState extends AppStates{}
 class AppSuccessPostRequestsDataState extends AppStates{}
 class AppErrorPostRequestsDataState extends AppStates{}
+
+class AppLoadingUpdateRequestsDataState extends AppStates{}
+class AppSuccessUpdateRequestsDataState extends AppStates{}
+class AppErrorUpdateRequestsDataState extends AppStates{}
 
 class ChangeBloodCheckValueState extends AppStates{}
 
