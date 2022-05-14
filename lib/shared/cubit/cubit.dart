@@ -443,6 +443,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   List<MessageModel> messages = [];
+  List<MessageModel> Tempmessage = [];
 
   void getMessages({
     @required String? receiverId,
@@ -450,16 +451,16 @@ class AppCubit extends Cubit<AppStates> {
     FirebaseFirestore.instance
         .collection('users')
         .doc(userDataModel?.user?.id.toString())
-        .collection('chats')
+        .collection("chats")
         .doc(receiverId)
-        .collection('messages')
-        .orderBy('datetime')
+        .collection("messages")
+        .orderBy('date')
         .snapshots()
         .listen((event) {
       messages = [];
-      event.docs.forEach((element) {
+      for (var element in event.docs) {
         messages.add(MessageModel.fromJason(element.data()));
-      });
+      }
       emit(GetMessagesSuccessState());
     });
   }
