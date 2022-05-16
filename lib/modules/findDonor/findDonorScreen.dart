@@ -17,11 +17,13 @@ import '../../shared/cubit/states.dart';
 import '../../shared/styles/colors.dart';
 
 class FindDonorScreen extends StatelessWidget {
-
-  String? bloodType;
-  var scaffoldkey = GlobalKey<ScaffoldState>();
-  bool isButtomSheetShown = false;
+  var scaffoldKey = GlobalKey<ScaffoldState>();
+  bool isBottomSheetShown = false;
   late int id;
+
+  String? bloodTypeFilter;
+  int? govIdFilter;
+  int? cityIdFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +32,19 @@ class FindDonorScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          key: scaffoldkey,
+          key: scaffoldKey,
           appBar: AppBar(
             title: Text('Find a donor'),
             actions: [
               IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
             ],
+            leading: IconButton(
+              onPressed: () {
+                cubit.getDonorData();
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back),
+            ),
           ),
           body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
@@ -63,11 +72,17 @@ class FindDonorScreen extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              if (isButtomSheetShown) {
-                Navigator.pop(context);
-                isButtomSheetShown = false;
+              if (isBottomSheetShown) {
+                cubit.filterDonor(
+                    bloodType: 'B+',
+                    govId: 10,
+                    cityId: 213);
+                if (state is AppSuccessFilterDonorState) {
+                  Navigator.pop(context);
+                }
+                isBottomSheetShown = false;
               } else {
-                scaffoldkey.currentState?.showBottomSheet((context) {
+                scaffoldKey.currentState?.showBottomSheet((context) {
                   return Container(
                     height: 420.h,
                     color: greyColor,
@@ -96,16 +111,16 @@ class FindDonorScreen extends StatelessWidget {
                               items: cubit.bloodGroupItem
                                   .map(
                                     (label) => DropdownMenuItem(
-                                  child: Text(
-                                    label,
-                                    style: const TextStyle(fontSize: 16),
-                                  ),
-                                  value: label,
-                                ),
-                              )
+                                      child: Text(
+                                        label,
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                      value: label,
+                                    ),
+                                  )
                                   .toList(),
                               onChanged: (value) {
-                                bloodType = value.toString();
+                                bloodTypeFilter = value.toString();
                               },
                               validator: (value) {
                                 if (value == null) {
@@ -175,8 +190,10 @@ class FindDonorScreen extends StatelessWidget {
                                 );
                               }).toList(),
                               onChanged: (newValue) {
-                                id = governorateItemList.indexWhere((element) => element.governorateName == newValue);
-                                cubit.getFilterCityData(id: governorateItemList[id].id!);
+                                id = governorateItemList.indexWhere((element) =>
+                                    element.governorateName == newValue);
+                                cubit.getFilterCityData(
+                                    id: governorateItemList[id].id!);
                                 idIndexOfCity = 0;
                               },
                             ),
@@ -213,12 +230,12 @@ class FindDonorScreen extends StatelessWidget {
                               ),
                               items: ["15 mayo", "ma3sara", "masaken"]
                                   .map((label) => DropdownMenuItem(
-                                child: Text(
-                                  label,
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                                value: label,
-                              ))
+                                        child: Text(
+                                          label,
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        value: label,
+                                      ))
                                   .toList(),
                               onChanged: (value) {
                                 // bloodtype = value.toString();
@@ -230,7 +247,7 @@ class FindDonorScreen extends StatelessWidget {
                     ),
                   );
                 });
-                isButtomSheetShown = true;
+                isBottomSheetShown = true;
               }
             },
             backgroundColor: mainColor,
@@ -330,10 +347,10 @@ class FindDonorInfo extends StatelessWidget {
                       borderRadius: BorderRadius.circular(26)),
                   child: Center(
                       child: Text(
-                        bloodType,
-                        style: const TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      )),
+                    bloodType,
+                    style: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  )),
                 ),
               ],
             ),

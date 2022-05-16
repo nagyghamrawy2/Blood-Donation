@@ -477,8 +477,7 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  FilterDonorModel? filterDonorModel;
-
+  // FilterDonorModel? filterDonorModel;
   void filterDonor({
     required String bloodType,
     required int govId,
@@ -490,8 +489,10 @@ class AppCubit extends Cubit<AppStates> {
       'governorate_id': govId,
       'city_id': cityId
     }).then((value) {
-      filterDonorModel = FilterDonorModel.fromJson(value.data);
-      print(filterDonorModel?.donors);
+      print(value.data);
+      donorModel = DonarModel.fromJson(value.data);
+      print(donorModel);
+      print(donorModel.users);
       emit(AppSuccessFilterDonorState());
     }).catchError((onError) {
       print(onError.toString());

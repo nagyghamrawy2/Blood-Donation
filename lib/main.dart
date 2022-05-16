@@ -63,9 +63,9 @@ class MyApp extends StatelessWidget {
       builder: () => BlocProvider(
         create: (context){
           if(govIdConstant != null){
-            return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getDonorData()..getCityData(id: govIdConstant!)..filterDonor(bloodType: 'A+', govId: 1, cityId: 32);
+            return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getDonorData()..getCityData(id: govIdConstant!);
           }
-          return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getDonorData()..filterDonor(bloodType: 'A+', govId: 1, cityId: 32);
+          return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getDonorData();
         },
         child: BlocConsumer<AppCubit, AppStates>(
           builder: (context, state) {
