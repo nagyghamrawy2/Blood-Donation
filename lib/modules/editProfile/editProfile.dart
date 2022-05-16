@@ -321,12 +321,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           );
                                         }).toList(),
                                         onChanged: (newValue) {
-                                          id = governorateItemList.indexWhere(
-                                                  (element) =>
-                                              element.governorateName ==
-                                                  newValue);
-                                          govIdConstant =
-                                              governorateItemList[id!].id;
+                                          id = governorateItemList.indexWhere((element) =>element.governorateName ==newValue);
+                                          govIdConstant = governorateItemList[id!].id;
                                           cubit.getCityData(id: govIdConstant!);
                                           idIndexOfCity = 0;
                                           flag = false;

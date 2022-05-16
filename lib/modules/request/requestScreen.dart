@@ -5,6 +5,7 @@ import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -20,7 +21,16 @@ class _RequestScreenState extends State<RequestScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if(state is AppSuccessCityEditRequestDataState){
+            idIndexOfCityEditRequest = AppCubit.get(context).cityEditRequestItemList.indexWhere((element) =>element.cityName == myRequestModel!.requests![indexOfMyRequest!].city!.cityName);
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => EditRequestScreen()),
+                  (route) => false,
+            );
+          }
+        },
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
           return DefaultTabController(
@@ -43,7 +53,7 @@ class _RequestScreenState extends State<RequestScreen> {
               body: TabBarView(
                 children: [
                   ConditionalBuilder(
-                    condition: requestModel!.requests != null,
+                    condition: requestModel!.requests != null && requestModel!.requests!.isNotEmpty,
                     builder: (context) => RefreshIndicator(
                       color: Colors.white,
                       backgroundColor: mainColor,
@@ -265,24 +275,11 @@ class _RequestScreenState extends State<RequestScreen> {
                                     children: [
                                       IconButton(
                                         onPressed: () {
-                                          // cubit.updateRequest(
-                                          //   title: 'test2',
-                                          //   description: 'test2',
-                                          //   phone: '01101171299',
-                                          //   numberOfBags: '3',
-                                          //   expiredDate: '2022-07-6',
-                                          //   bloodType: 'O+',
-                                          //   govId: '1',
-                                          //   cityId: '2',
-                                          //   id: myRequestModel!.requests![index].id!,
-                                          // );
+                                          // FirebaseMessaging.instance.getToken().then((value){
+                                          //   print(value);
+                                          // });
+                                          cubit.getCityEditRequestData(id: (myRequestModel!.requests![index].governorate!.id)!);
                                           indexOfMyRequest = index;
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    EditRequestScreen()),
-                                          );
                                         },
                                         icon: const Icon(Icons.edit),
                                       ),
@@ -323,103 +320,6 @@ class _RequestScreenState extends State<RequestScreen> {
                       ),
                     ),
                   ),
-                  // ConditionalBuilder(
-                  //   condition: myRequestModel?.requests != null,
-                  //   builder: (context) => Padding(
-                  //     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  //     child: ListView.separated(
-                  //       itemBuilder: (context, index) => Container(
-                  //         height: 110,
-                  //         width: double.infinity,
-                  //         child: Row(
-                  //           mainAxisAlignment: MainAxisAlignment.end,
-                  //           children: [
-                  //             CircleAvatar(
-                  //               radius: 20,
-                  //               child: Text(
-                  //                 '${myRequestModel?.requests![index].bloodType}',
-                  //                 style: const TextStyle(color: Colors.white),
-                  //               ),
-                  //               backgroundColor: mainColor,
-                  //             ),
-                  //             const SizedBox(
-                  //               width: 10,
-                  //             ),
-                  //             Expanded(
-                  //               child: Column(
-                  //                 mainAxisAlignment: MainAxisAlignment.center,
-                  //                 crossAxisAlignment: CrossAxisAlignment.start,
-                  //                 children: [
-                  //                   Text(
-                  //                     '${myRequestModel?.requests![index].user?.name} needs blood',
-                  //                     style: TextStyle(
-                  //                       fontWeight: FontWeight.bold,
-                  //                     ),
-                  //                   ),
-                  //                   const SizedBox(
-                  //                     height: 12,
-                  //                   ),
-                  //                   Text(
-                  //                     'no of bags    ${myRequestModel?.requests![index].noOfBags}',
-                  //                     style: const TextStyle(
-                  //                       color: greyColor2,
-                  //                     ),
-                  //                   ),
-                  //                   Text(
-                  //                     'Date      ${DateFormat('yMMMd').format(myRequestModel!.requests![index].requestExpiredDate!)}',
-                  //                     style: const TextStyle(
-                  //                       color: greyColor2,
-                  //                     ),
-                  //                   ),
-                  //                   Text(
-                  //                     'Location    ${myRequestModel?.requests![index].governorate?.governorateName},${myRequestModel?.requests![index].city?.cityName}',
-                  //                     style: const TextStyle(
-                  //                       color: greyColor2,
-                  //                     ),
-                  //                   ),
-                  //                 ],
-                  //               ),
-                  //             ),
-                  //             Column(
-                  //               mainAxisAlignment:
-                  //                   MainAxisAlignment.spaceEvenly,
-                  //               children: [
-                  //                 IconButton(
-                  //                   onPressed: () {
-                  //                     Navigator.push(
-                  //                       context,
-                  //                       MaterialPageRoute(
-                  //                           builder: (context) =>
-                  //                               EditRequestScreen()),
-                  //                     );
-                  //                   },
-                  //                   icon: const Icon(Icons.edit),
-                  //                 ),
-                  //                 IconButton(
-                  //                   onPressed: () {
-                  //                     setState(() {
-                  //                       cubit.deleteMyRequests(id: myRequestModel!.requests![index].id!);
-                  //                     });
-                  //                   },
-                  //                   icon: const Icon(Icons.delete_outline),
-                  //                 ),
-                  //               ],
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //       separatorBuilder: (context, index) => const SizedBox(
-                  //         height: 5,
-                  //       ),
-                  //       itemCount: myRequestModel!.requests!.length,
-                  //     ),
-                  //   ),
-                  //   fallback: (context) => Center(
-                  //     child: CircularProgressIndicator(
-                  //       color: mainColor,
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ),

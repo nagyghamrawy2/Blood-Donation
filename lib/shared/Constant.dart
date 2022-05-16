@@ -23,7 +23,7 @@ String? token='';
 int? govIdConstant;
 int? cityIdConstant;
 int? idIndexOfCity ;
-String? cityDropDownValue = cityItemList[idIndexOfCity!].cityName;
+int? idIndexOfCityEditRequest ;
 
 List<Governorates> governorateItemList = [];
 List<Cities> cityItemList = [];

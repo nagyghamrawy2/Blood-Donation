@@ -46,6 +46,10 @@ class AppLoadingCityRequestDataState extends AppStates{}
 class AppSuccessCityRequestDataState extends AppStates{}
 class AppErrorCityRequestDataState extends AppStates{}
 
+class AppLoadingCityEditRequestDataState extends AppStates{}
+class AppSuccessCityEditRequestDataState extends AppStates{}
+class AppErrorCityEditRequestDataState extends AppStates{}
+
 class AppLoadingUpdateRequestDataState extends AppStates{}
 class AppSuccessUpdateRequestDataState extends AppStates{}
 class AppErrorUpdateRequestDataState extends AppStates{}

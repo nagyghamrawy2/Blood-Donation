@@ -228,17 +228,17 @@ class AppCubit extends Cubit<AppStates> {
   List<Cities> cityEditRequestItemList = [];
 
   void getCityEditRequestData({required int id}) {
-    emit(AppLoadingCityDataState());
+    emit(AppLoadingCityEditRequestDataState());
     cityEditRequestItemList.clear();
     DioHelper.getData(url: '$CITY/$id').then((value) {
       cityEditRequestModel = CityModel.fromJson(value.data);
       cityEditRequestModel.cities?.forEach((e) {
         cityEditRequestItemList.add(e);
       });
-      emit(AppSuccessCityDataState());
+      emit(AppSuccessCityEditRequestDataState());
     }).catchError((error) {
       print(error.toString());
-      emit(AppErrorCityDataState());
+      emit(AppErrorCityEditRequestDataState());
     });
   }
 
