@@ -443,7 +443,6 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   List<MessageModel> messages = [];
-  List<MessageModel> Tempmessage = [];
 
   void getMessages({
     @required String? receiverId,

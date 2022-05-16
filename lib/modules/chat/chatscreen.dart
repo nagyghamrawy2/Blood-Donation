@@ -4,6 +4,7 @@ import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,7 +18,6 @@ class Chat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -109,7 +109,13 @@ class Chat extends StatelessWidget {
                                   receiverId: receiverId.toString(),
                                   date: DateTime.now().toString(),
                                   text: messageC.text);
-                              AppCubit.get(context).getMessages(receiverId: receiverId.toString());
+                              FirebaseMessaging.instance
+                                  .getToken()
+                                  .then((value) {
+                                print(value);
+                              });
+                              AppCubit.get(context).getMessages(
+                                  receiverId: receiverId.toString());
                             },
                           ),
                         )
@@ -138,7 +144,6 @@ class Chat extends StatelessWidget {
                     topEnd: Radius.circular(10))),
             child: Text(model.text!)),
       );
-
   Widget BuildMyMessage(MessageModel model) => Align(
         alignment: AlignmentDirectional.centerStart,
         child: Container(
@@ -152,6 +157,8 @@ class Chat extends StatelessWidget {
                     bottomEnd: Radius.circular(10),
                     topStart: Radius.circular(10),
                     topEnd: Radius.circular(10))),
-            child: Text(model.text!,)),
+            child: Text(
+              model.text!,
+            )),
       );
 }

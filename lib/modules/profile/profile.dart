@@ -1,5 +1,6 @@
 import 'package:blood_bank/modules/add_request/addRequest.dart';
 import 'package:blood_bank/modules/change%20password/changePassword.dart';
+import 'package:blood_bank/modules/chat/Chat.dart';
 import 'package:blood_bank/modules/myInformation/myInformation.dart';
 import 'package:blood_bank/modules/request/requestScreen.dart';
 import 'package:blood_bank/shared/Constant.dart';
@@ -56,7 +57,8 @@ class ProfileScreen extends StatelessWidget {
                     SizedBox(
                       width: 10.0,
                     ),
-                    Text('${userDataModel?.user?.governorate?.governorateName},${userDataModel?.user?.city?.cityName}'),
+                    Text(
+                        '${userDataModel?.user?.governorate?.governorateName},${userDataModel?.user?.city?.cityName}'),
                   ],
                 ),
                 const SizedBox(
@@ -76,7 +78,8 @@ class ProfileScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) =>  AddRequestScreen()),
+                            MaterialPageRoute(
+                                builder: (context) => AddRequestScreen()),
                           );
                         },
                         child: Row(
@@ -179,7 +182,7 @@ class ProfileScreen extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('${myRequestModel?.requests?.length ?? 0 }'),
+                          Text('${myRequestModel?.requests?.length ?? 0}'),
                           Text('requests'),
                         ],
                       ),
@@ -191,8 +194,8 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 ProfileButton(
                   switchFun: (value) {
-                    if(value == true) cubit.changeValueSwitch(1);
-                    if(value == false) cubit.changeValueSwitch(0);
+                    if (value == true) cubit.changeValueSwitch(1);
+                    if (value == false) cubit.changeValueSwitch(0);
                     cubit.changeAvailability(value: cubit.valueSwitch!);
                   },
                   have_switch: true,
@@ -236,7 +239,13 @@ class ProfileScreen extends StatelessWidget {
                   img_width: 35,
                   img_height: 35,
                   label_name: 'Chats',
-                  function: () {},
+                  function: () {
+                    AppCubit.get(context).getMessages();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ChatHome()),
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 14.0,
