@@ -3,6 +3,7 @@ import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,12 @@ class Chat extends StatelessWidget {
   final now = DateTime.now();
   int? receiverId;
   String? name;
+  var collection = FirebaseFirestore.instance
+      .collection('Chat')
+      .doc(userDataModel?.user?.id.toString())
+      .collection("Id");
+  var Id;
+  bool found = false;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +111,42 @@ class Chat extends StatelessWidget {
                               Icons.send,
                               size: 40,
                             ),
-                            onTap: () {
+                            onTap: () async {
+                              var querySnapshot = await collection.get();
+                              for (var queryDocumentSnapshot
+                                  in querySnapshot.docs) {
+                                Map<String, dynamic> data =
+                                    queryDocumentSnapshot.data();
+                                if (data['receiverId'].toString() ==
+                                    receiverId.toString()) {
+                                  Id = queryDocumentSnapshot.id;
+                                  found = true;
+                                }
+                              }
+                              if (found == true) {
+                                await FirebaseFirestore.instance
+                                    .collection('Chat')
+                                    .doc(userDataModel?.user?.id.toString())
+                                    .collection("Id")
+                                    .doc(Id)
+                                    .update(<String, dynamic>{
+                                  "username": name,
+                                  "receiverId": receiverId,
+                                  "date": DateTime.now().toString(),
+                                });
+                              } else {
+                                await FirebaseFirestore.instance
+                                    .collection('Chat')
+                                    .doc(userDataModel?.user?.id.toString())
+                                    .collection("Id")
+                                    .add(<String, dynamic>{
+                                  "username": name,
+                                  "receiverId": receiverId,
+                                  "date": DateTime.now().toString(),
+                                });
+                                found = false;
+                              }
+
                               AppCubit.get(context).sendMessage(
                                   receiverId: receiverId.toString(),
                                   date: DateTime.now().toString(),
@@ -144,6 +186,7 @@ class Chat extends StatelessWidget {
                     topEnd: Radius.circular(10))),
             child: Text(model.text!)),
       );
+
   Widget BuildMyMessage(MessageModel model) => Align(
         alignment: AlignmentDirectional.centerStart,
         child: Container(

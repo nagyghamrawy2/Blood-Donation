@@ -1,3 +1,4 @@
+import 'package:blood_bank/modules/chat/chatscreen.dart';
 import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:flutter/material.dart';
@@ -21,54 +22,60 @@ class ChatHome extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: FutureBuilder(
               future: FirebaseFirestore.instance
-                  .collection('users')
+                  .collection('Chat')
                   .doc(userDataModel?.user?.id.toString())
-                  .collection("chats")
+                  .collection("Id")
+                  .orderBy('date', descending: true)
                   .get(),
               builder: (context, AsyncSnapshot snapshots) {
-                print(snapshots.data.docs[0]["chats"]);
                 if (snapshots.hasData == false)
-
                   return Center(child: CircularProgressIndicator());
                 else {
                   return ListView.separated(
                       itemCount: snapshots.data.docs.length,
                       itemBuilder: (context, i) {
-                        return Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundImage: AssetImage(
-                                "",
-                              ),
-                              radius: 40,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Column(
-                              crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  snapshots.data.docs[i]["chats"],
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Text(
+                        return GestureDetector(
+                          onTap: () {
+                            int index = requestModel!.requests!.indexWhere(
+                                    (element) => element.id == snapshots.data.docs[i]['receiverId']);
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (context) => Chat(
+                                        receiverId: requestModel!
+                                            .requests![index].user?.id,
+                                        name: requestModel!
+                                            .requests![index].user?.name,
+                                      )),
+                            );
+                          },
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundImage: AssetImage(
                                   "",
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                  ),
                                 ),
-                              ],
-                            ),
-                          ],
+                                radius: 40,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    snapshots.data.docs[i]['username'],
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         );
                       },
                       separatorBuilder: (context, i) {

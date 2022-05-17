@@ -240,7 +240,6 @@ class ProfileScreen extends StatelessWidget {
                   img_height: 35,
                   label_name: 'Chats',
                   function: () {
-                    AppCubit.get(context).getMessages();
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => ChatHome()),
