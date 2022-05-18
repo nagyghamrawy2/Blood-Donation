@@ -246,14 +246,18 @@ class AppCubit extends Cubit<AppStates> {
   List<Cities> filterCityItemList = [];
 
   void getFilterCityData({required int id}) {
+    emit(AppLoadingFilterCityDataState());
     filterCityItemList.clear();
     DioHelper.getData(url: '$CITY/$id').then((value) {
       filterCityModel = CityModel.fromJson(value.data);
       filterCityModel.cities?.forEach((e) {
         filterCityItemList.add(e);
       });
+      print(filterCityItemList);
+      emit(AppSuccessFilterCityDataState());
     }).catchError((error) {
       print(error.toString());
+      emit(AppErrorFilterCityDataState());
     });
   }
 
@@ -407,7 +411,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void sendMessage({
-    required String? receiverId,
+    required String receiverId,
     required String date,
     required String text,
   }) {
@@ -445,7 +449,7 @@ class AppCubit extends Cubit<AppStates> {
   List<MessageModel> messages = [];
 
   void getMessages({
-    @required String? receiverId,
+    required String receiverId,
   }) {
     FirebaseFirestore.instance
         .collection('users')
@@ -470,7 +474,7 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppDonorDataState());
     DioHelper.getData(url: DONORDATA, token: token).then((value) {
       donorModel = DonarModel.fromJson(value.data);
-      emit(AppSuccesDonorDataState());
+      emit(AppSuccessDonorDataState());
     }).catchError((error) {
       emit(AppErrorDonorDataState());
     });

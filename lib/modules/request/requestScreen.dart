@@ -135,7 +135,7 @@ class _RequestScreenState extends State<RequestScreen> {
                                   onPressed: () {
                                     AppCubit.get(context).getMessages(
                                         receiverId: requestModel!
-                                            .requests![index].user?.id
+                                            .requests![index].user!.id
                                             .toString());
                                     Navigator.push(
                                       context,

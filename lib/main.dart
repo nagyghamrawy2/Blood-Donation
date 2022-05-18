@@ -1,6 +1,7 @@
 import 'package:blood_bank/layout/home_layout.dart';
 import 'package:blood_bank/modules/Login_Screen/login.dart';
 import 'package:blood_bank/modules/Sign_Up_with_gmail/Sign_up_with_gmail.dart';
+import 'package:blood_bank/modules/add_request/addRequest.dart';
 import 'package:blood_bank/modules/bloodBank/bloodBankScreen.dart';
 import 'package:blood_bank/modules/editProfile/editProfile.dart';
 import 'package:blood_bank/modules/education/education.dart';
@@ -20,6 +21,8 @@ import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:blood_bank/shared/styles/themes.dart';
+import 'package:blood_bank/testNotify.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,6 +38,16 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Bloc.observer = SimpleBlocObserver();
+  FirebaseMessaging.onMessage.listen((event) {
+    print(event.data.toString());
+  });
+  FirebaseMessaging.onMessageOpenedApp.listen((event) {
+    print(event.data.toString());
+  });
+
+  //na2s wa7da
+
+
   DioHelper.init();
   await CacheHelper.init();
   token = CacheHelper.getData(key: 'token');

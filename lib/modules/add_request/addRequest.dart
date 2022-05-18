@@ -28,7 +28,6 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
   int? id;
   int? govRequestId;
   int? cityRequestId;
-  bool flag = true;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
@@ -235,9 +234,6 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                     Card(
                       elevation: 5.0,
                       child: DropdownButtonFormField(
-                        // value:
-                        // governorateItemList[govIdConstant! - 1]
-                        //     .governorateName,
                         hint: const Text(
                           'Governorate',
                         ),
@@ -247,26 +243,24 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                           }
                         },
                         decoration: InputDecoration(
-                         border: InputBorder.none,
+                          border: InputBorder.none,
                         ),
                         icon: const Icon(Icons.keyboard_arrow_down),
-                        items: governorateItemList
-                            .asMap()
-                            .entries
-                            .map((items) {
+                        items: governorateItemList.asMap().entries.map((items) {
                           return DropdownMenuItem(
                             value: items.value.governorateName,
-                            child:
-                            Text(items.value.governorateName!),
+                            child: Text(items.value.governorateName!),
                           );
                         }).toList(),
                         onChanged: (newValue) {
-                          id = governorateItemList.indexWhere((element) =>element.governorateName ==newValue);
-                          govIdConstant = governorateItemList[id!].id;
-                          cubit.getCityData(id: govIdConstant!);
+                          id = governorateItemList.indexWhere(
+                                  (element) => element.governorateName == newValue);
+                          govRequestId = governorateItemList[id!].id;
+                          cubit.getCityRequestData(id: govRequestId!);
                           idIndexOfCity = 0;
-                          flag = false;
-                          print(cityIdConstant);
+                          print(id);
+                          print(govRequestId);
+                          print(cubit.cityRequestItemList);
                         },
                       ),
                     ),
@@ -286,41 +280,42 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.005,
                     ),
-                    Card(
-                      elevation: 5.0,
-                      child: DropdownButtonFormField(
-
-                        // value: cityItemList[idIndexOfCity!].cityName,
-                        hint: const Text(
-                          'City',
+                    ConditionalBuilder(
+                      condition: cubit.cityRequestItemList.isNotEmpty,
+                      builder: (context) => Card(
+                        elevation: 5.0,
+                        child: DropdownButtonFormField(
+                            hint: const Text(
+                              'City',
+                            ),
+                            validator: (value) {
+                              if (value == null) {
+                                return "City must not be empty";
+                              }
+                            },
+                            decoration: InputDecoration(
+                            border: InputBorder.none,
+                            ),
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            items: cubit.cityRequestItemList
+                                .asMap()
+                                .entries
+                                .map((items) {
+                              return DropdownMenuItem(
+                                value: items.value.cityName,
+                                child: Text(items.value.cityName!),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              int id = cubit.cityRequestItemList.indexWhere(
+                                      (element) => element.cityName == newValue);
+                              cityRequestId = cubit.cityRequestItemList[id].id;
+                            }),
+                      ),
+                      fallback: (context) => Center(
+                        child: CircularProgressIndicator(
+                          color: mainColor,
                         ),
-                        validator: (value) {
-                          if (value == null) {
-                            return "City must not be empty";
-                          }
-                        },
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                        ),
-                        icon: const Icon(
-                            Icons.keyboard_arrow_down),
-                        items: cityItemList
-                            .asMap()
-                            .entries
-                            .map((items) {
-                          return DropdownMenuItem(
-                            value: items.value.cityName,
-                            child: Text(items.value.cityName!),
-                          );
-                        }).toList(),
-                        onChanged: (newValue) {
-                          int id = cityItemList.indexWhere((element)=>element.cityName ==newValue);
-                          idIndexOfCity = id;
-                          flag = true;
-                          print(idIndexOfCity);
-                          print(cityItemList[idIndexOfCity!].cityName);
-                          cityIdConstant = (cityItemList[id].id)!;
-                        },
                       ),
                     ),
                     SizedBox(

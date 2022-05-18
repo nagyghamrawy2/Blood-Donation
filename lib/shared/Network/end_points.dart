@@ -14,3 +14,4 @@ const CHANGE_AVAILABILITY = 'change-availability';
 const EDUCATION = 'posts';
 const FILTER_DONORS = 'filter-donors';
 const UPDATE_REQUESTS = 'requests';
+const UPDATE_FCM_TOKEN = 'update-fcm_token';

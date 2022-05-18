@@ -18,5 +18,8 @@ class AppLoginFailedState extends AppLoginStates {
 
 }
 class changePasswordState extends AppLoginStates {}
+class changeFcmLoadingState extends AppLoginStates {}
+class changeFcmSuccessState extends AppLoginStates {}
+class changeFcmErrorState extends AppLoginStates {}
 
 

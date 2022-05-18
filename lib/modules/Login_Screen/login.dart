@@ -7,17 +7,35 @@ import 'package:blood_bank/shared/Network/local/Cache_helper.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../shared/Constant.dart';
 import '../../shared/Constant.dart';
 import '../../shared/styles/colors.dart';
 
-class LoginScreen extends StatelessWidget {
-  TextEditingController emailcontroller = TextEditingController();
-  TextEditingController passwordcontroller = TextEditingController();
-  var formKey = GlobalKey<FormState>();
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailcontroller = TextEditingController();
+
+  TextEditingController passwordcontroller = TextEditingController();
+
+  var formKey = GlobalKey<FormState>();
+  String? updateFcmToken;
+  void initState() {
+    super.initState();
+    FirebaseMessaging.instance.getToken().then((value){
+      print(value);
+      setState(() {
+        updateFcmToken = value;
+      });
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -39,8 +57,7 @@ class LoginScreen extends StatelessWidget {
                   .then((value) {
                 navigateAndFinish(context, HomeLayout());
               });
-              AppCubit.get(context).getMyRequests();
-              AppCubit.get(context).getAllRequests();
+              AppCubit.get(context)..getEducationData()..getGovernorateData()..getDonorData()..getAllRequests()..getMyRequests();
               ShowToast(text: 'LOGIN SUCCESSFULLY', state: ToastStates.SUCCESS);
             } else {
               ShowToast(
@@ -181,6 +198,10 @@ class LoginScreen extends StatelessWidget {
                                   email: emailcontroller.text,
                                   Password: passwordcontroller.text,
                                 );
+                                AppLoginCubit.get(context).updateFcmUserToken(
+                                    fcmToken: updateFcmToken!,
+                                );
+                                print ("done");
                               }
                             },
                             num_hieght: 52,

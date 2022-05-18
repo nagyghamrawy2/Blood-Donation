@@ -1,3 +1,4 @@
+import 'package:blood_bank/models/fcm_model.dart';
 import 'package:blood_bank/models/profile_model.dart';
 import 'package:blood_bank/modules/Login_Screen/Cubit/States.dart';
 import 'package:blood_bank/shared/Constant.dart';
@@ -36,5 +37,22 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
   void changePasswordStatus() {
     obsecure = !obsecure;
     emit(changePasswordState());
+  }
+
+  FcmTokenModel? updateFcmToken;
+  void updateFcmUserToken({
+    required String fcmToken,
+  }){
+    emit(changeFcmLoadingState());
+    DioHelper.putData(url: UPDATE_FCM_TOKEN, data: {
+      "fcm_token" : fcmToken,
+    }).then((value) {
+        updateFcmToken = FcmTokenModel.fromJson(value.data);
+        print("Hello");
+        emit(changeFcmSuccessState());
+    }).catchError((error){
+      print(error.toString());
+      emit(changeFcmErrorState());
+    });
   }
 }

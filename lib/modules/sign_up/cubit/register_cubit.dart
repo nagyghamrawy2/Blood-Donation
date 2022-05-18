@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:blood_bank/models/city_model.dart';
+import 'package:blood_bank/models/fcm_model.dart';
 import 'package:blood_bank/models/profile_model.dart';
 import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/Network/Remote/dio_helper.dart';
@@ -25,6 +26,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
     required String dateOfBirth,
     required String bloodType,
     required String lastDonateTime,
+    required String fcmToken,
 
   }) {
     emit(RegisterLoadingState());
@@ -41,6 +43,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
         'last_donate_time' : lastDonateTime,
         'governorate_id' : govId,
         'city_id' : cityId ,
+        'fcm_token' : fcmToken ,
       },
     ).then((value) {
       print(value.data);
@@ -111,5 +114,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
     obsecure = !obsecure;
     emit(ChangePasswordState());
   }
+
+
 
 }

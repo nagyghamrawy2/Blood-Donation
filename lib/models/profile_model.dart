@@ -31,6 +31,7 @@ class User {
   Governorate? governorate;
   City? city;
   String? token;
+  String? fcmToken;
 
 
   User.fromJson(Map<String, dynamic> json){
@@ -48,6 +49,7 @@ class User {
     governorate= Governorate.fromJson(json["governorate"]);
     city= City.fromJson(json["city"]);
     token= json["token"];
+    fcmToken= json["fcm_token"];
 
   }
 }
@@ -81,10 +83,12 @@ class Errors {
   List<String>? bloodType;
   List<String>? governorateId;
   List<String>? cityId;
+  List<String>? fcmToken;
 
 
   Errors.fromJson(Map<String, dynamic> json){
     name= json['name'] != null ? List<String>.from(json["name"].map((x) => x)) : null;
+    fcmToken= json['fcm_token'] != null ? List<String>.from(json["fcm_token"].map((x) => x)) : null;
     email= json['email'] != null ? List<String>.from(json["email"].map((x) => x)) : null;
     phoneNumber= json['phone_number'] != null ? List<String>.from(json["phone_number"].map((x) => x)) : null;
     dateOfBirth=json['date_of_birth'] != null ? List<String>.from(json["date_of_birth"].map((x) => x)) : null;

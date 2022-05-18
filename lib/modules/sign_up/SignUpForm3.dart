@@ -5,16 +5,14 @@ import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
-class SignUpScreen3 extends StatelessWidget {
-  TextEditingController lastDonationDate = new TextEditingController();
-  var bloodType = TextEditingController();
-  var formKey = GlobalKey<FormState>();
+class SignUpScreen3 extends StatefulWidget {
   late String phone;
 
   late String birthDate;
@@ -31,6 +29,27 @@ class SignUpScreen3 extends StatelessWidget {
       required this.emailAddress,
       required this.password,
       required this.confirmPassword});
+
+  @override
+  State<SignUpScreen3> createState() => _SignUpScreen3State();
+}
+
+class _SignUpScreen3State extends State<SignUpScreen3> {
+  TextEditingController lastDonationDate = new TextEditingController();
+
+  var bloodType = TextEditingController();
+  String?  fcmToken;
+  var formKey = GlobalKey<FormState>();
+  void initState() {
+    super.initState();
+    FirebaseMessaging.instance.getToken().then((value){
+      print(value);
+      setState(() {
+        fcmToken = value;
+      });
+
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -268,16 +287,17 @@ class SignUpScreen3 extends StatelessWidget {
                                 (cubit.policyTerms)) {
                               cubit.ChangeCheck();
                               cubit.userRegister(
-                                email: emailAddress,
-                                name: name,
-                                phone: phone,
-                                password: password,
-                                dateOfBirth: birthDate,
+                                email: widget.emailAddress,
+                                name: widget.name,
+                                phone: widget.phone,
+                                password: widget.password,
+                                dateOfBirth: widget.birthDate,
                                 bloodType: bloodType.text,
                                 lastDonateTime: lastDonationDate.text,
                                 cityId: cityIdConstant!,
                                 govId: govIdConstant!,
-                                confirmPassword: confirmPassword,
+                                confirmPassword: widget.confirmPassword,
+                                fcmToken: fcmToken!,
                               );
                               print("done");
                             } else {
