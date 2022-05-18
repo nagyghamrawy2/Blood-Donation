@@ -31,7 +31,7 @@ class AppSuccessUpdateUserDataState extends AppStates{}
 class AppErrorUpdateUserDataState extends AppStates{}
 
 class AppDonorDataState extends AppStates{}
-class AppSuccesDonorDataState extends AppStates{}
+class AppSuccessDonorDataState extends AppStates{}
 class AppErrorDonorDataState extends AppStates{}
 
 class AppLoadingGovernorateDataState extends AppStates{}

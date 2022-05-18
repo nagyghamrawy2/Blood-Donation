@@ -39,8 +39,7 @@ class LoginScreen extends StatelessWidget {
                   .then((value) {
                 navigateAndFinish(context, HomeLayout());
               });
-              AppCubit.get(context).getMyRequests();
-              AppCubit.get(context).getAllRequests();
+              AppCubit.get(context)..getEducationData()..getGovernorateData()..getDonorData()..getAllRequests()..getMyRequests();
               ShowToast(text: 'LOGIN SUCCESSFULLY', state: ToastStates.SUCCESS);
             } else {
               ShowToast(
