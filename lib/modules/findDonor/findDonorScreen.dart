@@ -18,6 +18,7 @@ import '../../shared/styles/colors.dart';
 
 class FindDonorScreen extends StatelessWidget {
   var scaffoldKey = GlobalKey<ScaffoldState>();
+  var formKey = GlobalKey<FormState>();
   bool isBottomSheetShown = false;
   late int id;
 
@@ -48,200 +49,216 @@ class FindDonorScreen extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                Image.asset("assets/images/finddonor.jpg"),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) => FindDonorInfo(
-                        "assets/images/finddonor.jpg",
-                        "${cubit.donorModel.users[index].name}",
-                        "${cubit.donorModel.users[index].governorate?.governorateName}",
-                        "${cubit.donorModel.users[index].city?.cityName}",
-                        "${cubit.donorModel.users[index].bloodType}"),
-                    separatorBuilder: (context, index) => SizedBox(
-                      height: 30.h,
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  Image.asset("assets/images/finddonor.jpg"),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => FindDonorInfo(
+                          "assets/images/finddonor.jpg",
+                          "${cubit.donorModel.users[index].name}",
+                          "${cubit.donorModel.users[index].governorate?.governorateName}",
+                          "${cubit.donorModel.users[index].city?.cityName}",
+                          "${cubit.donorModel.users[index].bloodType}"),
+                      separatorBuilder: (context, index) => SizedBox(
+                        height: 30.h,
+                      ),
+                      itemCount: cubit.donorModel.users.length,
                     ),
-                    itemCount: cubit.donorModel.users.length,
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               if (isBottomSheetShown) {
-                cubit.filterDonor(bloodType: 'B+', govId: 10, cityId: 213);
-                if (state is AppSuccessFilterDonorState) {
-                  Navigator.pop(context);
-                }
-                isBottomSheetShown = false;
+                if (formKey.currentState!.validate())
+                  {
+                    if (state is AppSuccessFilterDonorState) {
+                      Navigator.pop(context);
+                    }
+                    isBottomSheetShown = false;
+                  }
               } else {
                 scaffoldKey.currentState?.showBottomSheet((context) {
                   return Container(
-                    height: 420.h,
+                    height: 500.h,
                     color: greyColor,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 6, horizontal: 40),
                       child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Blood type",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 28.sp,
-                                color: mainColor,
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                              ),
-                              height: 60,
-                              width: double.infinity,
-                              child: DropdownButtonFormField<String>(
-                                items: cubit.bloodGroupItem
-                                    .map(
-                                      (label) => DropdownMenuItem(
-                                        child: Text(
-                                          label,
-                                          style: const TextStyle(fontSize: 16),
-                                        ),
-                                        value: label,
-                                      ),
-                                    )
-                                    .toList(),
-                                onChanged: (value) {
-                                  bloodTypeFilter = value.toString();
-                                },
-                                validator: (value) {
-                                  if (value == null) {
-                                    return "Blood type must not be empty";
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
+                        child: Form(
+                          key: formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Blood type",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 28.sp,
+                                  color: mainColor,
                                 ),
-                                hint: const Text('Blood type'),
                               ),
-                            ),
-                            SizedBox(
-                              height: 6.h,
-                            ),
-                            Text(
-                              "Governorate",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 28.sp,
-                                color: mainColor,
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                              ),
-                              height: 60,
-                              width: double.infinity,
-                              child: DropdownButtonFormField(
-                                hint: const Text(
-                                  'Governorate',
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
                                 ),
-                                validator: (value) {
-                                  value ?? "Governorate must not be empty";
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                                icon: const Icon(Icons.keyboard_arrow_down),
-                                items: governorateItemList
-                                    .asMap()
-                                    .entries
-                                    .map((items) {
-                                  return DropdownMenuItem(
-                                    value: items.value.governorateName,
-                                    child: Text(items.value.governorateName!),
-                                  );
-                                }).toList(),
-                                onChanged: (newValue) {
-                                  id = governorateItemList.indexWhere(
-                                      (element) =>
-                                          element.governorateName == newValue);
-                                  cubit.getFilterCityData(
-                                      id: governorateItemList[id].id!);
-                                  idIndexOfCity = 0;
-                                },
-                              ),
-                            ),
-                            SizedBox(
-                              height: 6.h,
-                            ),
-                            Text(
-                              "City",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 28.sp,
-                                color: mainColor,
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                              ),
-                              height: 60,
-                              width: double.infinity,
-                              child: DropdownButtonFormField<String>(
-                                decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                                items: ["15 mayo", "ma3sara", "masaken"]
-                                    .map((label) => DropdownMenuItem(
+                                height: 65,
+                                width: double.infinity,
+                                child: DropdownButtonFormField<String>(
+                                  items: cubit.bloodGroupItem
+                                      .map(
+                                        (label) => DropdownMenuItem(
                                           child: Text(
                                             label,
-                                            style: TextStyle(fontSize: 16),
+                                            style: const TextStyle(fontSize: 16),
                                           ),
                                           value: label,
-                                        ))
-                                    .toList(),
-                                onChanged: (value) {
-                                  // bloodtype = value.toString();
-                                },
+                                        ),
+                                      )
+                                      .toList(),
+                                  onChanged: (value) {
+                                    bloodTypeFilter = value.toString();
+                                  },
+                                  validator: (value) {
+                                    if (value == null) {
+                                      return "Blood type must not be empty";
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  hint: const Text('Blood type'),
+                                ),
                               ),
-                            ),
-                          ],
+                              SizedBox(
+                                height: 8.h,
+                              ),
+                              Text(
+                                "Governorate",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 28.sp,
+                                  color: mainColor,
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                ),
+                                height: 65,
+                                width: double.infinity,
+                                child: DropdownButtonFormField(
+                                  hint: const Text(
+                                    'Governorate',
+                                  ),
+                                  validator: (value) {
+                                    if (value == null) {
+                                      return "Governorate must not be empty";
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  icon: const Icon(Icons.keyboard_arrow_down),
+                                  items: governorateItemList
+                                      .asMap()
+                                      .entries
+                                      .map((items) {
+                                    return DropdownMenuItem(
+                                      value: items.value.governorateName,
+                                      child: Text(items.value.governorateName!),
+                                    );
+                                  }).toList(),
+                                  onChanged: (newValue) {
+                                    id = governorateItemList.indexWhere(
+                                        (element) =>
+                                            element.governorateName == newValue);
+                                    cubit.getFilterCityData(
+                                        id: governorateItemList[id].id!);
+                                    idIndexOfCity = 0;
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8.h,
+                              ),
+                              Text(
+                                "City",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 28.sp,
+                                  color: mainColor,
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                ),
+                                height: 65,
+                                width: double.infinity,
+                                child: DropdownButtonFormField<String>(
+                                  validator: (value) {
+                                    if (value == null) {
+                                      return "City must not be empty";
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  items: ["15 mayo", "ma3sara", "masaken"]
+                                      .map((label) => DropdownMenuItem(
+                                            child: Text(
+                                              label,
+                                              style: TextStyle(fontSize: 16),
+                                            ),
+                                            value: label,
+                                          ))
+                                      .toList(),
+                                  onChanged: (value) {
+                                    // bloodtype = value.toString();
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
