@@ -4,17 +4,17 @@ import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Chat extends StatelessWidget {
-  Chat({required this.receiverId, required this.name});
+class ChatScreen extends StatelessWidget {
+  ChatScreen({Key? key, required this.receiverId, required this.name})
+      : super(key: key);
 
-  var messageC = TextEditingController();
+  var messageController = TextEditingController();
   final now = DateTime.now();
-  int? receiverId;
+  String? receiverId;
   String? name;
   var collection = FirebaseFirestore.instance
       .collection('Chat')
@@ -30,14 +30,14 @@ class Chat extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: Color.fromRGBO(237, 57, 74, 1),
+              backgroundColor: const Color.fromRGBO(237, 57, 74, 1),
               title: Row(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     backgroundImage: AssetImage("assets/images/pp.png"),
                     radius: 25,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Text(name!)
@@ -48,7 +48,7 @@ class Chat extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.close_outlined,
                       color: Colors.black,
                       size: 40,
@@ -61,7 +61,7 @@ class Chat extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ListView.separated(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           var message = AppCubit.get(context).messages[index];
                           if (userDataModel?.user?.id == message.senderId) {
@@ -69,13 +69,13 @@ class Chat extends StatelessWidget {
                           }
                           return BuildMessage(message);
                         },
-                        separatorBuilder: (context, index) => SizedBox(
+                        separatorBuilder: (context, index) => const SizedBox(
                               height: 15,
                             ),
                         itemCount: AppCubit.get(context).messages.length),
                   ),
                   Container(
-                    margin: EdgeInsets.all(15.0),
+                    margin: const EdgeInsets.all(15.0),
                     child: Row(
                       children: [
                         Expanded(
@@ -85,7 +85,7 @@ class Chat extends StatelessWidget {
                             ),
                             height: 55,
                             child: TextField(
-                              controller: messageC,
+                              controller: messageController,
                               decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: const BorderSide(
@@ -97,7 +97,7 @@ class Chat extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(48),
                                   ),
                                   hintText: "Write a reply...",
-                                  hintStyle: TextStyle(
+                                  hintStyle: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold)),
                             ),
@@ -105,9 +105,10 @@ class Chat extends StatelessWidget {
                         ),
                         Container(
                           padding: const EdgeInsets.only(left: 18),
-                          decoration: BoxDecoration(shape: BoxShape.circle),
+                          decoration:
+                              const BoxDecoration(shape: BoxShape.circle),
                           child: GestureDetector(
-                            child: Icon(
+                            child: const Icon(
                               Icons.send,
                               size: 40,
                             ),
@@ -130,8 +131,6 @@ class Chat extends StatelessWidget {
                                     .collection("Id")
                                     .doc(Id)
                                     .update(<String, dynamic>{
-                                  "username": name,
-                                  "receiverId": receiverId,
                                   "date": DateTime.now().toString(),
                                 });
                               } else {
@@ -144,18 +143,26 @@ class Chat extends StatelessWidget {
                                   "receiverId": receiverId,
                                   "date": DateTime.now().toString(),
                                 });
+                                await FirebaseFirestore.instance
+                                    .collection('Chat')
+                                    .doc(receiverId.toString())
+                                    .collection("Id")
+                                    .add(<String, dynamic>{
+                                  "username": userDataModel?.user?.name,
+                                  "receiverId":
+                                      userDataModel?.user?.id.toString(),
+                                  "date": DateTime.now().toString(),
+                                });
                                 found = false;
                               }
 
                               AppCubit.get(context).sendMessage(
                                   receiverId: receiverId.toString(),
                                   date: DateTime.now().toString(),
-                                  text: messageC.text);
+                                  text: messageController.text);
                               FirebaseMessaging.instance
                                   .getToken()
-                                  .then((value) {
-                                print(value);
-                              });
+                                  .then((value) {});
                               AppCubit.get(context).getMessages(
                                   receiverId: receiverId.toString());
                             },
@@ -174,11 +181,11 @@ class Chat extends StatelessWidget {
   Widget BuildMessage(MessageModel model) => Align(
         alignment: AlignmentDirectional.centerEnd,
         child: Container(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               vertical: 5,
               horizontal: 10,
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: mainColor,
                 borderRadius: BorderRadiusDirectional.only(
                     bottomStart: Radius.circular(10),
@@ -190,11 +197,11 @@ class Chat extends StatelessWidget {
   Widget BuildMyMessage(MessageModel model) => Align(
         alignment: AlignmentDirectional.centerStart,
         child: Container(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               vertical: 5,
               horizontal: 10,
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: greyColor2,
                 borderRadius: BorderRadiusDirectional.only(
                     bottomEnd: Radius.circular(10),

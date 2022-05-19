@@ -138,9 +138,10 @@ class _RequestScreenState extends State<RequestScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Chat(
+                                          builder: (context) => ChatScreen(
                                                 receiverId: requestModel!
-                                                    .requests![index].user?.id,
+                                                    .requests![index].user?.id
+                                                    .toString(),
                                                 name: requestModel!
                                                     .requests![index]
                                                     .user

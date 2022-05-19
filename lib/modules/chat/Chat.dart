@@ -7,16 +7,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../shared/cubit/states.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ChatHome extends StatelessWidget {
+class ChatHomeScreen extends StatelessWidget {
+  const ChatHomeScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    AppCubit cubit = AppCubit.get(context);
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: Text('CHATS'),
+            title: const Text('Chats'),
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -28,30 +29,40 @@ class ChatHome extends StatelessWidget {
                   .orderBy('date', descending: true)
                   .get(),
               builder: (context, AsyncSnapshot snapshots) {
-                if (snapshots.hasData == false)
-                  return Center(child: CircularProgressIndicator());
-                else {
+                if (snapshots.hasData == false) {
+                  return const Center(child: CircularProgressIndicator());
+                } else {
                   return ListView.separated(
                       itemCount: snapshots.data.docs.length,
                       itemBuilder: (context, i) {
                         return GestureDetector(
-                          onTap: () {
-                            int index = requestModel!.requests!.indexWhere(
-                                    (element) => element.id == snapshots.data.docs[i]['receiverId']);
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => Chat(
-                                        receiverId: requestModel!
-                                            .requests![index].user?.id,
-                                        name: requestModel!
-                                            .requests![index].user?.name,
+                          onTap: () async {
+                            await FirebaseFirestore.instance
+                                .collection('Chat')
+                                .doc(userDataModel?.user?.id.toString())
+                                .collection("Id")
+                                .orderBy("date")
+                                .get();
+                            AppCubit.get(context).getMessages(
+                                receiverId: snapshots.data.docs[i]['receiverId']
+                                    .toString());
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChatScreen(
+                                        receiverId: snapshots
+                                            .data.docs[i]['receiverId']
+                                            .toString(),
+                                        name: snapshots.data.docs[i]['username']
+                                            .toString(),
                                       )),
                             );
                           },
                           child: Row(
                             children: [
-                              CircleAvatar(
+                              const CircleAvatar(
                                 backgroundImage: AssetImage(
-                                  "",
+                                  "assets/images/pp.png",
                                 ),
                                 radius: 40,
                               ),
@@ -79,9 +90,9 @@ class ChatHome extends StatelessWidget {
                         );
                       },
                       separatorBuilder: (context, i) {
-                        return Divider(
+                        return const Divider(
                           color: Colors.grey,
-                          thickness: 5,
+                          thickness: 1,
                         );
                       });
                 }

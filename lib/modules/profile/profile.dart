@@ -242,7 +242,7 @@ class ProfileScreen extends StatelessWidget {
                   function: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ChatHome()),
+                      MaterialPageRoute(builder: (context) => ChatHomeScreen()),
                     );
                   },
                 ),
