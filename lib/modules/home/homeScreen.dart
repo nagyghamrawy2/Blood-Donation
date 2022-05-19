@@ -9,7 +9,6 @@ import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:dotted_line/dotted_line.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

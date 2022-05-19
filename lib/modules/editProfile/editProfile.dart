@@ -30,7 +30,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   var formKey = GlobalKey<FormState>();
   int? id;
-  bool flag = true;
   @override
   Widget build(BuildContext context) {
     AppCubit cubit = AppCubit.get(context);
@@ -325,7 +324,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           govIdConstant = governorateItemList[id!].id;
                                           cubit.getCityData(id: govIdConstant!);
                                           idIndexOfCity = 0;
-                                          flag = false;
                                           print(cityIdConstant);
                                         },
                                       ),
@@ -404,7 +402,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         onChanged: (newValue) {
                                           int id = cityItemList.indexWhere((element)=>element.cityName ==newValue);
                                           idIndexOfCity = id;
-                                          flag = true;
                                           print(idIndexOfCity);
                                           print(cityItemList[idIndexOfCity!].cityName);
                                           cityIdConstant = (cityItemList[id].id)!;
