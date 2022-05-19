@@ -44,13 +44,15 @@ class AppLoginCubit extends Cubit<AppLoginStates> {
     required String fcmToken,
   }){
     emit(changeFcmLoadingState());
-    DioHelper.putData(url: UPDATE_FCM_TOKEN, data: {
+    DioHelper.putData(url: UPDATE_FCM_TOKEN,token: token  ,data: {
       "fcm_token" : fcmToken,
     }).then((value) {
-        updateFcmToken = FcmTokenModel.fromJson(value.data);
+       // updateFcmToken = FcmTokenModel.fromJson(value.data);
         print("Hello");
+        print(value.data);
         emit(changeFcmSuccessState());
     }).catchError((error){
+      print("xxxxxxxxxxx");
       print(error.toString());
       emit(changeFcmErrorState());
     });

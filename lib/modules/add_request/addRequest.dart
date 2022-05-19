@@ -233,7 +233,7 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                     ),
                     Card(
                       elevation: 5.0,
-                      child: DropdownButtonFormField(
+                      child:  DropdownButtonFormField(
                         hint: const Text(
                           'Governorate',
                         ),
@@ -243,7 +243,7 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                           }
                         },
                         decoration: InputDecoration(
-                          border: InputBorder.none,
+                         border: InputBorder.none,
                         ),
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: governorateItemList.asMap().entries.map((items) {
@@ -257,7 +257,6 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                                   (element) => element.governorateName == newValue);
                           govRequestId = governorateItemList[id!].id;
                           cubit.getCityRequestData(id: govRequestId!);
-                          idIndexOfCity = 0;
                           print(id);
                           print(govRequestId);
                           print(cubit.cityRequestItemList);

@@ -2,23 +2,23 @@ class FcmTokenModel {
 
   bool? status;
   String? message;
-  Errors? errors;
+  User? user;
 
   FcmTokenModel.fromJson(Map<String, dynamic> json) {
      status = json["status"];
      message =  json["message"];
-     errors =  Errors.fromJson(json["errors"]);
+     user =  User.fromJson(json["user"]);
 
    }
 
 
 }
 
-class Errors {
+class User {
 
   List<String>? fcmToken;
 
-   Errors.fromJson(Map<String, dynamic> json) {
+  User.fromJson(Map<String, dynamic> json) {
     fcmToken = List<String>.from(json["fcm_token"].map((x) => x));
 
   }

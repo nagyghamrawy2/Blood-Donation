@@ -55,6 +55,9 @@ class _LoginScreenState extends State<LoginScreen> {
               token = state.login.user?.token;
               CacheHelper.SaveData(key: 'token', value: state.login.user?.token)
                   .then((value) {
+                AppLoginCubit.get(context).updateFcmUserToken(
+                  fcmToken: updateFcmToken!,
+                );
                 navigateAndFinish(context, HomeLayout());
               });
               AppCubit.get(context)..getEducationData()..getGovernorateData()..getDonorData()..getAllRequests()..getMyRequests();
@@ -193,13 +196,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 100.0),
                         child: Buttons_without_icon(
                             function: () {
+
                               if (formKey.currentState!.validate()) {
                                 AppLoginCubit.get(context).userLogin(
                                   email: emailcontroller.text,
                                   Password: passwordcontroller.text,
-                                );
-                                AppLoginCubit.get(context).updateFcmUserToken(
-                                    fcmToken: updateFcmToken!,
                                 );
                                 print ("done");
                               }
