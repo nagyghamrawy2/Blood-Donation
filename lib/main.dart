@@ -30,7 +30,6 @@ import 'modules/change password/changePassword.dart';
 import 'shared/Network/local/Cache_helper.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -62,10 +61,14 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true, // a2dr aft7 2 app m3 b3d
       builder: () => BlocProvider(
         create: (context){
-          if(govIdConstant != null){
-            return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getDonorData()..getCityData(id: govIdConstant!);
+          if(token != null){
+            if(govIdConstant != null){
+              return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getDonorData()..getCityData(id: govIdConstant!);
+            }
+            return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getDonorData();
+          }else{
+            return AppCubit();
           }
-          return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getDonorData();
         },
         child: BlocConsumer<AppCubit, AppStates>(
           builder: (context, state) {
