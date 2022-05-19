@@ -8,6 +8,7 @@ const REGISTER = 'register';
 const GOVERNORATE = 'governorate';
 const CITY = 'city';
 const REQUESTS = 'requests';
+const CLOSED_REQUESTS = 'closed-requests';
 const MY_REQUESTS = 'my-requests';
 const ADD_REQUEST = 'requests' ;
 const CHANGE_AVAILABILITY = 'change-availability';

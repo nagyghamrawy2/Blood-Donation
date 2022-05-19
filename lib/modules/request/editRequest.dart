@@ -1,4 +1,5 @@
 import 'package:blood_bank/layout/home_layout.dart';
+import 'package:blood_bank/modules/request/myRequestScreen.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -35,10 +36,11 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
         if (state is AppSuccessUpdateRequestsDataState) {
           cubit.getAllRequests();
           cubit.getMyRequests();
-          Navigator.pushAndRemoveUntil(
+          cubit.getClosedRequests();
+          // idIndexOfCityEditRequest = AppCubit.get(context).cityEditRequestItemList.indexWhere((element) => element.cityName == myRequestModel!.requests![indexOfMyRequest!].city!.cityName);
+          Navigator.pop(
             context,
-            MaterialPageRoute(builder: (context) => HomeLayout()),
-                (route) => false,
+            MaterialPageRoute(builder: (context) => MyRequestScreen()),
           );
         }
         if (state is AppSuccessCityEditRequestDataState) {
@@ -60,7 +62,7 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                   Form(
                       key: formKey,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 20),
                         child: Column(
                           children: [
                             SignupTextField(
@@ -275,7 +277,7 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                                       height: 4,
                                     ),
                                     DropdownButtonFormField(
-                                      value: cubit.cityEditRequestItemList[idIndexOfCityEditRequest!].cityName,
+                                      // value: cubit.cityEditRequestItemList[idIndexOfCityEditRequest!].cityName,
                                       hint: const Text(
                                         'City',
                                       ),

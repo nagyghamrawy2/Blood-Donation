@@ -10,6 +10,7 @@ import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../shared/cubit/states.dart';
+import '../request/myRequestScreen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -49,12 +50,12 @@ class ProfileScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image(
+                    const Image(
                       image: AssetImage('assets/images/location.png'),
                       height: 20,
                       width: 20,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10.0,
                     ),
                     Text(
@@ -115,7 +116,7 @@ class ProfileScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const RequestScreen()),
+                                builder: (context) => const MyRequestScreen()),
                           );
                         },
                         child: Row(
@@ -129,7 +130,7 @@ class ProfileScreen extends StatelessWidget {
                             SizedBox(
                               width: 10.0,
                             ),
-                            Text('Request'),
+                            Text('My Requests'),
                           ],
                         ),
                       ),

@@ -31,6 +31,7 @@ List<Cities> cityItemList = [];
 ProfileModel? userDataModel;
 RequestModel? myRequestModel;
 RequestModel? requestModel;
+RequestModel? closedRequestModel;
 int? indexOfMyRequest;
 
 

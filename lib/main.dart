@@ -57,27 +57,27 @@ void main() async {
   } else {
     widget = LoginScreen();
   }
-  runApp(MyApp(StartWidget: widget));
+  runApp(MyApp(startWidget: widget));
 }
 
 class MyApp extends StatelessWidget {
-  final Widget StartWidget;
+  final Widget startWidget;
 
-  const MyApp({Key? key, required this.StartWidget}) : super(key: key);
+  const MyApp({Key? key, required this.startWidget}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(300, 1200),
+      designSize: const Size(300, 1200),
       minTextAdapt: true,
       splitScreenMode: true, // a2dr aft7 2 app m3 b3d
       builder: () => BlocProvider(
         create: (context){
           if(token != null){
             if(govIdConstant != null){
-              return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getDonorData()..getCityData(id: govIdConstant!);
+              return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getClosedRequests()..getDonorData()..getCityData(id: govIdConstant!);
             }
-            return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getDonorData();
+            return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getClosedRequests()..getDonorData();
           }else{
             return AppCubit()..getGovernorateData();
           }
@@ -95,7 +95,7 @@ class MyApp extends StatelessWidget {
                   child: widget!,
                 );
               },
-              home: StartWidget,
+              home: startWidget,
             );
           },
           listener: (context, state) {},

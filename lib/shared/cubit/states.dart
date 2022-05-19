@@ -58,6 +58,10 @@ class AppLoadingAllRequestsDataState extends AppStates{}
 class AppSuccessAllRequestsDataState extends AppStates{}
 class AppErrorAllRequestsDataState extends AppStates{}
 
+class AppLoadingClosedRequestsDataState extends AppStates{}
+class AppSuccessClosedRequestsDataState extends AppStates{}
+class AppErrorClosedRequestsDataState extends AppStates{}
+
 class AppLoadingMyRequestsDataState extends AppStates{}
 class AppSuccessMyRequestsDataState extends AppStates{}
 class AppErrorMyRequestsDataState extends AppStates{}

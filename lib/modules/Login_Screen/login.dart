@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
                 navigateAndFinish(context, HomeLayout());
               });
-              AppCubit.get(context)..getEducationData()..getGovernorateData()..getDonorData()..getAllRequests()..getMyRequests();
+              AppCubit.get(context)..getEducationData()..getGovernorateData()..getDonorData()..getAllRequests()..getMyRequests()..getClosedRequests();
               ShowToast(text: 'LOGIN SUCCESSFULLY', state: ToastStates.SUCCESS);
             } else {
               ShowToast(

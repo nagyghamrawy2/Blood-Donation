@@ -291,6 +291,19 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+  void getClosedRequests() {
+    emit(AppLoadingClosedRequestsDataState());
+    DioHelper.getData(url: CLOSED_REQUESTS, token: token).then((value) {
+      closedRequestModel = RequestModel.fromJson(value.data);
+      print('closed request tttttttttttttttttttttttttttttttttttttttt');
+      print(value.data);
+      emit(AppSuccessClosedRequestsDataState());
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(AppErrorClosedRequestsDataState());
+    });
+  }
+
   void getMyRequests() {
     emit(AppLoadingMyRequestsDataState());
     DioHelper.getData(url: MY_REQUESTS, token: token).then((value) {
