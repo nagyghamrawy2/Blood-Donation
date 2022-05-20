@@ -21,7 +21,6 @@ import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:blood_bank/shared/styles/themes.dart';
-import 'package:blood_bank/testNotify.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,8 +49,8 @@ void main() async {
   DioHelper.init();
   await CacheHelper.init();
   token = CacheHelper.getData(key: 'token');
-  govIdConstant = CacheHelper.getData(key: 'govId');
-  cityIdConstant = CacheHelper.getData(key: 'cityId');
+  govIdProfile = CacheHelper.getData(key: 'govId');
+  cityIdProfile = CacheHelper.getData(key: 'cityId');
   Widget widget;
   if (token != null) {
     widget = HomeLayout();
@@ -75,8 +74,8 @@ class MyApp extends StatelessWidget {
       builder: () => BlocProvider(
         create: (context){
           if(token != null){
-            if(govIdConstant != null){
-              return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getClosedRequests()..getDonorData()..getCityData(id: govIdConstant!);
+            if(govIdProfile != null){
+              return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getClosedRequests()..getDonorData()..getCityData(id: govIdProfile!);
             }
             return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getClosedRequests()..getDonorData();
           }else{

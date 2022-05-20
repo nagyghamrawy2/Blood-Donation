@@ -64,7 +64,9 @@ class _SignUpScreen3State extends State<SignUpScreen3> {
               ShowToast(state: ToastStates.SUCCESS , text: "Register successfully" );
               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
             } else{
-              ShowToast(state: ToastStates.ERROR , text: "Please make sure the data enter is correct" );
+              print(state.registerModel.errors?.email);
+              ShowToast(state: ToastStates.ERROR , text: "${state.registerModel.errors?.name ?? 'hiiiiiiiii'}" );
+              // ShowToast(state: ToastStates.ERROR , text: "Please make sure the data enter is correct" );
             }
           }
         },
@@ -294,8 +296,8 @@ class _SignUpScreen3State extends State<SignUpScreen3> {
                                 dateOfBirth: widget.birthDate,
                                 bloodType: bloodType.text,
                                 lastDonateTime: lastDonationDate.text,
-                                cityId: cityIdConstant!,
-                                govId: govIdConstant!,
+                                cityId: cityIdProfile!,
+                                govId: govIdProfile!,
                                 confirmPassword: widget.confirmPassword,
                                 fcmToken: fcmToken!,
                               );

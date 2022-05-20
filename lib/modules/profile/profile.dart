@@ -274,7 +274,7 @@ class ProfileScreen extends StatelessWidget {
                   function: () {
                     myRequestModel?.requests?.clear();
                     requestModel?.requests?.clear();
-                    Signout(context);
+                    signOut(context);
                   },
                 ),
                 const SizedBox(

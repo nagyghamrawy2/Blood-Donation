@@ -23,7 +23,8 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
       listener: (context,state){
         if (state is AppSuccessCityEditRequestDataState) {
           idIndexOfCityEditRequest = AppCubit.get(context).cityEditRequestItemList.indexWhere((element) => element.cityName == myRequestModel!.requests![indexOfMyRequest!].city!.cityName);
-          Navigator.push(
+          print('my request screen state $idIndexOfCityEditRequest');
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => EditRequestScreen()),
           );

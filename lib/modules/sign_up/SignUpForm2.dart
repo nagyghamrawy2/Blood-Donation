@@ -244,11 +244,11 @@ class SignUpScreen2 extends StatelessWidget {
                           id = governorateItemList.indexWhere(
                               (element) => element.governorateName == newValue);
                           // govId = cubit.governorateItemList[id!].id;
-                          govIdConstant = governorateItemList[id!].id;
-                          cubit.getCityData(id: govIdConstant!);
+                          govIdProfile = governorateItemList[id!].id;
+                          cubit.getCityData(id: govIdProfile!);
                           print(id);
                           // print(govId);
-                          print(govIdConstant);
+                          print(govIdProfile);
                         },
                       ),
                       SizedBox(
@@ -309,7 +309,7 @@ class SignUpScreen2 extends StatelessWidget {
                             onChanged: (newValue) {
                               int id = cityItemList.indexWhere(
                                   (element) => element.cityName == newValue);
-                              cityIdConstant = (cityItemList[id].id)!;
+                              cityIdProfile = (cityItemList[id].id)!;
                               // print(govId);
                               // print(govIdConstant);
                             }),

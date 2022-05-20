@@ -102,10 +102,9 @@ class SignUpScreen extends StatelessWidget {
                               text: 'Name',
                               controller: name,
                               keyboardtype: TextInputType.text,
-
                               validatorFunction: (value){
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter your first name';
+                                  return 'Please enter your name';
                                 }
                               },
                             ),
@@ -140,7 +139,7 @@ class SignUpScreen extends StatelessWidget {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter your password';
                                 }
-                                if(value.length >= 8 ){
+                                if(value.length <= 8 ){
                                   return "The password must be at least 8 characters";
                                 }
                                 if(!RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})").hasMatch(value)){
@@ -221,24 +220,3 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 }
-
-//  bool value = false;
-// Row(
-// children: [
-// Padding(
-// padding: const EdgeInsets.only(left: 5.0),
-// child: Checkbox(
-// activeColor: mainColor,
-// value: this.value,
-// onChanged: (value) {
-// setState(() {
-// this.value = value!;
-// });
-// },
-// ),
-// ),
-// Text('I accept the policy and terms',
-// style: TextStyle(
-// color: mainColor, fontWeight: FontWeight.bold)),
-// ],
-// ),

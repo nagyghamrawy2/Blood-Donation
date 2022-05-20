@@ -72,10 +72,6 @@ class AppCubit extends Cubit<AppStates> {
   ];
   int bloodGroup = -1;
   bool bloodCheck = true;
-  void changeBloodGroupValue(){
-    bloodGroup = -1;
-    emit(BloodValueGroupChangeState());
-  }
   void changeBloodValue(int value) {
     bloodGroup = value;
     emit(BloodValueChangeState());
@@ -238,6 +234,7 @@ class AppCubit extends Cubit<AppStates> {
       cityEditRequestModel.cities?.forEach((e) {
         cityEditRequestItemList.add(e);
       });
+      print(cityEditRequestItemList);
       emit(AppSuccessCityEditRequestDataState());
     }).catchError((error) {
       print(error.toString());
@@ -487,7 +484,7 @@ class AppCubit extends Cubit<AppStates> {
   late DonarModel donorModel;
 
   void getDonorData() {
-    emit(AppDonorDataState());
+    emit(AppLoadingDonorDataState());
     DioHelper.getData(url: DONORDATA, token: token).then((value) {
       donorModel = DonarModel.fromJson(value.data);
       emit(AppSuccessDonorDataState());

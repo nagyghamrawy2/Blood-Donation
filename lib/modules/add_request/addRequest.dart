@@ -30,7 +30,7 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
   int? cityRequestId;
   @override
   void initState() {
-    AppCubit.get(context).changeBloodGroupValue();
+    AppCubit.get(context).bloodGroup = -1;
     super.initState();
   }
   @override
@@ -41,6 +41,7 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
           AppCubit.get(context).getMyRequests();
           AppCubit.get(context).getAllRequests();
           Navigator.pop(context);
+
           // Navigator.pushAndRemoveUntil(
           //   context,
           //   MaterialPageRoute(

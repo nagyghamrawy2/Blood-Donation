@@ -4,7 +4,6 @@ class AppChangeBotNavBarState extends AppStates{}
 class AppChangeSwitchValueState extends AppStates{}
 class ColorChangeValueState extends AppStates{}
 class BloodValueChangeState extends AppStates{}
-class BloodValueGroupChangeState extends AppStates{}
 class PolicyTermsChangeState extends AppStates{}
 class ChangePasswordState extends AppStates {}
 class ChangeConfirmPasswordState extends AppStates {}
@@ -31,7 +30,7 @@ class AppLoadingUpdateUserDataState extends AppStates{}
 class AppSuccessUpdateUserDataState extends AppStates{}
 class AppErrorUpdateUserDataState extends AppStates{}
 
-class AppDonorDataState extends AppStates{}
+class AppLoadingDonorDataState extends AppStates{}
 class AppSuccessDonorDataState extends AppStates{}
 class AppErrorDonorDataState extends AppStates{}
 

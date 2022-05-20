@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 import '../models/edit_request_model.dart';
 
-void Signout(context)
+void signOut(context)
 {
   CacheHelper.Removedata(Key: 'token').then((value)
   {
@@ -20,8 +20,8 @@ void Signout(context)
 }
 String? token='';
 
-int? govIdConstant;
-int? cityIdConstant;
+int? govIdProfile;
+int? cityIdProfile;
 int? idIndexOfCity ;
 int? idIndexOfCityEditRequest ;
 

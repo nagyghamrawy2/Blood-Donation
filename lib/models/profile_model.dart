@@ -6,7 +6,6 @@ class ProfileModel {
   User? user;
   Errors? errors;
 
-
   ProfileModel.fromJson(Map<String, dynamic> json){
     status= json["status"];
     message= json["message"];
@@ -85,7 +84,6 @@ class Errors {
   List<String>? cityId;
   List<String>? fcmToken;
 
-
   Errors.fromJson(Map<String, dynamic> json){
     name= json['name'] != null ? List<String>.from(json["name"].map((x) => x)) : null;
     fcmToken= json['fcm_token'] != null ? List<String>.from(json["fcm_token"].map((x) => x)) : null;
@@ -96,6 +94,4 @@ class Errors {
     governorateId= json['governorate_id'] != null ?  List<String>.from(json["governorate_id"].map((x) => x)) : null;
     cityId=json['city_id'] != null ?  List<String>.from(json["city_id"].map((x) => x)) : null;
   }
-
 }
-

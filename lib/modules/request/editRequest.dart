@@ -13,21 +13,28 @@ import '../../shared/cubit/cubit.dart';
 import '../../shared/cubit/states.dart';
 
 class EditRequestScreen extends StatefulWidget {
-
   @override
   State<EditRequestScreen> createState() => _EditRequestScreenState();
 }
 
 class _EditRequestScreenState extends State<EditRequestScreen> {
-  TextEditingController titleController = TextEditingController(text: myRequestModel!.requests![indexOfMyRequest!].title);
-  TextEditingController descriptionController = TextEditingController(text: myRequestModel!.requests![indexOfMyRequest!].description);
-  TextEditingController phoneController = TextEditingController(text: myRequestModel!.requests![indexOfMyRequest!].phoneNumber);
-  TextEditingController bloodBagsController = TextEditingController(text: myRequestModel!.requests![indexOfMyRequest!].noOfBags.toString());
-  TextEditingController expiredDateController = TextEditingController(text: myRequestModel!.requests![indexOfMyRequest!].requestExpiredDate);
-  TextEditingController bloodTypeController = TextEditingController(text: myRequestModel!.requests![indexOfMyRequest!].bloodType);
-  var govIdForRequest = myRequestModel!.requests![indexOfMyRequest!].governorate?.id;
+  TextEditingController titleController = TextEditingController(
+      text: myRequestModel!.requests![indexOfMyRequest!].title);
+  TextEditingController descriptionController = TextEditingController(
+      text: myRequestModel!.requests![indexOfMyRequest!].description);
+  TextEditingController phoneController = TextEditingController(
+      text: myRequestModel!.requests![indexOfMyRequest!].phoneNumber);
+  TextEditingController bloodBagsController = TextEditingController(
+      text: myRequestModel!.requests![indexOfMyRequest!].noOfBags.toString());
+  TextEditingController expiredDateController = TextEditingController(
+      text: myRequestModel!.requests![indexOfMyRequest!].requestExpiredDate);
+  TextEditingController bloodTypeController = TextEditingController(
+      text: myRequestModel!.requests![indexOfMyRequest!].bloodType);
+  var govIdForRequest =
+      myRequestModel!.requests![indexOfMyRequest!].governorate?.id;
   var cityIdForRequest = myRequestModel!.requests![indexOfMyRequest!].city?.id;
   var formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     AppCubit cubit = AppCubit.get(context);
@@ -37,14 +44,13 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
           cubit.getAllRequests();
           cubit.getMyRequests();
           cubit.getClosedRequests();
-          // idIndexOfCityEditRequest = AppCubit.get(context).cityEditRequestItemList.indexWhere((element) => element.cityName == myRequestModel!.requests![indexOfMyRequest!].city!.cityName);
           Navigator.pop(
-            context,
-            MaterialPageRoute(builder: (context) => MyRequestScreen()),
+              context
           );
         }
         if (state is AppSuccessCityEditRequestDataState) {
-          int id2 = cubit.cityEditRequestItemList.indexWhere((element) => element.cityName == cubit.cityEditRequestItemList[0].cityName);
+          int id2 = cubit.cityEditRequestItemList.indexWhere((element) =>
+          element.cityName == cubit.cityEditRequestItemList[0].cityName);
           cityIdForRequest = (cubit.cityEditRequestItemList[id2].id)!;
         }
       },
@@ -55,36 +61,32 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
           ),
           body: ConditionalBuilder(
             condition: cubit.cityEditRequestItemList.isNotEmpty,
-            builder:(context)=> SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Form(
+            builder: (context) =>
+                SingleChildScrollView(
+                  child: Form(
                       key: formKey,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 20),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 20),
                         child: Column(
                           children: [
                             SignupTextField(
-                              hintText: 'Enter request\'s title',
-                              text: 'Title',
-                              controller: titleController,
-                              keyboardtype: TextInputType.text,
-                                validatorFunction: (value){
+                                hintText: 'Enter request\'s title',
+                                text: 'Title',
+                                controller: titleController,
+                                keyboardtype: TextInputType.text,
+                                validatorFunction: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Title must not be empty';
                                   }
-                                }
-                            ),
-                            const SizedBox(
-                              height: 10
-                            ),
+                                }),
+                            const SizedBox(height: 10),
                             SignupTextField(
                               hintText: 'Enter request\'s description',
                               text: 'Description',
                               controller: descriptionController,
                               keyboardtype: TextInputType.text,
-                              validatorFunction: (value){
+                              validatorFunction: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Description must not be empty';
                                 }
@@ -98,11 +100,11 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                               text: 'Phone number',
                               controller: phoneController,
                               keyboardtype: TextInputType.phone,
-                              validatorFunction: (value){
+                              validatorFunction: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter your phone number';
                                 }
-                                if(value.length != 11){
+                                if (value.length != 11) {
                                   return "Please enter valid phone";
                                 }
                               },
@@ -115,7 +117,7 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                               text: 'blood bags',
                               controller: bloodBagsController,
                               keyboardtype: TextInputType.phone,
-                              validatorFunction: (value){
+                              validatorFunction: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Blood bags must not be empty';
                                 }
@@ -160,10 +162,11 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                                               expiredDateController.text,
                                             ),
                                             firstDate: DateTime(1900),
-                                            lastDate: DateTime.parse('2025-05-05'),
+                                            lastDate: DateTime.parse(
+                                                '2025-05-05'),
                                           ).then(
                                                 (value) {
-                                                  expiredDateController.text =
+                                              expiredDateController.text =
                                                   DateFormat('yyyy-MM-dd')
                                                       .format(value!);
                                             },
@@ -180,26 +183,25 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                                             borderSide: const BorderSide(
                                               width: 1,
                                             ),
-                                            borderRadius:
-                                            BorderRadius.circular(10),
+                                            borderRadius: BorderRadius.circular(
+                                                10),
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderSide: const BorderSide(
                                                 color: Colors.red, width: 1),
-                                            borderRadius:
-                                            BorderRadius.circular(20),
+                                            borderRadius: BorderRadius.circular(
+                                                20),
                                           ),
                                           hintText: 'Enter your birthdate',
                                           focusedErrorBorder: OutlineInputBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(10),
+                                            borderRadius: BorderRadius.circular(
+                                                10),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ],
-                                )
-                            ),
+                                )),
                             const SizedBox(
                               height: 10,
                             ),
@@ -220,18 +222,22 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                                       height: 4,
                                     ),
                                     DropdownButtonFormField(
-                                      value:governorateItemList[govIdForRequest! - 1].governorateName,
+                                      value:
+                                      governorateItemList[govIdForRequest! - 1]
+                                          .governorateName,
                                       hint: const Text(
                                         'Governorate',
                                       ),
                                       validator: (value) {
-                                        value ?? "Governorate must not be empty";
+                                        value ??
+                                            "Governorate must not be empty";
                                         return null;
                                       },
                                       decoration: InputDecoration(
                                         focusColor: Colors.green,
                                         focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(
+                                              10),
                                           borderSide: const BorderSide(
                                             color: greyColor,
                                           ),
@@ -240,33 +246,42 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                                           borderSide: const BorderSide(
                                             width: 1,
                                           ),
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(
+                                              10),
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide: const BorderSide(
                                               color: Colors.red, width: 1),
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius: BorderRadius.circular(
+                                              20),
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(
+                                              10),
                                         ),
                                       ),
-                                      icon: const Icon(Icons.keyboard_arrow_down),
+                                      icon: const Icon(
+                                          Icons.keyboard_arrow_down),
                                       items: governorateItemList
                                           .asMap()
                                           .entries
                                           .map((items) {
                                         return DropdownMenuItem(
                                           value: items.value.governorateName,
-                                          child:
-                                          Text(items.value.governorateName!),
+                                          child: Text(
+                                              items.value.governorateName!),
                                         );
                                       }).toList(),
                                       onChanged: (newValue) {
                                         print('hi');
-                                        int id = governorateItemList.indexWhere((element) =>element.governorateName == newValue);
-                                        govIdForRequest = governorateItemList[id].id;
-                                        cubit.getCityEditRequestData(id: govIdForRequest!);
+                                        int id = governorateItemList.indexWhere(
+                                                (element) =>
+                                            element.governorateName ==
+                                                newValue);
+                                        govIdForRequest =
+                                            governorateItemList[id].id;
+                                        cubit.getCityEditRequestData(
+                                            id: govIdForRequest!);
                                         idIndexOfCityEditRequest = 0;
                                         print(id);
                                         print(govIdForRequest);
@@ -296,7 +311,10 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                                       height: 4,
                                     ),
                                     DropdownButtonFormField(
-                                      // value: cubit.cityEditRequestItemList[idIndexOfCityEditRequest!].cityName,
+                                      value: cubit
+                                          .cityEditRequestItemList[
+                                      idIndexOfCityEditRequest!]
+                                          .cityName,
                                       hint: const Text(
                                         'City',
                                       ),
@@ -309,8 +327,8 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                                       decoration: InputDecoration(
                                         focusColor: Colors.green,
                                         focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(
+                                              10),
                                           borderSide: const BorderSide(
                                             color: greyColor,
                                           ),
@@ -319,20 +337,18 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                                           borderSide: const BorderSide(
                                             width: 1,
                                           ),
-                                          borderRadius:
-                                          BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(
+                                              10),
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide: const BorderSide(
-                                              color: Colors.red,
-                                              width: 1),
-                                          borderRadius:
-                                          BorderRadius.circular(20),
+                                              color: Colors.red, width: 1),
+                                          borderRadius: BorderRadius.circular(
+                                              20),
                                         ),
-                                        focusedErrorBorder:
-                                        OutlineInputBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(10),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              10),
                                         ),
                                       ),
                                       icon: const Icon(
@@ -347,9 +363,12 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                                         );
                                       }).toList(),
                                       onChanged: (newValue) {
-                                        int id = cubit.cityEditRequestItemList.indexWhere((element)=>element.cityName ==newValue);
+                                        int id = cubit.cityEditRequestItemList
+                                            .indexWhere((element) =>
+                                        element.cityName == newValue);
                                         idIndexOfCityEditRequest = id;
-                                        cityIdForRequest = (cubit.cityEditRequestItemList[id].id)!;
+                                        cityIdForRequest =
+                                        (cubit.cityEditRequestItemList[id].id)!;
                                         // idIndexOfCity = id;
                                         // flag = true;
                                         // print(idIndexOfCity);
@@ -374,19 +393,22 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                                 ),
                                 SizedBox(
                                   height:
-                                  MediaQuery.of(context).size.height * 0.008,
+                                  MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height * 0.008,
                                 ),
                                 DropdownButtonFormField<String>(
                                   value: bloodTypeController.text,
                                   items: cubit.bloodGroupItem
-                                      .map((label) => DropdownMenuItem(
-                                    child: Text(
-                                      label,
-                                      style:
-                                      const TextStyle(fontSize: 16),
-                                    ),
-                                    value: label,
-                                  ))
+                                      .map((label) =>
+                                      DropdownMenuItem(
+                                        child: Text(
+                                          label,
+                                          style: const TextStyle(fontSize: 16),
+                                        ),
+                                        value: label,
+                                      ))
                                       .toList(),
                                   onChanged: (value) {
                                     bloodTypeController.text = value!;
@@ -403,7 +425,8 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10)),
+                                        borderRadius: BorderRadius.circular(
+                                            10)),
                                   ),
                                   hint: const Text('Blood type'),
                                 ),
@@ -416,15 +439,16 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                               function: () {
                                 if (formKey.currentState!.validate()) {
                                   cubit.updateRequest(
-                                      title: titleController.text,
-                                      description: descriptionController.text,
-                                      phone: phoneController.text,
-                                      numberOfBags: bloodBagsController.text,
-                                      expiredDate: expiredDateController.text,
-                                      bloodType: bloodTypeController.text,
-                                      govId: govIdForRequest.toString(),
-                                      cityId: cityIdForRequest.toString(),
-                                      id: myRequestModel!.requests![indexOfMyRequest!].id!,
+                                    title: titleController.text,
+                                    description: descriptionController.text,
+                                    phone: phoneController.text,
+                                    numberOfBags: bloodBagsController.text,
+                                    expiredDate: expiredDateController.text,
+                                    bloodType: bloodTypeController.text,
+                                    govId: govIdForRequest.toString(),
+                                    cityId: cityIdForRequest.toString(),
+                                    id: myRequestModel!
+                                        .requests![indexOfMyRequest!].id!,
                                   );
                                   print(govIdForRequest);
                                   print(cityIdForRequest);
@@ -446,10 +470,13 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                           ],
                         ),
                       )),
-                ],
-              ),
-            ),
-            fallback: (context)=> Center(child: CircularProgressIndicator(color: mainColor,),),
+                ),
+            fallback: (context) =>
+                Center(
+                  child: CircularProgressIndicator(
+                    color: mainColor,
+                  ),
+                ),
           ),
         );
       },

@@ -44,10 +44,10 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           if (state is AppLoginSuccessState) {
             if (state.login.status!) {
-              govIdConstant = userDataModel?.user?.governorate?.id;
-              cityIdConstant = (userDataModel?.user?.city?.id)!;
+              govIdProfile = userDataModel?.user?.governorate?.id;
+              cityIdProfile = (userDataModel?.user?.city?.id)!;
               AppCubit.get(context).valueSwitch = userDataModel?.user?.availableForDonate;
-              AppCubit.get(context).getCityData(id: govIdConstant!);
+              AppCubit.get(context).getCityData(id: govIdProfile!);
               CacheHelper.SaveData(
                   key: 'govId', value: state.login.user?.governorate?.id);
               CacheHelper.SaveData(

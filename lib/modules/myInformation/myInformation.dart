@@ -89,8 +89,7 @@ class MyInformationScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsets.only(left: 40, right: 40, top: 240),
+                      padding: const EdgeInsets.only(left: 40, right: 40, top: 240),
                       child: Container(
                         width: double.infinity,
                         child: ListView.separated(
@@ -132,10 +131,9 @@ class MyInformationScreen extends StatelessWidget {
                     num_fontsize: 20,
                     text_fontwwieght: FontWeight.normal,
                     function: () {
-                      print(govIdConstant);
-                      print(cityIdConstant);
+                      print(govIdProfile);
+                      print(cityIdProfile);
                       print(cityItemList);
-                      // print(cityItemList.indexWhere((element) =>element.cityName == userDataModel?.user?.city?.cityName));
                       idIndexOfCity = cityItemList.indexWhere((element) =>element.cityName == userDataModel?.user?.city?.cityName);
                       print(idIndexOfCity);
                       // print(cityItemList[idIndexOfCity+1].cityName);

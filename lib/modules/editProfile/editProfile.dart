@@ -21,15 +21,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   var emailAddress = TextEditingController(text: userDataModel?.user?.email);
   var phone = TextEditingController(text: userDataModel?.user?.phoneNumber);
   var birthDate = TextEditingController(text: userDataModel?.user?.dateOfBirth);
-  var donationDate =
-      TextEditingController(text: userDataModel?.user?.donationDate);
+  var donationDate = TextEditingController(text: userDataModel?.user?.donationDate);
   var bloodType = TextEditingController(text: userDataModel?.user?.bloodType);
-  var height =
-      TextEditingController(text: userDataModel?.user?.height.toString());
+  var height = TextEditingController(text: userDataModel?.user?.height.toString());
   var weight = TextEditingController(text: userDataModel?.user?.weight);
-
   var formKey = GlobalKey<FormState>();
   int? id;
+
   @override
   Widget build(BuildContext context) {
     AppCubit cubit = AppCubit.get(context);
@@ -40,7 +38,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         }
         if (state is AppSuccessCityDataState) {
           int id2 = cityItemList.indexWhere((element) => element.cityName == cityItemList[0].cityName);
-          cityIdConstant = (cityItemList[id2].id)!;
+          cityIdProfile = (cityItemList[id2].id)!;
         }
       },
       builder: (context, state) {
@@ -299,9 +297,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         height: 4,
                                       ),
                                       DropdownButtonFormField(
-                                        value:
-                                        governorateItemList[govIdConstant! - 1]
-                                            .governorateName,
+                                        value: governorateItemList[govIdProfile! - 1].governorateName,
                                         hint: const Text(
                                           'Governorate',
                                         ),
@@ -345,10 +341,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         }).toList(),
                                         onChanged: (newValue) {
                                           id = governorateItemList.indexWhere((element) =>element.governorateName ==newValue);
-                                          govIdConstant = governorateItemList[id!].id;
-                                          cubit.getCityData(id: govIdConstant!);
+                                          govIdProfile = governorateItemList[id!].id;
+                                          cubit.getCityData(id: govIdProfile!);
                                           idIndexOfCity = 0;
-                                          print(cityIdConstant);
+                                          print(cityIdProfile);
                                         },
                                       ),
                                     ],
@@ -428,7 +424,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           idIndexOfCity = id;
                                           print(idIndexOfCity);
                                           print(cityItemList[idIndexOfCity!].cityName);
-                                          cityIdConstant = (cityItemList[id].id)!;
+                                          cityIdProfile = (cityItemList[id].id)!;
                                         },
                                       )
                                     ],
@@ -523,14 +519,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       phone: phone.text,
                                       dateOfBirth: birthDate.text,
                                       bloodType: bloodType.text,
-                                      govId: govIdConstant!,
-                                      cityId: cityIdConstant!,
+                                      govId: govIdProfile!,
+                                      cityId: cityIdProfile!,
                                       height: int.parse(height.text),
                                       weight: weight.text,
                                       lastDonateDate: donationDate.text,
                                     );
-                                    print(govIdConstant);
-                                    print(cityIdConstant);
+                                    print(govIdProfile);
+                                    print(cityIdProfile);
                                     // print(idIndexOfCity);
                                     // CacheHelper.SaveData(key: 'govId', value: govIdConstant);
                                     // CacheHelper.SaveData(key: 'cityId', value: cityIdConstant);
