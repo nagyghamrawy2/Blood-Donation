@@ -91,7 +91,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 keyboardtype: TextInputType.emailAddress,
                                 validatorFunction: (value){
                                   if (value == null || value.isEmpty) {
-                                    return 'Email must not be empty';
+                                    return "Please enter your email";
+                                  }
+                                  if(!value.contains("@" )&& !value.contains(".com")){
+                                    return "The email must be a valid email address";
                                   }
                                 },
                               ),
@@ -105,7 +108,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 keyboardtype: TextInputType.phone,
                                 validatorFunction: (value){
                                   if (value == null || value.isEmpty) {
-                                    return 'Phone must not be empty';
+                                    return 'Please enter your phone number';
+                                  }
+                                  if(value.length != 11){
+                                    return "Please enter valid phone";
                                   }
                                 },
                               ),
@@ -143,19 +149,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           onTap: () {
                                             showDatePicker(
                                               context: context,
-                                              initialDate: DateTime.parse(
-                                                birthDate.text,
-                                              ),
-                                              firstDate: DateTime(1900),
-                                              lastDate:
-                                              DateTime.parse('2025-05-05'),
-                                            ).then(
-                                                  (value) {
-                                                birthDate.text =
-                                                    DateFormat('yyyy-MM-dd')
-                                                        .format(value!);
-                                              },
-                                            );
+                                              initialDate: DateTime.parse('2004-12-01'),
+                                              firstDate: DateTime(1957),
+                                              lastDate: DateTime.parse('2004-12-31'),
+                                            ).then((value) {
+                                              birthDate.text =
+                                                  DateFormat('yyyy-MM-dd')
+                                                      .format(value!);
+                                            });
                                           },
                                           decoration: InputDecoration(
                                             focusedBorder: OutlineInputBorder(
@@ -219,6 +220,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             }
                                             return null;
                                           },
+                                          // onTap: () {
+                                          //   showDatePicker(
+                                          //     context: context,
+                                          //     initialDate: DateTime.now(),
+                                          //     firstDate: DateTime(2018),
+                                          //     lastDate: DateTime.now(),
+                                          //   ).then((value) {
+                                          //     lastDonationDate.text =
+                                          //         DateFormat('yyyy-MM-dd')
+                                          //             .format(value!);
+                                          //   });
+                                          // },
                                           onTap: () {
                                             showDatePicker(
                                               context: context,

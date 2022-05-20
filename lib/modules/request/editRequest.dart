@@ -100,7 +100,10 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                               keyboardtype: TextInputType.phone,
                               validatorFunction: (value){
                                 if (value == null || value.isEmpty) {
-                                  return 'Phone number must not be empty';
+                                  return 'Please enter your phone number';
+                                }
+                                if(value.length != 11){
+                                  return "Please enter valid phone";
                                 }
                               },
                             ),

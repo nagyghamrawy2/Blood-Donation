@@ -108,7 +108,7 @@ class SignUpScreen2 extends StatelessWidget {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your phone number';
                           }
-                          if(value != 11){
+                          if(value.length != 11){
                             return "Please enter valid phone";
                           }
                         },
