@@ -29,6 +29,11 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
   int? govRequestId;
   int? cityRequestId;
   @override
+  void initState() {
+    AppCubit.get(context).changeBloodGroupValue();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {
@@ -79,7 +84,11 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                       keyboardtype: TextInputType.name,
                       obsecure: false,
                       text_hint: "Enter your title ",
-                      validatorText: 'Please enter title',
+                      validatorFunction: (value){
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter title';
+                        }
+                      },
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.009,
@@ -92,7 +101,12 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                       keyboardtype: TextInputType.name,
                       obsecure: false,
                       text_hint: "Enter your description ",
-                      validatorText: 'Please enter description',
+                      validatorFunction: (value){
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter description';
+                        }
+                      },
+
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.019,
@@ -195,7 +209,11 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                       icon_name: "assets/images/blood-bag.png",
                       img_width: 10.w,
                       img_height: 10.h,
-                      validatorText: 'Please enter number of bags',
+                      validatorFunction: (value){
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter number of bags';
+                        }
+                      },
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.0097,
@@ -213,7 +231,14 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                       icon_name: "assets/images/blood-bag.png",
                       img_width: 10.w,
                       img_height: 10.h,
-                      validatorText: 'Please enter phone number',
+                      validatorFunction: (value){
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your phone number';
+                        }
+                        if(value != 11){
+                          return "Please enter valid phone";
+                        }
+                      },
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.0097,
@@ -352,8 +377,8 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                                     showDatePicker(
                                       context: context,
                                       initialDate: DateTime.now(),
-                                      firstDate: DateTime(1900),
-                                      lastDate: DateTime.parse('2025-05-05'),
+                                      firstDate: DateTime.now(),
+                                      lastDate: DateTime.parse('2023-01-01'),
                                     ).then((value) {
                                       expired_dateController.text =
                                           DateFormat.yMMMd().format(value!);
@@ -404,6 +429,7 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                       function: () {
                         if (formKey.currentState!.validate()) {
                           // cubit.changeBloodCheck();
+
                           cubit.postRequest(
                             title: titleController.text,
                             description: descriptionController.text,

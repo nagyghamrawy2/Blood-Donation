@@ -197,7 +197,7 @@ class Textformfield_with_icon extends StatelessWidget {
       required this.icon_name,
       required this.img_width,
       required this.img_height,
-      required this.validatorText,
+        this.validatorFunction,
       });
 
   late String text_name;
@@ -212,7 +212,7 @@ class Textformfield_with_icon extends StatelessWidget {
   late double img_width;
   late double img_height;
   TextEditingController controller_Name;
-  late String validatorText;
+  FormFieldValidator<String>? validatorFunction;
 
   @override
   Widget build(BuildContext context) {
@@ -242,11 +242,7 @@ class Textformfield_with_icon extends StatelessWidget {
                 controller: controller_Name,
                 keyboardType: keyboardtype,
                 obscureText: obsecure,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return validatorText;
-                  }
-                },
+                validator: validatorFunction,
                 decoration: InputDecoration(
                   hintText: text_hint,
                   contentPadding: const EdgeInsets.all(15),
@@ -351,7 +347,7 @@ class Requst_textformfield extends StatelessWidget {
     required this.keyboardtype,
     required this.obsecure,
     required this.text_hint,
-    required this.validatorText,
+    this.validatorFunction,
   });
 
   late String text_name;
@@ -361,7 +357,7 @@ class Requst_textformfield extends StatelessWidget {
   late bool obsecure;
   late String text_hint;
   TextEditingController controller_Name;
-  late String validatorText;
+  FormFieldValidator<String>? validatorFunction;
 
   @override
   Widget build(BuildContext context) {
@@ -388,11 +384,7 @@ class Requst_textformfield extends StatelessWidget {
               controller: controller_Name,
               keyboardType: keyboardtype,
               obscureText: obsecure,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return validatorText;
-                }
-              },
+              validator: validatorFunction,
               decoration: InputDecoration(
 
                 contentPadding: const EdgeInsets.all(15),
