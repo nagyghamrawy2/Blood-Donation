@@ -226,8 +226,8 @@ class _SignUpScreen3State extends State<SignUpScreen3> {
                                 showDatePicker(
                                   context: context,
                                   initialDate: DateTime.now(),
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime.parse('2025-05-05'),
+                                  firstDate: DateTime(2018),
+                                  lastDate: DateTime.now(),
                                 ).then((value) {
                                   lastDonationDate.text =
                                       DateFormat('yyyy-MM-dd')

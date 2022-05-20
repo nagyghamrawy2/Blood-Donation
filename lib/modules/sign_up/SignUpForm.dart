@@ -102,6 +102,7 @@ class SignUpScreen extends StatelessWidget {
                               text: 'Name',
                               controller: name,
                               keyboardtype: TextInputType.text,
+
                               validatorFunction: (value){
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter your first name';
@@ -119,7 +120,10 @@ class SignUpScreen extends StatelessWidget {
                               keyboardtype: TextInputType.emailAddress,
                               validatorFunction: (value){
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter your email';
+                                  return "Please enter your email";
+                                }
+                                if(!value.contains("@" )&& !value.contains(".com")){
+                                  return "The email must be a valid email address";
                                 }
                               },
                             ),
@@ -135,6 +139,12 @@ class SignUpScreen extends StatelessWidget {
                               validatorFunction: (value){
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter your password';
+                                }
+                                if(value.length >= 8 ){
+                                  return "The password must be at least 8 characters";
+                                }
+                                if(!RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})").hasMatch(value)){
+                                  return "Password must contain at least one number,\n both uppercase and lowercase letters \n and symbol";
                                 }
                               },
                               isPasswordField: true,
@@ -154,7 +164,10 @@ class SignUpScreen extends StatelessWidget {
                               keyboardtype: TextInputType.visiblePassword,
                               validatorFunction: (value){
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter your password again';
+                                  return 'Please re-enter password again';
+                                }
+                                if(password.text!=confirmPassword.text){
+                                  return "Password does not match";
                                 }
                               },
                               isPasswordField: true,

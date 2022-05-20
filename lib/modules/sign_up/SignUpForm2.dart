@@ -108,6 +108,9 @@ class SignUpScreen2 extends StatelessWidget {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your phone number';
                           }
+                          if(value.length < 11 && value.length > 11){
+                            return "Please enter valid phone";
+                          }
                         },
                       ),
                       SizedBox(
@@ -133,7 +136,8 @@ class SignUpScreen2 extends StatelessWidget {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Date must not be empty';
-                              } else {
+                              }
+                              else {
                                 birthDate.text = value;
                               }
                             },
@@ -166,9 +170,9 @@ class SignUpScreen2 extends StatelessWidget {
                             onTap: () {
                               showDatePicker(
                                 context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(1900),
-                                lastDate: DateTime.parse('2025-05-05'),
+                                initialDate: DateTime.parse('2004-12-01'),
+                                firstDate: DateTime(1957),
+                                lastDate: DateTime.parse('2004-12-31'),
                               ).then((value) {
                                 birthDate.text =
                                     DateFormat('yyyy-MM-dd')
