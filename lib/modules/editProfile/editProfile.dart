@@ -73,10 +73,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 text: 'Name',
                                 controller: name,
                                 keyboardtype: TextInputType.text,
-                                validatorText:
-                                userDataModel?.errors?.name![0] != null
-                                    ? userDataModel!.errors!.name![0]
-                                    : 'Name must not be empty',
+                                validatorFunction: (value){
+                                  if (value == null || value.isEmpty) {
+                                    return userDataModel?.errors?.name![0] != null
+                                        ? userDataModel!.errors!.name![0]
+                                        : 'Name must not be empty';
+                                  }
+                                },
                               ),
                               const SizedBox(
                                 height: 10,
@@ -86,7 +89,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 text: 'Email',
                                 controller: emailAddress,
                                 keyboardtype: TextInputType.emailAddress,
-                                validatorText: 'Email must not be empty',
+                                validatorFunction: (value){
+                                  if (value == null || value.isEmpty) {
+                                    return 'Email must not be empty';
+                                  }
+                                },
                               ),
                               const SizedBox(
                                 height: 10,
@@ -96,7 +103,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 text: 'Phone',
                                 controller: phone,
                                 keyboardtype: TextInputType.phone,
-                                validatorText: 'Phone must not be empty',
+                                validatorFunction: (value){
+                                  if (value == null || value.isEmpty) {
+                                    return 'Phone must not be empty';
+                                  }
+                                },
                               ),
                               const SizedBox(
                                 height: 10,
@@ -467,7 +478,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 text: 'Weight',
                                 controller: weight,
                                 keyboardtype: TextInputType.number,
-                                validatorText: 'Weight must not be empty',
+                                validatorFunction: (value){
+                                  if (value == null || value.isEmpty) {
+                                    return 'Weight must not be empty';
+                                  }
+                                },
                               ),
                               const SizedBox(
                                 height: 10,
@@ -477,7 +492,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 text: 'Height',
                                 controller: height,
                                 keyboardtype: TextInputType.number,
-                                validatorText: 'Height must not be empty',
+                                validatorFunction: (value){
+                                  if (value == null || value.isEmpty) {
+                                    return 'Height must not be empty';
+                                  }
+                                },
                               ),
                               const SizedBox(
                                 height: 20,

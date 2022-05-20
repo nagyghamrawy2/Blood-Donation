@@ -102,7 +102,11 @@ class SignUpScreen extends StatelessWidget {
                               text: 'Name',
                               controller: name,
                               keyboardtype: TextInputType.text,
-                              validatorText: 'Please enter your first name',
+                              validatorFunction: (value){
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your first name';
+                                }
+                              },
                             ),
                             SizedBox(
                               height:
@@ -113,7 +117,11 @@ class SignUpScreen extends StatelessWidget {
                               text: 'Email',
                               controller: emailAddress,
                               keyboardtype: TextInputType.emailAddress,
-                              validatorText: 'Please enter your email',
+                              validatorFunction: (value){
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your email';
+                                }
+                              },
                             ),
                             SizedBox(
                               height:
@@ -124,7 +132,11 @@ class SignUpScreen extends StatelessWidget {
                               text: 'Password',
                               controller: password,
                               keyboardtype: TextInputType.emailAddress,
-                              validatorText: 'Please enter your password',
+                              validatorFunction: (value){
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your password';
+                                }
+                              },
                               isPasswordField: true,
                               secure: cubit.obsecure,
                               suffixFunction: () {
@@ -140,7 +152,11 @@ class SignUpScreen extends StatelessWidget {
                               text: 'Confirm Password',
                               controller: confirmPassword,
                               keyboardtype: TextInputType.visiblePassword,
-                              validatorText: 'Please enter your password again',
+                              validatorFunction: (value){
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your password again';
+                                }
+                              },
                               isPasswordField: true,
                               secure: cubit.confirmObsecure,
                               suffixFunction: () {

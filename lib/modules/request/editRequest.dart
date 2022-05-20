@@ -70,7 +70,11 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                               text: 'Title',
                               controller: titleController,
                               keyboardtype: TextInputType.text,
-                              validatorText: 'Title must not be empty',
+                                validatorFunction: (value){
+                                  if (value == null || value.isEmpty) {
+                                    return 'Title must not be empty';
+                                  }
+                                }
                             ),
                             const SizedBox(
                               height: 10
@@ -80,7 +84,11 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                               text: 'Description',
                               controller: descriptionController,
                               keyboardtype: TextInputType.text,
-                              validatorText: 'Description must not be empty',
+                              validatorFunction: (value){
+                                if (value == null || value.isEmpty) {
+                                  return 'Description must not be empty';
+                                }
+                              },
                             ),
                             const SizedBox(
                               height: 10,
@@ -90,7 +98,11 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                               text: 'Phone number',
                               controller: phoneController,
                               keyboardtype: TextInputType.phone,
-                              validatorText: 'Phone number must not be empty',
+                              validatorFunction: (value){
+                                if (value == null || value.isEmpty) {
+                                  return 'Phone number must not be empty';
+                                }
+                              },
                             ),
                             const SizedBox(
                               height: 10,
@@ -100,7 +112,11 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                               text: 'blood bags',
                               controller: bloodBagsController,
                               keyboardtype: TextInputType.phone,
-                              validatorText: 'Blood bags must not be empty',
+                              validatorFunction: (value){
+                                if (value == null || value.isEmpty) {
+                                  return 'Blood bags must not be empty';
+                                }
+                              },
                             ),
                             const SizedBox(
                               height: 10,

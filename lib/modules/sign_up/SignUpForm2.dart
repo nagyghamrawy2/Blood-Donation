@@ -104,7 +104,11 @@ class SignUpScreen2 extends StatelessWidget {
                         text: 'Phone Number',
                         controller: phone,
                         keyboardtype: TextInputType.phone,
-                        validatorText: 'Please enter your phone number',
+                        validatorFunction: (value){
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your phone number';
+                          }
+                        },
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.008,
