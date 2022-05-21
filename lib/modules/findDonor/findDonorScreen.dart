@@ -1,3 +1,4 @@
+import 'package:blood_bank/layout/home_layout.dart';
 import 'package:blood_bank/modules/findDonor/filterDonorScreen.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,7 @@ class _FindDonorScreenState extends State<FindDonorScreen> {
             leading: IconButton(
               onPressed: () {
                 cubit.getDonorData();
-                Navigator.pop(context);
+                Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) => HomeLayout()), (route) => false,);
               },
               icon: const Icon(Icons.arrow_back),
             ),
