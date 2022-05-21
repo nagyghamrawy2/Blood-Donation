@@ -82,19 +82,35 @@ class ChatHomeScreen extends StatelessWidget {
                                     const SizedBox(
                                       height: 10,
                                     ),
-                                    Text(
-                                      snapshots.data.docs[i]['username'],
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          snapshots.data.docs[i]['username'],
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 90.w,
+                                        ),
+                                        Text(
+                                          snapshots.data.docs[i]['date'],
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(height: 4.h,),
+                                    SizedBox(
+                                      height: 20.h,
+                                    ),
                                     Text(
-                                      "Me: " + snapshots.data.docs[i]['message'],
+                                      "Me: " +
+                                          snapshots.data.docs[i]['message'],
                                       style: const TextStyle(
-
                                         color: Colors.black,
                                         fontSize: 12,
                                       ),
@@ -149,15 +165,31 @@ class ChatHomeScreen extends StatelessWidget {
                                     const SizedBox(
                                       height: 10,
                                     ),
-                                    Text(
-                                      snapshots.data.docs[i]['username'],
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          snapshots.data.docs[i]['username'],
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 90.w,
+                                        ),
+                                        Text(
+                                          snapshots.data.docs[i]['date'],
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(height: 4.h,),
+                                    SizedBox(
+                                      height: 20.h,
+                                    ),
                                     Text(
                                       snapshots.data.docs[i]['username'] +
                                           ": " +

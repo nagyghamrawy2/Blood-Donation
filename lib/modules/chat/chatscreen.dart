@@ -8,6 +8,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:intl/intl.dart';
 
 class ChatScreen extends StatelessWidget {
   ChatScreen(
@@ -18,7 +19,7 @@ class ChatScreen extends StatelessWidget {
       : super(key: key);
 
   var messageController = TextEditingController();
-  final now = DateTime.now();
+  final date = DateFormat("MM-dd hh:mm").format(DateTime.now());
   String? receiverId;
   String? name;
   String? phone;
@@ -150,7 +151,7 @@ class ChatScreen extends StatelessWidget {
                                       .collection("Id")
                                       .doc(Id)
                                       .update(<String, dynamic>{
-                                    "date": DateTime.now().toString(),
+                                    "date":date,
                                     "message": messageController.text,
                                   });
                                 } else {
@@ -161,7 +162,7 @@ class ChatScreen extends StatelessWidget {
                                       .add(<String, dynamic>{
                                     "username": name,
                                     "receiverId": receiverId,
-                                    "date": DateTime.now().toString(),
+                                    "date": date,
                                     "phone": phone,
                                     "message": messageController.text,
                                   });
@@ -173,7 +174,7 @@ class ChatScreen extends StatelessWidget {
                                     "username": userDataModel?.user?.name,
                                     "receiverId":
                                         userDataModel?.user?.id.toString(),
-                                    "date": DateTime.now().toString(),
+                                    "date": date,
                                     "phone": userDataModel?.user?.phoneNumber
                                         .toString(),
                                     "message": messageController.toString(),
@@ -183,7 +184,7 @@ class ChatScreen extends StatelessWidget {
 
                                 AppCubit.get(context).sendMessage(
                                     receiverId: receiverId.toString(),
-                                    date: DateTime.now().toString(),
+                                    date: date,
                                     text: messageController.text);
                                 FirebaseMessaging.instance
                                     .getToken()
