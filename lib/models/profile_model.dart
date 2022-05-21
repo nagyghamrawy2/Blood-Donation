@@ -76,6 +76,8 @@ class Governorate {
 
 class Errors {
   List<String>? name;
+  List<String>? password;
+  List<String>? confirmPassword;
   List<String>? email;
   List<String>? phoneNumber;
   List<String>? dateOfBirth;
@@ -86,6 +88,8 @@ class Errors {
 
   Errors.fromJson(Map<String, dynamic> json){
     name= json['name'] != null ? List<String>.from(json["name"].map((x) => x)) : null;
+    password= json['password'] != null ? List<String>.from(json["password"].map((x) => x)) : null;
+    password= json['confirmPassword'] != null ? List<String>.from(json["confirmPassword"].map((x) => x)) : null;
     fcmToken= json['fcm_token'] != null ? List<String>.from(json["fcm_token"].map((x) => x)) : null;
     email= json['email'] != null ? List<String>.from(json["email"].map((x) => x)) : null;
     phoneNumber= json['phone_number'] != null ? List<String>.from(json["phone_number"].map((x) => x)) : null;

@@ -20,6 +20,11 @@ class PolicyTermsChangeState extends RegisterStates{}
 class ChangeCheckValueState extends RegisterStates{}
 
 class AppLoadingCityDataState extends RegisterStates{}
+
+class AppLoadingErrorDataState extends RegisterStates{}
+class AppSuccessErrorDataState extends RegisterStates{}
+class AppErrorErrorDataState extends RegisterStates{}
+
 class AppSuccessCityDataState extends RegisterStates{}
 class AppErrorCityDataState extends RegisterStates{}
 class ChangeConfirmPasswordState extends RegisterStates{}

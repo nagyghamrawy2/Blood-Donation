@@ -13,7 +13,7 @@ part 'register_state.dart';
 class RegisterCubit extends Cubit<RegisterStates> {
   RegisterCubit() : super(RegisterInitial());
   static RegisterCubit get(context) => BlocProvider.of(context);
-  late ProfileModel registerModel;
+   ProfileModel? registerModel;
 
   void userRegister({
     required String email,
@@ -49,10 +49,25 @@ class RegisterCubit extends Cubit<RegisterStates> {
       print(value.data);
       registerModel = ProfileModel.fromJson(value.data);
       print(registerModel);
-      emit(RegisterSuccessState(registerModel));
+      emit(RegisterSuccessState(registerModel!));
     }).catchError((error) {
       print(error.toString());
       emit(RegisterErrorState(error.toString()));
+    });
+  }
+
+  void getErrorData() {
+    emit(AppLoadingErrorDataState());
+    DioHelper.postData(
+      url: REGISTER,
+      token: token,
+    ).then((value) {
+      print(value.data);
+      registerModel = ProfileModel.fromJson(value.data);
+      emit(AppSuccessErrorDataState());
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(AppErrorErrorDataState());
     });
   }
 
