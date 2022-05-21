@@ -139,18 +139,22 @@ class _RequestScreenState extends State<RequestScreen> {
                                                         .requests![index]
                                                         .user
                                                         ?.name,
+                                                phone: requestModel!
+                                                    .requests![index]
+                                                    .user
+                                                    ?.phoneNumber,
                                                   )),
                                         );
                                       },
                                       child: Row(
-                                        children: [
-                                          const Text(
+                                        children: const [
+                                          Text(
                                             'Contact ',
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                          const Icon(
+                                          Icon(
                                             Icons.chat,
                                             size: 20,
                                           ),
@@ -183,7 +187,7 @@ class _RequestScreenState extends State<RequestScreen> {
                         ),
                       ),
                     ),
-                    fallback: (context) => Center(
+                    fallback: (context) => const Center(
                       child: Text('No Requests Yet !',
                           style: TextStyle(fontSize: 30)),
                     ),
@@ -229,7 +233,7 @@ class _RequestScreenState extends State<RequestScreen> {
                                     children: [
                                       Text(
                                         '${closedRequestModel?.requests![index].user?.name} needs blood',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -287,18 +291,22 @@ class _RequestScreenState extends State<RequestScreen> {
                                                         .requests![index]
                                                         .user
                                                         ?.name,
+                                                phone: requestModel!
+                                                    .requests![index]
+                                                    .user
+                                                    ?.phoneNumber,
                                                   )),
                                         );
                                       },
                                       child: Row(
-                                        children: [
-                                          const Text(
+                                        children: const [
+                                          Text(
                                             'Contact ',
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                          const Icon(
+                                          Icon(
                                             Icons.chat,
                                             size: 20,
                                           ),
@@ -341,7 +349,7 @@ class _RequestScreenState extends State<RequestScreen> {
                           cubit.getClosedRequests();
                         });
                       },
-                      child: Center(
+                      child: const Center(
                         child: Text('No Requests Yet !',
                             style: TextStyle(fontSize: 30)),
                       ),

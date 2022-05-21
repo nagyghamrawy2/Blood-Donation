@@ -7,15 +7,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 class ChatScreen extends StatelessWidget {
-  ChatScreen({Key? key, required this.receiverId, required this.name})
+  ChatScreen(
+      {Key? key,
+      required this.receiverId,
+      required this.name,
+      required this.phone})
       : super(key: key);
 
   var messageController = TextEditingController();
   final now = DateTime.now();
   String? receiverId;
   String? name;
+  String? phone;
   var collection = FirebaseFirestore.instance
       .collection('Chat')
       .doc(userDataModel?.user?.id.toString())
@@ -44,6 +50,16 @@ class ChatScreen extends StatelessWidget {
                 ],
               ),
               actions: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.call,
+                    color: Colors.black,
+                  ),
+                  onPressed: () async {
+                    await FlutterPhoneDirectCaller.callNumber(phone!);
+                    // do
+                  },
+                ),
                 IconButton(
                     onPressed: () {
                       Navigator.pop(context);
@@ -84,7 +100,7 @@ class ChatScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(48),
                             ),
                             height: 55,
-                            child: TextField(
+                            child: TextFormField(
                               controller: messageController,
                               decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
@@ -113,58 +129,68 @@ class ChatScreen extends StatelessWidget {
                               size: 40,
                             ),
                             onTap: () async {
-                              var querySnapshot = await collection.get();
-                              for (var queryDocumentSnapshot
-                                  in querySnapshot.docs) {
-                                Map<String, dynamic> data =
-                                    queryDocumentSnapshot.data();
-                                if (data['receiverId'].toString() ==
-                                    receiverId.toString()) {
-                                  Id = queryDocumentSnapshot.id;
-                                  found = true;
-                                }
-                              }
-                              if (found == true) {
-                                await FirebaseFirestore.instance
-                                    .collection('Chat')
-                                    .doc(userDataModel?.user?.id.toString())
-                                    .collection("Id")
-                                    .doc(Id)
-                                    .update(<String, dynamic>{
-                                  "date": DateTime.now().toString(),
-                                });
+                              if (messageController.text == "") {
+                                return;
                               } else {
-                                await FirebaseFirestore.instance
-                                    .collection('Chat')
-                                    .doc(userDataModel?.user?.id.toString())
-                                    .collection("Id")
-                                    .add(<String, dynamic>{
-                                  "username": name,
-                                  "receiverId": receiverId,
-                                  "date": DateTime.now().toString(),
-                                });
-                                await FirebaseFirestore.instance
-                                    .collection('Chat')
-                                    .doc(receiverId.toString())
-                                    .collection("Id")
-                                    .add(<String, dynamic>{
-                                  "username": userDataModel?.user?.name,
-                                  "receiverId":
-                                      userDataModel?.user?.id.toString(),
-                                  "date": DateTime.now().toString(),
-                                });
-                                found = false;
-                              }
+                                var querySnapshot = await collection.get();
+                                for (var queryDocumentSnapshot
+                                    in querySnapshot.docs) {
+                                  Map<String, dynamic> data =
+                                      queryDocumentSnapshot.data();
+                                  if (data['receiverId'].toString() ==
+                                      receiverId.toString()) {
+                                    Id = queryDocumentSnapshot.id;
+                                    found = true;
+                                  }
+                                }
+                                if (found == true) {
+                                  await FirebaseFirestore.instance
+                                      .collection('Chat')
+                                      .doc(userDataModel?.user?.id.toString())
+                                      .collection("Id")
+                                      .doc(Id)
+                                      .update(<String, dynamic>{
+                                    "date": DateTime.now().toString(),
+                                    "message": messageController.text,
+                                  });
+                                } else {
+                                  await FirebaseFirestore.instance
+                                      .collection('Chat')
+                                      .doc(userDataModel?.user?.id.toString())
+                                      .collection("Id")
+                                      .add(<String, dynamic>{
+                                    "username": name,
+                                    "receiverId": receiverId,
+                                    "date": DateTime.now().toString(),
+                                    "phone": phone,
+                                    "message": messageController.text,
+                                  });
+                                  await FirebaseFirestore.instance
+                                      .collection('Chat')
+                                      .doc(receiverId.toString())
+                                      .collection("Id")
+                                      .add(<String, dynamic>{
+                                    "username": userDataModel?.user?.name,
+                                    "receiverId":
+                                        userDataModel?.user?.id.toString(),
+                                    "date": DateTime.now().toString(),
+                                    "phone": userDataModel?.user?.phoneNumber
+                                        .toString(),
+                                    "message": messageController.toString(),
+                                  });
+                                  found = false;
+                                }
 
-                              AppCubit.get(context).sendMessage(
-                                  receiverId: receiverId.toString(),
-                                  date: DateTime.now().toString(),
-                                  text: messageController.text);
-                              FirebaseMessaging.instance
-                                  .getToken()
-                                  .then((value) {});
-                              AppCubit.get(context).getMessages(
-                                  receiverId: receiverId.toString());
+                                AppCubit.get(context).sendMessage(
+                                    receiverId: receiverId.toString(),
+                                    date: DateTime.now().toString(),
+                                    text: messageController.text);
+                                FirebaseMessaging.instance
+                                    .getToken()
+                                    .then((value) {});
+                                AppCubit.get(context).getMessages(
+                                    receiverId: receiverId.toString());
+                              }
                             },
                           ),
                         )
