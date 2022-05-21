@@ -23,6 +23,7 @@ class Request {
   int? noOfBags;
   var requestExpiredDate;
   String? bloodType;
+  int? status;
   Governorate? governorate;
   City? city;
   User? user;
@@ -35,6 +36,7 @@ class Request {
     noOfBags = json["no_of_bags"];
     requestExpiredDate = DateFormat('yyyy-MM-dd').format(DateTime.parse(json["request_expiredDate"]));
     bloodType = json["blood_type"];
+    status = json['status'];
     governorate = Governorate.fromJson(json["governorate"]);
     city = City.fromJson(json["city"]);
     user = json["user"] == null ? null : User.fromJson(json["user"]);

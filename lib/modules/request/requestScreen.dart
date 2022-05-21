@@ -7,6 +7,7 @@ import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RequestScreen extends StatefulWidget {
   const RequestScreen({Key? key}) : super(key: key);
@@ -57,127 +58,106 @@ class _RequestScreenState extends State<RequestScreen> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: ListView.separated(
-                          itemBuilder: (context, index) => Container(
-                            height: 110,
-                            width: double.infinity,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                CircleAvatar(
-                                  radius: 20,
-                                  child: Text(
-                                    '${requestModel?.requests![index].bloodType}',
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                  backgroundColor: mainColor,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '${requestModel?.requests![index].user?.name} needs blood',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 12,
-                                      ),
-                                      Text(
-                                        'no of bags    ${requestModel?.requests![index].noOfBags}',
-                                        style: const TextStyle(
-                                          color: greyColor2,
-                                        ),
-                                      ),
-                                      Text(
-                                        'Date      ${requestModel!.requests![index].requestExpiredDate!}',
-                                        style: const TextStyle(
-                                          color: greyColor2,
-                                        ),
-                                      ),
-                                      Text(
-                                        'Location    ${requestModel?.requests![index].governorate?.governorateName},${requestModel?.requests![index].city?.cityName}',
-                                        style: const TextStyle(
-                                          color: greyColor2,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                          itemBuilder: (context, index) => SizedBox(
+                            height: 220,
+                            child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    ElevatedButton(
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                                greenColor),
-                                      ),
-                                      onPressed: () {
-                                        AppCubit.get(context).getMessages(
-                                            receiverId: requestModel!
-                                                .requests![index].user!.id
-                                                .toString());
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => ChatScreen(
-                                                    receiverId: requestModel!
-                                                        .requests![index]
-                                                        .user
-                                                        ?.id
-                                                        .toString(),
-                                                    name: requestModel!
-                                                        .requests![index]
-                                                        .user
-                                                        ?.name,
-                                                phone: requestModel!
-                                                    .requests![index]
-                                                    .user
-                                                    ?.phoneNumber,
-                                                  )),
-                                        );
-                                      },
-                                      child: Row(
-                                        children: const [
-                                          Text(
-                                            'Contact ',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.chat,
-                                            size: 20,
-                                          ),
-                                        ],
-                                      ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Name',
+                                          style: TextStyle(
+                                              color: Colors.blueGrey[400],
+                                              fontSize: 16),
+                                        ),
+                                        Text(
+                                          '${requestModel?.requests![index].user?.name}',
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20),
+                                        ),
+                                        SizedBox(
+                                          height: 20.h,
+                                        ),
+                                        Text(
+                                          'Location',
+                                          style: TextStyle(
+                                              color: Colors.blueGrey[400],
+                                              fontSize: 16),
+                                        ),
+                                        Text(
+                                          '${requestModel?.requests![index].governorate?.governorateName},${requestModel?.requests![index].city?.cityName}',
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20),
+                                        ),
+                                        SizedBox(
+                                          height: 20.h,
+                                        ),
+                                        Text(
+                                          'Blood Type',
+                                          style: TextStyle(
+                                              color: Colors.blueGrey[400],
+                                              fontSize: 16),
+                                        ),
+                                        Text(
+                                          '${requestModel?.requests![index].noOfBags} bags of ${requestModel?.requests![index].bloodType?.toUpperCase()}',
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20),
+                                        ),
+                                      ],
                                     ),
-                                    ElevatedButton(
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                                mainColor),
-                                      ),
-                                      onPressed: () {},
-                                      child: const Text(
-                                        'I can donate',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          '${requestModel?.requests![index].requestExpiredDate}',
+                                          style: const TextStyle(
+                                              color: mainColor,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        const Spacer(),
+                                        IconButton(
+                                          onPressed: () {
+                                            AppCubit.get(context).getMessages(receiverId: requestModel!.requests![index].user!.id.toString());
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ChatScreen(
+                                                        receiverId: requestModel!.requests![index].user?.id.toString(),
+                                                        name: requestModel!.requests![index].user?.name,
+                                                        phone: requestModel!.requests![index].user?.phoneNumber,
+                                                      )),
+                                            );
+                                          },
+                                          icon: const Icon(
+                                            Icons.chat,
+                                            size: 30,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {},
+                                          child: const Text(
+                                            'DONATE',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              color: mainColor,
+                                              fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                           separatorBuilder: (context, index) => const SizedBox(
@@ -208,128 +188,106 @@ class _RequestScreenState extends State<RequestScreen> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: ListView.separated(
-                          itemBuilder: (context, index) => Container(
-                            height: 110,
-                            width: double.infinity,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                CircleAvatar(
-                                  radius: 20,
-                                  child: Text(
-                                    '${closedRequestModel?.requests![index].bloodType}',
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                  backgroundColor: mainColor,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '${closedRequestModel?.requests![index].user?.name} needs blood',
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 12,
-                                      ),
-                                      Text(
-                                        'no of bags    ${closedRequestModel?.requests![index].noOfBags}',
-                                        style: const TextStyle(
-                                          color: greyColor2,
-                                        ),
-                                      ),
-                                      Text(
-                                        'Date      ${closedRequestModel!.requests![index].requestExpiredDate!}',
-                                        style: const TextStyle(
-                                          color: greyColor2,
-                                        ),
-                                      ),
-                                      Text(
-                                        'Location    ${closedRequestModel?.requests![index].governorate?.governorateName},${requestModel?.requests![index].city?.cityName}',
-                                        style: const TextStyle(
-                                          color: greyColor2,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                          itemBuilder: (context, index) => SizedBox(
+                            height: 220,
+                            child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    ElevatedButton(
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                                greenColor),
-                                      ),
-                                      onPressed: () {
-                                        AppCubit.get(context).getMessages(
-                                            receiverId: closedRequestModel!
-                                                .requests![index].user!.id
-                                                .toString());
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => ChatScreen(
-                                                    receiverId:
-                                                        closedRequestModel!
-                                                            .requests![index]
-                                                            .user
-                                                            ?.id
-                                                            .toString(),
-                                                    name: requestModel!
-                                                        .requests![index]
-                                                        .user
-                                                        ?.name,
-                                                phone: requestModel!
-                                                    .requests![index]
-                                                    .user
-                                                    ?.phoneNumber,
-                                                  )),
-                                        );
-                                      },
-                                      child: Row(
-                                        children: const [
-                                          Text(
-                                            'Contact ',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.chat,
-                                            size: 20,
-                                          ),
-                                        ],
-                                      ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Name',
+                                          style: TextStyle(
+                                              color: Colors.blueGrey[400],
+                                              fontSize: 16),
+                                        ),
+                                        Text(
+                                          '${closedRequestModel?.requests![index].user?.name}',
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20),
+                                        ),
+                                        SizedBox(
+                                          height: 20.h,
+                                        ),
+                                        Text(
+                                          'Location',
+                                          style: TextStyle(
+                                              color: Colors.blueGrey[400],
+                                              fontSize: 16),
+                                        ),
+                                        Text(
+                                          '${closedRequestModel?.requests![index].governorate?.governorateName},${closedRequestModel?.requests![index].city?.cityName}',
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20),
+                                        ),
+                                        SizedBox(
+                                          height: 20.h,
+                                        ),
+                                        Text(
+                                          'Blood Type',
+                                          style: TextStyle(
+                                              color: Colors.blueGrey[400],
+                                              fontSize: 16),
+                                        ),
+                                        Text(
+                                          '${closedRequestModel?.requests![index].noOfBags} bags of ${closedRequestModel?.requests![index].bloodType?.toUpperCase()}',
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20),
+                                        ),
+                                      ],
                                     ),
-                                    ElevatedButton(
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                                mainColor),
-                                      ),
-                                      onPressed: () {},
-                                      child: const Text(
-                                        'I can donate',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          '${closedRequestModel?.requests![index].requestExpiredDate}',
+                                          style: const TextStyle(
+                                              color: mainColor,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        const Spacer(),
+                                        IconButton(
+                                          onPressed: () {
+                                            AppCubit.get(context).getMessages(receiverId: closedRequestModel!.requests![index].user!.id.toString());
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ChatScreen(
+                                                        receiverId: closedRequestModel!.requests![index].user?.id.toString(),
+                                                        name: closedRequestModel!.requests![index].user?.name,
+                                                        phone: closedRequestModel!.requests![index].user?.phoneNumber,
+                                                      )),
+                                            );
+                                          },
+                                          icon: const Icon(
+                                            Icons.chat,
+                                            size: 30,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {},
+                                          child: const Text(
+                                            'DONATE',
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                color: mainColor,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                           separatorBuilder: (context, index) => const SizedBox(
@@ -355,117 +313,6 @@ class _RequestScreenState extends State<RequestScreen> {
                       ),
                     ),
                   ),
-                  // ConditionalBuilder(
-                  //   condition: closedRequestModel!.requests != null,
-                  //   builder: (context) => RefreshIndicator(
-                  //     color: Colors.white,
-                  //     backgroundColor: mainColor,
-                  //     strokeWidth: 2,
-                  //     triggerMode: RefreshIndicatorTriggerMode.anywhere,
-                  //     onRefresh: () async {
-                  //       setState(() {
-                  //         cubit.getClosedRequests();
-                  //       });
-                  //     },
-                  //     child: ConditionalBuilder(
-                  //       condition: closedRequestModel!.requests!.isNotEmpty,
-                  //       builder: (context) => Padding(
-                  //         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  //         child: ListView.separated(
-                  //           itemBuilder: (context, index) => Container(
-                  //             height: 110,
-                  //             width: double.infinity,
-                  //             child: Row(
-                  //               mainAxisAlignment: MainAxisAlignment.end,
-                  //               children: [
-                  //                 CircleAvatar(
-                  //                   radius: 20,
-                  //                   child: Text(
-                  //                     '${closedRequestModel?.requests![index].bloodType}',
-                  //                     style:
-                  //                         const TextStyle(color: Colors.white),
-                  //                   ),
-                  //                   backgroundColor: mainColor,
-                  //                 ),
-                  //                 const SizedBox(
-                  //                   width: 10,
-                  //                 ),
-                  //                 Expanded(
-                  //                   child: Column(
-                  //                     mainAxisAlignment:
-                  //                         MainAxisAlignment.center,
-                  //                     crossAxisAlignment:
-                  //                         CrossAxisAlignment.start,
-                  //                     children: [
-                  //                       Text(
-                  //                         '${closedRequestModel?.requests![index].user?.name} needs blood',
-                  //                         style: const TextStyle(
-                  //                           fontWeight: FontWeight.bold,
-                  //                         ),
-                  //                       ),
-                  //                       const SizedBox(
-                  //                         height: 12,
-                  //                       ),
-                  //                       Text(
-                  //                         'no of bags    ${closedRequestModel?.requests![index].noOfBags}',
-                  //                         style: const TextStyle(
-                  //                           color: greyColor2,
-                  //                         ),
-                  //                       ),
-                  //                       Text(
-                  //                         'Date      ${closedRequestModel!.requests![index].requestExpiredDate!}',
-                  //                         style: const TextStyle(
-                  //                           color: greyColor2,
-                  //                         ),
-                  //                       ),
-                  //                       Text(
-                  //                         'Location    ${closedRequestModel?.requests![index].governorate?.governorateName},${myRequestModel?.requests![index].city?.cityName}',
-                  //                         style: const TextStyle(
-                  //                           color: greyColor2,
-                  //                         ),
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //                 Column(
-                  //                   mainAxisAlignment:
-                  //                       MainAxisAlignment.spaceEvenly,
-                  //                   children: [
-                  //                     IconButton(
-                  //                       onPressed: () {},
-                  //                       icon: const Icon(Icons.edit),
-                  //                     ),
-                  //                     IconButton(
-                  //                       onPressed: () {},
-                  //                       icon: const Icon(Icons.delete_outline),
-                  //                     ),
-                  //                   ],
-                  //                 ),
-                  //               ],
-                  //             ),
-                  //           ),
-                  //           separatorBuilder: (context, index) =>
-                  //               const SizedBox(
-                  //             height: 5,
-                  //           ),
-                  //           itemCount: closedRequestModel!.requests!.length,
-                  //         ),
-                  //       ),
-                  //       fallback: (context) => Center(
-                  //         child: Text(
-                  //           'No Request Yet !',
-                  //           style: TextStyle(fontSize: 30, color: greyColor),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  //   fallback: (context) => Center(
-                  //     child: Text(
-                  //       'No Requests Yet !',
-                  //       style: TextStyle(fontSize: 30),
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ),
@@ -473,3 +320,127 @@ class _RequestScreenState extends State<RequestScreen> {
         });
   }
 }
+
+//Container(
+//                             height: 110,
+//                             width: double.infinity,
+//                             child: Row(
+//                               mainAxisAlignment: MainAxisAlignment.end,
+//                               children: [
+//                                 CircleAvatar(
+//                                   radius: 20,
+//                                   child: Text(
+//                                     '${requestModel?.requests![index].bloodType}',
+//                                     style: const TextStyle(color: Colors.white),
+//                                   ),
+//                                   backgroundColor: mainColor,
+//                                 ),
+//                                 const SizedBox(
+//                                   width: 10,
+//                                 ),
+//                                 Expanded(
+//                                   child: Column(
+//                                     mainAxisAlignment: MainAxisAlignment.center,
+//                                     crossAxisAlignment:
+//                                         CrossAxisAlignment.start,
+//                                     children: [
+//                                       Text(
+//                                         '${requestModel?.requests![index].user?.name} needs blood',
+//                                         style: TextStyle(
+//                                           fontWeight: FontWeight.bold,
+//                                         ),
+//                                       ),
+//                                       const SizedBox(
+//                                         height: 12,
+//                                       ),
+//                                       Text(
+//                                         'no of bags    ${requestModel?.requests![index].noOfBags}',
+//                                         style: const TextStyle(
+//                                           color: greyColor2,
+//                                         ),
+//                                       ),
+//                                       Text(
+//                                         'Date      ${requestModel!.requests![index].requestExpiredDate!}',
+//                                         style: const TextStyle(
+//                                           color: greyColor2,
+//                                         ),
+//                                       ),
+//                                       Text(
+//                                         'Location    ${requestModel?.requests![index].governorate?.governorateName},${requestModel?.requests![index].city?.cityName}',
+//                                         style: const TextStyle(
+//                                           color: greyColor2,
+//                                         ),
+//                                         overflow: TextOverflow.ellipsis,
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                                 Column(
+//                                   mainAxisAlignment:
+//                                       MainAxisAlignment.spaceAround,
+//                                   children: [
+//                                     ElevatedButton(
+//                                       style: ButtonStyle(
+//                                         backgroundColor:
+//                                             MaterialStateProperty.all<Color>(
+//                                                 greenColor),
+//                                       ),
+//                                       onPressed: () {
+//                                         AppCubit.get(context).getMessages(
+//                                             receiverId: requestModel!
+//                                                 .requests![index].user!.id
+//                                                 .toString());
+//                                         Navigator.push(
+//                                           context,
+//                                           MaterialPageRoute(
+//                                               builder: (context) => ChatScreen(
+//                                                     receiverId: requestModel!
+//                                                         .requests![index]
+//                                                         .user
+//                                                         ?.id
+//                                                         .toString(),
+//                                                     name: requestModel!
+//                                                         .requests![index]
+//                                                         .user
+//                                                         ?.name,
+//                                                 phone: requestModel!
+//                                                     .requests![index]
+//                                                     .user
+//                                                     ?.phoneNumber,
+//                                                   )),
+//                                         );
+//                                       },
+//                                       child: Row(
+//                                         children: const [
+//                                           Text(
+//                                             'Contact ',
+//                                             style: TextStyle(
+//                                               fontWeight: FontWeight.bold,
+//                                             ),
+//                                           ),
+//                                           Icon(
+//                                             Icons.chat,
+//                                             size: 20,
+//                                           ),
+//                                         ],
+//                                       ),
+//                                     ),
+//                                     ElevatedButton(
+//                                       style: ButtonStyle(
+//                                         backgroundColor:
+//                                             MaterialStateProperty.all<Color>(
+//                                                 mainColor),
+//                                       ),
+//                                       onPressed: () {},
+//                                       child: const Text(
+//                                         'I can donate',
+//                                         style: TextStyle(
+//                                             color: Colors.white,
+//                                             fontWeight: FontWeight.bold),
+//                                       ),
+//                                     ),
+//                                   ],
+//                                 ),
+//                               ],
+//                             ),
+//                           )

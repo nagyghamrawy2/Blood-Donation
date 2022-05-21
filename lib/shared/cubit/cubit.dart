@@ -328,6 +328,16 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+  void changeStatueForRequest(int idRequest){
+    emit(AppLoadingChangeStatueForMyRequestsDataState());
+    DioHelper.getData(url: '${CHANGE_STATUE_REQUESTS}/$idRequest',token: token).then((value){
+      emit(AppSuccessChangeStatueForMyRequestsDataState());
+    }).catchError((onError){
+      print(onError.toString());
+      emit(AppErrorChangeStatueForMyRequestsDataState());
+    });
+  }
+
   void changeAvailability({required int value}) {
     DioHelper.putData(
         url: CHANGE_AVAILABILITY,

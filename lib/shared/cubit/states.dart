@@ -78,6 +78,11 @@ class AppLoadingUpdateRequestsDataState extends AppStates{}
 class AppSuccessUpdateRequestsDataState extends AppStates{}
 class AppErrorUpdateRequestsDataState extends AppStates{}
 
+class AppLoadingChangeStatueForMyRequestsDataState extends AppStates{}
+class AppSuccessChangeStatueForMyRequestsDataState extends AppStates{}
+class AppErrorChangeStatueForMyRequestsDataState extends AppStates{}
+
+
 class ChangeBloodCheckValueState extends AppStates{}
 
 class AppSuccessChangeAvailabilityState extends AppStates{}

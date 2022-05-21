@@ -15,7 +15,7 @@ class DioHelper {
   static Future<Response> getData({
     required String url,
     Map<String, dynamic>? query,
-    String? token,
+    String? token, data,
   }) async {
     dio!.options.headers = {
       'Authorization': 'Bearer ${token}',
