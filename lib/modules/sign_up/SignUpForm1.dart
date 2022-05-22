@@ -12,7 +12,8 @@ import '../Login_Screen/login.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key}) : super(key: key);
-
+  String? nameValidator;
+  String? emailValidator;
   var name = TextEditingController();
   var emailAddress = TextEditingController();
   var password = TextEditingController();
@@ -25,7 +26,13 @@ class SignUpScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => RegisterCubit(),
       child: BlocConsumer<RegisterCubit, RegisterStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if(state is AppSuccessErrorDataState ){
+            nameValidator = RegisterCubit.get(context).registerModel?.errors?.name?[0];
+            emailValidator = RegisterCubit.get(context).registerModel?.errors?.email?[0];
+            print(nameValidator);
+          }
+        },
         builder: (context, state) {
           RegisterCubit cubit = RegisterCubit.get(context);
           return Scaffold(
@@ -103,9 +110,11 @@ class SignUpScreen extends StatelessWidget {
                               controller: name,
                               keyboardtype: TextInputType.text,
                               validatorFunction: (value){
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your name';
-                                }
+                                return nameValidator ;
+
+                                // if (value == null || value.isEmpty) {
+                                //   return 'Please enter your name';
+                                // }
                               },
                             ),
                             SizedBox(
@@ -118,12 +127,13 @@ class SignUpScreen extends StatelessWidget {
                               controller: emailAddress,
                               keyboardtype: TextInputType.emailAddress,
                               validatorFunction: (value){
-                                if (value == null || value.isEmpty) {
-                                  return "Please enter your email";
-                                }
-                                if(!value.contains("@" )&& !value.contains(".com")){
-                                  return "The email must be a valid email address";
-                                }
+                                return emailValidator ;
+                                // if (value == null || value.isEmpty) {
+                                //   return "Please enter your email";
+                                // }
+                                // if(!value.contains("@" )&& !value.contains(".com")){
+                                //   return "The email must be a valid email address";
+                                // }
                               },
                             ),
                             SizedBox(
@@ -136,15 +146,16 @@ class SignUpScreen extends StatelessWidget {
                               controller: password,
                               keyboardtype: TextInputType.emailAddress,
                               validatorFunction: (value){
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your password';
-                                }
-                                if(value.length <= 8 ){
-                                  return "The password must be at least 8 characters";
-                                }
-                                if(!RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})").hasMatch(value)){
-                                  return "Password must contain at least one number,\n both uppercase and lowercase letters \n and symbol";
-                                }
+                                return "${cubit.registerModel?.errors?.password}" ;
+                                // if (value == null || value.isEmpty) {
+                                //   return 'Please enter your password';
+                                // }
+                                // if(value.length <= 8 ){
+                                //   return "The password must be at least 8 characters";
+                                // }
+                                // if(!RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})").hasMatch(value)){
+                                //   return "Password must contain at least one number,\n both uppercase and lowercase letters \n and symbol";
+                                // }
                               },
                               isPasswordField: true,
                               secure: cubit.obsecure,
@@ -162,12 +173,13 @@ class SignUpScreen extends StatelessWidget {
                               controller: confirmPassword,
                               keyboardtype: TextInputType.visiblePassword,
                               validatorFunction: (value){
-                                if (value == null || value.isEmpty) {
-                                  return 'Please re-enter password again';
-                                }
-                                if(password.text!=confirmPassword.text){
-                                  return "Password does not match";
-                                }
+                                return "${cubit.registerModel?.errors?.confirmPassword}" ;
+                                // if (value == null || value.isEmpty) {
+                                //   return 'Please re-enter password again';
+                                // }
+                                // if(password.text!=confirmPassword.text){
+                                //   return "Password does not match";
+                                // }
                               },
                               isPasswordField: true,
                               secure: cubit.confirmObsecure,
@@ -183,6 +195,7 @@ class SignUpScreen extends StatelessWidget {
                               child: Buttons_without_icon(
                                 function: () {
                                   if (formKey.currentState!.validate()) {
+
                                     print('done');
                                     Navigator.push(
                                         context,
@@ -193,7 +206,11 @@ class SignUpScreen extends StatelessWidget {
                                               confirmPassword: confirmPassword.text,
                                               emailAddress: emailAddress.text,
                                             )));
-                                  } else {
+                                  } else  {
+                                    print(nameValidator);
+                                    cubit.getErrorData();
+                                    print("${cubit.registerModel?.errors?.name}");
+                                    print(nameValidator);
                                     print('not done');
                                   }
                                 },
