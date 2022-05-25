@@ -126,7 +126,12 @@ class _RequestScreenState extends State<RequestScreen> {
                                         IconButton(
                                           onPressed: () {
                                             AppCubit.get(context).getMessages(receiverId: requestModel!.requests![index].user!.id.toString());
-                                            Navigator.push(
+                                            if(requestModel!.requests![index].user?.id.toString()==userDataModel?.user?.id.toString())
+                                            {
+                                              return;
+                                            }
+                                            else {
+                                              Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
@@ -136,6 +141,7 @@ class _RequestScreenState extends State<RequestScreen> {
                                                         phone: requestModel!.requests![index].user?.phoneNumber,
                                                       )),
                                             );
+                                            }
                                           },
                                           icon: const Icon(
                                             Icons.chat,
@@ -256,16 +262,22 @@ class _RequestScreenState extends State<RequestScreen> {
                                         IconButton(
                                           onPressed: () {
                                             AppCubit.get(context).getMessages(receiverId: closedRequestModel!.requests![index].user!.id.toString());
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ChatScreen(
-                                                        receiverId: closedRequestModel!.requests![index].user?.id.toString(),
-                                                        name: closedRequestModel!.requests![index].user?.name,
-                                                        phone: closedRequestModel!.requests![index].user?.phoneNumber,
-                                                      )),
-                                            );
+                                            if(requestModel!.requests![index].user?.id.toString()==userDataModel?.user?.id.toString())
+                                            {
+                                              return;
+                                            }
+                                            else {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ChatScreen(
+                                                          receiverId: requestModel!.requests![index].user?.id.toString(),
+                                                          name: requestModel!.requests![index].user?.name,
+                                                          phone: requestModel!.requests![index].user?.phoneNumber,
+                                                        )),
+                                              );
+                                            }
                                           },
                                           icon: const Icon(
                                             Icons.chat,

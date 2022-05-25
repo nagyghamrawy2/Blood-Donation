@@ -19,7 +19,8 @@ class ChatScreen extends StatelessWidget {
       : super(key: key);
 
   var messageController = TextEditingController();
-  final date = DateFormat("MM-dd hh:mm").format(DateTime.now());
+  ScrollController listview = ScrollController();
+  final date = DateFormat("MM-dd hh:mm:s").format(DateTime.now());
   String? receiverId;
   String? name;
   String? phone;
@@ -78,6 +79,8 @@ class ChatScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ListView.separated(
+                        controller: listview,
+                        cacheExtent: 20,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           var message = AppCubit.get(context).messages[index];
@@ -151,7 +154,7 @@ class ChatScreen extends StatelessWidget {
                                       .collection("Id")
                                       .doc(Id)
                                       .update(<String, dynamic>{
-                                    "date":date,
+                                    "date": date,
                                     "message": messageController.text,
                                   });
                                 } else {
