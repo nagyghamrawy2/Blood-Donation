@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:blood_bank/models/profile_model.dart';
 import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/Network/local/Cache_helper.dart';
@@ -9,6 +11,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -27,6 +30,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   var weight = TextEditingController(text: userDataModel?.user?.weight);
   var formKey = GlobalKey<FormState>();
   int? id;
+  dynamic x;
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +57,78 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      radius: 75,
-                      backgroundImage: AssetImage(image),
+                    Stack(
+                      children: [
+                        (x== null)?
+                        CircleAvatar(
+                          radius: 75,
+                          backgroundImage: AssetImage(image),
+                        ):
+                        CircleAvatar(
+                          radius: 75,
+                          backgroundImage: FileImage(x),
+                        ),
+                        Positioned(
+                          right: 50,
+                          bottom: 1.5,
+                          child: Container(
+                            height: 20,
+                            child: IconButton(onPressed: (){
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context){
+                                    return AlertDialog(
+                                      title: Text("Add photo"),
+                                      content: Text("choose one"),
+                                      actions: [
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            textStyle: const TextStyle(fontSize: 20),
+                                          ),
+                                          onPressed: () async{
+                                          ImagePicker a = new ImagePicker();
+                                          dynamic b = await  a.getImage(source: ImageSource.gallery);
+                                          setState(() {
+                                            x = File(b.path);
+                                          });
+                                          Navigator.pop(context);
+                                          },
+                                          child: const Text('Gallery'),
+                                        ),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            textStyle: const TextStyle(fontSize: 20),
+                                          ),
+                                          onPressed: () async{
+                                            ImagePicker a = new ImagePicker();
+                                            dynamic b = await  a.getImage(source: ImageSource.camera);
+                                            setState(() {
+                                              x = File(b.path);
+                                            });
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('Camera'),
+                                        ),
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                            textStyle: const TextStyle(fontSize: 20),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('close'),
+                                        ),
+                                      ],
+                                    );
+                                  }
+                              );
+                            },
+                                icon: Icon(Icons.add_a_photo , size: 35),
+                            ),
+                          ),
+                        ),
+
+                      ],
                     ),
                     const SizedBox(
                       height: 5,
@@ -524,6 +597,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       height: int.parse(height.text),
                                       weight: weight.text,
                                       lastDonateDate: donationDate.text,
+                                      profilePicture:  x,
                                     );
                                     print(govIdProfile);
                                     print(cityIdProfile);
