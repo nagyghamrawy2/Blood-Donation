@@ -19,6 +19,8 @@ class AddRequestScreen extends StatefulWidget {
 
 class _AddRequestScreenState extends State<AddRequestScreen> {
   TextEditingController titleController = new TextEditingController();
+  TextEditingController hospitalNameController = new TextEditingController();
+  TextEditingController hospitalAddressController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();
   TextEditingController bagsController = new TextEditingController();
   TextEditingController phoneController = new TextEditingController();
@@ -105,6 +107,42 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                       validatorFunction: (value){
                         if (value == null || value.isEmpty) {
                           return 'Please enter description';
+                        }
+                      },
+
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.009,
+                    ),
+                    Requst_textformfield(
+                      controller_Name: hospitalNameController,
+                      text_name: "Hospital Name",
+                      num_width: 0.9,
+                      num_height: 0.15,
+                      keyboardtype: TextInputType.name,
+                      obsecure: false,
+                      text_hint: "Enter hospital name",
+                      validatorFunction: (value){
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter hospital name';
+                        }
+                      },
+
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.009,
+                    ),
+                    Requst_textformfield(
+                      controller_Name: hospitalAddressController,
+                      text_name: "Hospital Address",
+                      num_width: 0.9,
+                      num_height: 0.15,
+                      keyboardtype: TextInputType.name,
+                      obsecure: false,
+                      text_hint: "Enter hospital address",
+                      validatorFunction: (value){
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter hospital address';
                         }
                       },
 
@@ -440,6 +478,8 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                             bloodType: cubit.bloodGroupItem[cubit.bloodGroup],
                             govId: govRequestId.toString(),
                             cityId: cityRequestId.toString(),
+                            hospitalAddress: hospitalAddressController.text,
+                            hospitalName: hospitalNameController.text,
                           );
                           print('done');
                         } else {

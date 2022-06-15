@@ -11,6 +11,7 @@ import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../add_request/addRequest.dart';
 
@@ -309,99 +310,110 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        InkWell(
-                          onTap:(){},
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 120,
-                                width: MediaQuery.of(context).size.width * 0.5,
-                                color: Colors.black,
-                                child: const Image(
-                                  image: const AssetImage(
-                                    'assets/images/educationImage.png',
-                                  ),
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.5,
-                                child: const Text(
-                                  'important of blood donation',
-                                  style: TextStyle(color: Colors.black),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 30,),
-                        InkWell(
-                          onTap:(){},
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 120,
-                                width: MediaQuery.of(context).size.width * 0.5,
-                                color: Colors.black,
-                                child: const Image(
-                                  image: const AssetImage(
-                                    'assets/images/educationImage.png',
-                                  ),
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.5,
-                                child: const Text(
-                                  'important of blood donation',
-                                  style: TextStyle(color: Colors.black),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 30,),
-                        InkWell(
-                          onTap:(){},
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 120,
-                                width: MediaQuery.of(context).size.width * 0.5,
-                                color: Colors.black,
-                                child: const Image(
-                                  image: const AssetImage(
-                                    'assets/images/educationImage.png',
-                                  ),
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.5,
-                                child: const Text(
-                                  'important of blood donation',
-                                  style: TextStyle(color: Colors.black),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                  Container(
+                    height: 200.h,
+                    width: 300.w,
+                    child: ListView.separated(
+                        physics: const BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) => EducationInfo(index: index),
+                        separatorBuilder: (context, index) => SizedBox(width: 30,),
+                        itemCount: cubit.educationItemData.length
                     ),
                   ),
+                  // SingleChildScrollView(
+                  //   scrollDirection: Axis.horizontal,
+                  //   child: Row(
+                  //     children: [
+                  //       InkWell(
+                  //         onTap:(){},
+                  //         child: Column(
+                  //           crossAxisAlignment: CrossAxisAlignment.start,
+                  //           children: [
+                  //             Container(
+                  //               height: 120,
+                  //               width: MediaQuery.of(context).size.width * 0.5,
+                  //               color: Colors.black,
+                  //               child: const Image(
+                  //                 image: const AssetImage(
+                  //                   'assets/images/educationImage.png',
+                  //                 ),
+                  //                 fit: BoxFit.fill,
+                  //               ),
+                  //             ),
+                  //             Container(
+                  //               width: MediaQuery.of(context).size.width * 0.5,
+                  //               child: const Text(
+                  //                 'important of blood donation',
+                  //                 style: TextStyle(color: Colors.black),
+                  //                 overflow: TextOverflow.ellipsis,
+                  //                 maxLines: 1,
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //       const SizedBox(width: 30,),
+                  //       InkWell(
+                  //         onTap:(){},
+                  //         child: Column(
+                  //           crossAxisAlignment: CrossAxisAlignment.start,
+                  //           children: [
+                  //             Container(
+                  //               height: 120,
+                  //               width: MediaQuery.of(context).size.width * 0.5,
+                  //               color: Colors.black,
+                  //               child: const Image(
+                  //                 image: const AssetImage(
+                  //                   'assets/images/educationImage.png',
+                  //                 ),
+                  //                 fit: BoxFit.fill,
+                  //               ),
+                  //             ),
+                  //             Container(
+                  //               width: MediaQuery.of(context).size.width * 0.5,
+                  //               child: const Text(
+                  //                 'important of blood donation',
+                  //                 style: TextStyle(color: Colors.black),
+                  //                 overflow: TextOverflow.ellipsis,
+                  //                 maxLines: 1,
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //       const SizedBox(width: 30,),
+                  //       InkWell(
+                  //         onTap:(){},
+                  //         child: Column(
+                  //           crossAxisAlignment: CrossAxisAlignment.start,
+                  //           children: [
+                  //             Container(
+                  //               height: 120,
+                  //               width: MediaQuery.of(context).size.width * 0.5,
+                  //               color: Colors.black,
+                  //               child: const Image(
+                  //                 image: const AssetImage(
+                  //                   'assets/images/educationImage.png',
+                  //                 ),
+                  //                 fit: BoxFit.fill,
+                  //               ),
+                  //             ),
+                  //             Container(
+                  //               width: MediaQuery.of(context).size.width * 0.5,
+                  //               child: const Text(
+                  //                 'important of blood donation',
+                  //                 style: TextStyle(color: Colors.black),
+                  //                 overflow: TextOverflow.ellipsis,
+                  //                 maxLines: 1,
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ),

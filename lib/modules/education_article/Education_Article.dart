@@ -20,7 +20,7 @@ class EducationArticlesScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.network(
-              image,
+              "http://blood-bank2022.herokuapp.com/dashboard_files/posts/${image}",
             ),
             SizedBox(
               height: 25.h,

@@ -360,6 +360,8 @@ class AppCubit extends Cubit<AppStates> {
     required String bloodType,
     required String govId,
     required String cityId,
+    required String hospitalName,
+    required String hospitalAddress,
   }) {
     emit(AppLoadingPostRequestsDataState());
     DioHelper.postData(url: ADD_REQUEST, token: token, data: {
@@ -371,6 +373,8 @@ class AppCubit extends Cubit<AppStates> {
       'blood_type': bloodType,
       'governorate_id': govId,
       'city_id': cityId,
+      'hosp_name': hospitalName,
+      'hosp_address': hospitalAddress,
     }).then((value) {
       print(value.data);
       emit(AppSuccessPostRequestsDataState());
