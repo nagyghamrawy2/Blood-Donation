@@ -597,8 +597,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       height: int.parse(height.text),
                                       weight: weight.text,
                                       lastDonateDate: donationDate.text,
-                                      profilePicture:  x,
+                                      //profilePicture:  x,
                                     );
+                                    (x!= null)?
+                                    cubit.updateProfilePictureUserData(
+                                      profilePicture: x,
+                                    ): null;
                                     print(govIdProfile);
                                     print(cityIdProfile);
                                     // print(idIndexOfCity);

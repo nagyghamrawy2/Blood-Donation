@@ -154,7 +154,7 @@ class AppCubit extends Cubit<AppStates> {
     required String email,
     required String phone,
     required String dateOfBirth,
-    File? profilePicture,
+    //File? profilePicture,
     String? lastDonateDate,
     required String bloodType,
     required int govId,
@@ -170,7 +170,7 @@ class AppCubit extends Cubit<AppStates> {
         "email": email,
         "phone_number": phone,
         "date_of_birth": dateOfBirth,
-         "profile_picture": profilePicture,
+        // "profile_picture": profilePicture,
         "blood_type": bloodType,
         'last_donate_time': lastDonateDate,
         "height": height,
@@ -187,6 +187,30 @@ class AppCubit extends Cubit<AppStates> {
     }).catchError((onError) {
       print(onError.toString());
       emit(AppErrorUpdateUserDataState());
+    });
+  }
+
+  void updateProfilePictureUserData({
+
+    File? profilePicture,
+
+  }) {
+    emit(AppLoadingUpdatePictureUserDataState());
+    DioHelper.putData(
+      url: UPDATE_Profile_Picture_PROFILE,
+
+      data: {
+        "profile_picture": profilePicture,
+      },
+      token: token,
+    ).then((value) {
+      print(value.data);
+      userDataModel = ProfileModel.fromJson(value.data);
+      print('bye');
+      emit(AppSuccessUpdatePictureUserDataState());
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(AppErrorUpdatePictureUserDataState());
     });
   }
 
