@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                   Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: AssetImage(image),
+                        backgroundImage: NetworkImage(image),
                         radius: 50,
                       ),
                       const SizedBox(width: 5,),

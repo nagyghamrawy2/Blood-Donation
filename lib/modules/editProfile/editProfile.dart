@@ -64,10 +64,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   children: [
                     Stack(
                       children: [
-                        (x == null)
+                        (imagePath == null)
                             ? CircleAvatar(
                                 radius: 75,
-                                backgroundImage: AssetImage(image),
+                                backgroundImage: NetworkImage(image),
                               )
                             : CircleAvatar(
                                 radius: 75,

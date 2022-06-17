@@ -36,7 +36,7 @@ int? indexOfMyRequest;
 
 
 String image = userDataModel?.user?.profilePicture != null
-    ? '${userDataModel?.user?.profilePicture}'
+    ? 'https://blood-bank2022.herokuapp.com/dashboard_files/users_pictures/${userDataModel?.user?.profilePicture}'
     : 'assets/images/noImage.png';
 
 

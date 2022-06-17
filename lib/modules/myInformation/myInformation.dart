@@ -42,9 +42,9 @@ class MyInformationScreen extends StatelessWidget {
               ? '${userDataModel?.user?.height} CM'
               : '',
         ];
-        String image = userDataModel?.user?.profilePicture != null
-            ? '${userDataModel?.user?.profilePicture}'
-            : 'assets/images/noImage.png';
+        // String image = userDataModel?.user?.profilePicture != null
+        //     ? '${userDataModel?.user?.profilePicture}'
+        //     : 'assets/images/noImage.png';
         return Scaffold(
           appBar: AppBar(
             title: const Text(
@@ -71,7 +71,7 @@ class MyInformationScreen extends StatelessWidget {
                           children: [
                             CircleAvatar(
                               radius: 90,
-                              backgroundImage: AssetImage(image),
+                              backgroundImage: NetworkImage(image),
                             ),
                             const SizedBox(
                               height: 10,
