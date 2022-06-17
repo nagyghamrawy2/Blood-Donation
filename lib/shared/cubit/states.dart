@@ -34,6 +34,10 @@ class AppLoadingUpdatePictureUserDataState extends AppStates{}
 class AppSuccessUpdatePictureUserDataState extends AppStates{}
 class AppErrorUpdatePictureUserDataState extends AppStates{}
 
+class UploadFilesLoadingState extends AppStates{}
+class UploadFilesSuccessState extends AppStates{}
+class UploadFilesErrorState extends AppStates{}
+
 class AppLoadingDonorDataState extends AppStates{}
 class AppSuccessDonorDataState extends AppStates{}
 class AppErrorDonorDataState extends AppStates{}

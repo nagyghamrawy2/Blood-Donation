@@ -481,6 +481,7 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                             hospitalAddress: hospitalAddressController.text,
                             hospitalName: hospitalNameController.text,
                           );
+                          Navigator.pop(context);
                           print('done');
                         } else {
                           cubit.changeBloodCheck();

@@ -18,7 +18,7 @@ void signOut(context)
     }
   });
 }
-String? token='';
+String token='';
 
 int? govIdProfile;
 int? cityIdProfile;

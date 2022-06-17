@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   key: 'govId', value: state.login.user?.governorate?.id);
               CacheHelper.SaveData(
                   key: 'cityId', value: state.login.user?.city?.id);
-              token = state.login.user?.token;
+              token = state.login.user!.token!;
               CacheHelper.SaveData(key: 'token', value: state.login.user?.token)
                   .then((value) {
                 AppLoginCubit.get(context).updateFcmUserToken(

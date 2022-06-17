@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:core';
 import 'dart:io';
 import 'package:blood_bank/models/Donermodel.dart';
@@ -20,6 +21,7 @@ import 'package:blood_bank/shared/Network/end_points.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart' as http;
 
 //import 'package:flutter/cupertino.dart';
 import 'package:blood_bank/models/profile_model.dart';
@@ -27,6 +29,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:http_parser/http_parser.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
@@ -72,6 +75,7 @@ class AppCubit extends Cubit<AppStates> {
   ];
   int bloodGroup = -1;
   bool bloodCheck = true;
+
   void changeBloodValue(int value) {
     bloodGroup = value;
     emit(BloodValueChangeState());
@@ -190,29 +194,29 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  void updateProfilePictureUserData({
-
-    File? profilePicture,
-
-  }) {
-    emit(AppLoadingUpdatePictureUserDataState());
-    DioHelper.putData(
-      url: UPDATE_Profile_Picture_PROFILE,
-
-      data: {
-        "profile_picture": profilePicture,
-      },
-      token: token,
-    ).then((value) {
-      print(value.data);
-      userDataModel = ProfileModel.fromJson(value.data);
-      print('bye');
-      emit(AppSuccessUpdatePictureUserDataState());
-    }).catchError((onError) {
-      print(onError.toString());
-      emit(AppErrorUpdatePictureUserDataState());
-    });
-  }
+  // void updateProfilePictureUserData({
+  //
+  //   File? profilePicture,
+  //
+  // }) {
+  //   emit(AppLoadingUpdatePictureUserDataState());
+  //   DioHelper.postData(
+  //     url: UPDATE_Profile_Picture_PROFILE,
+  //
+  //     data: {
+  //       "profile_picture": profilePicture,
+  //     },
+  //     token: token,
+  //   ).then((value) {
+  //     print(value.data);
+  //     userDataModel = ProfileModel.fromJson(value.data);
+  //     print('bye');
+  //     emit(AppSuccessUpdatePictureUserDataState());
+  //   }).catchError((onError) {
+  //     print(onError.toString());
+  //     emit(AppErrorUpdatePictureUserDataState());
+  //   });
+  // }
 
   late GovernorateModel governorateModel;
 
@@ -352,11 +356,12 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  void changeStatueForRequest(int idRequest){
+  void changeStatueForRequest(int idRequest) {
     emit(AppLoadingChangeStatueForMyRequestsDataState());
-    DioHelper.getData(url: '${CHANGE_STATUE_REQUESTS}/$idRequest',token: token).then((value){
+    DioHelper.getData(url: '${CHANGE_STATUE_REQUESTS}/$idRequest', token: token)
+        .then((value) {
       emit(AppSuccessChangeStatueForMyRequestsDataState());
-    }).catchError((onError){
+    }).catchError((onError) {
       print(onError.toString());
       emit(AppErrorChangeStatueForMyRequestsDataState());
     });
@@ -433,13 +438,62 @@ class AppCubit extends Cubit<AppStates> {
         'city_id': cityId,
       },
       token: token,
-    ).then((value){
+    ).then((value) {
       print(value.data);
       emit(AppSuccessUpdateRequestsDataState());
-    }).catchError((onError){
+    }).catchError((onError) {
       print(onError.toString());
       emit(AppErrorUpdateRequestsDataState());
     });
+  }
+
+  void uploadPP(
+      String imagePath,
+      String name,
+      String email,
+      String phone,
+      String dateOfBirth,
+      String bloodType,
+      int governorateId,
+      int cityId,
+      String weight,
+      int height,
+      String lastDonationDate) async {
+    emit(AppLoadingUpdatePictureUserDataState());
+    var headers = {
+      'Content-Type': 'application/json',
+      'API_PASSWORD': '1234',
+      'Authorization': "Bearer ${token}"
+    };
+
+    var request = http.MultipartRequest('POST',
+        Uri.parse('http://blood-bank2022.herokuapp.com/api/v1/change-photo'));
+    request.files.add(
+        await http.MultipartFile.fromPath('profile_picture', '$imagePath'));
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      updateUserData(
+          name: name,
+          email: email,
+          phone: phone,
+          dateOfBirth: dateOfBirth,
+          bloodType: bloodType,
+          govId: governorateId,
+          cityId: cityId,
+          height: height,
+          weight: weight,
+          lastDonateDate: lastDonationDate);
+      emit(AppSuccessUpdatePictureUserDataState());
+      print("xxxxxxxxxxxxx");
+    } else {
+      print(response.reasonPhrase);
+      emit(AppErrorUpdatePictureUserDataState());
+    }
+    emit(AppErrorUpdatePictureUserDataState());
   }
 
   EducationModel? educationModel;
