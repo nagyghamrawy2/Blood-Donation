@@ -20,7 +20,7 @@ class ChatScreen extends StatelessWidget {
 
   var messageController = TextEditingController();
   ScrollController listview = ScrollController();
-  final date = DateFormat("MM-dd hh:mm:s").format(DateTime.now());
+  final date = DateFormat("MM-dd hh:mm:ss").format(DateTime.now());
   String? receiverId;
   String? name;
   String? phone;
@@ -37,6 +37,15 @@ class ChatScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
+            // floatingActionButton: FloatingActionButton(
+            //   child: const Icon(Icons.arrow_downward),
+            //   onPressed: () {
+            //     listview.animateTo(listview.position.maxScrollExtent,
+            //         duration: const Duration(seconds: 1),
+            //         curve: (Curves.easeOut));
+            //   },
+            // ),
+            // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
             appBar: AppBar(
               backgroundColor: const Color.fromRGBO(237, 57, 74, 1),
               title: Row(
