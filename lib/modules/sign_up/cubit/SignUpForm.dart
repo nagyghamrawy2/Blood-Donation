@@ -7,49 +7,40 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:email_validator/email_validator.dart';
 
-class SignUpScreenTest extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
-  State<SignUpScreenTest> createState() => _SignUpState();
+  State<SignUpScreen> createState() => _SignUpState();
 }
 
-class _SignUpState extends State<SignUpScreenTest> {
+class _SignUpState extends State<SignUpScreen> {
   var formKey = GlobalKey<FormState>();
-
   var name = TextEditingController();
-
   var emailAddress = TextEditingController();
-
   var password = TextEditingController();
-
   var confirmPassword = TextEditingController();
-
   var phone =  TextEditingController();
-
   var birthDate =  TextEditingController();
-
   var bloodType = TextEditingController();
-
   var lastDonationDate =  TextEditingController();
-
-
-  String?  fcmToken;
-
+  String? fcmToken;
   int? id;
 
+  @override
   void initState() {
     super.initState();
     FirebaseMessaging.instance.getToken().then((value){
       print(value);
-      setState(() {
+      setState((){
         fcmToken = value;
       });
-
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -64,16 +55,14 @@ class _SignUpState extends State<SignUpScreenTest> {
               ShowToast(state: ToastStates.SUCCESS , text: "Register successfully" );
               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
             } else{
-              print(state.registerModel.errors?.email);
-              ShowToast(state: ToastStates.ERROR , text: "${state.registerModel.errors?.name ?? 'hiiiiiiiii'}" );
-              // ShowToast(state: ToastStates.ERROR , text: "Please make sure the data enter is correct" );
+              if(state.registerModel.errors?.email != null) {
+                ShowToast(state: ToastStates.ERROR,location: ToastGravity.CENTER, text: "${state.registerModel.errors?.email![0]}");
+              }
+              if(state.registerModel.errors?.phoneNumber != null) {
+                ShowToast(state: ToastStates.ERROR, location: ToastGravity.CENTER,text: "${state.registerModel.errors?.phoneNumber![0]}");
+              }
             }
           }
-          // if(state is AppSuccessErrorDataState ){
-          //   nameValidator = RegisterCubit.get(context).registerModel?.errors?.name?[0];
-          //   emailValidator = RegisterCubit.get(context).registerModel?.errors?.email?[0];
-          //   print(nameValidator);
-          // }
         },
         builder: (context, state) {
           RegisterCubit cubit = RegisterCubit.get(context);
@@ -85,8 +74,7 @@ class _SignUpState extends State<SignUpScreenTest> {
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: 450.h,
-                      //MediaQuery.of(context).size.height * 0.36,
-                      color: const Color.fromRGBO(237, 57, 74, 1),
+                      color: mainColor,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -131,8 +119,6 @@ class _SignUpState extends State<SignUpScreenTest> {
                               controller: name,
                               keyboardtype: TextInputType.text,
                               validatorFunction: (value){
-                                // return nameValidator ;
-
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter your name';
                                 }
@@ -152,8 +138,8 @@ class _SignUpState extends State<SignUpScreenTest> {
                                 if (value == null || value.isEmpty) {
                                   return "Please enter your email";
                                 }
-                                if(!value.contains("@" )&& !value.contains(".com")){
-                                  return "The email must be a valid email address";
+                                if(!EmailValidator.validate(value)){
+                                  return 'Invalid Email Address';
                                 }
                               },
                             ),
@@ -168,15 +154,25 @@ class _SignUpState extends State<SignUpScreenTest> {
                               keyboardtype: TextInputType.emailAddress,
                               validatorFunction: (value){
                                 // return "${cubit.registerModel?.errors?.password}" ;
+                                FlutterPwValidator(
+                                    controller: password,
+                                    minLength: 8,
+                                    uppercaseCharCount: 1,
+                                    numericCharCount: 1,
+                                    specialCharCount: 1,
+                                    width: 400,
+                                    height: 150,
+                                    onSuccess: (){},
+                                );
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter your password';
                                 }
-                                if(value.length <= 8 ){
-                                  return "The password must be at least 8 characters";
-                                }
-                                if(!RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})").hasMatch(value)){
-                                  return "Password must contain at least one number,\n both uppercase and lowercase letters \n and symbol";
-                                }
+                                // if(value.length <= 8 ){
+                                //   return "The password must be at least 8 characters";
+                                // }
+                                // if(!RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})").hasMatch(value)){
+                                //   return "Password must contain at least one number,\n both uppercase and lowercase letters \n and symbol";
+                                // }
                               },
                               isPasswordField: true,
                               secure: cubit.obsecure,
@@ -467,12 +463,26 @@ class _SignUpState extends State<SignUpScreenTest> {
                                 return null;
                               },
                               decoration: InputDecoration(
+                                focusColor: Colors.green,
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                      color: greyColor,
+                                    )),
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(width: 1),
+                                  borderSide: const BorderSide(
+                                    width: 1,
+                                  ),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10)),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Colors.red, width: 1),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
                               hint: const Text('Blood type'),
                             ),

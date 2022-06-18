@@ -158,10 +158,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 keyboardtype: TextInputType.text,
                                 validatorFunction: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return userDataModel?.errors?.name![0] !=
-                                            null
-                                        ? userDataModel!.errors!.name![0]
-                                        : 'Name must not be empty';
+                                    'Name must not be empty';
                                   }
                                 },
                               ),

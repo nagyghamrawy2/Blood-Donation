@@ -43,12 +43,6 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
           AppCubit.get(context).getMyRequests();
           AppCubit.get(context).getAllRequests();
           Navigator.pop(context);
-
-          // Navigator.pushAndRemoveUntil(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (BuildContext context) => HomeLayout(),
-          //   ),(route) => false);
         }
       },
       builder: (context, state) {
@@ -306,8 +300,10 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                             return "Governorate must not be empty";
                           }
                         },
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.all(15),
+
                         ),
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: governorateItemList.asMap().entries.map((items) {
@@ -356,8 +352,9 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                                 return "City must not be empty";
                               }
                             },
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                             border: InputBorder.none,
+                            contentPadding: EdgeInsets.all(15),
                             ),
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: cubit.cityRequestItemList
@@ -433,6 +430,7 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                                   },
                                   obscureText: false,
                                   decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.all(15),
                                     hintText: "Enter expired date",
                                     hintStyle: const TextStyle(
                                         fontSize: 16,

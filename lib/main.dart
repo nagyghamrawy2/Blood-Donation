@@ -21,7 +21,6 @@ import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:blood_bank/shared/styles/themes.dart';
-import 'package:blood_bank/testNotify.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,7 +44,6 @@ void main() async {
   });
 
   //na2s wa7da
-
 
   DioHelper.init();
   await CacheHelper.init();

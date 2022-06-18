@@ -75,27 +75,37 @@ class Governorate {
 }
 
 class Errors {
-  List<String>? name;
-  List<String>? password;
-  List<String>? confirmPassword;
   List<String>? email;
   List<String>? phoneNumber;
-  List<String>? dateOfBirth;
-  List<String>? bloodType;
-  List<String>? governorateId;
-  List<String>? cityId;
-  List<String>? fcmToken;
 
   Errors.fromJson(Map<String, dynamic> json){
-    name= json['name'] != null ? List<String>.from(json["name"].map((x) => x)) : null;
-    password= json['password'] != null ? List<String>.from(json["password"].map((x) => x)) : null;
-    password= json['confirmPassword'] != null ? List<String>.from(json["confirmPassword"].map((x) => x)) : null;
-    fcmToken= json['fcm_token'] != null ? List<String>.from(json["fcm_token"].map((x) => x)) : null;
     email= json['email'] != null ? List<String>.from(json["email"].map((x) => x)) : null;
     phoneNumber= json['phone_number'] != null ? List<String>.from(json["phone_number"].map((x) => x)) : null;
-    dateOfBirth=json['date_of_birth'] != null ? List<String>.from(json["date_of_birth"].map((x) => x)) : null;
-    bloodType= json['blood_type'] != null ? List<String>.from(json["blood_type"].map((x) => x)) : null;
-    governorateId= json['governorate_id'] != null ?  List<String>.from(json["governorate_id"].map((x) => x)) : null;
-    cityId=json['city_id'] != null ?  List<String>.from(json["city_id"].map((x) => x)) : null;
   }
 }
+
+// class Errors {
+//   List<String>? name;
+//   List<String>? password;
+//   List<String>? confirmPassword;
+//   List<String>? email;
+//   List<String>? phoneNumber;
+//   List<String>? dateOfBirth;
+//   List<String>? bloodType;
+//   List<String>? governorateId;
+//   List<String>? cityId;
+//   List<String>? fcmToken;
+//
+//   Errors.fromJson(Map<String, dynamic> json){
+//     name= json['name'] != null ? List<String>.from(json["name"].map((x) => x)) : null;
+//     password= json['password'] != null ? List<String>.from(json["password"].map((x) => x)) : null;
+//     password= json['confirmPassword'] != null ? List<String>.from(json["confirmPassword"].map((x) => x)) : null;
+//     fcmToken= json['fcm_token'] != null ? List<String>.from(json["fcm_token"].map((x) => x)) : null;
+//     email= json['email'] != null ? List<String>.from(json["email"].map((x) => x)) : null;
+//     phoneNumber= json['phone_number'] != null ? List<String>.from(json["phone_number"].map((x) => x)) : null;
+//     dateOfBirth=json['date_of_birth'] != null ? List<String>.from(json["date_of_birth"].map((x) => x)) : null;
+//     bloodType= json['blood_type'] != null ? List<String>.from(json["blood_type"].map((x) => x)) : null;
+//     governorateId= json['governorate_id'] != null ?  List<String>.from(json["governorate_id"].map((x) => x)) : null;
+//     cityId=json['city_id'] != null ?  List<String>.from(json["city_id"].map((x) => x)) : null;
+//   }
+// }

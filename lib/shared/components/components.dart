@@ -142,12 +142,13 @@ class Textformfield_with_border extends StatelessWidget {
 void ShowToast({
   required String? text,
   required ToastStates state,
+  ToastGravity location = ToastGravity.BOTTOM,
 }){
   Fluttertoast.showToast(
       msg: text!,
       toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 5,
+      gravity: location,
+      timeInSecForIosWeb: 10,
       backgroundColor: ChooseToastColor(state),
       textColor: Colors.white,
       fontSize: 16.0
