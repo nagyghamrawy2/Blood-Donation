@@ -144,6 +144,7 @@ class AppCubit extends Cubit<AppStates> {
     ).then((value) {
       print(value.data);
       userDataModel = ProfileModel.fromJson(value.data);
+      print(userDataModel);
       emit(AppSuccessUserDataState());
     }).catchError((onError) {
       print(onError.toString());
@@ -187,6 +188,7 @@ class AppCubit extends Cubit<AppStates> {
       print(value.data);
       userDataModel = ProfileModel.fromJson(value.data);
       print('bye');
+      getUserData();
       emit(AppSuccessUpdateUserDataState());
     }).catchError((onError) {
       print(onError.toString());
@@ -487,7 +489,9 @@ class AppCubit extends Cubit<AppStates> {
           height: height,
           weight: weight,
           lastDonateDate: lastDonationDate);
+
       emit(AppSuccessUpdatePictureUserDataState());
+
       print("xxxxxxxxxxxxx");
     } else {
       print(response.reasonPhrase);

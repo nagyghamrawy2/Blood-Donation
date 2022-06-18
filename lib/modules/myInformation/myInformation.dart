@@ -71,7 +71,7 @@ class MyInformationScreen extends StatelessWidget {
                           children: [
                             CircleAvatar(
                               radius: 90,
-                              backgroundImage: NetworkImage(image),
+                              backgroundImage: NetworkImage('https://blood-bank2022.herokuapp.com/dashboard_files/users_pictures/${userDataModel?.user?.profilePicture}',),
                             ),
                             const SizedBox(
                               height: 10,

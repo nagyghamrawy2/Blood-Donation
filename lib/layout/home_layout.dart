@@ -18,7 +18,7 @@ class HomeLayout extends StatelessWidget {
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
         return ConditionalBuilder(
-            condition: userDataModel != null,
+            condition: userDataModel != null ,
             builder: (context) {
               return Scaffold(
                 body: cubit.screens[cubit.currentIndex],

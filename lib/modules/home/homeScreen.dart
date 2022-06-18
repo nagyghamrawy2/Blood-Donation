@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                   Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: NetworkImage(image),
+                        backgroundImage: NetworkImage('https://blood-bank2022.herokuapp.com/dashboard_files/users_pictures/${userDataModel?.user?.profilePicture}'),
                         backgroundColor: Colors.transparent,
                         radius: 50,
                       //  child: CachedNetworkImage(

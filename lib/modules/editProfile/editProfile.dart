@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:blood_bank/models/profile_model.dart';
+import 'package:blood_bank/modules/home/homeScreen.dart';
 import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/Network/local/Cache_helper.dart';
 import 'package:blood_bank/shared/components/components.dart';
@@ -67,7 +68,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         (imagePath == null)
                             ? CircleAvatar(
                                 radius: 75,
-                                backgroundImage: NetworkImage(image),
+                                backgroundImage: NetworkImage('https://blood-bank2022.herokuapp.com/dashboard_files/users_pictures/${userDataModel?.user?.profilePicture}'),
                               )
                             : CircleAvatar(
                                 radius: 75,
@@ -653,7 +654,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     // CacheHelper.SaveData(key: 'govId', value: govIdConstant);
                                     // CacheHelper.SaveData(key: 'cityId', value: cityIdConstant);
                                     print('done');
-                                  } else if (formKey.currentState!.validate() &&
+                                  } else if
+                                  (formKey.currentState!.validate() &&
                                       imagePath != null) {
                                     cubit.uploadPP(
                                         imagePath!,
@@ -667,8 +669,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         weight.text,
                                         int.parse(height.text),
                                         donationDate.text);
+
                                     print("done with image");
-                                  } else {
+                                  }
+                                  else {
                                     print('not done');
                                   }
                                 },
