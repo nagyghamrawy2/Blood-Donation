@@ -26,13 +26,13 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordcontroller = TextEditingController();
 
   var formKey = GlobalKey<FormState>();
-  String? updateFcmToken;
+  String updateFcmToken="";
   void initState() {
     super.initState();
     FirebaseMessaging.instance.getToken().then((value){
       print(value);
       setState(() {
-        updateFcmToken = value;
+        updateFcmToken = value!;
       });
 
     });
@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
               CacheHelper.SaveData(key: 'token', value: state.login.user?.token)
                   .then((value) {
                 AppLoginCubit.get(context).updateFcmUserToken(
-                  fcmToken: updateFcmToken!,
+                  fcmToken: updateFcmToken,
                 );
                 navigateAndFinish(context, HomeLayout());
               });

@@ -55,6 +55,7 @@ dependencies:
   flutter_advanced_switch: ^3.0.1
   flutter_switch: ^0.3.2
   http: ^0.13.4
+  cached_network_image: ^3.2.0
 
 
 dev_dependencies:

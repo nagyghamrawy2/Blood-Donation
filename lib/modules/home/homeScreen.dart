@@ -8,6 +8,7 @@ import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,7 +50,19 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         backgroundImage: NetworkImage(image),
+                        backgroundColor: Colors.transparent,
                         radius: 50,
+                      //  child: CachedNetworkImage(
+                      //    errorWidget:
+                      //        (context, url, error) =>
+                      //        Icon(
+                      //          Icons.error,
+                      //          size: 60,
+                      //        ),
+                      //    imageUrl:
+                      //    '${image}',
+                      //    fit: BoxFit.cover,
+                      //  ),
                       ),
                       const SizedBox(width: 5,),
                       Container(
