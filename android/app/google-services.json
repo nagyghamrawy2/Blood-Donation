@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "684322860521",
-    "project_id": "mustafa-84175",
-    "storage_bucket": "mustafa-84175.appspot.com"
+    "project_number": "873828680556",
+    "project_id": "final-8a16d",
+    "storage_bucket": "final-8a16d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:684322860521:android:54eb8b7ef71f85fefd2f78",
+        "mobilesdk_app_id": "1:873828680556:android:b87ebda103159487e1a949",
         "android_client_info": {
           "package_name": "com.example.blood_bank"
         }
       },
       "oauth_client": [
         {
-          "client_id": "684322860521-cmkoogmim0iinje4jf3jdu6rve5fe2vq.apps.googleusercontent.com",
+          "client_id": "873828680556-5ru7th4ra1b7uv8p97j3nmrtesdpgpkb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDPgbWeaftfMmZiiQnbzySoZ0mYFauqFFc"
+          "current_key": "AIzaSyC6h3S72ZET_fyE9owEzT5Ydr6nQQkugEo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "684322860521-cmkoogmim0iinje4jf3jdu6rve5fe2vq.apps.googleusercontent.com",
+              "client_id": "873828680556-5ru7th4ra1b7uv8p97j3nmrtesdpgpkb.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
