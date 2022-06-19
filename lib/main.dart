@@ -32,17 +32,26 @@ import 'modules/change password/changePassword.dart';
 import 'shared/Network/local/Cache_helper.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+Future<void> firebaseMessaging(RemoteMessage message)async{
+
+
+  print("Handling a background message");
+  print(message.data.toString());
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Bloc.observer = SimpleBlocObserver();
   FirebaseMessaging.onMessage.listen((event) {
+    print("on Message");
     print(event.data.toString());
   });
   FirebaseMessaging.onMessageOpenedApp.listen((event) {
+    print("onMessageOpenedApp");
     print(event.data.toString());
   });
-
+  FirebaseMessaging.onBackgroundMessage(firebaseMessaging);
   //na2s wa7da
 
   DioHelper.init();
