@@ -59,7 +59,6 @@ class Textformfield_with_border extends StatelessWidget {
     required this.text_label,
     required this.num_border,
     this.suffixFunction,
-    this.onFieldSubmitted,
     // required this.validatorText,
     this.validatorFunction,
     required this.haveIcon,
@@ -76,7 +75,6 @@ class Textformfield_with_border extends StatelessWidget {
   // late String validatorText;
   FormFieldValidator<String>? validatorFunction;
   Function? suffixFunction;
-  Function? onFieldSubmitted;
 
   late bool haveIcon;
   String? iconName;
@@ -87,11 +85,6 @@ class Textformfield_with_border extends StatelessWidget {
       controller: controllerName,
       keyboardType: keyboardType,
       obscureText: obsecure,
-      onFieldSubmitted:(value)
-      {
-        onFieldSubmitted!(value);
-      }
-      ,
       validator: validatorFunction,
       decoration: InputDecoration(
         hintText: hintText,

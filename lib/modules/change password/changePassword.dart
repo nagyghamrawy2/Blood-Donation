@@ -3,6 +3,7 @@ import 'package:blood_bank/modules/change%20password/Cubit/States.dart';
 import 'package:blood_bank/modules/profile/profile.dart';
 import 'package:blood_bank/shared/Network/local/Cache_helper.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -150,16 +151,6 @@ class ChangePasswordScreen extends StatelessWidget {
                         Textformfield_with_border(
                           controllerName: Confirmpasswordcontroller,
                           keyboardType: TextInputType.visiblePassword,
-                          onFieldSubmitted: (value) {
-                            if (formKey.currentState!.validate()) {
-                              AppChangePasswordCubit.get(context)
-                                  .ChangePassword(
-                                      oldPassword: Oldpasswordcontroller.text,
-                                      newPassword: Newpasswordcontroller.text,
-                                      confirmPassword:
-                                          Confirmpasswordcontroller.text);
-                            }
-                          },
                           obsecure:
                               AppChangePasswordCubit.get(context).obsecureConfirm,
                           hintText: 'Confirm password',
@@ -183,27 +174,31 @@ class ChangePasswordScreen extends StatelessWidget {
                         SizedBox(
                           height: 40.h,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                          child: Buttons_without_icon(
-                            function: () {
-                              if (formKey.currentState!.validate()) {
-                                AppChangePasswordCubit.get(context)
-                                    .ChangePassword(
-                                        oldPassword: Oldpasswordcontroller.text,
-                                        newPassword: Newpasswordcontroller.text,
-                                        confirmPassword:
-                                            Confirmpasswordcontroller.text);
-                              }
-                            },
-                            num_hieght: 52,
-                            text_button_name: 'Change Password',
-                            button_color: mainColor,
-                            num_border: 11,
-                            num_fontsize: 20,
-                            text_fontwwieght: FontWeight.normal,
-                          ),
-                        )
+                       ConditionalBuilder(
+                           condition: state is! AppChangePasswordLoadingState,
+                           builder: (context) =>  Padding(
+                             padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                             child: Buttons_without_icon(
+                               function: () {
+                                 if (formKey.currentState!.validate()) {
+                                   AppChangePasswordCubit.get(context)
+                                       .ChangePassword(
+                                       oldPassword: Oldpasswordcontroller.text,
+                                       newPassword: Newpasswordcontroller.text,
+                                       confirmPassword:
+                                       Confirmpasswordcontroller.text);
+                                 }
+                               },
+                               num_hieght: 52,
+                               text_button_name: 'Change Password',
+                               button_color: mainColor,
+                               num_border: 11,
+                               num_fontsize: 20,
+                               text_fontwwieght: FontWeight.normal,
+                             ),
+                           ),
+                           fallback: (context) => Center(child: CircularProgressIndicator(color: mainColor,),)
+                       ),
                       ],
                     ),
                   ),

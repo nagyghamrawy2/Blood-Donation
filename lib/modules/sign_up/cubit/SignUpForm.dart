@@ -599,36 +599,40 @@ class _SignUpState extends State<SignUpScreen> {
                             SizedBox(
                               height: 20.h,
                             ),
-                            Buttons_without_icon(
-                              function: () {
-                                if (formKey.currentState!.validate() &&
-                                    (cubit.policyTerms)) {
-                                  cubit.ChangeCheck();
-                                  cubit.userRegister(
-                                    email: emailAddress.text,
-                                    name: name.text,
-                                    phone: phone.text,
-                                    password: password.text,
-                                    dateOfBirth: birthDate.text,
-                                    bloodType: bloodType.text,
-                                    lastDonateTime: lastDonationDate.text,
-                                    cityId: cityIdProfile!,
-                                    govId: govIdProfile!,
-                                    confirmPassword: confirmPassword.text,
-                                    fcmToken: fcmToken!,
-                                  );
-                                  print("done");
-                                } else {
-                                  cubit.ChangeCheck();
-                                  print('not done');
-                                }
-                              },
-                              num_hieght: 80.h,
-                              text_button_name: 'Sign up',
-                              button_color: mainColor,
-                              num_border: 30,
-                              num_fontsize: 20,
-                              text_fontwwieght: FontWeight.normal,
+                            ConditionalBuilder(
+                                condition: state is! RegisterLoadingState,
+                                builder: (context) => Buttons_without_icon(
+                                  function: () {
+                                    if (formKey.currentState!.validate() &&
+                                        (cubit.policyTerms)) {
+                                      cubit.ChangeCheck();
+                                      cubit.userRegister(
+                                        email: emailAddress.text,
+                                        name: name.text,
+                                        phone: phone.text,
+                                        password: password.text,
+                                        dateOfBirth: birthDate.text,
+                                        bloodType: bloodType.text,
+                                        lastDonateTime: lastDonationDate.text,
+                                        cityId: cityIdProfile!,
+                                        govId: govIdProfile!,
+                                        confirmPassword: confirmPassword.text,
+                                        fcmToken: fcmToken!,
+                                      );
+                                      print("done");
+                                    } else {
+                                      cubit.ChangeCheck();
+                                      print('not done');
+                                    }
+                                  },
+                                  num_hieght: 80.h,
+                                  text_button_name: 'Sign up',
+                                  button_color: mainColor,
+                                  num_border: 30,
+                                  num_fontsize: 20,
+                                  text_fontwwieght: FontWeight.normal,
+                                ),
+                                fallback: (context) => Center(child: CircularProgressIndicator(color: mainColor,),),
                             ),
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.008,

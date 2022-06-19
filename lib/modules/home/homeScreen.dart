@@ -144,10 +144,10 @@ class HomeScreen extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(builder: (context) => Add_Request()),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => AddRequestScreen()),
+                                );
                               },
                               child: Card(
                                 elevation: 5,
@@ -176,10 +176,10 @@ class HomeScreen extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(builder: (context) => EditProfileScreen()),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => EditProfileScreen()),
+                                );
                               },
                               child: Card(
                                 elevation: 3,
