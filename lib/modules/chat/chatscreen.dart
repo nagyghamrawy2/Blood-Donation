@@ -5,10 +5,12 @@ import 'package:blood_bank/shared/cubit/states.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ChatScreen extends StatelessWidget {
   ChatScreen(
@@ -78,8 +80,13 @@ class ChatScreen extends StatelessWidget {
                     color: Colors.black,
                   ),
                   onPressed: () async {
-                    await FlutterPhoneDirectCaller.callNumber(phone!);
-                    // do
+                    final Uri launchuri = Uri(
+                      scheme: 'tel',
+                      path: phone,
+                    );
+                    if (await canLaunchUrl(launchuri)) {
+                      await launchUrl((launchuri));
+                    }
                   },
                 ),
                 IconButton(
