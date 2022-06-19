@@ -61,6 +61,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 AppLoginCubit.get(context).updateFcmUserToken(
                   fcmToken: updateFcmToken,
                 );
+                print("xxxxxxxxxxxxxxxxxx");
+                print(updateFcmToken);
                 navigateAndFinish(context, HomeLayout());
               });
               AppCubit.get(context)..getEducationData()..getGovernorateData()..getDonorData()..getAllRequests()..getMyRequests()..getClosedRequests();

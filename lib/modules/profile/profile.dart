@@ -167,21 +167,6 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text('04'),
-                          Text('donations'),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: 107,
-                      height: 59,
-                      decoration: BoxDecoration(
-                        color: greyColor,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text('${myRequestModel?.requests?.length ?? 0}'),
                           Text('requests'),
@@ -272,8 +257,7 @@ class ProfileScreen extends StatelessWidget {
                   img_height: 35,
                   label_name: 'Sign out',
                   function: () {
-                    myRequestModel?.requests?.clear();
-                    requestModel?.requests?.clear();
+                    cubit.cityRequestItemList.clear();
                     signOut(context);
                   },
                 ),

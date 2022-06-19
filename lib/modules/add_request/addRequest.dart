@@ -28,8 +28,7 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
   TextEditingController expired_dateController = new TextEditingController();
   var formKey = GlobalKey<FormState>();
   int? id;
-  int? govRequestId;
-  int? cityRequestId;
+
   @override
   void initState() {
     AppCubit.get(context).bloodGroup = -1;

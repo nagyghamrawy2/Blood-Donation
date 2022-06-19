@@ -14,6 +14,16 @@ void signOut(context)
   {
     if(value)
     {
+      myRequestModel?.requests?.clear();
+      requestModel?.requests?.clear();
+      govIdProfile = null;
+      cityIdProfile = null;
+      idIndexOfCity = null;
+      idIndexOfCityEditRequest = null;
+      govRequestId = null;
+      cityRequestId = null;
+      governorateItemList.clear();
+      cityItemList.clear();
       Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => LoginScreen()));
     }
   });
@@ -24,6 +34,9 @@ int? govIdProfile;
 int? cityIdProfile;
 int? idIndexOfCity ;
 int? idIndexOfCityEditRequest ;
+
+int? govRequestId;
+int? cityRequestId;
 
 List<Governorates> governorateItemList = [];
 List<Cities> cityItemList = [];
