@@ -68,7 +68,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         (imagePath == null)
                             ? CircleAvatar(
                                 radius: 75,
-                                backgroundImage: NetworkImage(image),
+                                backgroundImage: NetworkImage(imageUserLogin),
                               )
                             : CircleAvatar(
                                 radius: 75,

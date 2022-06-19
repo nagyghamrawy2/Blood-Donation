@@ -34,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                  CircleAvatar(
                   radius: 70.0,
-                   backgroundImage: NetworkImage(image),
+                   backgroundImage: NetworkImage(imageUserLogin),
                 ),
                 const SizedBox(
                   height: 3.0,

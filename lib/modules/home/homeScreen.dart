@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                   Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: NetworkImage(image),
+                        backgroundImage: NetworkImage(imageUserLogin),
                         backgroundColor: Colors.transparent,
                         radius: 50,
                       ),

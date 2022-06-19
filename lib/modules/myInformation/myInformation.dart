@@ -68,7 +68,7 @@ class MyInformationScreen extends StatelessWidget {
                           children: [
                             CircleAvatar(
                               radius: 90,
-                              backgroundImage: NetworkImage(image),
+                              backgroundImage: NetworkImage(imageUserLogin),
                             ),
                             const SizedBox(
                               height: 10,

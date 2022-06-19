@@ -62,7 +62,7 @@ class _FindDonorScreenState extends State<FindDonorScreen> {
                       physics: const BouncingScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) => FindDonorInfo(
-                          image,
+                          "https://blood-bank2022.herokuapp.com/dashboard_files/users_pictures/${cubit.donorModel.users[index].profilePicture}",
                           "${cubit.donorModel.users[index].name}",
                           "${cubit.donorModel.users[index].governorate?.governorateName}",
                           "${cubit.donorModel.users[index].city?.cityName}",
