@@ -90,6 +90,7 @@ class ChatHomeScreen extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     CircleAvatar(
                                       backgroundImage: (snapshots.data.docs[i]
@@ -131,7 +132,7 @@ class ChatHomeScreen extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    Spacer(),
+                                    const Spacer(),
                                     Padding(
                                       padding: EdgeInsets.only(top: 15.h),
                                       child: Text(
