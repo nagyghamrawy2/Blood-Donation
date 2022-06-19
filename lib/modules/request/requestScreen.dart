@@ -64,10 +64,12 @@ class _RequestScreenState extends State<RequestScreen> {
                               child: Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           'Name',
@@ -114,7 +116,8 @@ class _RequestScreenState extends State<RequestScreen> {
                                       ],
                                     ),
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
                                         Text(
                                           '${requestModel?.requests![index].requestExpiredDate}',
@@ -125,22 +128,41 @@ class _RequestScreenState extends State<RequestScreen> {
                                         const Spacer(),
                                         IconButton(
                                           onPressed: () {
-                                            AppCubit.get(context).getMessages(receiverId: requestModel!.requests![index].user!.id.toString());
-                                            if(requestModel!.requests![index].user?.id.toString()==userDataModel?.user?.id.toString())
-                                            {
+                                            AppCubit.get(context).getMessages(
+                                                receiverId: requestModel!
+                                                    .requests![index].user!.id
+                                                    .toString());
+                                            if (requestModel!
+                                                    .requests![index].user?.id
+                                                    .toString() ==
+                                                userDataModel?.user?.id
+                                                    .toString()) {
                                               return;
-                                            }
-                                            else {
+                                            } else {
                                               Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ChatScreen(
-                                                        receiverId: requestModel!.requests![index].user?.id.toString(),
-                                                        name: requestModel!.requests![index].user?.name,
-                                                        phone: requestModel!.requests![index].user?.phoneNumber,
-                                                      )),
-                                            );
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ChatScreen(
+                                                          receiverId:
+                                                              requestModel!
+                                                                  .requests![
+                                                                      index]
+                                                                  .user
+                                                                  ?.id
+                                                                  .toString(),
+                                                          name: requestModel!
+                                                              .requests![index]
+                                                              .user
+                                                              ?.name,
+                                                          phone: requestModel!
+                                                              .requests![index]
+                                                              .user
+                                                              ?.phoneNumber,
+                                                          Image:
+                                                              'https://blood-bank2022.herokuapp.com/dashboard_files/users_pictures/${requestModel!.requests![index].user?.profilePicture}',
+                                                        )),
+                                              );
                                             }
                                           },
                                           icon: const Icon(
@@ -154,9 +176,9 @@ class _RequestScreenState extends State<RequestScreen> {
                                           child: const Text(
                                             'DONATE',
                                             style: TextStyle(
-                                              fontSize: 18,
-                                              color: mainColor,
-                                              fontWeight: FontWeight.bold),
+                                                fontSize: 18,
+                                                color: mainColor,
+                                                fontWeight: FontWeight.bold),
                                           ),
                                         ),
                                       ],
@@ -200,10 +222,12 @@ class _RequestScreenState extends State<RequestScreen> {
                               child: Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           'Name',
@@ -250,7 +274,8 @@ class _RequestScreenState extends State<RequestScreen> {
                                       ],
                                     ),
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
                                         Text(
                                           '${closedRequestModel?.requests![index].requestExpiredDate}',
@@ -261,21 +286,42 @@ class _RequestScreenState extends State<RequestScreen> {
                                         const Spacer(),
                                         IconButton(
                                           onPressed: () {
-                                            AppCubit.get(context).getMessages(receiverId: closedRequestModel!.requests![index].user!.id.toString());
-                                            if(requestModel!.requests![index].user?.id.toString()==userDataModel?.user?.id.toString())
-                                            {
+                                            AppCubit.get(context).getMessages(
+                                                receiverId: closedRequestModel!
+                                                    .requests![index].user!.id
+                                                    .toString());
+                                            if (requestModel!
+                                                    .requests![index].user?.id
+                                                    .toString() ==
+                                                userDataModel?.user?.id
+                                                    .toString()) {
                                               return;
-                                            }
-                                            else {
+                                            } else {
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         ChatScreen(
-                                                          receiverId: requestModel!.requests![index].user?.id.toString(),
-                                                          name: requestModel!.requests![index].user?.name,
-                                                          phone: requestModel!.requests![index].user?.phoneNumber,
-                                                        )),
+                                                            receiverId:
+                                                                requestModel!
+                                                                    .requests![
+                                                                        index]
+                                                                    .user
+                                                                    ?.id
+                                                                    .toString(),
+                                                            name:
+                                                                requestModel!
+                                                                    .requests![
+                                                                        index]
+                                                                    .user
+                                                                    ?.name,
+                                                            phone: requestModel!
+                                                                .requests![
+                                                                    index]
+                                                                .user
+                                                                ?.phoneNumber,
+                                                            Image:
+                                                                'https://blood-bank2022.herokuapp.com/dashboard_files/users_pictures/${requestModel!.requests![index].user?.profilePicture}')),
                                               );
                                             }
                                           },
