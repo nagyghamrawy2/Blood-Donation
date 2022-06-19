@@ -151,28 +151,19 @@ class _SignUpState extends State<SignUpScreen> {
                               hintText: 'Enter your password',
                               text: 'Password',
                               controller: password,
-                              keyboardtype: TextInputType.emailAddress,
+                              keyboardtype: TextInputType.visiblePassword,
                               validatorFunction: (value){
-                                // return "${cubit.registerModel?.errors?.password}" ;
-                                FlutterPwValidator(
-                                    controller: password,
-                                    minLength: 8,
-                                    uppercaseCharCount: 1,
-                                    numericCharCount: 1,
-                                    specialCharCount: 1,
-                                    width: 400,
-                                    height: 150,
-                                    onSuccess: (){},
-                                );
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter your password';
                                 }
-                                // if(value.length <= 8 ){
-                                //   return "The password must be at least 8 characters";
-                                // }
-                                // if(!RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})").hasMatch(value)){
-                                //   return "Password must contain at least one number,\n both uppercase and lowercase letters \n and symbol";
-                                // }
+                                if(value.length <8){
+                                  return 'Password must be more than 8 characters';
+                                }else{
+                                  if(!validatePassword(value)){
+                                    return 'Password must contain upper,lower,digit and Special character';
+                                  }
+                                }
+
                               },
                               isPasswordField: true,
                               secure: cubit.obsecure,
@@ -190,7 +181,6 @@ class _SignUpState extends State<SignUpScreen> {
                               controller: confirmPassword,
                               keyboardtype: TextInputType.visiblePassword,
                               validatorFunction: (value){
-                                // return "${cubit.registerModel?.errors?.confirmPassword}" ;
                                 if (value == null || value.isEmpty) {
                                   return 'Please re-enter password again';
                                 }

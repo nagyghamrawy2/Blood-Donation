@@ -4,6 +4,7 @@ import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../shared/Constant.dart';
 import '../../shared/components/components.dart';
 
 class CreateNewPasswordScreen extends StatelessWidget {
@@ -106,6 +107,13 @@ class CreateNewPasswordScreen extends StatelessWidget {
                         validatorFunction: (value){
                           if(value ==null || value.isEmpty){
                             return 'Password must not be empty';
+                          }
+                          if(value.length <8){
+                            return 'Password must be more than 8 characters';
+                          }else{
+                            if(!validatePassword(value)){
+                              return 'Password must contain upper,lower,digit and Special character';
+                            }
                           }
                         },
                         suffixFunction: (){
