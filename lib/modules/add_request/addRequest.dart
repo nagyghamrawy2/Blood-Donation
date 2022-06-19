@@ -456,37 +456,40 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.02,
                     ),
-                    Buttons_without_icon(
-                      num_hieght: MediaQuery.of(context).size.height * 0.07,
-                      text_button_name: "Post a request",
-                      button_color: const Color(0xffED394A),
-                      num_border: 12.r,
-                      num_fontsize: 25.sp,
-                      text_fontwwieght: FontWeight.normal,
-                      function: () {
-                        if (formKey.currentState!.validate()) {
-                          // cubit.changeBloodCheck();
+                    ConditionalBuilder(
+                        condition: state is! AppLoadingPostRequestsDataState,
+                        builder: (context) => Buttons_without_icon(
+                          num_hieght: MediaQuery.of(context).size.height * 0.07,
+                          text_button_name: "Post a request",
+                          button_color: const Color(0xffED394A),
+                          num_border: 12.r,
+                          num_fontsize: 25.sp,
+                          text_fontwwieght: FontWeight.normal,
+                          function: () {
+                            if (formKey.currentState!.validate()) {
+                              // cubit.changeBloodCheck();
 
-                          cubit.postRequest(
-                            title: titleController.text,
-                            description: descriptionController.text,
-                            phone: phoneController.text,
-                            numberOfBags: bagsController.text,
-                            expiredDate: expired_dateController.text,
-                            bloodType: cubit.bloodGroupItem[cubit.bloodGroup],
-                            govId: govRequestId.toString(),
-                            cityId: cityRequestId.toString(),
-                            hospitalAddress: hospitalAddressController.text,
-                            hospitalName: hospitalNameController.text,
-                          );
-                          Navigator.pop(context);
-                          print('done');
-                        } else {
-                          cubit.changeBloodCheck();
-                          print('not done');
-                        }
-                      },
-                    ),
+                              cubit.postRequest(
+                                title: titleController.text,
+                                description: descriptionController.text,
+                                phone: phoneController.text,
+                                numberOfBags: bagsController.text,
+                                expiredDate: expired_dateController.text,
+                                bloodType: cubit.bloodGroupItem[cubit.bloodGroup],
+                                govId: govRequestId.toString(),
+                                cityId: cityRequestId.toString(),
+                                hospitalAddress: hospitalAddressController.text,
+                                hospitalName: hospitalNameController.text,
+                              );
+                              Navigator.pop(context);
+                              print('done');
+                            } else {
+                              cubit.changeBloodCheck();
+                              print('not done');
+                            }
+                          },
+                        ),
+                        fallback: (context) => Center(child: CircularProgressIndicator(color: mainColor,),)),
                   ],
                 ),
               ),

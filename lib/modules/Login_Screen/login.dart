@@ -8,6 +8,7 @@ import 'package:blood_bank/shared/Network/local/Cache_helper.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -134,14 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           controllerName: passwordcontroller,
                           keyboardType: TextInputType.visiblePassword,
                           obsecure: AppLoginCubit.get(context).obsecure,
-                          onFieldSubmitted: (value) {
-                            if (formKey.currentState!.validate()) {
-                              AppLoginCubit.get(context).userLogin(
-                                email: emailcontroller.text,
-                                Password: passwordcontroller.text,
-                              );
-                            }
-                          },
+
                           hintText: 'Enter your Password',
                           text_label: 'Password',
                           num_border: 10,
@@ -193,26 +187,30 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(
                         height: 60,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 100.0),
-                        child: Buttons_without_icon(
-                            function: () {
+                     ConditionalBuilder(
+                         condition: state is! AppLoginLoadingState ,
+                         builder: (context) =>  Padding(
+                           padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                           child: Buttons_without_icon(
+                               function: () {
 
-                              if (formKey.currentState!.validate()) {
-                                AppLoginCubit.get(context).userLogin(
-                                  email: emailcontroller.text,
-                                  Password: passwordcontroller.text,
-                                );
-                                print ("done");
-                              }
-                            },
-                            num_hieght: 52,
-                            text_button_name: 'Login',
-                            button_color: mainColor,
-                            num_border: 25,
-                            num_fontsize: 20,
-                            text_fontwwieght: FontWeight.normal),
-                      )
+                                 if (formKey.currentState!.validate()) {
+                                   AppLoginCubit.get(context).userLogin(
+                                     email: emailcontroller.text,
+                                     Password: passwordcontroller.text,
+                                   );
+                                   print ("done");
+                                 }
+                               },
+                               num_hieght: 52,
+                               text_button_name: 'Login',
+                               button_color: mainColor,
+                               num_border: 25,
+                               num_fontsize: 20,
+                               text_fontwwieght: FontWeight.normal),
+                         ),
+                         fallback: (context) => Center(child: CircularProgressIndicator(color: mainColor,),)
+                     ),
                     ],
                   ),
                 ),
