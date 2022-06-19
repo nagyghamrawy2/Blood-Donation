@@ -15,7 +15,8 @@ class ChatScreen extends StatelessWidget {
       {Key? key,
       required this.receiverId,
       required this.name,
-      required this.phone})
+      required this.phone,
+      required this.Image})
       : super(key: key);
 
   var messageController = TextEditingController();
@@ -24,6 +25,7 @@ class ChatScreen extends StatelessWidget {
   String? receiverId;
   String? name;
   String? phone;
+  String? Image;
   var collection = FirebaseFirestore.instance
       .collection('Chat')
       .doc(userDataModel?.user?.id.toString())
@@ -37,21 +39,30 @@ class ChatScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
-            // floatingActionButton: FloatingActionButton(
-            //   child: const Icon(Icons.arrow_downward),
-            //   onPressed: () {
-            //     listview.animateTo(listview.position.maxScrollExtent,
-            //         duration: const Duration(seconds: 1),
-            //         curve: (Curves.easeOut));
-            //   },
-            // ),
-            // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+            floatingActionButton: Padding(
+              padding: const EdgeInsets.only(bottom: 55),
+              child: SizedBox(
+                width: 30,
+                child: FloatingActionButton(
+                  child: const Icon(Icons.arrow_downward),
+                  onPressed: () {
+                    listview.animateTo(listview.position.maxScrollExtent,
+                        duration: const Duration(seconds: 1),
+                        curve: (Curves.easeOut));
+                  },
+                ),
+              ),
+            ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
             appBar: AppBar(
               backgroundColor: const Color.fromRGBO(237, 57, 74, 1),
               title: Row(
                 children: [
-                  const CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/pp.png"),
+                  CircleAvatar(
+                    backgroundImage: (Image != null)
+                        ? NetworkImage(Image!)
+                        : const NetworkImage(
+                            'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg'),
                     radius: 25,
                   ),
                   const SizedBox(
@@ -103,112 +114,116 @@ class ChatScreen extends StatelessWidget {
                             ),
                         itemCount: AppCubit.get(context).messages.length),
                   ),
-                  Container(
-                    margin: const EdgeInsets.all(15.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(48),
-                            ),
-                            height: 55,
-                            child: TextFormField(
-                              controller: messageController,
-                              decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(48),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(48),
+                          ),
+                          height: 45,
+                          child: TextFormField(
+                            controller: messageController,
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 1,
                                   ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(48),
-                                  ),
-                                  hintText: "Write a reply...",
-                                  hintStyle: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold)),
-                            ),
+                                  borderRadius: BorderRadius.circular(48),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(48),
+                                ),
+                                hintText: "Write a reply...",
+                                hintStyle: const TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold)),
                           ),
                         ),
-                        Container(
-                          padding: const EdgeInsets.only(left: 18),
-                          decoration:
-                              const BoxDecoration(shape: BoxShape.circle),
-                          child: GestureDetector(
-                            child: const Icon(
-                              Icons.send,
-                              size: 40,
-                            ),
-                            onTap: () async {
-                              if (messageController.text == "") {
-                                return;
-                              } else {
-                                var querySnapshot = await collection.get();
-                                for (var queryDocumentSnapshot
-                                    in querySnapshot.docs) {
-                                  Map<String, dynamic> data =
-                                      queryDocumentSnapshot.data();
-                                  if (data['receiverId'].toString() ==
-                                      receiverId.toString()) {
-                                    Id = queryDocumentSnapshot.id;
-                                    found = true;
-                                  }
-                                }
-                                if (found == true) {
-                                  await FirebaseFirestore.instance
-                                      .collection('Chat')
-                                      .doc(userDataModel?.user?.id.toString())
-                                      .collection("Id")
-                                      .doc(Id)
-                                      .update(<String, dynamic>{
-                                    "date": date,
-                                    "message": messageController.text,
-                                  });
-                                } else {
-                                  await FirebaseFirestore.instance
-                                      .collection('Chat')
-                                      .doc(userDataModel?.user?.id.toString())
-                                      .collection("Id")
-                                      .add(<String, dynamic>{
-                                    "username": name,
-                                    "receiverId": receiverId,
-                                    "date": date,
-                                    "phone": phone,
-                                    "message": messageController.text,
-                                  });
-                                  await FirebaseFirestore.instance
-                                      .collection('Chat')
-                                      .doc(receiverId.toString())
-                                      .collection("Id")
-                                      .add(<String, dynamic>{
-                                    "username": userDataModel?.user?.name,
-                                    "receiverId":
-                                        userDataModel?.user?.id.toString(),
-                                    "date": date,
-                                    "phone": userDataModel?.user?.phoneNumber
-                                        .toString(),
-                                    "message": messageController.toString(),
-                                  });
-                                  found = false;
-                                }
-
-                                AppCubit.get(context).sendMessage(
-                                    receiverId: receiverId.toString(),
-                                    date: date,
-                                    text: messageController.text);
-                                FirebaseMessaging.instance
-                                    .getToken()
-                                    .then((value) {});
-                                AppCubit.get(context).getMessages(
-                                    receiverId: receiverId.toString());
-                              }
-                            },
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(left: 18),
+                        decoration: const BoxDecoration(shape: BoxShape.circle),
+                        child: GestureDetector(
+                          child: const Icon(
+                            Icons.send,
+                            size: 40,
                           ),
-                        )
-                      ],
-                    ),
+                          onTap: () async {
+                            if (messageController.text == "") {
+                              return;
+                            } else {
+                              var querySnapshot = await collection.get();
+                              for (var queryDocumentSnapshot
+                                  in querySnapshot.docs) {
+                                Map<String, dynamic> data =
+                                    queryDocumentSnapshot.data();
+                                if (data['receiverId'].toString() ==
+                                    receiverId.toString()) {
+                                  Id = queryDocumentSnapshot.id;
+                                  found = true;
+                                }
+                              }
+                              if (found == true) {
+                                await FirebaseFirestore.instance
+                                    .collection('Chat')
+                                    .doc(userDataModel?.user?.id.toString())
+                                    .collection("Id")
+                                    .doc(Id)
+                                    .update(<String, dynamic>{
+                                  "date": date,
+                                  "message": messageController.text,
+                                  "image": Image
+                                });
+                              } else {
+                                await FirebaseFirestore.instance
+                                    .collection('Chat')
+                                    .doc(userDataModel?.user?.id.toString())
+                                    .collection("Id")
+                                    .add(<String, dynamic>{
+                                  "username": name,
+                                  "receiverId": receiverId,
+                                  "date": date,
+                                  "phone": phone,
+                                  "message": messageController.text,
+                                  "image": Image
+                                });
+                                await FirebaseFirestore.instance
+                                    .collection('Chat')
+                                    .doc(receiverId.toString())
+                                    .collection("Id")
+                                    .add(<String, dynamic>{
+                                  "username": userDataModel?.user?.name,
+                                  "receiverId":
+                                      userDataModel?.user?.id.toString(),
+                                  "date": date,
+                                  "phone": userDataModel?.user?.phoneNumber
+                                      .toString(),
+                                  "message": messageController.toString(),
+                                  "image": userDataModel?.user?.profilePicture
+                                      .toString(),
+                                });
+                                found = false;
+                              }
+
+                              AppCubit.get(context).sendMessage(
+                                  receiverId: receiverId.toString(),
+                                  date: date,
+                                  text: messageController.text);
+                              FirebaseMessaging.instance
+                                  .getToken()
+                                  .then((value) {});
+                              AppCubit.get(context).getMessages(
+                                  receiverId: receiverId.toString());
+                            }
+                            listview.animateTo(
+                                listview.position.maxScrollExtent,
+                                duration: const Duration(seconds: 1),
+                                curve: (Curves.easeOut));
+                          },
+                        ),
+                      )
+                    ],
                   ),
                 ],
               ),

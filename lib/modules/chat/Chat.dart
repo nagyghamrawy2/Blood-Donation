@@ -1,6 +1,7 @@
 import 'package:blood_bank/modules/chat/chatscreen.dart';
 import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
+import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -36,176 +37,117 @@ class ChatHomeScreen extends StatelessWidget {
                   return ListView.separated(
                       itemCount: snapshots.data.docs.length,
                       itemBuilder: (context, i) {
-                        if (snapshots.data.docs[i]['receiverId'].toString() !=
-                            userDataModel?.user?.id.toString()) {
-                          return GestureDetector(
-                            onTap: () async {
-                              await FirebaseFirestore.instance
-                                  .collection('Chat')
-                                  .doc(userDataModel?.user?.id.toString())
-                                  .collection("Id")
-                                  .orderBy("date")
-                                  .get();
-                              AppCubit.get(context).getMessages(
-                                  receiverId: snapshots
-                                      .data.docs[i]['receiverId']
-                                      .toString());
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ChatScreen(
-                                          receiverId: snapshots
-                                              .data.docs[i]['receiverId']
-                                              .toString(),
-                                          name: snapshots
-                                              .data.docs[i]['username']
-                                              .toString(),
-                                          phone: snapshots.data.docs[i]['phone']
-                                              .toString(),
-                                        )),
-                              );
-                            },
-                            child: Row(
-                              children: [
-                                const CircleAvatar(
-                                  backgroundImage: AssetImage(
-                                    "assets/images/pp.png",
+                        return GestureDetector(
+                          onTap: () async {
+                            await FirebaseFirestore.instance
+                                .collection('Chat')
+                                .doc(userDataModel?.user?.id.toString())
+                                .collection("Id")
+                                .orderBy("date")
+                                .get();
+                            AppCubit.get(context).getMessages(
+                                receiverId: snapshots.data.docs[i]['receiverId']
+                                    .toString());
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChatScreen(
+                                        receiverId: snapshots
+                                            .data.docs[i]['receiverId']
+                                            .toString(),
+                                        name: snapshots.data.docs[i]['username']
+                                            .toString(),
+                                        phone: snapshots.data.docs[i]['phone']
+                                            .toString(),
+                                        Image: snapshots.data.docs[i]['image']
+                                            .toString(),
+                                      )),
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.1),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: const Offset(
+                                        0, 3), // changes position of shadow
                                   ),
-                                  radius: 40,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Column(
+                                ],
+                              ),
+                              height: 110,
+                              width: double.infinity,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const SizedBox(
-                                      height: 10,
+                                    CircleAvatar(
+                                      backgroundImage: (snapshots.data.docs[i]
+                                                  ["image"] !=
+                                              null)
+                                          ? NetworkImage(snapshots
+                                              .data.docs[i]['image']
+                                              .toString())
+                                          : const NetworkImage(
+                                              'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg'),
+                                      radius: 60.r,
                                     ),
-                                    Row(
+                                    SizedBox(
+                                      width: 15.w,
+                                    ),
+                                    Column(
                                       children: [
+                                        SizedBox(
+                                          height: 15.h,
+                                        ),
                                         Text(
                                           snapshots.data.docs[i]['username'],
                                           style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black,
-                                            fontSize: 16,
+                                            fontSize: 20,
                                           ),
                                         ),
                                         SizedBox(
-                                          width: 90.w,
+                                          height: 25.h,
                                         ),
                                         Text(
-                                          snapshots.data.docs[i]['date'],
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-                                    Text(
-                                      "Me: " +
                                           snapshots.data.docs[i]['message'],
-                                      style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          );
-                        } else {
-                          return GestureDetector(
-                            onTap: () async {
-                              await FirebaseFirestore.instance
-                                  .collection('Chat')
-                                  .doc(userDataModel?.user?.id.toString())
-                                  .collection("Id")
-                                  .orderBy("date")
-                                  .get();
-                              AppCubit.get(context).getMessages(
-                                  receiverId: snapshots
-                                      .data.docs[i]['receiverId']
-                                      .toString());
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ChatScreen(
-                                          receiverId: snapshots
-                                              .data.docs[i]['receiverId']
-                                              .toString(),
-                                          name: snapshots
-                                              .data.docs[i]['username']
-                                              .toString(),
-                                          phone: snapshots.data.docs[i]['phone']
-                                              .toString(),
-                                        )),
-                              );
-                            },
-                            child: Row(
-                              children: [
-                                const CircleAvatar(
-                                  backgroundImage: AssetImage(
-                                    "assets/images/pp.png",
-                                  ),
-                                  radius: 40,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          snapshots.data.docs[i]['username'],
                                           style: const TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 90.w,
-                                        ),
-                                        Text(
-                                          snapshots.data.docs[i]['date'],
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16,
+                                            color: Colors.black26,
+                                            fontSize: 15,
                                           ),
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
-                                      height: 20.h,
-                                    ),
-                                    Text(
-                                      snapshots.data.docs[i]['username'] +
-                                          ": " +
-                                          snapshots.data.docs[i]['message'],
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                        fontSize: 10,
+                                    Spacer(),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 15.h),
+                                      child: Text(
+                                        snapshots.data.docs[i]['date'],
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
-                              ],
+                              ),
                             ),
-                          );
-                        }
+                          ),
+                        );
                       },
                       separatorBuilder: (context, i) {
                         return const Divider(
