@@ -90,7 +90,6 @@ class ChatHomeScreen extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     CircleAvatar(
                                       backgroundImage: (snapshots.data.docs[i]
@@ -122,27 +121,28 @@ class ChatHomeScreen extends StatelessWidget {
                                         SizedBox(
                                           height: 25.h,
                                         ),
-                                        Text(
-                                          snapshots.data.docs[i]['message'],
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black26,
-                                            fontSize: 15,
-                                          ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              snapshots.data.docs[i]['message'],
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black26,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                            Text(
+                                              snapshots.data.docs[i]['date'],
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                    const Spacer(),
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 15.h),
-                                      child: Text(
-                                        snapshots.data.docs[i]['date'],
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ),
+
                                   ],
                                 ),
                               ),
