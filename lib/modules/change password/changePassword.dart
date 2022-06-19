@@ -36,9 +36,12 @@ class ChangePasswordScreen extends StatelessWidget {
                   text: state.changePassword.message,
                   state: ToastStates.SUCCESS);
             } else {
-              ShowToast(
-                  text: 'Please make sure the data entered is correct',
-                  state: ToastStates.ERROR);
+              if(state.changePassword.message != null){
+                ShowToast(text: "${state.changePassword.message}", state: ToastStates.ERROR);
+              }
+              // ShowToast(
+              //     text: 'Please make sure the data entered is correct',
+              //     state: ToastStates.ERROR);
             }
           }
         },
