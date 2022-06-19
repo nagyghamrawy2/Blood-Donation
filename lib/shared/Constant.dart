@@ -39,4 +39,13 @@ String image = userDataModel?.user?.profilePicture != null
     ? 'https://blood-bank2022.herokuapp.com/dashboard_files/users_pictures/${userDataModel?.user?.profilePicture}'
     : 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg';
 
+RegExp regex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
 
+bool validatePassword(String pass){
+  String _password = pass.trim();
+  if(regex.hasMatch(_password)){
+    return true;
+  }else{
+    return false;
+  }
+}

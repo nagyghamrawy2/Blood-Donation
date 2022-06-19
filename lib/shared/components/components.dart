@@ -60,7 +60,8 @@ class Textformfield_with_border extends StatelessWidget {
     required this.num_border,
     this.suffixFunction,
     this.onFieldSubmitted,
-    required this.validatorText,
+    // required this.validatorText,
+    this.validatorFunction,
     required this.haveIcon,
     this.iconName,
   });
@@ -72,7 +73,8 @@ class Textformfield_with_border extends StatelessWidget {
   late String hintText;
   late String text_label;
   late double num_border;
-  late String validatorText;
+  // late String validatorText;
+  FormFieldValidator<String>? validatorFunction;
   Function? suffixFunction;
   Function? onFieldSubmitted;
 
@@ -90,11 +92,7 @@ class Textformfield_with_border extends StatelessWidget {
         onFieldSubmitted!(value);
       }
       ,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return validatorText;
-        }
-      },
+      validator: validatorFunction,
       decoration: InputDecoration(
         hintText: hintText,
         floatingLabelBehavior: FloatingLabelBehavior.always,

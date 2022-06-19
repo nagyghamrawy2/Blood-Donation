@@ -9,6 +9,7 @@ import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/styles/colors.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -123,7 +124,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           num_border: 10,
                           haveIcon: true,
                           iconName: 'assets/images/emaillogin.png',
-                          validatorText: 'Email address must not empty',
+                          validatorFunction: (value){
+                            if(value ==null || value.isEmpty){
+                              return 'Email address must not be empty';
+                            }
+                            if(!EmailValidator.validate(value)){
+                              return 'Invalid Email address';
+                            }
+                          },
                         ),
                       ),
                       const SizedBox(
@@ -141,7 +149,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           num_border: 10,
                           haveIcon: true,
                           isPasswordField: true,
-                          validatorText: 'Password must be not empty',
+                          validatorFunction: (value){
+                            if(value ==null || value.isEmpty){
+                              return 'Password must not be empty';
+                            }
+                          },
                           suffixFunction: () {
                             AppLoginCubit.get(context).changePasswordStatus();
                           },

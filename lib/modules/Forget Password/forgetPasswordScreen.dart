@@ -76,7 +76,11 @@ class ForgetPasswordScreen extends StatelessWidget {
                       hintText: 'Enter your email',
                       text_label: 'Email address',
                       num_border: 10,
-                      validatorText: 'Email address must not be empty',
+                      validatorFunction: (value){
+                        if(value ==null || value.isEmpty){
+                          return 'Email address must not be empty';
+                        }
+                      },
                       haveIcon: false,
                     ),
                   ),

@@ -49,20 +49,9 @@ class HomeScreen extends StatelessWidget {
                   Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: NetworkImage('https://blood-bank2022.herokuapp.com/dashboard_files/users_pictures/${userDataModel?.user?.profilePicture}'),
+                        backgroundImage: NetworkImage(image),
                         backgroundColor: Colors.transparent,
                         radius: 50,
-                      //  child: CachedNetworkImage(
-                      //    errorWidget:
-                      //        (context, url, error) =>
-                      //        Icon(
-                      //          Icons.error,
-                      //          size: 60,
-                      //        ),
-                      //    imageUrl:
-                      //    '${image}',
-                      //    fit: BoxFit.cover,
-                      //  ),
                       ),
                       const SizedBox(width: 5,),
                       Container(

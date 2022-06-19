@@ -42,9 +42,6 @@ class MyInformationScreen extends StatelessWidget {
               ? '${userDataModel?.user?.height} CM'
               : '',
         ];
-        // String image = userDataModel?.user?.profilePicture != null
-        //     ? '${userDataModel?.user?.profilePicture}'
-        //     : 'assets/images/noImage.png';
         return Scaffold(
           appBar: AppBar(
             title: const Text(
@@ -71,7 +68,7 @@ class MyInformationScreen extends StatelessWidget {
                           children: [
                             CircleAvatar(
                               radius: 90,
-                              backgroundImage: NetworkImage('https://blood-bank2022.herokuapp.com/dashboard_files/users_pictures/${userDataModel?.user?.profilePicture}',),
+                              backgroundImage: NetworkImage(image),
                             ),
                             const SizedBox(
                               height: 10,

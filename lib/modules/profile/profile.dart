@@ -34,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                  CircleAvatar(
                   radius: 70.0,
-                  backgroundImage:  NetworkImage('https://blood-bank2022.herokuapp.com/dashboard_files/users_pictures/${userDataModel?.user?.profilePicture}'),
+                   backgroundImage: NetworkImage(image),
                 ),
                 const SizedBox(
                   height: 3.0,

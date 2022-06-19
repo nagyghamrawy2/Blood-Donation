@@ -110,7 +110,11 @@ class ChangePasswordScreen extends StatelessWidget {
                           text_label: 'Old Password',
                           num_border: 10,
                           isPasswordField: true,
-                          validatorText: 'Password must not be empty',
+                          validatorFunction: (value){
+                            if(value ==null || value.isEmpty){
+                              return 'Password must not be empty';
+                            }
+                          },
                           suffixFunction: () {
                             AppChangePasswordCubit.get(context)
                                 .changePasswordStatus();
@@ -129,7 +133,11 @@ class ChangePasswordScreen extends StatelessWidget {
                           text_label: 'New Password',
                           num_border: 10,
                           isPasswordField: true,
-                          validatorText: 'Password must not be empty',
+                          validatorFunction: (value){
+                            if(value ==null || value.isEmpty){
+                              return 'Password must not be empty';
+                            }
+                          },
                           suffixFunction: () {
                             AppChangePasswordCubit.get(context)
                                 .changeNewPasswordStatus();
@@ -158,7 +166,14 @@ class ChangePasswordScreen extends StatelessWidget {
                           text_label: 'Confirm New Password',
                           num_border: 10,
                           isPasswordField: true,
-                          validatorText: 'Password must not be empty',
+                          validatorFunction: (value){
+                            if(value ==null || value.isEmpty){
+                              return 'Password must not be empty';
+                            }
+                            if(value != Newpasswordcontroller.text){
+                              return "Password does not match";
+                            }
+                          },
                           suffixFunction: () {
                             AppChangePasswordCubit.get(context)
                                 .changeConfirmPasswordStatus();

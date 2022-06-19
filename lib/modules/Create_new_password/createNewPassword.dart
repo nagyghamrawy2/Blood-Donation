@@ -81,7 +81,11 @@ class CreateNewPasswordScreen extends StatelessWidget {
                         text_label: 'New Password',
                         num_border: 10,
                         isPasswordField: true,
-                        validatorText: 'Password must not be empty',
+                        validatorFunction: (value){
+                          if(value ==null || value.isEmpty){
+                            return 'Password must not be empty';
+                          }
+                        },
                         suffixFunction: ()
                         {
                           cubit.changePasswordStatus();
@@ -99,7 +103,11 @@ class CreateNewPasswordScreen extends StatelessWidget {
                         text_label: 'Confirm Password',
                         num_border: 10,
                         isPasswordField: true,
-                        validatorText: 'Password must not be empty',
+                        validatorFunction: (value){
+                          if(value ==null || value.isEmpty){
+                            return 'Password must not be empty';
+                          }
+                        },
                         suffixFunction: (){
                           cubit.changePasswordStatus();
                         },

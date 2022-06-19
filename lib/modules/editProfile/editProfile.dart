@@ -68,7 +68,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         (imagePath == null)
                             ? CircleAvatar(
                                 radius: 75,
-                                backgroundImage: NetworkImage('https://blood-bank2022.herokuapp.com/dashboard_files/users_pictures/${userDataModel?.user?.profilePicture}'),
+                                backgroundImage: NetworkImage(image),
                               )
                             : CircleAvatar(
                                 radius: 75,
@@ -622,67 +622,70 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 height: 20,
                               ),
                               ConditionalBuilder(
-                                  condition: state is! AppLoadingUpdateUserDataState || state is! AppLoadingUpdatePictureUserDataState ,
-                                  builder: (context) => Buttons_without_icon(
-                                    function: () {
-                                      if (formKey.currentState!.validate() &&
-                                          imagePath == null) {
-                                        cubit.updateUserData(
-                                          name: name.text,
-                                          email: emailAddress.text,
-                                          phone: phone.text,
-                                          dateOfBirth: birthDate.text,
-                                          bloodType: bloodType.text,
-                                          govId: govIdProfile!,
-                                          cityId: cityIdProfile!,
-                                          height: int.parse(height.text),
-                                          weight: weight.text,
-                                          lastDonateDate: donationDate.text,
-                                          //profilePicture:  x,
-                                        );
-                                        // Upload();
+                                condition: state
+                                        is! AppLoadingUpdateUserDataState ||
+                                    state
+                                        is! AppLoadingUpdatePictureUserDataState,
+                                builder: (context) => Buttons_without_icon(
+                                  function: () {
+                                    if (formKey.currentState!.validate() &&
+                                        imagePath == null) {
+                                      cubit.updateUserData(
+                                        name: name.text,
+                                        email: emailAddress.text,
+                                        phone: phone.text,
+                                        dateOfBirth: birthDate.text,
+                                        bloodType: bloodType.text,
+                                        govId: govIdProfile!,
+                                        cityId: cityIdProfile!,
+                                        height: int.parse(height.text),
+                                        weight: weight.text,
+                                        lastDonateDate: donationDate.text,
+                                        //profilePicture:  x,
+                                      );
+                                      // Upload();
 
-                                        print("hhhhhh");
-                                        // cubit.updateProfilePictureUserData(
-                                        //   profilePicture: x,
-                                        // )
+                                      print("hhhhhh");
+                                      // cubit.updateProfilePictureUserData(
+                                      //   profilePicture: x,
+                                      // )
 
-                                        print(govIdProfile);
-                                        print(cityIdProfile);
-                                        // print(idIndexOfCity);
-                                        // CacheHelper.SaveData(key: 'govId', value: govIdConstant);
-                                        // CacheHelper.SaveData(key: 'cityId', value: cityIdConstant);
-                                        print('done');
-                                      } else if
-                                      (formKey.currentState!.validate() &&
-                                          imagePath != null) {
-                                        cubit.uploadPP(
-                                            imagePath!,
-                                            name.text,
-                                            emailAddress.text,
-                                            phone.text,
-                                            birthDate.text,
-                                            bloodType.text,
-                                            govIdProfile!,
-                                            cityIdProfile!,
-                                            weight.text,
-                                            int.parse(height.text),
-                                            donationDate.text);
+                                      print(govIdProfile);
+                                      print(cityIdProfile);
+                                      // print(idIndexOfCity);
+                                      // CacheHelper.SaveData(key: 'govId', value: govIdConstant);
+                                      // CacheHelper.SaveData(key: 'cityId', value: cityIdConstant);
+                                      print('done');
+                                    } else if (formKey.currentState!
+                                            .validate() &&
+                                        imagePath != null) {
+                                      cubit.uploadPP(
+                                          imagePath!,
+                                          name.text,
+                                          emailAddress.text,
+                                          phone.text,
+                                          birthDate.text,
+                                          bloodType.text,
+                                          govIdProfile!,
+                                          cityIdProfile!,
+                                          weight.text,
+                                          int.parse(height.text),
+                                          donationDate.text);
 
-                                        print("done with image");
-                                      }
-                                      else {
-                                        print('not done');
-                                      }
-                                    },
-                                    num_hieght: 52,
-                                    text_button_name: 'Save data',
-                                    button_color: mainColor,
-                                    num_border: 12,
-                                    num_fontsize: 20,
-                                    text_fontwwieght: FontWeight.normal,
-                                  ),
-                                  fallback: (context) => Center(child: CircularProgressIndicator()),
+                                      print("done with image");
+                                    } else {
+                                      print('not done');
+                                    }
+                                  },
+                                  num_hieght: 52,
+                                  text_button_name: 'Save data',
+                                  button_color: mainColor,
+                                  num_border: 12,
+                                  num_fontsize: 20,
+                                  text_fontwwieght: FontWeight.normal,
+                                ),
+                                fallback: (context) =>
+                                    Center(child: CircularProgressIndicator()),
                               ),
                               const SizedBox(
                                 height: 25,
@@ -704,6 +707,4 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       },
     );
   }
-
-
 }

@@ -303,7 +303,6 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                         decoration: const InputDecoration(
                          border: InputBorder.none,
                           contentPadding: EdgeInsets.all(15),
-
                         ),
                         icon: const Icon(Icons.keyboard_arrow_down),
                         items: governorateItemList.asMap().entries.map((items) {
@@ -313,8 +312,7 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                           );
                         }).toList(),
                         onChanged: (newValue) {
-                          id = governorateItemList.indexWhere(
-                                  (element) => element.governorateName == newValue);
+                          id = governorateItemList.indexWhere((element) => element.governorateName == newValue);
                           govRequestId = governorateItemList[id!].id;
                           cubit.getCityRequestData(id: govRequestId!);
                           print(id);
