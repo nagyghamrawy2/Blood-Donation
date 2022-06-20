@@ -69,7 +69,14 @@ class ChatScreen extends StatelessWidget {
                   const SizedBox(
                     width: 10,
                   ),
-                  Text(name!)
+                  SizedBox(
+                      width: 110,
+                      child: Text(
+                        name!,
+                        overflow: TextOverflow.ellipsis,
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 18),
+                      ))
                 ],
               ),
               actions: [
