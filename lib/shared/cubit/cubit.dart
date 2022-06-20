@@ -142,7 +142,6 @@ class AppCubit extends Cubit<AppStates> {
       url: PROFILE,
       token: token,
     ).then((value) {
-      print(value.data);
       userDataModel = ProfileModel.fromJson(value.data);
       print(userDataModel);
       emit(AppSuccessUserDataState());
@@ -159,7 +158,6 @@ class AppCubit extends Cubit<AppStates> {
     required String email,
     required String phone,
     required String dateOfBirth,
-    //File? profilePicture,
     String? lastDonateDate,
     required String bloodType,
     required int govId,
@@ -175,7 +173,6 @@ class AppCubit extends Cubit<AppStates> {
         "email": email,
         "phone_number": phone,
         "date_of_birth": dateOfBirth,
-        // "profile_picture": profilePicture,
         "blood_type": bloodType,
         'last_donate_time': lastDonateDate,
         "height": height,
@@ -187,7 +184,6 @@ class AppCubit extends Cubit<AppStates> {
     ).then((value) {
       print(value.data);
       userDataModel = ProfileModel.fromJson(value.data);
-      print('bye');
       getUserData();
       emit(AppSuccessUpdateUserDataState());
     }).catchError((onError) {
@@ -196,32 +192,7 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  // void updateProfilePictureUserData({
-  //
-  //   File? profilePicture,
-  //
-  // }) {
-  //   emit(AppLoadingUpdatePictureUserDataState());
-  //   DioHelper.postData(
-  //     url: UPDATE_Profile_Picture_PROFILE,
-  //
-  //     data: {
-  //       "profile_picture": profilePicture,
-  //     },
-  //     token: token,
-  //   ).then((value) {
-  //     print(value.data);
-  //     userDataModel = ProfileModel.fromJson(value.data);
-  //     print('bye');
-  //     emit(AppSuccessUpdatePictureUserDataState());
-  //   }).catchError((onError) {
-  //     print(onError.toString());
-  //     emit(AppErrorUpdatePictureUserDataState());
-  //   });
-  // }
-
   late GovernorateModel governorateModel;
-
   void getGovernorateData() {
     emit(AppLoadingGovernorateDataState());
     DioHelper.getData(url: GOVERNORATE).then((value) {
@@ -264,7 +235,6 @@ class AppCubit extends Cubit<AppStates> {
       cityEditRequestModel.cities?.forEach((e) {
         cityEditRequestItemList.add(e);
       });
-      print(cityEditRequestItemList);
       emit(AppSuccessCityEditRequestDataState());
     }).catchError((error) {
       print(error.toString());
@@ -283,7 +253,6 @@ class AppCubit extends Cubit<AppStates> {
       filterCityModel.cities?.forEach((e) {
         filterCityItemList.add(e);
       });
-      print(filterCityItemList);
       emit(AppSuccessFilterCityDataState());
     }).catchError((error) {
       print(error.toString());
@@ -495,8 +464,6 @@ class AppCubit extends Cubit<AppStates> {
           lastDonateDate: lastDonationDate);
 
       emit(AppSuccessUpdatePictureUserDataState());
-
-      print("xxxxxxxxxxxxx");
     } else {
       print(response.reasonPhrase);
       emit(AppErrorUpdatePictureUserDataState());
@@ -514,9 +481,7 @@ class AppCubit extends Cubit<AppStates> {
       educationModel?.posts?.forEach((element) {
         educationItemData.add(element);
       });
-      print(educationItemData);
       emit(AppSuccessEducationDataState());
-      // print(educationItemData);
     }).catchError((error) {
       print(error.toString());
       emit(AppErrorEducationDataState());
@@ -605,10 +570,7 @@ class AppCubit extends Cubit<AppStates> {
       'governorate_id': govId,
       'city_id': cityId
     }).then((value) {
-      print(value.data);
       donorModel = DonarModel.fromJson(value.data);
-      print(donorModel);
-      print(donorModel.users);
       emit(AppSuccessFilterDonorState());
     }).catchError((onError) {
       print(onError.toString());

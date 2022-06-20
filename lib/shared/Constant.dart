@@ -10,7 +10,7 @@ import '../models/edit_request_model.dart';
 
 void signOut(context)
 {
-  CacheHelper.Removedata(Key: 'token').then((value)
+  CacheHelper.removeData(Key: 'token').then((value)
   {
     if(value)
     {

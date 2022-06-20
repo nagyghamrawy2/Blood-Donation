@@ -65,18 +65,20 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Name',style: TextStyle(color: Colors.blueGrey[400],fontSize: 16),),
-                                  Text('${myRequestModel?.requests![index].user?.name}',style: const TextStyle(color: Colors.black,fontSize: 20),),
-                                  SizedBox(height: 20.h,),
-                                  Text('Location',style: TextStyle(color: Colors.blueGrey[400],fontSize: 16),),
-                                  Text('${myRequestModel?.requests![index].governorate?.governorateName},${myRequestModel?.requests![index].city?.cityName}',style: const TextStyle(color: Colors.black,fontSize: 20),),
-                                  SizedBox(height: 20.h,),
-                                  Text('Blood Type',style: TextStyle(color: Colors.blueGrey[400],fontSize: 16),),
-                                  Text('${myRequestModel?.requests![index].bloodType?.toUpperCase()}',style: const TextStyle(color: Colors.black,fontSize: 20),),
-                                ],
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Name',style: TextStyle(color: Colors.blueGrey[400],fontSize: 16),),
+                                    Text('${myRequestModel?.requests![index].user?.name}',style: const TextStyle(color: Colors.black,fontSize: 20),),
+                                    SizedBox(height: 20.h,),
+                                    Text('Location',style: TextStyle(color: Colors.blueGrey[400],fontSize: 16),),
+                                    Text('${myRequestModel?.requests![index].governorate?.governorateName},${myRequestModel?.requests![index].city?.cityName}',style: const TextStyle(color: Colors.black,fontSize: 20,overflow: TextOverflow.ellipsis),),
+                                    SizedBox(height: 20.h,),
+                                    Text('Blood Type',style: TextStyle(color: Colors.blueGrey[400],fontSize: 16),),
+                                    Text('${myRequestModel?.requests![index].bloodType?.toUpperCase()}',style: const TextStyle(color: Colors.black,fontSize: 20),),
+                                  ],
+                                ),
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,

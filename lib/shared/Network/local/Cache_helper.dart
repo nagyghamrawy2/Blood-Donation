@@ -13,7 +13,7 @@ class CacheHelper {
   {
     return sharedPreferences!.get(key);
   }
-  static Future<bool> SaveData({
+  static Future<bool> saveData({
     required String key, required dynamic value
   }) async{
     if(value is String) return await sharedPreferences!.setString(key, value);
@@ -21,7 +21,7 @@ class CacheHelper {
     if(value is bool) return await sharedPreferences!.setBool(key, value);
     return await sharedPreferences!.setBool(key, value);
   }
-  static Future<bool> Removedata({required String Key})async
+  static Future<bool> removeData({required String Key})async
   {
     return await sharedPreferences!.remove(Key);
   }

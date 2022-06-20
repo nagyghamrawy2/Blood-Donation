@@ -50,20 +50,20 @@ class _LoginScreenState extends State<LoginScreen> {
               govIdProfile = userDataModel?.user?.governorate?.id;
               cityIdProfile = (userDataModel?.user?.city?.id)!;
               AppCubit.get(context).valueSwitch = userDataModel?.user?.availableForDonate;
-              AppCubit.get(context).getCityData(id: govIdProfile!);
-              CacheHelper.SaveData(
+              // AppCubit.get(context).getCityData(id: govIdProfile!);
+              CacheHelper.saveData(
                   key: 'govId', value: state.login.user?.governorate?.id);
-              CacheHelper.SaveData(
+              CacheHelper.saveData(
                   key: 'cityId', value: state.login.user?.city?.id);
               token = state.login.user!.token!;
-              CacheHelper.SaveData(key: 'token', value: state.login.user?.token)
+              CacheHelper.saveData(key: 'token', value: state.login.user?.token)
                   .then((value) {
                 AppLoginCubit.get(context).updateFcmUserToken(
                   fcmToken: updateFcmToken,
                 );
                 navigateAndFinish(context, HomeLayout());
               });
-              AppCubit.get(context)..getEducationData()..getGovernorateData()..getDonorData()..getAllRequests()..getMyRequests()..getClosedRequests();
+              AppCubit.get(context)..getEducationData()..getGovernorateData()..getCityData(id: govIdProfile!)..getDonorData()..getAllRequests()..getMyRequests()..getClosedRequests();
               ShowToast(text: 'LOGIN SUCCESSFULLY', state: ToastStates.SUCCESS);
             } else {
               ShowToast(
@@ -182,7 +182,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           Spacer(),
                           MaterialButton(
                             onPressed: () {
-                              AppCubit.get(context).getGovernorateData();
+                              if(governorateItemList.isEmpty){
+                                AppCubit.get(context).getGovernorateData();
+                              }
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

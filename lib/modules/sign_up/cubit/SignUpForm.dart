@@ -62,12 +62,12 @@ class _SignUpState extends State<SignUpScreen> {
               cityIdProfile = (userDataModel?.user?.city?.id)!;
               AppCubit.get(context).valueSwitch = userDataModel?.user?.availableForDonate;
               AppCubit.get(context).getCityData(id: govIdProfile!);
-              CacheHelper.SaveData(
+              CacheHelper.saveData(
                   key: 'govId', value: state.registerModel.user?.governorate?.id);
-              CacheHelper.SaveData(
+              CacheHelper.saveData(
                   key: 'cityId', value: state.registerModel.user?.city?.id);
               token = state.registerModel.user!.token!;
-              CacheHelper.SaveData(key: 'token', value: state.registerModel.user?.token);
+              CacheHelper.saveData(key: 'token', value: state.registerModel.user?.token);
               AppCubit.get(context)..getEducationData()..getDonorData()..getAllRequests()..getMyRequests()..getClosedRequests();
               if(token != null){
                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeLayout()), (route) => false);

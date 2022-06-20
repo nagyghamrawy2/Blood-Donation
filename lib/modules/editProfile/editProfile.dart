@@ -43,6 +43,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {
         if (state is AppSuccessUpdateUserDataState) {
+          CacheHelper.saveData(
+              key: 'govId', value: govIdProfile);
+          CacheHelper.saveData(
+              key: 'cityId', value: cityIdProfile);
           Navigator.pop(context);
         }
         if (state is AppSuccessCityDataState) {
@@ -641,20 +645,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         height: int.parse(height.text),
                                         weight: weight.text,
                                         lastDonateDate: donationDate.text,
-                                        //profilePicture:  x,
                                       );
-                                      // Upload();
-
-                                      print("hhhhhh");
-                                      // cubit.updateProfilePictureUserData(
-                                      //   profilePicture: x,
-                                      // )
-
                                       print(govIdProfile);
                                       print(cityIdProfile);
-                                      // print(idIndexOfCity);
-                                      // CacheHelper.SaveData(key: 'govId', value: govIdConstant);
-                                      // CacheHelper.SaveData(key: 'cityId', value: cityIdConstant);
                                       print('done');
                                     } else if (formKey.currentState!
                                             .validate() &&

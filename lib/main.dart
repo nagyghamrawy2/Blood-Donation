@@ -87,7 +87,7 @@ class MyApp extends StatelessWidget {
             }
             return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getClosedRequests()..getDonorData();
           }else{
-            return AppCubit()..getGovernorateData();
+            return AppCubit();
           }
         },
         child: BlocConsumer<AppCubit, AppStates>(
