@@ -34,6 +34,7 @@ import 'modules/change password/changePassword.dart';
 import 'shared/Network/local/Cache_helper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 Future<void> firebaseMessaging(RemoteMessage message) async {
   print("Handling a background message");
@@ -55,17 +56,6 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(firebaseMessaging);
   //na2s wa7da
   var result = await Connectivity().checkConnectivity();
-  if (result == ConnectivityResult.mobile) {
-    print("Internet connection is from Mobile data");
-  } else if (result == ConnectivityResult.wifi) {
-    print("internet connection is from wifi");
-  } else if (result == ConnectivityResult.ethernet) {
-    print("internet connection is from wired cable");
-  } else if (result == ConnectivityResult.bluetooth) {
-    print("internet connection is from bluethooth threatening");
-  } else if (result == ConnectivityResult.none) {
-    print("No internet connection");
-  }
   DioHelper.init();
   await CacheHelper.init();
   token = CacheHelper.getData(key: 'token');
