@@ -287,7 +287,7 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Education',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
@@ -301,7 +301,7 @@ class HomeScreen extends StatelessWidget {
                         },
                         child: const Text(
                           'view all',
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.blue,
                             fontSize: 16,
                           ),
@@ -312,110 +312,17 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  Container(
-                    height: 200.h,
-                    width: 300.w,
+                  SizedBox(
+                    height: 250.h,
+                    width: 250.w,
                     child: ListView.separated(
                         physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) => EducationInfo(index: index),
-                        separatorBuilder: (context, index) => SizedBox(width: 30,),
-                        itemCount: cubit.educationItemData.length
+                        separatorBuilder: (context, index) => const SizedBox(width: 30,),
+                        itemCount: 3
                     ),
                   ),
-                  // SingleChildScrollView(
-                  //   scrollDirection: Axis.horizontal,
-                  //   child: Row(
-                  //     children: [
-                  //       InkWell(
-                  //         onTap:(){},
-                  //         child: Column(
-                  //           crossAxisAlignment: CrossAxisAlignment.start,
-                  //           children: [
-                  //             Container(
-                  //               height: 120,
-                  //               width: MediaQuery.of(context).size.width * 0.5,
-                  //               color: Colors.black,
-                  //               child: const Image(
-                  //                 image: const AssetImage(
-                  //                   'assets/images/educationImage.png',
-                  //                 ),
-                  //                 fit: BoxFit.fill,
-                  //               ),
-                  //             ),
-                  //             Container(
-                  //               width: MediaQuery.of(context).size.width * 0.5,
-                  //               child: const Text(
-                  //                 'important of blood donation',
-                  //                 style: TextStyle(color: Colors.black),
-                  //                 overflow: TextOverflow.ellipsis,
-                  //                 maxLines: 1,
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //       const SizedBox(width: 30,),
-                  //       InkWell(
-                  //         onTap:(){},
-                  //         child: Column(
-                  //           crossAxisAlignment: CrossAxisAlignment.start,
-                  //           children: [
-                  //             Container(
-                  //               height: 120,
-                  //               width: MediaQuery.of(context).size.width * 0.5,
-                  //               color: Colors.black,
-                  //               child: const Image(
-                  //                 image: const AssetImage(
-                  //                   'assets/images/educationImage.png',
-                  //                 ),
-                  //                 fit: BoxFit.fill,
-                  //               ),
-                  //             ),
-                  //             Container(
-                  //               width: MediaQuery.of(context).size.width * 0.5,
-                  //               child: const Text(
-                  //                 'important of blood donation',
-                  //                 style: TextStyle(color: Colors.black),
-                  //                 overflow: TextOverflow.ellipsis,
-                  //                 maxLines: 1,
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //       const SizedBox(width: 30,),
-                  //       InkWell(
-                  //         onTap:(){},
-                  //         child: Column(
-                  //           crossAxisAlignment: CrossAxisAlignment.start,
-                  //           children: [
-                  //             Container(
-                  //               height: 120,
-                  //               width: MediaQuery.of(context).size.width * 0.5,
-                  //               color: Colors.black,
-                  //               child: const Image(
-                  //                 image: const AssetImage(
-                  //                   'assets/images/educationImage.png',
-                  //                 ),
-                  //                 fit: BoxFit.fill,
-                  //               ),
-                  //             ),
-                  //             Container(
-                  //               width: MediaQuery.of(context).size.width * 0.5,
-                  //               child: const Text(
-                  //                 'important of blood donation',
-                  //                 style: TextStyle(color: Colors.black),
-                  //                 overflow: TextOverflow.ellipsis,
-                  //                 maxLines: 1,
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
                 ],
               ),
             ),

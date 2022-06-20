@@ -89,7 +89,7 @@ class EducationInfo extends StatelessWidget {
             width: MediaQuery
                 .of(context)
                 .size
-                .width * 0.9,
+                .width * 0.8,
             height: 160,
             decoration: const BoxDecoration(
               color: Color(0xFFFFEEE6),
@@ -198,7 +198,7 @@ class EducationInfo extends StatelessWidget {
             width: MediaQuery
                 .of(context)
                 .size
-                .width * 0.9,
+                .width * 0.8,
             height: 160,
             decoration: const BoxDecoration(
               color: Color(0xFFF8F8F8),
