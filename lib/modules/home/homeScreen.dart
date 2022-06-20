@@ -247,7 +247,7 @@ class HomeScreen extends StatelessWidget {
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) =>  BloodBankScreen()),
+                                  MaterialPageRoute(builder: (context) => BloodBankScreen()),
                                 );
                               },
                               child: Card(

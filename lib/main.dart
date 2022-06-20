@@ -8,6 +8,7 @@ import 'package:blood_bank/modules/education/education.dart';
 import 'package:blood_bank/modules/education_article/Education_Article.dart';
 import 'package:blood_bank/modules/findDonor/findDonorScreen.dart';
 import 'package:blood_bank/modules/myInformation/myInformation.dart';
+import 'package:blood_bank/modules/no_internet/noInternet.dart';
 import 'package:blood_bank/modules/profile/profile.dart';
 import 'package:blood_bank/modules/request/editRequest.dart';
 import 'package:blood_bank/modules/request/requestScreen.dart';
@@ -25,16 +26,16 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'modules/Create_new_password/createNewPassword.dart';
 import 'modules/Forget Password/forgetPasswordScreen.dart';
 import 'modules/Verification/verificationScreen.dart';
 import 'modules/change password/changePassword.dart';
 import 'shared/Network/local/Cache_helper.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
-Future<void> firebaseMessaging(RemoteMessage message)async{
-
-
+Future<void> firebaseMessaging(RemoteMessage message) async {
   print("Handling a background message");
   print(message.data.toString());
 }
@@ -53,18 +54,36 @@ void main() async {
   });
   FirebaseMessaging.onBackgroundMessage(firebaseMessaging);
   //na2s wa7da
-
+  var result = await Connectivity().checkConnectivity();
+  if (result == ConnectivityResult.mobile) {
+    print("Internet connection is from Mobile data");
+  } else if (result == ConnectivityResult.wifi) {
+    print("internet connection is from wifi");
+  } else if (result == ConnectivityResult.ethernet) {
+    print("internet connection is from wired cable");
+  } else if (result == ConnectivityResult.bluetooth) {
+    print("internet connection is from bluethooth threatening");
+  } else if (result == ConnectivityResult.none) {
+    print("No internet connection");
+  }
   DioHelper.init();
   await CacheHelper.init();
   token = CacheHelper.getData(key: 'token');
   govIdProfile = CacheHelper.getData(key: 'govId');
   cityIdProfile = CacheHelper.getData(key: 'cityId');
   Widget widget;
-  if (token != null) {
-    widget = HomeLayout();
+  bool checkConnection = false;
+  checkConnection = await InternetConnectionChecker().hasConnection;
+  if (result != ConnectivityResult.none) {
+    if (token != null) {
+      widget = HomeLayout();
+    } else {
+      widget = LoginScreen();
+    }
   } else {
-    widget = LoginScreen();
+    widget = noInternetScreen();
   }
+
   runApp(MyApp(startWidget: widget));
 }
 
@@ -80,13 +99,28 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true, // a2dr aft7 2 app m3 b3d
       builder: () => BlocProvider(
-        create: (context){
-          if(token != null){
-            if(govIdProfile != null){
-              return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getClosedRequests()..getDonorData()..getCityData(id: govIdProfile!);
+        create: (context) {
+          if (token != null) {
+            if (govIdProfile != null) {
+              return AppCubit()
+                ..getUserData()
+                ..getEducationData()
+                ..getGovernorateData()
+                ..getMyRequests()
+                ..getAllRequests()
+                ..getClosedRequests()
+                ..getDonorData()
+                ..getCityData(id: govIdProfile!);
             }
-            return AppCubit()..getUserData()..getEducationData()..getGovernorateData()..getMyRequests()..getAllRequests()..getClosedRequests()..getDonorData();
-          }else{
+            return AppCubit()
+              ..getUserData()
+              ..getEducationData()
+              ..getGovernorateData()
+              ..getMyRequests()
+              ..getAllRequests()
+              ..getClosedRequests()
+              ..getDonorData();
+          } else {
             return AppCubit();
           }
         },
