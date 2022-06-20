@@ -94,13 +94,15 @@ class BloodBankScreen extends StatelessWidget {
     },
   ];
 
+  BloodBankScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Blood bank'),
+        title: const Text('Blood bank'),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
+          IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
         ],
       ),
       body: SingleChildScrollView(
@@ -118,15 +120,11 @@ class BloodBankScreen extends StatelessWidget {
               child: ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemBuilder: (context, index) => BloodBankInfo(
-                    'assets/images/pp.png',
-                    'Ain shams university hospital',
-                    'cairo',
-                    'helwan'),
+                itemBuilder: (context, index) => BloodBankInfo(hospitals,index),
                 separatorBuilder: (context, index) => const SizedBox(
-                  height: 5,
+                  height: 40,
                 ),
-                itemCount: 10,
+                itemCount: hospitals.length,
               ),
             ),
           ],
@@ -137,14 +135,18 @@ class BloodBankScreen extends StatelessWidget {
 }
 
 class BloodBankInfo extends StatelessWidget {
-  BloodBankInfo(this.imageLink, this.hospitalName, this.governorate, this.city,
-      {Key? key})
-      : super(key: key);
+  BloodBankInfo(
+      this.listOfHospital,
+      this.index,
+      );
 
-  late String imageLink;
-  late String hospitalName;
-  late String governorate;
-  late String city;
+  List<Map<String,dynamic>> listOfHospital;
+  int index;
+  // late String hospitalImage;
+  // late String hospitalName;
+  // late String hospitalAddress;
+  // late String hospitalAddressMap;
+  // late String hospitalPhone;
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +159,7 @@ class BloodBankInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             CircleAvatar(
-              backgroundImage: AssetImage(imageLink),
+              backgroundImage: NetworkImage(listOfHospital[index]['image']),
               radius: 29,
             ),
             SizedBox(
@@ -169,7 +171,7 @@ class BloodBankInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    hospitalName,
+                    listOfHospital[index]['name'],
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(
@@ -181,10 +183,11 @@ class BloodBankInfo extends StatelessWidget {
                     height: 12,
                   ),
                   Text(
-                    '$city,$governorate',
+                    listOfHospital[index]['location'],
                     style: TextStyle(
                       color: greyColor2,
                       fontSize: 20.sp,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
@@ -199,7 +202,15 @@ class BloodBankInfo extends StatelessWidget {
                       "assets/images/phone-call.svg",
                       color: greenColor,
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      final Uri launchUri = Uri(
+                        scheme: 'tel',
+                        path: listOfHospital[index]['number'],
+                      );
+                      if (await canLaunchUrl(launchUri)) {
+                        await launchUrl((launchUri));
+                      }
+                    },
                   ),
                 ),
                 Expanded(
@@ -210,7 +221,7 @@ class BloodBankInfo extends StatelessWidget {
                       size: 30,
                     ),
                     onPressed: () async {
-                      const url = 'https://goo.gl/maps/YS5XeQoArhHT8zPCA';
+                      String url = listOfHospital[index]['gps'];
                       if (await canLaunch(url)) {
                         await launch((url));
                       }

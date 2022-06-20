@@ -476,6 +476,7 @@ class AppCubit extends Cubit<AppStates> {
 
   void getEducationData() {
     emit(AppLoadingEducationDataState());
+    educationItemData.clear();
     DioHelper.getData(url: EDUCATION, token: token).then((value) {
       educationModel = EducationModel.fromJson(value.data);
       educationModel?.posts?.forEach((element) {
