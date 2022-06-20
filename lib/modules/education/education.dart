@@ -4,6 +4,7 @@ import 'package:blood_bank/modules/education_article/Education_Article.dart';
 import 'package:blood_bank/shared/components/components.dart';
 import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:blood_bank/shared/cubit/states.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -89,7 +90,7 @@ class EducationInfo extends StatelessWidget {
                 .of(context)
                 .size
                 .width * 0.9,
-            height: 125,
+            height: 160,
             decoration: const BoxDecoration(
               color: Color(0xFFFFEEE6),
             ),
@@ -110,55 +111,68 @@ class EducationInfo extends StatelessWidget {
                   ),
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text(
-                          "${cubit.educationItemData[index].title}",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 19.sp,
-                              color: const Color(0xFF5D240C)),
-                        ),
-                        SizedBox(
-                          height: MediaQuery
-                              .of(context)
-                              .size
-                              .height * 0.02,
-                        ),
-                        Text(
-                          "${cubit.educationItemData[index].description}",
-                          style: TextStyle(
-                            fontSize: 17.sp,
-                            fontWeight: FontWeight.normal,
-                            color: const Color(0xFF787F8F),
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        SizedBox(
-                          height: MediaQuery
-                              .of(context)
-                              .size
-                              .height * 0.02,
-                        ),
-                        InkWell(
+                        Directionality(
+                          textDirection: TextDirection.rtl,
                           child: Text(
-                            "Learn more",
+                            "${cubit.educationItemData[index].title}",
                             style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.normal,
-                                color: Color(0xFFFF0000)),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 19.sp,
+                                color: const Color(0xFF5D240C),
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (context) =>
-                                    EducationArticlesScreen(description: cubit
-                                        .educationItemData[index].description!,
-                                      image: cubit.educationItemData[index]
-                                          .image!,
-                                      title: cubit.educationItemData[index]
-                                          .title!,)));
-                          },
+                        ),
+                        SizedBox(
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height * 0.01,
+                        ),
+                        Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: Text(
+                            "${cubit.educationItemData[index].description}",
+                            style: TextStyle(
+                              fontSize: 17.sp,
+                              fontWeight: FontWeight.normal,
+                              color: const Color(0xFF787F8F),
+                            ),
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height * 0.02,
+                        ),
+                        const Spacer(),
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: InkWell(
+                            child: const Text(
+                              "Learn more",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  color: Color(0xFFFF0000)),
+                            ),
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) =>
+                                      EducationArticlesScreen(description: cubit
+                                          .educationItemData[index].description!,
+                                        image: cubit.educationItemData[index]
+                                            .image!,
+                                        title: cubit.educationItemData[index]
+                                            .title!,)));
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -185,7 +199,7 @@ class EducationInfo extends StatelessWidget {
                 .of(context)
                 .size
                 .width * 0.9,
-            height: 125,
+            height: 160,
             decoration: const BoxDecoration(
               color: Color(0xFFF8F8F8),
             ),
@@ -206,54 +220,65 @@ class EducationInfo extends StatelessWidget {
                   ),
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text(
-                          "${cubit.educationItemData[index].title}",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 19.sp,
-                              color: const Color(0xFF5D240C)),
-                        ),
-                        SizedBox(
-                          height: MediaQuery
-                              .of(context)
-                              .size
-                              .height * 0.02,
-                        ),
-                        Text(
-                          "${cubit.educationItemData[index].description}",
-                          style: TextStyle(
-                              fontSize: 17.sp,
-                              fontWeight: FontWeight.normal,
-                              color: const Color(0xFF787F8F)),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        SizedBox(
-                          height: MediaQuery
-                              .of(context)
-                              .size
-                              .height * 0.02,
-                        ),
-                        InkWell(
+                        Directionality(
+                          textDirection: TextDirection.rtl,
                           child: Text(
-                            "Learn more",
+                            "${cubit.educationItemData[index].title}",
                             style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.normal,
-                                color: Color(0xFFFF0000)),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 19.sp,
+                                color: const Color(0xFF5D240C)),
                           ),
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (context) =>
-                                    EducationArticlesScreen(description: cubit
-                                        .educationItemData[index].description!,
-                                      image: cubit.educationItemData[index]
-                                          .image!,
-                                      title: cubit.educationItemData[index]
-                                          .title!,)));
-                          },
+                        ),
+                        SizedBox(
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height * 0.02,
+                        ),
+                        Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: Text(
+                            "${cubit.educationItemData[index].description}",
+                            style: TextStyle(
+                                fontSize: 17.sp,
+                                fontWeight: FontWeight.normal,
+                                color: const Color(0xFF787F8F)),
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height * 0.02,
+                        ),
+                        const Spacer(),
+
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          child: InkWell(
+                            child: const Text(
+                              "Learn more",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  color: Color(0xFFFF0000)),
+                            ),
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) =>
+                                      EducationArticlesScreen(description: cubit
+                                          .educationItemData[index].description!,
+                                        image: cubit.educationItemData[index]
+                                            .image!,
+                                        title: cubit.educationItemData[index]
+                                            .title!,)));
+                            },
+                          ),
                         ),
                       ],
                     ),

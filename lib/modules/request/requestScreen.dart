@@ -74,14 +74,20 @@ class _RequestScreenState extends State<RequestScreen> {
                                         Text(
                                           'Name',
                                           style: TextStyle(
-                                              color: Colors.blueGrey[400],
-                                              fontSize: 16),
+                                            color: Colors.blueGrey[400],
+                                            fontSize: 16,
+                                          ),
                                         ),
-                                        Text(
-                                          '${requestModel?.requests![index].user?.name}',
-                                          style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20),
+                                        SizedBox(
+                                          width: 200,
+                                          child: Text(
+                                            '${requestModel?.requests![index].user?.name}',
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
                                         ),
                                         SizedBox(
                                           height: 20.h,
@@ -92,11 +98,16 @@ class _RequestScreenState extends State<RequestScreen> {
                                               color: Colors.blueGrey[400],
                                               fontSize: 16),
                                         ),
-                                        Text(
-                                          '${requestModel?.requests![index].governorate?.governorateName},${requestModel?.requests![index].city?.cityName}',
-                                          style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20),
+                                        SizedBox(
+                                          width: 200,
+                                          child: Text(
+                                            '${requestModel?.requests![index].governorate?.governorateName},${requestModel?.requests![index].city?.cityName}',
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
                                         ),
                                         SizedBox(
                                           height: 20.h,
@@ -107,11 +118,16 @@ class _RequestScreenState extends State<RequestScreen> {
                                               color: Colors.blueGrey[400],
                                               fontSize: 16),
                                         ),
-                                        Text(
-                                          '${requestModel?.requests![index].noOfBags} bags of ${requestModel?.requests![index].bloodType?.toUpperCase()}',
-                                          style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20),
+                                        SizedBox(
+                                          width: 150,
+                                          child: Text(
+                                            '${requestModel?.requests![index].noOfBags} bags of ${requestModel?.requests![index].bloodType?.toUpperCase()}',
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 20,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     ),

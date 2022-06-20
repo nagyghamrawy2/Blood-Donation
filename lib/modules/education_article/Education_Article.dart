@@ -26,7 +26,7 @@ class EducationArticlesScreen extends StatelessWidget {
               height: 25.h,
             ),
             Align(
-              alignment: Alignment.topLeft,
+              alignment: Alignment.topRight,
               child: Text(
                 title,
                 style: TextStyle(
@@ -48,11 +48,15 @@ class EducationArticlesScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(
                           left: 11, right: 10, bottom: 28, top: 7),
-                      child: Text(
-                        description,
-                        style: TextStyle(
-                          fontSize: 25.sp,
-                          color: Color(0xFF5D240C),
+                      child: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: Text(
+                          description,
+                          style: TextStyle(
+                            fontSize: 25.sp,
+                            color: Color(0xFF5D240C),
+                            
+                          ),
                         ),
                       ),
                     ),
