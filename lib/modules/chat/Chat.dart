@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import '../../shared/cubit/states.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -85,7 +86,7 @@ class ChatHomeScreen extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     CircleAvatar(
                                       backgroundImage: (snapshots.data.docs[i]
@@ -101,45 +102,50 @@ class ChatHomeScreen extends StatelessWidget {
                                     SizedBox(
                                       width: 15.w,
                                     ),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          height: 15.h,
-                                        ),
-                                        Text(
-                                          snapshots.data.docs[i]['username'],
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
-                                            fontSize: 20,
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 5.0),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            width:110.w,
+                                            child: Text(
+                                              snapshots.data.docs[i]['username'],
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                                fontSize: 20,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 25.h,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
+                                          Container(
+                                            width: 110.w,
+                                            child: Text(
                                               snapshots.data.docs[i]['message'],
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.black26,
                                                 fontSize: 15,
+                                                overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
-                                            Text(
-                                              snapshots.data.docs[i]['date'],
-                                              style: const TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
-
+                                    Spacer(),
+                                    Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: Text(
+                                        DateFormat('jms').format(DateTime.parse(snapshots.data.docs[i]['date'].toString())),
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),

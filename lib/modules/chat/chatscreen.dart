@@ -22,7 +22,7 @@ class ChatScreen extends StatelessWidget {
 
   var messageController = TextEditingController();
   ScrollController listview = ScrollController();
-  final date = DateFormat("MM-dd hh:mm:ss").format(DateTime.now());
+  final date = DateFormat("yyyy-MM-dd hh:mm:ss").format(DateTime.now());
   String? receiverId;
   String? name;
   String? phone;
