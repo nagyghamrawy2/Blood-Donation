@@ -41,7 +41,10 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
         if (state is AppSuccessPostRequestsDataState) {
           AppCubit.get(context).getMyRequests();
           AppCubit.get(context).getAllRequests();
+          print('state before pop');
           Navigator.pop(context);
+          print('state after pop');
+
         }
       },
       builder: (context, state) {
@@ -478,7 +481,7 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                                 hospitalAddress: hospitalAddressController.text,
                                 hospitalName: hospitalNameController.text,
                               );
-                              Navigator.pop(context);
+                              // Navigator.pop(context);
                               print('done');
                             } else {
                               cubit.changeBloodCheck();

@@ -6,6 +6,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 
 import '../../shared/Constant.dart';
@@ -30,6 +31,10 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
       text: myRequestModel!.requests![indexOfMyRequest!].requestExpiredDate);
   TextEditingController bloodTypeController = TextEditingController(
       text: myRequestModel!.requests![indexOfMyRequest!].bloodType);
+  TextEditingController hospitalNameController = TextEditingController(
+      text: myRequestModel!.requests![indexOfMyRequest!].hospitalName);
+  TextEditingController hospitalAddressController = TextEditingController(
+      text: myRequestModel!.requests![indexOfMyRequest!].hospitalAddress);
   var govIdForRequest =
       myRequestModel!.requests![indexOfMyRequest!].governorate?.id;
   var cityIdForRequest = myRequestModel!.requests![indexOfMyRequest!].city?.id;
@@ -41,12 +46,13 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
     return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {
         if (state is AppSuccessUpdateRequestsDataState) {
-          cubit.getAllRequests();
-          cubit.getMyRequests();
-          cubit.getClosedRequests();
-          Navigator.pop(
-              context
-          );
+            ShowToast(text: 'EDIT SUCCESSFULLY', state: ToastStates.SUCCESS);
+            cubit.getAllRequests();
+            cubit.getMyRequests();
+            cubit.getClosedRequests();
+            Navigator.pop(
+                context
+            );
         }
         if (state is AppSuccessCityEditRequestDataState) {
           int id2 = cubit.cityEditRequestItemList.indexWhere((element) =>
@@ -89,6 +95,31 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                               validatorFunction: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Description must not be empty';
+                                }
+                              },
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            SignupTextField(
+                                hintText: 'Enter Hospital Name',
+                                text: 'Hospital Name',
+                                controller: hospitalNameController,
+                                keyboardtype: TextInputType.text,
+                                validatorFunction: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Hospital name must not be empty';
+                                  }
+                                }),
+                            const SizedBox(height: 10),
+                            SignupTextField(
+                              hintText: 'Enter Hospital Address',
+                              text: 'Hospital Address',
+                              controller: hospitalAddressController,
+                              keyboardtype: TextInputType.text,
+                              validatorFunction: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Hospital Address must not be empty';
                                 }
                               },
                             ),
@@ -447,8 +478,9 @@ class _EditRequestScreenState extends State<EditRequestScreen> {
                                     bloodType: bloodTypeController.text,
                                     govId: govIdForRequest.toString(),
                                     cityId: cityIdForRequest.toString(),
-                                    id: myRequestModel!
-                                        .requests![indexOfMyRequest!].id!,
+                                    hospitalName: hospitalNameController.text,
+                                    hospitalAddress: hospitalAddressController.text,
+                                    id: myRequestModel!.requests![indexOfMyRequest!].id!,
                                   );
                                   print(govIdForRequest);
                                   print(cityIdForRequest);

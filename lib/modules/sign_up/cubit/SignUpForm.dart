@@ -1,3 +1,4 @@
+import 'package:blood_bank/layout/home_layout.dart';
 import 'package:blood_bank/modules/Login_Screen/login.dart';
 import 'package:blood_bank/modules/sign_up/cubit/register_cubit.dart';
 import 'package:blood_bank/shared/Constant.dart';
@@ -12,6 +13,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:email_validator/email_validator.dart';
+
+import '../../../shared/Network/local/Cache_helper.dart';
+import '../../../shared/cubit/cubit.dart';
+import '../../Login_Screen/Cubit/Cubit.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -53,7 +58,20 @@ class _SignUpState extends State<SignUpScreen> {
             if(state.registerModel.status!)
             {
               ShowToast(state: ToastStates.SUCCESS , text: "Register successfully" );
-              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
+              govIdProfile = userDataModel?.user?.governorate?.id;
+              cityIdProfile = (userDataModel?.user?.city?.id)!;
+              AppCubit.get(context).valueSwitch = userDataModel?.user?.availableForDonate;
+              AppCubit.get(context).getCityData(id: govIdProfile!);
+              CacheHelper.SaveData(
+                  key: 'govId', value: state.registerModel.user?.governorate?.id);
+              CacheHelper.SaveData(
+                  key: 'cityId', value: state.registerModel.user?.city?.id);
+              token = state.registerModel.user!.token!;
+              CacheHelper.SaveData(key: 'token', value: state.registerModel.user?.token);
+              AppCubit.get(context)..getEducationData()..getDonorData()..getAllRequests()..getMyRequests()..getClosedRequests();
+              if(token != null){
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomeLayout()), (route) => false);
+              }
             } else{
               if(state.registerModel.errors?.email != null) {
                 ShowToast(state: ToastStates.ERROR,location: ToastGravity.CENTER, text: "${state.registerModel.errors?.email![0]}");

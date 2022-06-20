@@ -22,6 +22,7 @@ void signOut(context)
       idIndexOfCityEditRequest = null;
       govRequestId = null;
       cityRequestId = null;
+      governorateItemList.clear();
       cityItemList.clear();
       Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => LoginScreen()));
     }

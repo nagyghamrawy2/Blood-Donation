@@ -5,6 +5,7 @@ import 'package:blood_bank/models/profile_model.dart';
 import 'package:blood_bank/shared/Constant.dart';
 import 'package:blood_bank/shared/Network/Remote/dio_helper.dart';
 import 'package:blood_bank/shared/Network/end_points.dart';
+import 'package:blood_bank/shared/cubit/cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -47,9 +48,9 @@ class RegisterCubit extends Cubit<RegisterStates> {
       },
     ).then((value) {
       print(value.data);
-      registerModel = ProfileModel.fromJson(value.data);
-      print(registerModel);
-      emit(RegisterSuccessState(registerModel!));
+      userDataModel = ProfileModel.fromJson(value.data);
+      print(userDataModel);
+      emit(RegisterSuccessState(userDataModel!));
     }).catchError((error) {
       print(error.toString());
       emit(RegisterErrorState(error.toString()));
