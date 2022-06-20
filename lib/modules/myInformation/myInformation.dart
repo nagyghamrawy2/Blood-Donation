@@ -131,6 +131,7 @@ class MyInformationScreen extends StatelessWidget {
                       print(govIdProfile);
                       print(cityIdProfile);
                       print(cityItemList);
+                      print(cityItemList.length);
                       idIndexOfCity = cityItemList.indexWhere((element) =>element.cityName == userDataModel?.user?.city?.cityName);
                       print(idIndexOfCity);
                       // print(cityItemList[idIndexOfCity+1].cityName);

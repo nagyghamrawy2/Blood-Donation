@@ -24,6 +24,8 @@ class Request {
   var requestExpiredDate;
   String? bloodType;
   int? status;
+  String? hospitalName;
+  String? hospitalAddress;
   Governorate? governorate;
   City? city;
   User? user;
@@ -36,6 +38,8 @@ class Request {
     noOfBags = json["no_of_bags"];
     requestExpiredDate = DateFormat('yyyy-MM-dd').format(DateTime.parse(json["request_expiredDate"]));
     bloodType = json["blood_type"];
+    hospitalName = json['hosp_name'];
+    hospitalAddress = json['hosp_address'];
     status = json['status'];
     governorate = Governorate.fromJson(json["governorate"]);
     city = City.fromJson(json["city"]);

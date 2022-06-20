@@ -31,6 +31,9 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
             MaterialPageRoute(builder: (context) => EditRequestScreen()),
           );
         }
+        if(state is AppSuccessChangeStatueForMyRequestsDataState){
+          AppCubit.get(context).getClosedRequests();
+        }
       },
       builder: (context,state){
         return Scaffold(
@@ -92,24 +95,6 @@ class _MyRequestScreenState extends State<MyRequestScreen> {
                                       if(value == false) myRequestModel?.requests![index].status = 0;
                                     },
                                   ),
-                                  // AdvancedSwitch(
-                                  //     activeColor: Colors.green,
-                                  //     inactiveColor: Colors.red,
-                                  //     activeChild: Text('ON'),
-                                  //     inactiveChild: Text('OFF'),
-                                  //     width: 65.0,
-                                  //     height: 30.0,
-                                  // ),
-                                  // Switch.adaptive(
-                                  //   activeColor: Colors.green,
-                                  //   inactiveThumbColor: Colors.red,
-                                  //   value: myRequestModel?.requests![index].status == 1 ? true : false,
-                                  //   onChanged: (value){
-                                  //     cubit.changeStatueForRequest((myRequestModel?.requests![index].id)!);
-                                  //     if(value == true) myRequestModel?.requests![index].status = 1;
-                                  //     if(value == false) myRequestModel?.requests![index].status = 0;
-                                  //   },
-                                  // ),
                                   IconButton(
                                     onPressed: () {
                                       cubit.getCityEditRequestData(id: (myRequestModel!.requests![index].governorate!.id)!);

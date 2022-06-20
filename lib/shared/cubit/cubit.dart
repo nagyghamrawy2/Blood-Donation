@@ -424,6 +424,8 @@ class AppCubit extends Cubit<AppStates> {
     required String bloodType,
     required String govId,
     required String cityId,
+    required String hospitalName,
+    required String hospitalAddress,
     required int id,
   }) {
     emit(AppLoadingUpdateRequestsDataState());
@@ -438,6 +440,8 @@ class AppCubit extends Cubit<AppStates> {
         'blood_type': bloodType,
         'governorate_id': govId,
         'city_id': cityId,
+        'hosp_name': hospitalName,
+        'hosp_address': hospitalAddress,
       },
       token: token,
     ).then((value) {
